@@ -12,8 +12,12 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+<<<<<<< HEAD
     "express-fileupload": "^1.2.1",
     "mongoose": "^5.11.17",
+=======
+    "mongoose": "^5.11.15",
+>>>>>>> 3e95b887c22701f31bc3c31a81f08f9e7a66eb7e
     "socket.io": "^3.1.1"
   }
 }
