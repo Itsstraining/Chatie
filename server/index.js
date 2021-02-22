@@ -1,33 +1,47 @@
 const server = require('./src/server');
 const config = require('./src/config');
 const multer = require('multer');
+const path = require('path');
 const Database = require('./src/database');
-
+const mongoose = require('mongoose');
 const http = require('http').createServer(server);
 const io = require('socket.io')(http);
 
 
-let storage = multer.diskStorage({
+
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }
-})
+});
 
-let upload = multer({ storage: storage })
+const upload = multer({ storage: storage })
 
-
+const connectionString = 'mongodb+srv://admin:admin@cluster0.9grd8.mongodb.net/chat_DB?retryWrites=true&w=majority'
 
 //Upload file và hình
 
 server.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
-const connectionString = 'mongodb+srv://admin:admin@cluster0.9grd8.mongodb.net/chat_DB?retryWrites=true&w=majority'
+
+server.post('/uploadfile', upload.single('myFile'), (req, res,next) => {
+  const file = req.file;
+  if(!file)
+  {
+    const error = new Error("Please upload a file");
+    error.httpStatusCode=400;
+    return next(error);
+  }
+  res.send(file);
+});
+  
 
 
+//connect DB
 async function main() {
 
   await Database.instance.connectToMongoDB(connectionString)
@@ -40,22 +54,5 @@ main();
 
 
 
-server.post('/uploadphoto', upload.single('picture'), (req, res) => {
-  let img = fs.readFileSync(req.file.path);
-  let encode_image = img.toString('base64');
-  // Define a JSONobject for the image attributes for saving to database
 
-  let finalImg = {
-    contentType: req.file.mimetype,
-    image:  new Buffer(encode_image, 'base64')
-  };
-  db.collection('quotes').insertOne(finalImg, (err, result) => {
-    console.log(result)
-
-    if (err) return console.log(err)
-
-    console.log('saved to database')
-    res.redirect('/')
-  })
-})
 
