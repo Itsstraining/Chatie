@@ -40,13 +40,22 @@ main();
 
 
 
-server.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
-  const file = req.file
-  if (!file) {
-    const error = new Error('Please upload a file')
-    error.httpStatusCode = 400
-    return next(error)
-  }
-  res.send(file)
+server.post('/uploadphoto', upload.single('picture'), (req, res) => {
+  let img = fs.readFileSync(req.file.path);
+  let encode_image = img.toString('base64');
+  // Define a JSONobject for the image attributes for saving to database
+
+  let finalImg = {
+    contentType: req.file.mimetype,
+    image:  new Buffer(encode_image, 'base64')
+  };
+  db.collection('quotes').insertOne(finalImg, (err, result) => {
+    console.log(result)
+
+    if (err) return console.log(err)
+
+    console.log('saved to database')
+    res.redirect('/')
+  })
 })
 
