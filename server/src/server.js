@@ -1,10 +1,11 @@
 const express = require('express');
 const server = express();
+const Database = require('./database')
 
 
-server.get('/', (request, response) => {
-    response.send('Hello!')
-})
+
+
+
 
 
 module.exports = server;
