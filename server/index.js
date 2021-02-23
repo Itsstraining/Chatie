@@ -34,8 +34,17 @@ const multer = require('multer');
 const path = require('path');
 const Database = require('./src/database');
 const mongoose = require('mongoose');
-const http = require('http').createServer(server);
-const io = require('socket.io')(http);
+const http = require('http')
+
+let httpServer = http.createServer(server);
+const io = require('socket.io')(httpServer,{
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+const cors = require('cors');
+server.use(cors);
 
 
 
@@ -43,12 +52,10 @@ const io = require('socket.io')(http);
 //     response.send("hello world")
 // })
 
-// io.on('connection', (socket) => {
-//     console.log('a user is connected');
-//     socket.on('disconnect', () => {
-//         console.log('a user is disconnected')
-//     })
-// })
+io.on('connection', (socket) => {
+    console.log('a user is connected');
+    socket.emit('test event', 'this is some new data')
+})
 
 
 // io.on('connection', (socket) => {
@@ -72,7 +79,7 @@ const io = require('socket.io')(http);
 //connect DB
 async function main() {
   await Database.instance.connect("mongodb+srv://admin:admin@cluster0.9grd8.mongodb.net/chat_DB?retryWrites=true&w=majority");
-  http.listen(config.PORT, config.HOST, function () {
+  httpServer.listen(9999, config.HOST, function () {
     console.log(`${config.HOST}:${config.PORT}`);
   })
 }
