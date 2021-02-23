@@ -13,12 +13,21 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { DialogSettingfriendComponent } from './components/dialog-settingfriend/dialog-settingfriend.component';
+import { DialogSettingComponent } from './components/dialog-setting/dialog-setting.component';
+import { DialogNotificationComponent } from './components/dialog-notification/dialog-notification.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogUnfriendComponent } from './components/dialog-unfriend/dialog-unfriend.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    DialogSettingfriendComponent,
+    DialogSettingComponent,
+    DialogNotificationComponent,
+    DialogUnfriendComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +38,8 @@ import { FooterComponent } from './components/footer/footer.component';
     MatMenuModule,
     MatButtonModule,
     MatBadgeModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
