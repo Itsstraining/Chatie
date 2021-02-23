@@ -1,4 +1,4 @@
-module.exports ={
-    PORT:'9999',
-    HOST:'0.0.0.0',
+module.exports = {
+    PORT: '9999',
+    HOST: '0.0.0.0',
 }
