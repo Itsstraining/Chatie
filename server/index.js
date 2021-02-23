@@ -1,3 +1,33 @@
+
+// const server = require('./src/server');
+// const config = require('./src/config');
+// const Database = require('./src/database');
+// const SocketIo = require('./src/socketio');
+
+// const socket = new SocketIo();
+
+// const http = require('http').createServer(server);
+// // const io = require('socket.io')(http);
+
+
+// const connectionString = 'mongodb+srv://admin:admin@cluster0.9grd8.mongodb.net/chat_DB?retryWrites=true&w=majority'
+
+
+// async function main() {
+//     // await Database.instance.connectToMongoDB(connectionString);
+//     try {
+//         socket.connectToSocket();
+//         http.listen(config.PORT, config.HOST, function () {
+//             console.log(`${config.HOST}:${config.PORT}`);
+//         });
+//     }catch(err){
+//         console.log('bug');
+//     }
+// }
+
+// main();
+
+
 const server = require('./src/server');
 const config = require('./src/config');
 const multer = require('multer');
@@ -6,6 +36,34 @@ const Database = require('./src/database');
 const mongoose = require('mongoose');
 const http = require('http').createServer(server);
 const io = require('socket.io')(http);
+
+
+
+// server.get('/', (request, response) => {
+//     response.send("hello world")
+// })
+
+// io.on('connection', (socket) => {
+//     console.log('a user is connected');
+//     socket.on('disconnect', () => {
+//         console.log('a user is disconnected')
+//     })
+// })
+
+
+// io.on('connection', (socket) => {
+//     socket.broadcast.emit('hi');
+// });
+
+// io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' });
+
+// io.on('connection', (socket) => {
+//     socket.on('chat message', (msg) => {
+//         io.emit('chat message', msg);
+//     });
+// });
+
+
 
 
 // const connectionString = 'mongodb+srv://admin:admin@cluster0.9grd8.mongodb.net/chat_DB?retryWrites=true&w=majority'
@@ -54,12 +112,4 @@ server.post('/uploadfile', upload.single('myFile'), (req, res,next) => {
   });
 });
   
-
-
-
 main();
-
-
-
-
-
