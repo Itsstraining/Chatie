@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { ChatSocketRoutingModule } from './chat-socket-routing.module';
 import { ChatSocketComponent } from './chat-socket.component';
+import { FormsModule } from '@angular/forms'
+import { from } from 'rxjs';
 
 
 @NgModule({
   declarations: [ChatSocketComponent],
   imports: [
     CommonModule,
-    ChatSocketRoutingModule
+    ChatSocketRoutingModule,
+    FormsModule
   ]
 })
 export class ChatSocketModule { }
