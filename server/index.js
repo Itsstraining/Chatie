@@ -1,94 +1,28 @@
-
-// const server = require('./src/server');
-// const config = require('./src/config');
-// const Database = require('./src/database');
-// const SocketIo = require('./src/socketio');
-
-// const socket = new SocketIo();
-
-// const http = require('http').createServer(server);
-// // const io = require('socket.io')(http);
-
-
-// const connectionString = 'mongodb+srv://admin:admin@cluster0.9grd8.mongodb.net/chat_DB?retryWrites=true&w=majority'
-
-
-// async function main() {
-//     // await Database.instance.connectToMongoDB(connectionString);
-//     try {
-//         socket.connectToSocket();
-//         http.listen(config.PORT, config.HOST, function () {
-//             console.log(`${config.HOST}:${config.PORT}`);
-//         });
-//     }catch(err){
-//         console.log('bug');
-//     }
-// }
-
-// main();
-
-
 const server = require('./src/server');
 const config = require('./src/config');
 const multer = require('multer');
 const path = require('path');
 const Database = require('./src/database');
 const mongoose = require('mongoose');
-const http = require('http')
-
-let httpServer = http.createServer(server);
-const io = require('socket.io')(httpServer,{
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
-  }
-});
+const httpServer = require('./src/http');
+const io = require('./src/socketio')
 const cors = require('cors');
 server.use(cors);
 
+const connectionString = 'mongodb+srv://admin:admin@cluster0.9grd8.mongodb.net/chat_DB?retryWrites=true&w=majority'
 
-
-// server.get('/', (request, response) => {
-//     response.send("hello world")
-// })
-
+// connect socket server with client
 io.on('connection', (socket) => {
-    console.log('a user is connected');
-    // socket.emit('message-broadcast', 'this is some new data');
-    socket.on('message', (msg) => {
-      console.log(msg);
-      socket.broadcast.emit('message-broadcast', msg);
-    });
-});
-
-
-// io.on('connection', (socket) => {
-//     socket.broadcast.emit('hi');
-// });
-
-// io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' });
-
-// io.on('connection', (socket) => {
-//     socket.on('chat message', (msg) => {
-//         io.emit('chat message', msg);
-//     });
-// });
-
-
-
-
-// const connectionString = 'mongodb+srv://admin:admin@cluster0.9grd8.mongodb.net/chat_DB?retryWrites=true&w=majority'
-
-
-//connect DB
-async function main() {
-  await Database.instance.connect("mongodb+srv://admin:admin@cluster0.9grd8.mongodb.net/chat_DB?retryWrites=true&w=majority");
-  httpServer.listen(9999, config.HOST, function () {
-    console.log(`${config.HOST}:${config.PORT}`);
+  console.log('a user is connected');
+  socket.on('disconnect', () => {
+    console.log('a user disconnected')
   })
-}
-
-
+  // socket.emit('message-broadcast', 'this is some new data');
+  socket.on('message', (msg) => {
+    console.log(msg);
+    socket.broadcast.emit('message-broadcast', msg);
+  });
+});
 
 //khai báo kho lưu trữ multer
 const storage = multer.diskStorage({
@@ -99,7 +33,9 @@ const storage = multer.diskStorage({
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }
 });
-const upload = multer({ storage: storage })
+const upload = multer({
+  storage: storage
+})
 
 
 //Upload file và hình
@@ -108,19 +44,26 @@ server.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-server.post('/uploadfile', upload.single('myFile'), (req, res,next) => {
+server.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
   const file = req.file;
   console.log(file);
-  if(!file)
-  {
+  if (!file) {
     const error = new Error("Please upload a file");
-    error.httpStatusCode=400;
+    error.httpStatusCode = 400;
     return next(error);
   }
-  res.send(file , {
+  res.send(file, {
     msg: 'File upload!',
     file: `uploads/${req.file.fieldname}`
   });
 });
-  
+
+//connect DB
+async function main() {
+  await Database.instance.connect(connectionString);
+  httpServer.listen(config.PORT, config.HOST, function () {
+    console.log(`${config.HOST}:${config.PORT}`);
+  })
+}
+
 main();
