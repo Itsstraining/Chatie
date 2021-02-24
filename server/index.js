@@ -54,8 +54,12 @@ server.use(cors);
 
 io.on('connection', (socket) => {
     console.log('a user is connected');
-    socket.emit('test event', 'this is some new data')
-})
+    // socket.emit('message-broadcast', 'this is some new data');
+    socket.on('message', (msg) => {
+      console.log(msg);
+      socket.broadcast.emit('message-broadcast', msg);
+    });
+});
 
 
 // io.on('connection', (socket) => {
