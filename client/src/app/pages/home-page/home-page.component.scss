@@ -159,6 +159,8 @@ body {
   border-radius: 50%;
   border: 0.15rem solid $red;
   text-align: center;
+  height: 3rem;
+  width: 3rem;
   cursor: pointer;
 
   &:hover {
@@ -177,6 +179,8 @@ body {
   padding: 0.3rem;
   border-radius: 50%;
   border: 0.15rem solid $blue;
+  height: 3rem;
+  width: 3rem;
   cursor: pointer;
 
   text-align: center;
