@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { logging } from 'protractor';
 import * as firebase from 'firebase';
+import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -8,32 +12,13 @@ import * as firebase from 'firebase';
 })
 export class HomePageComponent implements OnInit {
 
-  user: any;
-  constructor(private auth: AngularFireAuth) { }
-  public provider = new firebase.default.auth.GoogleAuthProvider();
-  public async login() {
-    try {
-      await this.auth.signInWithPopup(this.provider);
-      alert('Đăng nhập thành công');
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  constructor(private auth: LoginService, private router: Router) { }
 
-  public async logout() {
-    try {
-      await this.auth.signOut();
-      this.user = null;
-      alert('Đăng xuất thành công');
-    } catch (err) {
-      console.log(err);
-    }
-  }
   ngOnInit(): void {
-    this.auth.authState.subscribe((hello) => {
-      if (hello) {
-        this.user = hello;
-      }
-    });
   }
+  async Login() {
+    await this.auth.Login();
+    this.router.navigate(['chat-page']);
+  }
+  
 }
