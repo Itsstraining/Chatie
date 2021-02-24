@@ -14,8 +14,6 @@ export class HomePageComponent implements OnInit {
 
   constructor(private auth: LoginService, private router: Router) { }
 
-  
-
   ngOnInit(): void {
   }
   async Login() {
