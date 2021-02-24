@@ -1,13 +1,8 @@
 const mongoose = require('mongoose');
 const userSchema = require('../schemas/user.schemas');
 const fileSchema = require('../schemas/file.schemas');
-<<<<<<< HEAD
-const Conversation = require('../src/services/conversation');
-const user = require('../models/user.model');
-=======
 const conversationSchema = require('../schemas/conversation.shemas');
 const User = require('../models/user.model');
->>>>>>> 51b6fc35f2f4fc778a753108a5361e59f54a7ef3
 class Database {
     /**
      * @type {Database}
@@ -18,15 +13,9 @@ class Database {
         /**
          * @type{mongoose.Model<any>}
          */
-<<<<<<< HEAD
-        this.userSchema = new mongoose.model("users", userSchema);
+        this.User = new mongoose.model("User", userSchema);
         this.fileSchema = new mongoose.model("files", fileSchema);
-        this.Conversation = new Conversation();
-=======
-        this.User = new mongoose.model("User",userSchema);
-        this.fileSchema = new mongoose.model("files",fileSchema);
-        this.conversationSchema = new mongoose.model('conversation',conversationSchema);
->>>>>>> 51b6fc35f2f4fc778a753108a5361e59f54a7ef3
+        this.conversationSchema = new mongoose.model('conversation', conversationSchema);
     }
 
     /**
@@ -59,16 +48,14 @@ class Database {
             });
         });
     }
-    
+
     /**
      * @param {User} newUser
      */
-    async createUser(newUser)
-    {
-       return await this.User.create(newUser);
+    async createUser(newUser) {
+        return await this.User.create(newUser);
     }
-    async getUserMail(email)
-    {
+    async getUserMail(email) {
         return await this.User.find();
     }
     /**
@@ -78,8 +65,7 @@ class Database {
      * @param {String} avatar 
      * @param {Boolean} status 
      */
-    async getUserMailandupdate(email,displayname , avatar , status)
-    {
+    async getUserMailandupdate(email, displayname, avatar, status) {
         return await this.User.findByIdAndUpdate(email);
     }
 }

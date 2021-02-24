@@ -1,6 +1,5 @@
 const express = require('express');
 const server = express();
-<<<<<<< HEAD
 const Database = require('./database');
 const bodyParser = require('body-parser');
 const ConversationModel = require('../models/conversation.model');
@@ -47,38 +46,48 @@ server.put('/findupdate', async (req, res) => {
     })
 })
 
-=======
-const Database = require('./database')
-const bodyParser = require('body-parser')
-
-const User = require('../models/user.model');
-
-
-server.use(bodyParser.json());
->>>>>>> 51b6fc35f2f4fc778a753108a5361e59f54a7ef3
 
 
 
-server.post("/createUser", async(req,res)=>{
-    const{email , displayname , avatar , status} = req.body;
-    let user = await Database.instance.createUser(new User(email , displayname , avatar  , status));
-    res.send({ message: user});
+server.post("/createUser", async (req, res) => {
+    const {
+        email,
+        displayname,
+        avatar,
+        status
+    } = req.body;
+    let user = await Database.instance.createUser(new User(email, displayname, avatar, status));
+    res.send({
+        message: user
+    });
 });
-server.get("/getUser", async(req,res)=>{
-    const {email} = req.query;
+server.get("/getUser", async (req, res) => {
+    const {
+        email
+    } = req.query;
     let getUser = await Database.instance.getUserMail(email);
-    res.send({getUser:getUser});
+    res.send({
+        getUser: getUser
+    });
 });
-server.put("/updateUser", async(req,res)=>{
-    const{email , displayname , avatar , status} = req.body;
-    try{
-        await Database.instance.getUserMailandupdate(email,displayname , avatar , status);
-    res.send({message: `Update[${email}]`});
-    }catch(erro)
-    {
-        res.status(400).send({message:  `Cannot Update[${email}]`});
+server.put("/updateUser", async (req, res) => {
+    const {
+        email,
+        displayname,
+        avatar,
+        status
+    } = req.body;
+    try {
+        await Database.instance.getUserMailandupdate(email, displayname, avatar, status);
+        res.send({
+            message: `Update[${email}]`
+        });
+    } catch (erro) {
+        res.status(400).send({
+            message: `Cannot Update[${email}]`
+        });
     }
-    
+
 });
 
 
