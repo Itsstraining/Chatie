@@ -5,13 +5,12 @@ import * as firebase from 'firebase'
   providedIn: 'root'
 })
 export class LoginService {
-  public user: any
+  public user: firebase.default.User;
   constructor(private auth: AngularFireAuth) {
     this.auth.authState.subscribe((test) => {
       if (test) {
-        this.user = test
-        console.log(this.user)
-
+        this.user = test;
+        console.log(this.user.displayName)
       } else {
         this.user = null;
       }
@@ -31,8 +30,10 @@ export class LoginService {
   async LogOut() {
     try {
       this.auth.signOut();
-      localStorage.removeItem(this.user)
+      localStorage.removeItem(this.user.toString())
       this.user = null;
+      alert('Log Out Success')
+      console.clear();
     } catch (err) {
       console.log(err)
     }

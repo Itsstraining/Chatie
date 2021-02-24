@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { logging } from 'protractor';
 import * as firebase from 'firebase';
 import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -11,7 +12,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private auth: LoginService) { }
+  constructor(private auth: LoginService, private router: Router) { }
 
   
 
@@ -19,8 +20,7 @@ export class HomePageComponent implements OnInit {
   }
   async Login() {
     await this.auth.Login();
+    this.router.navigate(['chat-page']);
   }
-  async LogOut() {
-    await this.auth.LogOut();
-  }
+  
 }

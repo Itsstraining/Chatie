@@ -18,11 +18,15 @@
         </button>
             <button mat-menu-item disabled>
           <mat-icon>voicemail</mat-icon>
-          <span>Check voice mail</span>
+          <span >Check voice mail </span>
         </button>
             <button mat-menu-item>
           <mat-icon>notifications_off</mat-icon>
           <span>Disable alerts</span>
+        </button>
+            <button *ngIf="this.auth.user != undefined" mat-menu-item (click)="LogOut()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
         </button>
         </mat-menu>
     </mat-toolbar-row>
