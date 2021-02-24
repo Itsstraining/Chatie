@@ -18,7 +18,9 @@ import { DialogSettingComponent } from './components/dialog-setting/dialog-setti
 import { DialogNotificationComponent } from './components/dialog-notification/dialog-notification.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogUnfriendComponent } from './components/dialog-unfriend/dialog-unfriend.component';
-
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import {AngularFireAuthModule} from '@angular/fire/auth'
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +41,9 @@ import { DialogUnfriendComponent } from './components/dialog-unfriend/dialog-unf
     MatButtonModule,
     MatBadgeModule,
     MatGridListModule,
-    MatDialogModule
+    MatDialogModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

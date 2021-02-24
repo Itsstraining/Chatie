@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { logging } from 'protractor';
+import * as firebase from 'firebase';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: LoginService) { }
+
+  
 
   ngOnInit(): void {
   }
-
+  async Login() {
+    await this.auth.Login();
+  }
+  async LogOut() {
+    await this.auth.LogOut();
+  }
 }
