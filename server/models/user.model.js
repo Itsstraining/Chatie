@@ -1,20 +1,21 @@
-class user {
+class User {
     
     /**
      * 
      * @param {String} email 
      * @param {String} displayname 
      * @param {String} avatar 
-     * @param {String} friendList 
+     * @param {Boolean} status
      */
-    constructor(email,displayname,avatar,friendList)
+    constructor(email,displayname,avatar,status)
     {
         this.email = email;
         this.displayname = displayname;
         this.avatar = avatar;
-        this.friendList = friendList;
+        this.friendList =[];
+        this.status = status;
     }
     
 }
 
-module.exports= user;
+module.exports= User;

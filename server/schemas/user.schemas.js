@@ -5,7 +5,8 @@ const userSchema = new mongoose.Schema({
     email:String,
     displayname:String,
     avatar: String,
-    friendList: [String]
+    friendList: [String],
+    status :Boolean
 });
 
 module.exports = userSchema;
