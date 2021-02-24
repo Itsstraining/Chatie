@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChatSocketComponent } from '../chat-socket/chat-socket.component';
+import { DialogNotificationComponent } from './dialog-notification.component';
 
-describe('ChatSocketComponent', () => {
-  let component: ChatSocketComponent;
-  let fixture: ComponentFixture<ChatSocketComponent>;
+describe('DialogNotificationComponent', () => {
+  let component: DialogNotificationComponent;
+  let fixture: ComponentFixture<DialogNotificationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChatSocketComponent ]
+      declarations: [ DialogNotificationComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChatSocketComponent);
+    fixture = TestBed.createComponent(DialogNotificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

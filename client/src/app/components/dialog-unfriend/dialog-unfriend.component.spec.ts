@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChatSocketComponent } from '../chat-socket/chat-socket.component';
+import { DialogUnfriendComponent } from './dialog-unfriend.component';
 
-describe('ChatSocketComponent', () => {
-  let component: ChatSocketComponent;
-  let fixture: ComponentFixture<ChatSocketComponent>;
+describe('DialogUnfriendComponent', () => {
+  let component: DialogUnfriendComponent;
+  let fixture: ComponentFixture<DialogUnfriendComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChatSocketComponent ]
+      declarations: [ DialogUnfriendComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChatSocketComponent);
+    fixture = TestBed.createComponent(DialogUnfriendComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
