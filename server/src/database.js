@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const userSchema = require('../schemas/user.schemas');
 const fileSchema = require('../schemas/file.schemas');
-const conversationSchema = require('../schemas/conversation.shemas');
+const Conversation = require('../src/services/conversation');
 const user = require('../models/user.model');
 class Database {
     /**
@@ -15,7 +15,7 @@ class Database {
          */
         this.userSchema = new mongoose.model("users", userSchema);
         this.fileSchema = new mongoose.model("files", fileSchema);
-        this.conversationSchema = new mongoose.model('conversation', conversationSchema);
+        this.Conversation = new Conversation();
     }
 
     /**
