@@ -65,7 +65,6 @@ class Database {
      * @param {String} avatar 
      * @param {Boolean} status 
      */
-<<<<<<< HEAD
     async getUserMailandupdate(email,displayname , avatar , status)
     {
         return await this.User.findOneAndUpdate({email: email}, {
@@ -73,10 +72,6 @@ class Database {
             avatar: avatar,
             status:status
         });
-=======
-    async getUserMailandupdate(email, displayname, avatar, status) {
-        return await this.User.findByIdAndUpdate(email);
->>>>>>> 95e90dc5ca8a984cc41cadea2722f1e40bc01932
     }
 }
 

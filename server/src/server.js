@@ -46,27 +46,10 @@ server.put('/findupdate', async (req, res) => {
     })
 })
 
-<<<<<<< HEAD
 server.post("/createUser", async(req,res)=>{
     const{email , displayname , avatar , status} = req.body;
     let user = await Database.instance.createUser(new User(email , displayname , avatar  , status));
     res.send({ message: user});
-=======
-
-
-
-server.post("/createUser", async (req, res) => {
-    const {
-        email,
-        displayname,
-        avatar,
-        status
-    } = req.body;
-    let user = await Database.instance.createUser(new User(email, displayname, avatar, status));
-    res.send({
-        message: user
-    });
->>>>>>> 95e90dc5ca8a984cc41cadea2722f1e40bc01932
 });
 server.get("/getUser", async (req, res) => {
     const {
@@ -77,7 +60,6 @@ server.get("/getUser", async (req, res) => {
         getUser: getUser
     });
 });
-<<<<<<< HEAD
 server.put("/updateUser", async(req,res)=>{
     const{email , displayname , avatar , status} = req.body;
     try{
@@ -86,24 +68,6 @@ server.put("/updateUser", async(req,res)=>{
     }catch(erro)
     {
         res.status(400).send({message:  `Cannot Update[${email}]`});
-=======
-server.put("/updateUser", async (req, res) => {
-    const {
-        email,
-        displayname,
-        avatar,
-        status
-    } = req.body;
-    try {
-        await Database.instance.getUserMailandupdate(email, displayname, avatar, status);
-        res.send({
-            message: `Update[${email}]`
-        });
-    } catch (erro) {
-        res.status(400).send({
-            message: `Cannot Update[${email}]`
-        });
->>>>>>> 95e90dc5ca8a984cc41cadea2722f1e40bc01932
     }
 
 });
