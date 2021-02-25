@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 
 
 const messageSchema = new mongoose.Schema({
-    date: Date,
-    content: String
+    date: Date.now(),
+    senderId: String,
+    content: String,
+    conversationId: String,
 });
 
 

@@ -3,16 +3,19 @@ const server = express();
 const Database = require('./database');
 const bodyParser = require('body-parser');
 const ConversationModel = require('../models/conversation.model');
+const MessageModel = require('../models/message.model');
 
 server.use(bodyParser.json());
 
 
+
+//Conversation
 server.post('/', async (req, res) => {
     const {
         sender,
         receiver
     } = req.body;
-    let conver = await Database.instance.Conversation.createConversation(new ConversationModel(sender, receiver));
+    let conver = await Database.instance.Conversation.createConversation(new ConversationModel(receiver));
     res.send({
         conver: conver,
     })
@@ -47,7 +50,7 @@ server.put('/findupdate', async (req, res) => {
 })
 
 
-
+//User
 
 server.post("/createUser", async (req, res) => {
     const {
@@ -89,6 +92,37 @@ server.put("/updateUser", async (req, res) => {
     }
 
 });
+//Message
+server.post("/create", (req, res) => {
+    const {
+        message
+    } = req.body;
+    try {
+        let newMessage = Database.instance.Message.createMessage(new MessageModel(message));
+        res.send('Messsage has been created')
+    } catch (error) {
+        res.send('Message has not been created')
+
+    }
+});
+
+server.get("/getmess", async (req, res) => {
+    let getMessage = await Database.instance.Message.getAllMessage();
+    res.send({
+        getMess: getMessage,
+    })
+});
+
+server.get("/getMessageID", async (req, res) => {
+    const{id} = req.body;
+    try {
+        let messageID = await Database.instance.Message.getMessageByID(id);
+        console.log(messageID)
+        res.send({ content: messageID})
+    } catch (error) {
+        res.send('err')
+    }
+})
 
 
 
