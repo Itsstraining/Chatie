@@ -76,7 +76,11 @@ class Database {
      */
     async getUserMailandupdate(email,displayname , avatar , status)
     {
-        return await this.User.findByIdAndUpdate(email);
+        return await this.User.findOneAndUpdate({email: email}, {
+            displayname: displayname,
+            avatar: avatar,
+            status:status
+        });
     }
 }
 

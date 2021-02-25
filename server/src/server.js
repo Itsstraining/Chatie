@@ -9,7 +9,6 @@ const User = require('../models/user.model');
 server.use(bodyParser.json());
 
 
-
 server.post("/createUser", async(req,res)=>{
     const{email , displayname , avatar , status} = req.body;
     let user = await Database.instance.createUser(new User(email , displayname , avatar  , status));
@@ -24,7 +23,7 @@ server.put("/updateUser", async(req,res)=>{
     const{email , displayname , avatar , status} = req.body;
     try{
         await Database.instance.getUserMailandupdate(email,displayname , avatar , status);
-    res.send({message: `Update[${email}]`});
+    res.send({message: `Update ${email}`});
     }catch(erro)
     {
         res.status(400).send({message:  `Cannot Update[${email}]`});
