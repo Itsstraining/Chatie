@@ -1,35 +1,50 @@
-<div class="container">
-  <div class="chat-box">
-    <div class="row"> 
-      <div class="chat-frame">
-        <div class="friend">
-          <img src="../../../assets/images/applestore.png" alt="img">
-          <h1>tantrung</h1>
+<div class='container' ng-cloak ng-app="chatApp">
+    <div class='chatbox' ng-controller="MessageCtrl as chatMessage">
+        <div class='chatbox__user-list'>
+
+            <h1>Tan Trung</h1>
+
+            <!-- <div class='chatbox__user--active'>
+                <p>Jack Thomson</p>
+            </div>
+            <div class='chatbox__user--busy'>
+                <p>Angelina Jolie</p>
+            </div>
+            <div class='chatbox__user--active'>
+                <p>George Clooney</p>
+            </div>
+            <div class='chatbox__user--active'>
+                <p>Seth Rogen</p>
+            </div>
+            <div class='chatbox__user--away'>
+                <p>John Lydon</p>
+            </div> -->
         </div>
 
-        <div class="chat-messages">
-          <div class="chat-messages-show-container">
-            <ul class="chat-messages-show-list" id="message-list">
-            </ul>
-          </div>
-          <div class="chat-messages-create-container"> 
-            <input class="chat-messages-create-input" type="text" >
-            <button  class="chat-messages-create-button" > Send </button>
-          </div>
-       </div>
-      </div>
-      
+        <div class="chatbox__friend-profile">
+            <h1>Tan Trung</h1>
 
+            <div class="chat-messages">
+                <div class="chat-messages-show-container">
+                    <ul class="chat-messages-show-list" id="message-list">
+                    </ul>
+                </div>
+                <div class="chat-messages-create-container">
+                    <input class="chat-messages-create-input" type="text">
+                    <button class="chat-messages-create-button"> Send </button>
+                </div>
+            </div>
 
-
-      <div class="user-list">
-        <div class="profile">
-          <img src="../../../assets/images/applestore.png" alt="img">
-          <h1>nhphongphu</h1>
         </div>
+        <!-- 
+        <div class="chatbox__messages" ng-repeat="message in messages">
+            <div class="chatbox__messages__user-message">
+                <div class="chatbox__messages__user-message--ind-message">
+                    <p class="name">{{message.Name}}</p>
+                    <br/>
+                    <p class="message">{{message.Message}}</p>
+                </div>
+            </div>
+        </div> -->
 
-      </div>
     </div>
-
-  </div>
-</div>

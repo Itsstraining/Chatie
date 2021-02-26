@@ -6,6 +6,8 @@ import { ChatPageComponent } from './chat-page.component';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatToolbarModule} from '@angular/material/toolbar'
+import { from } from 'rxjs';
 @NgModule({
   declarations: [ChatPageComponent],
   imports: [
@@ -13,7 +15,8 @@ import {MatDividerModule} from '@angular/material/divider';
     ChatPageRoutingModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatToolbarModule
   ]
 })
 export class ChatPageModule { }
