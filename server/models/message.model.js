@@ -2,10 +2,11 @@ class MessageModel {
 
     /**
      * 
-     * @param {String} message 
+     * @param {String} senderId 
+     * @param {String} content 
+     * @param {String} conversationId 
      */
-    constructor(senderId, content, conversationId) {
-        this.senderId = senderId;
+    constructor( content, conversationId) {
         this.content = content;
         this.conversationId = conversationId
         this.date = Date.now();

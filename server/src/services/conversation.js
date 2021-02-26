@@ -16,10 +16,18 @@ class ConversationClass {
 
     /**
      * 
-     * @param {ConversationModel} newConversation 
+     * 
      */
-    async createConversation(newConversation) {
-        return await this.Conversation.create(newConversation);
+    async createConversation(senderID, receiverID) {
+        return await this.Conversation.create({
+            sender: senderID,
+            receiver: [receiverID],
+            ...conversationSchema
+        });
+    }
+
+    async createChatGroup(){
+
     }
 
 
@@ -29,25 +37,22 @@ class ConversationClass {
     }
 
     //Get one friend recent
-    async getOneConversation(receiver) {
+    async getOneConversation(senderId, receiverId) {
         return await this.Conversation.findOne({
-            receiver: receiver
+            sender: senderId,
+            receiver: { $elemMatch: {$eq: receiverId} } 
         });
     }
 
     /**
      * 
-     * @param {*} receiver 
+     * @param {*} receiverId 
      * @param {String} message 
      */
-    async updateConversation(senderId, receiverId, message) {
-        const query = {
-            sender: senderId,
-            receiver: receiverId
-        };
-        let newMessage =(await this.message.createMessage(new MessageModel(senderId, message, receiverId)))._id ;
+    async updateConversation(message, conversationId) {
+        let newMessage =(await this.message.createMessage(new MessageModel(message, conversationId)))._id ;
         return await this.Conversation.findOneAndUpdate(
-            query, {
+            {_id: conversationId}, {
                 $push: {
                     messages: [newMessage]
                 }

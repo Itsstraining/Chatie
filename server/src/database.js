@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-const userSchema = require('../schemas/user.schemas');
 const fileSchema = require('../schemas/file.schemas');
 
 const MessageClass = require('./services/message');
 const ConversationClass = require('./services/conversation');
-const User = require('../models/user.model');
+const UserClass = require("../src/services/user");
 class Database {
     /**
      * @type {Database}
@@ -12,13 +11,11 @@ class Database {
     static _cache = null;
 
     constructor() {
-        /**
-         * @type{mongoose.Model<any>}
-         */
-        this.User = new mongoose.model("User", userSchema);
+        
         this.fileSchema = new mongoose.model("files", fileSchema);
         this.Conversation = new ConversationClass();
         this.Message = new MessageClass();
+        this.User = new UserClass();
     }
 
     /**
@@ -51,32 +48,6 @@ class Database {
             });
         });
     }
-
-    /**
-     * @param {User} newUser
-     */
-    async createUser(newUser) {
-        return await this.User.create(newUser);
-    }
-    async getUserMail(email) {
-        return await this.User.find();
-    }
-    /**
-     * 
-     * @param {String} email 
-     * @param {String} displayname 
-     * @param {String} avatar 
-     * @param {Boolean} status 
-     */
-    async getUserMailandupdate(email,displayname , avatar , status)
-    {
-        return await this.User.findOneAndUpdate({email: email}, {
-            displayname: displayname,
-            avatar: avatar,
-            status:status
-        });
-    }
-
 }
 
 
