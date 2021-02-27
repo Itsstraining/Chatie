@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     displayname:String,
     avatar: String,
     friendList: [String],
+    conversations: [String],
     status :Boolean
 });
 

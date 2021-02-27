@@ -11,10 +11,12 @@ export class NavbarComponent implements OnInit {
 
   public user: any;
   constructor(public auth: LoginService, private router: Router) { 
-    
+    console.log(this.auth.user)
   }
 
   ngOnInit(): void {
+    console.log(this.auth.user)
+
   }
   
   async LogOut() {

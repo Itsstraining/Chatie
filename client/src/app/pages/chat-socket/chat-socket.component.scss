@@ -1,7 +1,22 @@
+<<<<<<< HEAD
 $black: #1A1B20;
 $light-black: #21242A;
 $green-neon: #53B46C;
 $light-green-neon: #cff8ab;
+=======
+.chat-message{
+  width: 100vw;
+  height: 100vh;
+}
+
+.chat-messages-show-container {
+  background: #c3c3c3;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+>>>>>>> b83506a94ce6f9c9693c925c7c6834bcc0f50d37
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: white;
