@@ -9,6 +9,7 @@ class User {
      */
     constructor(email,displayname,avatar,status)
     {
+        
         this.email = email;
         this.displayname = displayname;
         this.avatar = avatar;
