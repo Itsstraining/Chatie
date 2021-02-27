@@ -15,8 +15,17 @@ export class LoginService {
         this.user = null;
       }
     })
+    // console.log(this.user.uid);
   }
-
+  public isAuthenticated(): boolean {
+    if(this.user!=undefined){
+      return true;
+    }
+    
+    // Check whether the token is expired and return
+    // true or false
+    return false
+  }
   async Login() {
 
     try {
