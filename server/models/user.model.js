@@ -8,7 +8,6 @@ class UserModel {
      */
     constructor(email,displayname,avatar)
     {
-        
         this.email = email;
         this.displayname = displayname;
         this.avatar = avatar;

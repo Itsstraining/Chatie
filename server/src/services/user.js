@@ -102,20 +102,10 @@ class UserClass {
         await this.User.updateOne({ _id: id }, { $pull: { friendList: { $in: [friendId] } } });
         return 'Deleted'
     }
-    async Login(email) {
-        mongoose.set('useNewUrlParser', true);
-        let user = await this.getUser()();
-        for (let i = 0; i < user.length; i++) {
-            if (email == user.length[i]) {
-                return 'Already have account';
-            }
-        }
-        await this.User.updateOne({ email: email }, { $push: { User } });
+    
+    async LoginWithEmail(newUser) {
+        return await this.User.create(newUser);
     }
-
-
-
-
 }
 
 module.exports = UserClass;

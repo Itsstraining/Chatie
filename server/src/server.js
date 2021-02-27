@@ -1,11 +1,12 @@
 const express = require('express');
+const cors =require('cors')
 const server = express();
 const Database = require('./database');
 const bodyParser = require('body-parser');
 const ConversationModel = require('../models/conversation.model');
 const User = require('../models/user.model');
 const MessageModel = require('../models/message.model');
-
+server.use(cors());
 server.use(bodyParser.json());
 
 
