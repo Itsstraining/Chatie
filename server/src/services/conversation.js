@@ -16,38 +16,57 @@ class ConversationClass {
 
     /**
      * 
-     * @param {ConversationModel} newConversation 
+     * 
      */
-    async createConversation(newConversation) {
-        return await this.Conversation.create(newConversation);
+    async createConversation(senderID, receiverID) {
+        return await this.Conversation.create({
+            senderId: senderID,
+            receiver: [receiverID],
+            ...conversationSchema
+        });
+    }
+
+    async createChatGroup(){
+
     }
 
 
-    //Get all Friend recent
+    //Get all conversation 
     async getAllConversation() {
         return await this.Conversation.find();
     }
 
+    //Get all conversation 
+    async getAllUserConversation(senderId) {
+        return await this.Conversation.find({senderId: senderId});
+    }
+
     //Get one friend recent
-    async getOneConversation(receiver) {
+    async getOneConversation(senderId, receiverId) {
         return await this.Conversation.findOne({
-            receiver: receiver
+            senderId: senderId,
+            receiver: { $elemMatch: {$eq: receiverId} } 
         });
     }
 
     /**
      * 
-     * @param {*} receiver 
+     * @param {*} receiverId 
      * @param {String} message 
      */
     async updateConversation(senderId, receiverId, message) {
-        const query = {
-            sender: senderId,
-            receiver: receiverId
-        };
-        let newMessage =(await this.message.createMessage(new MessageModel(senderId, message, receiverId)))._id ;
+        let convers = await this.getAllUserConversation(senderId);
+        let conversationId = '';
+        for(let i = 0; i < convers.length; i++){
+            for(let j = 0; j < convers[i].receiver.length; j++){
+                if(receiverId == convers[i].receiver[j]){
+                    conversationId = convers[i]._id;
+                }
+            }
+        }
+        let newMessage =(await this.message.createMessage(new MessageModel(message, conversationId, senderId)))._id ;
         return await this.Conversation.findOneAndUpdate(
-            query, {
+            {_id: conversationId}, {
                 $push: {
                     messages: [newMessage]
                 }

@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ChatSocketRoutingModule } from './chat-socket-routing.module';
 import { ChatSocketComponent } from './chat-socket.component';
 import { FormsModule } from '@angular/forms'
+import {MatIconModule} from '@angular/material/icon';
+
 import { from } from 'rxjs';
 
 
@@ -12,7 +14,8 @@ import { from } from 'rxjs';
   imports: [
     CommonModule,
     ChatSocketRoutingModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ]
 })
 export class ChatSocketModule { }

@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="this.auth.user != null">
     <mat-toolbar-row>
         <span style='height: 64px;'><img src="../../../assets/images/chatie-logo-removebg-preview.png" style="height: 63px; width: 160px"></span>
         <span class="example-spacer"></span>

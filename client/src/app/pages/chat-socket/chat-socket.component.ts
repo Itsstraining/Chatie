@@ -13,9 +13,10 @@ import * as io from 'socket.io-client/dist/socket.io';
 export class ChatSocketComponent implements OnInit {
   socket: any;
   message: any;
-  readonly uri: string = "http://localhost:9999"
+  readonly uri: string = "http://localhost:9999";
 
   constructor(private sock: ChatsocketioService) {
+    console.log("bug")
     this.socket = io(this.uri);
 
   }
@@ -62,10 +63,12 @@ export class ChatSocketComponent implements OnInit {
     this.socket.emit('message', this.message);
     const element = document.createElement('li');
     element.innerHTML = this.message;
-    element.style.background = 'white';
+    element.style.background = 'pink';
     element.style.padding = '15px 30px';
     element.style.margin = '10px';
     element.style.textAlign = 'right';
+    // element.style.float = 'right';
+    // element.style.width = 'fit-content';
     document.getElementById('message-list').appendChild(element);
   }
 
