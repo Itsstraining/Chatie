@@ -17,9 +17,22 @@ export class LoginService {
       } else {
         this.user = null;
       }
-    });
+<<<<<<< HEAD
+    })
+    // console.log(this.user.uid);
   }
-
+  public isAuthenticated(): boolean {
+    if(this.user!=undefined){
+      return true;
+    }
+    
+    // Check whether the token is expired and return
+    // true or false
+    return false
+=======
+    });
+>>>>>>> d1afa90385d98bd76feff9b19d493a82dc0f7614
+  }
   async Login() {
     try {
       let provider = new firebase.default.auth.GoogleAuthProvider();
