@@ -16,6 +16,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user=this.auth.user;
+    console.log(this.auth.user)
+
   }
   
   async LogOut() {
