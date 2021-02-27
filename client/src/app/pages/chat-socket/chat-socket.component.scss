@@ -51,8 +51,9 @@ $light-green-neon: #cff8ab;
     width: 90%;
     height: 88%;
     background-color: $light-black;
-
-
+    text-align: center;
+    display: flex;
+    flex-direction: column;
   }
 
   .find {

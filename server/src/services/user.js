@@ -85,7 +85,7 @@ class UserClass {
             }
         }
         // user.friendList.push(friendId);
-        await this.User.updateOne({ _id: id }, { $push: { friendList: [friendId] } });
+        await this.User.updateOne({ _id: id }, { $push: { friendListRequest: [friendId] } });
         return 'Friends'
     }
 

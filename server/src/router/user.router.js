@@ -54,7 +54,7 @@ router.post("/email", async (req, res) => {
 
 router.get("/", async (req, res) => {
     const { email } = req.query;
-    let getUser = await Database.instance.User.getAllUser(email);
+    let getUser = await Database.instance.User.getAllUser();
     res.send({
         getUser: getUser
     });

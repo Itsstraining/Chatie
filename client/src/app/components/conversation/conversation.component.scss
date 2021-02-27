@@ -1,0 +1,25 @@
+img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.conversation{
+    margin: 0.5rem 0 0 0;
+    width: 90%;
+    height: 5rem;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 0.5rem;
+}
+
+.conversation-container{
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.conversation-content{
+    margin: 0.5rem 0 0 0.5rem;
+}

@@ -6,7 +6,10 @@ import { ChatPageComponent } from './chat-page.component';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatToolbarModule} from '@angular/material/toolbar'
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTabsModule} from '@angular/material/tabs';
+
+
 import { from } from 'rxjs';
 @NgModule({
   declarations: [ChatPageComponent],
@@ -16,7 +19,8 @@ import { from } from 'rxjs';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTabsModule,
   ]
 })
 export class ChatPageModule { }

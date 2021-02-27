@@ -13,7 +13,7 @@ server.use(bodyParser.json());
 server.use("/conversation", require('./router/conversation.router'));
 server.use("/user", require('./router/user.router'));
 server.use("/mess", require('./router/message.router'));
-server.use("/", require('./router/friend.router'));
+server.use("/friend", require('./router/friend.router'));
 
 
 module.exports = server;
