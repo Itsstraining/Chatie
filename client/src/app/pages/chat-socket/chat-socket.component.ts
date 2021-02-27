@@ -16,12 +16,8 @@ export class ChatSocketComponent implements OnInit {
   readonly uri: string = "http://localhost:9999";
 
   constructor(private sock: ChatsocketioService) {
-<<<<<<< HEAD
-    // this.socket = io(this.uri);
-=======
     console.log("bug")
     this.socket = io(this.uri);
->>>>>>> b83506a94ce6f9c9693c925c7c6834bcc0f50d37
 
   }
 
@@ -48,7 +44,7 @@ export class ChatSocketComponent implements OnInit {
 
 
   setupSocketConnection() {
-    this.socket = io(this.uri);
+    // this.socket = io(this.uri);
     this.socket.on('message-broadcast', (data: string) => {
       if (data) {
         const element = document.createElement('li');
