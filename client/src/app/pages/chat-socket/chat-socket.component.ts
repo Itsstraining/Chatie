@@ -13,10 +13,10 @@ import * as io from 'socket.io-client/dist/socket.io';
 export class ChatSocketComponent implements OnInit {
   socket: any;
   message: any;
-  readonly uri: string = "http://localhost:9999"
+  readonly uri: string = "http://localhost:9999";
 
   constructor(private sock: ChatsocketioService) {
-    this.socket = io(this.uri);
+    // this.socket = io(this.uri);
 
   }
 
@@ -43,7 +43,7 @@ export class ChatSocketComponent implements OnInit {
 
 
   setupSocketConnection() {
-    // this.socket = io(this.uri);
+    this.socket = io(this.uri);
     this.socket.on('message-broadcast', (data: string) => {
       if (data) {
         const element = document.createElement('li');
@@ -66,6 +66,8 @@ export class ChatSocketComponent implements OnInit {
     element.style.padding = '15px 30px';
     element.style.margin = '10px';
     element.style.textAlign = 'right';
+    // element.style.float = 'right';
+    // element.style.width = 'fit-content';
     document.getElementById('message-list').appendChild(element);
   }
 
