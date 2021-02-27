@@ -256,6 +256,7 @@ body {
     text-align: center;
     height: 3rem;
     width: 3rem;
+    outline: none;
     cursor: pointer;
     &:hover {
         background-color: white;
@@ -370,6 +371,26 @@ body {
     }
     .phones-container {
         display: initial;
+        .slide {
+            // height: 336px;
+            // width: 465px;
+            margin: -386px auto 0 69px;
+            animation: slides 1s infinite;
+        }
+        @keyframes slides {
+            25% {
+                background-image: url(../../../assets/images/chatie-logo.png);
+            }
+            50% {
+                background-image: url(../../../assets/images/chatie-logo.png);
+            }
+            75% {
+                background-image: url(../../../assets/images/chatie-logo.png);
+            }
+            100% {
+                background-image: url(../../../assets/images/chatie-logo.png);
+            }
+        }
     }
     .log-in-container {
         order: 1;
