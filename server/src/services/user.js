@@ -44,26 +44,77 @@ class UserClass {
         });
     }
 
-    async chat(id, receiverId, conversationId){
+    async chat(id, receiverId, newConSend, newConRec){
         await this.User.findOneAndUpdate(
             {_id: id}, {
                 $push: {
-                    conversations: [conversationId]
+                    conversations: [newConSend]
                 }
             });
-        let conver = this.Conversation.createConversation(receiverId)
         await this.User.findOneAndUpdate(
             {_id: receiverId}, {
                 $push: {
-                    conversations: [conversationId]
+                    conversations: [newConRec]
                 }
             });
         return 'You two are chatting'
     }
 
-    async deleteUser(email){
-        await this.User.findOneAndDelete({email: email});
+    async getId(id) {
+        return await this.User.findOne({ _id: id });
     }
+
+    async deleteUser(id) {
+        await this.User.findOneAndDelete({ _id: id });
+    }
+
+    /**
+     * 
+     * @param {String} id 
+     * @param {String} friendId 
+     * 
+     */
+    async addFriend(id, friendId) {
+        // Optional. Use this if you create a lot of connections and don't want
+        // to copy/paste `{ useNewUrlParser: true }`.
+        mongoose.set('useNewUrlParser', true);
+        let user = await this.getId(id);
+        for (let i = 0; i < user.friendList.length; i++) {
+            if (friendId == user.friendList[i]) {
+                return 'Already be friend';
+            }
+        }
+        // user.friendList.push(friendId);
+        await this.User.updateOne({ _id: id }, { $push: { friendList: [friendId] } });
+        return 'Friends'
+    }
+
+    /**
+     * 
+     * @param {String} id 
+     * @param {String} friendId 
+     * 
+     */
+    async DeleteFriend(id, friendId) {
+        // Optional. Use this if you create a lot of connections and don't want
+        // to copy/paste `{ useNewUrlParser: true }`.
+        mongoose.set('useNewUrlParser', true);
+        await this.User.updateOne({ _id: id }, { $pull: { friendList: { $in: [friendId] } } });
+        return 'Deleted'
+    }
+    async Login(email) {
+        mongoose.set('useNewUrlParser', true);
+        let user = await this.getUser()();
+        for (let i = 0; i < user.length; i++) {
+            if (email == user.length[i]) {
+                return 'Already have account';
+            }
+        }
+        await this.User.updateOne({ email: email }, { $push: { User } });
+    }
+
+
+
 
 }
 

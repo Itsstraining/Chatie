@@ -5,6 +5,7 @@ const messageSchema = new mongoose.Schema({
     date: Date,
     content: String,
     conversationId: String,
+    senderId: String,
 });
 
 

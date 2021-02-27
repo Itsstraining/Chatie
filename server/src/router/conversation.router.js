@@ -1,5 +1,4 @@
 const app = require('express');
-const ConversationModel = require('../../models/conversation.model');
 const Database = require('../database');
 
 const router = app.Router();
@@ -10,22 +9,35 @@ router.post('/', async (req, res) => {
         receiverId,
         message
     } = req.body;
-    let conver = await Database.instance.Conversation.getOneConversation(senderId, receiverId);
     try {
+        let conver = await Database.instance.Conversation.getAllUserConversation(senderId);
+        let existed = 0;
         if (conver != null) {
-            await Database.instance.Conversation.updateConversation(message, conver._id);
+            for (let i = 0; i < conver.length; i++) {
+                for (let j = 0; j < conver[i].receiver.length; i++) {
+                    if (receiverId == conver[i].receiver[j]) {
+                        existed = 1;
+                        res.send({
+                            message: "you already talk to this friend"
+                        })
+                        return;
+                    }
+                }
+            }
+        }
+        if (existed == 0) {
+            //create sender conversation
+            let newConSend = await Database.instance.Conversation.createConversation(senderId, receiverId);
+            // create receiver conversation
+            let newConRec = await Database.instance.Conversation.createConversation(receiverId, senderId);
+            let chat = await Database.instance.User.chat(senderId, receiverId, newConSend._id, newConRec._id);
             res.send({
-                message: conver._id,
-            })
-        } else {
-            let newConver = await Database.instance.Conversation.createConversation(senderId, receiverId);
-            let chat = await Database.instance.User.chat(senderId, receiverId, newConver._id);
-            res.send({
-                message: newConver._id,
                 message: chat,
             })
-        };
-    }catch(err){
+        }
+
+        console.log("bug")
+    } catch (err) {
         res.send({
             message: "Can not send message"
         })
@@ -44,40 +56,53 @@ router.post('/', async (req, res) => {
 //     })
 // })
 
+//get all conversation in database
 router.get('/', async (req, res) => {
     let conversations = await Database.instance.Conversation.getAllConversation();
     res.send({
         message: conversations,
     })
-})
+});
 
+//get one conversation 
 router.get('/one', async (req, res) => {
-    const {senderId, receiverId} = req.body
+    const {
+        senderId,
+        receiverId
+    } = req.body
     let conversations = await Database.instance.Conversation.getOneConversation(senderId, receiverId);
     res.send({
         message: conversations,
     })
-})
+});
 
-router.get('/findreceiver', async (req, res) => {
-    const {
-        receiver
-    } = req.query;
-    let conversation = await Database.instance.Conversation.getOneConversation(receiver);
-    res.send({
-        message: conversation,
-    })
-})
+// router.get('/findreceiver', async (req, res) => {
+//     const {
+//         receiver
+//     } = req.query;
+//     let conversation = await Database.instance.Conversation.getOneConversation(receiver);
+//     res.send({
+//         message: conversation,
+//     })
+// });
 
-router.put('/findupdate', async (req, res) => {
+router.put('/', async (req, res) => {
     const {
-        receiver,
+        senderId,
+        receiverId,
         message
     } = req.body;
-    let conversation = await Database.instance.Conversation.updateConversation(receiver, message);
-    res.send({
-        message: message
-    })
-})
+    try {
+        console.log("bug")
+        let conversation = await Database.instance.Conversation.updateConversation(senderId, receiverId, message);
+        res.send({
+            message: conversation
+        })
+    } catch (err) {
+        res.send({
+            message: 'can not send messsage'
+        })
+    }
+});
 
 module.exports = router;

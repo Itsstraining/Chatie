@@ -1,16 +1,10 @@
-const app = require('express');
-const Database = require('../database');
-
-const router = app.Router();
-
-router.post("/", (req, res) => {
+//Message
+server.post("/create", (req, res) => {
     const {
-        senderId,
-        message,
-        conversationId
+        message
     } = req.body;
     try {
-        let newMessage = Database.instance.Message.createMessage(new MessageModel(senderId, message, conversationId));
+        let newMessage = Database.instance.Message.createMessage(new MessageModel(message));
         res.send('Messsage has been created')
     } catch (error) {
         res.send('Message has not been created')
@@ -18,14 +12,14 @@ router.post("/", (req, res) => {
     }
 });
 
-router.get("/", async (req, res) => {
+server.get("/getmess", async (req, res) => {
     let getMessage = await Database.instance.Message.getAllMessage();
     res.send({
         getMess: getMessage,
     })
 });
 
-router.get("/getMessageID", async (req, res) => {
+server.get("/getMessageID", async (req, res) => {
     const{id} = req.body;
     try {
         let messageID = await Database.instance.Message.getMessageByID(id);
@@ -34,6 +28,4 @@ router.get("/getMessageID", async (req, res) => {
     } catch (error) {
         res.send('err')
     }
-});
-
-module.exports = router;
+})

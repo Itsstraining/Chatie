@@ -20,7 +20,7 @@ class ConversationClass {
      */
     async createConversation(senderID, receiverID) {
         return await this.Conversation.create({
-            sender: senderID,
+            senderId: senderID,
             receiver: [receiverID],
             ...conversationSchema
         });
@@ -31,15 +31,20 @@ class ConversationClass {
     }
 
 
-    //Get all Friend recent
+    //Get all conversation 
     async getAllConversation() {
         return await this.Conversation.find();
+    }
+
+    //Get all conversation 
+    async getAllUserConversation(senderId) {
+        return await this.Conversation.find({senderId: senderId});
     }
 
     //Get one friend recent
     async getOneConversation(senderId, receiverId) {
         return await this.Conversation.findOne({
-            sender: senderId,
+            senderId: senderId,
             receiver: { $elemMatch: {$eq: receiverId} } 
         });
     }
@@ -49,8 +54,17 @@ class ConversationClass {
      * @param {*} receiverId 
      * @param {String} message 
      */
-    async updateConversation(message, conversationId) {
-        let newMessage =(await this.message.createMessage(new MessageModel(message, conversationId)))._id ;
+    async updateConversation(senderId, receiverId, message) {
+        let convers = await this.getAllUserConversation(senderId);
+        let conversationId = '';
+        for(let i = 0; i < convers.length; i++){
+            for(let j = 0; j < convers[i].receiver.length; j++){
+                if(receiverId == convers[i].receiver[j]){
+                    conversationId = convers[i]._id;
+                }
+            }
+        }
+        let newMessage =(await this.message.createMessage(new MessageModel(message, conversationId, senderId)))._id ;
         return await this.Conversation.findOneAndUpdate(
             {_id: conversationId}, {
                 $push: {
