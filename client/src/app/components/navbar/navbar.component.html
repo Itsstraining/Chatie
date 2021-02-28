@@ -9,7 +9,8 @@
           <mat-icon>notifications_none</mat-icon>
         </button>
         <button mat-icon-button *ngIf="this.auth.user != undefined" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          <mat-icon>more_vert</mat-icon>
+          <!-- <mat-icon>more_vert</mat-icon> -->
+          <img [src]="this.auth.user.photoURL" alt="" style="width: 40px; height: 40px; border-radius: 50%">
         </button>
         <mat-menu #menu="matMenu">
             <button *ngIf="this.auth.user != undefined" mat-menu-item>

@@ -1,14 +1,28 @@
+$border-color: #1A1B20;
+
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+
 img{
     width: 80px;
     height: 80px;
     border-radius: 50%;
 }
 
+hr{
+    width: 80%;
+    height: 0.125rem;
+    color: $border-color;
+    background-color: $border-color;
+    border: none;
+    opacity: 70%;
+}
+
 .conversation{
     margin: 0.5rem 0 0 0;
     width: 90%;
     height: 5rem;
-    background-color: white;
     border-radius: 1rem;
     padding: 0.5rem;
 }
@@ -22,4 +36,15 @@ img{
 
 .conversation-content{
     margin: 0.5rem 0 0 0.5rem;
+    text-align: left;
+}
+
+.displayName{
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: white;
+}
+
+.content{
+    color: white;
 }

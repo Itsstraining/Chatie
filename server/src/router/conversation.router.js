@@ -35,7 +35,6 @@ router.post('/', async (req, res) => {
                 message: chat,
             })
         }
-
         console.log("bug")
     } catch (err) {
         res.send({
@@ -44,6 +43,16 @@ router.post('/', async (req, res) => {
     }
 
 });
+
+router.get('/allUserConver', async (req, res) => {
+    const {
+        senderId
+    } = req.query;
+    let allUserConver = await Database.instance.Conversation.getAllUserConversation(senderId);
+    res.send({
+        allUserConver: allUserConver
+    })
+})
 
 // router.post('/', async (req, res) => {
 //     const {
@@ -65,14 +74,14 @@ router.get('/', async (req, res) => {
 });
 
 //get one conversation 
-router.get('/one', async (req, res) => {
+router.get('/oneConver', async (req, res) => {
     const {
         senderId,
         receiverId
     } = req.body
-    let conversations = await Database.instance.Conversation.getOneConversation(senderId, receiverId);
+    let conversation = await Database.instance.Conversation.getOneConversation(senderId, receiverId);
     res.send({
-        message: conversations,
+        conversation: conversation,
     })
 });
 

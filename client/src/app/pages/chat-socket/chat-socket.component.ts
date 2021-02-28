@@ -3,6 +3,8 @@ import { from, Observable } from 'rxjs';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
 import * as io from 'socket.io-client/dist/socket.io';
+import { UserService } from 'src/app/services/user.service';
+import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
@@ -13,9 +15,11 @@ import * as io from 'socket.io-client/dist/socket.io';
 export class ChatSocketComponent implements OnInit {
   socket: any;
   message: any;
+  userInfo:any;
+  public listConver: Array<any>;
   readonly uri: string = "http://localhost:9999";
 
-  constructor(private sock: ChatsocketioService) {
+  constructor(private sock: ChatsocketioService, public userService: UserService, public auth: LoginService) {
     console.log("bug")
     this.socket = io(this.uri);
 
@@ -26,8 +30,20 @@ export class ChatSocketComponent implements OnInit {
       console.log(data);
     });
     this.setupSocketConnection();
+    this.getUserInfos()
   }
 
+  public async getUserInfos(){
+    await this.userService.getUserInfo(this.auth.user.email);
+    this.userInfo = this.userService.user;
+    console.log(this.userInfo.email);
+  }
+
+  public async getAllUserConver(){
+    await this.userService.getAllConver();
+    this.listConver = this.userService.listConver;
+  }
+  
   listen(eventName: string) {
     return new Observable((Subscriber) => {
       this.socket.on(eventName, (data) => {
@@ -40,8 +56,6 @@ export class ChatSocketComponent implements OnInit {
   emit(eventName: string, data: any) {
     this.socket.emit(eventName, data);
   }
-
-
 
   setupSocketConnection() {
     // this.socket = io(this.uri);

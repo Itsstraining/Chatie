@@ -5,7 +5,7 @@
     <div class="chat-container">
       <div class="receiver-info">
         <img src="../../../assets/images/chatie-logo.png">
-        <h3>tan trung</h3>
+        <h3>{{this.auth.user.displayName}}</h3>
 
         <div class="option">
           <mat-icon style="color: #53B46C;" aria-hidden="false" aria-label="Example home icon">more_vert</mat-icon>
@@ -43,10 +43,16 @@
         <input class="search-input" type="text" placeholder="seach">
 
       </div>
-      <div class="chat-recent">
+      <div class="chat-recent" onmouseover="this.style.overflowY='scroll'"
+      onmouseout="this.style.overflowY='hidden'">
+        <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;" *ngFor="let conver of listConver" [conversation]="conver"></app-conversation>
+        <!-- <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;"></app-conversation>
         <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;"></app-conversation>
+        <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;"></app-conversation>
+        <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;"></app-conversation>
+        <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;"></app-conversation>
+        <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;"></app-conversation> -->
       </div>
     </div>
-
   </div>
 </div>

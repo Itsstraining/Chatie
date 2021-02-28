@@ -13,7 +13,7 @@ export class LoginService {
     this.auth.authState.subscribe((test) => {
       if (test) {
         this.user = test;
-        console.log(this.user.displayName);
+        // console.log(this.user.displayName);
       } else {
         this.user = null;
       }
@@ -41,9 +41,6 @@ export class LoginService {
         .subscribe((temp) => {
           console.log(temp);
         });
-      // await this.auth.signInWithPopup(
-      //   new firebase.default.auth.GoogleAuthProvider()
-      // );
       alert('login successfully');
     } catch (erro) {
       alert('Login failed');
