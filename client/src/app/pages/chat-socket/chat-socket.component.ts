@@ -13,7 +13,7 @@ import * as io from 'socket.io-client/dist/socket.io';
 export class ChatSocketComponent implements OnInit {
   socket: any;
   message: any;
-  readonly uri: string = "http://localhost:9999";
+  readonly uri: string = "http://0.0.0.0:8080";
 
   constructor(private sock: ChatsocketioService) {
     console.log("bug")
@@ -50,8 +50,12 @@ export class ChatSocketComponent implements OnInit {
         const element = document.createElement('li');
         element.innerHTML = data;
         element.style.background = 'white';
-        element.style.padding = '15px 30px';
+        element.style.padding = '10px 20px';
         element.style.margin = '10px';
+        element.style.float = 'left';
+        element.style.marginRight = '45%';
+        element.style.marginLeft = '3%';
+        element.style.borderRadius = '20px';
         document.getElementById('message-list').appendChild(element);
       }
     });
@@ -61,15 +65,24 @@ export class ChatSocketComponent implements OnInit {
 
   SendMessage() {
     this.socket.emit('message', this.message);
+    if(this.message == '' || this.message == null) {
+      return;
+    }
     const element = document.createElement('li');
     element.innerHTML = this.message;
-    element.style.background = 'pink';
-    element.style.padding = '15px 30px';
+    element.style.background = '#4290E4';
+    element.style.padding = '10px 20px';
     element.style.margin = '10px';
-    element.style.textAlign = 'right';
-    // element.style.float = 'right';
-    // element.style.width = 'fit-content';
-    document.getElementById('message-list').appendChild(element);
+    element.style.textAlign = 'left';
+    element.style.color = 'white';
+    element.style.float = 'right';
+    element.style.width = 'fit-content';
+    element.style.marginLeft = '45%';
+    element.style.marginRight = '3%'
+    element.style.borderRadius = '25px';
+    const messList = document.getElementById('message-list');
+    messList.appendChild(element);
+    this.message = '';
   }
 
 
