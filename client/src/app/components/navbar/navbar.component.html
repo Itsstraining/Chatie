@@ -13,8 +13,8 @@
         </button>
         <mat-menu #menu="matMenu">
             <button *ngIf="this.auth.user != undefined" mat-menu-item>
-              <mat-icon>account_circle</mat-icon>
-              <span>Setting profile</span>
+              <mat-icon>settings</mat-icon>
+              <span>Setting</span>
             </button>
             <button *ngIf="this.auth.user != undefined" mat-menu-item (click)="LogOut()">
               <mat-icon>logout</mat-icon>
