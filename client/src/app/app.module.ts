@@ -24,10 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
-<<<<<<< HEAD
 import { ReceivedMsgComponent } from './components/received-msg/received-msg.component';
-=======
->>>>>>> 6834d63e9d210cadca1659746620d4fcb363389d
 
 @NgModule({
   declarations: [
@@ -38,10 +35,7 @@ import { ReceivedMsgComponent } from './components/received-msg/received-msg.com
     DialogSettingComponent,
     DialogNotificationComponent,
     DialogUnfriendComponent,
-<<<<<<< HEAD
     ReceivedMsgComponent,
-=======
->>>>>>> 6834d63e9d210cadca1659746620d4fcb363389d
   ],
   imports: [
     BrowserModule,

@@ -85,13 +85,8 @@ class UserClass {
                 return 'Already be friend';
             }
         }
-<<<<<<< HEAD
-        // user.friendList.push(friendId);
-        await this.User.updateOne({ _id: id }, { $push: { friendListRequest: [friendId] } });
-=======
         // user.friendList.push(friendId);                  
         await this.User.updateOne({ _id: friendId }, { $push: { friendListRequest: [id] } });
->>>>>>> 6834d63e9d210cadca1659746620d4fcb363389d
         return 'Friends'
     }
 

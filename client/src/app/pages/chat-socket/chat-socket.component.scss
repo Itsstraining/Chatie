@@ -58,16 +58,10 @@ $blue: #4290E4;
     width: 90%;
     height: 88%;
     background-color: $light-black;
-<<<<<<< HEAD
     text-align: center;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-=======
-    overflow: hidden;
-
-
->>>>>>> 6834d63e9d210cadca1659746620d4fcb363389d
   }
 
   .find {
@@ -242,22 +236,6 @@ $blue: #4290E4;
 ::-webkit-scrollbar {
   width: 10px;
 }
-<<<<<<< HEAD
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-=======
 
 /* Track */
 ::-webkit-scrollbar-track {
@@ -272,7 +250,6 @@ $blue: #4290E4;
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
->>>>>>> 6834d63e9d210cadca1659746620d4fcb363389d
 }
 
 

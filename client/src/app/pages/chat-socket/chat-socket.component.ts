@@ -15,13 +15,9 @@ import { LoginService } from 'src/app/services/login.service';
 export class ChatSocketComponent implements OnInit {
   socket: any;
   message: any;
-<<<<<<< HEAD
   userInfo:any;
   public listConver: Array<any>;
   readonly uri: string = "http://localhost:9999";
-=======
-  readonly uri: string = "http://0.0.0.0:8080";
->>>>>>> 6834d63e9d210cadca1659746620d4fcb363389d
 
   constructor(private sock: ChatsocketioService, public userService: UserService, public auth: LoginService) {
     console.log("bug")
