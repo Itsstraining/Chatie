@@ -375,17 +375,17 @@ body {
             // height: 336px;
             // width: 465px;
             margin: -386px auto 0 69px;
-            animation: slides 1s infinite;
+            animation: slides 5s infinite;
         }
         @keyframes slides {
             25% {
-                background-image: url(../../../assets/images/chatie-logo.png);
+                background-image: url(../../../assets/images/chat-benefits.png);
             }
             50% {
                 background-image: url(../../../assets/images/chatie-logo.png);
             }
             75% {
-                background-image: url(../../../assets/images/chatie-logo.png);
+                background-image: url(../../../assets/images/logo.png);
             }
             100% {
                 background-image: url(../../../assets/images/chatie-logo.png);

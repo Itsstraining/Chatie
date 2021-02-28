@@ -51,6 +51,13 @@ router.post("/email", async (req, res) => {
         })
     }
 });
+router.get("/getByEmail", async (req, res) => {
+    const { email } = req.query;
+    let getByEmail = await Database.instance.User.getUserByEmail(email);
+    res.send({
+        getByEmail: getByEmail
+    });
+});
 
 router.get("/", async (req, res) => {
     const { email } = req.query;
@@ -98,6 +105,7 @@ router.put("/updateUser", async (req, res) => {
     }
 
 });
+
 // router.post("/email", async (req, res) => {
 //     const { email } = req.body;
 //     try {
