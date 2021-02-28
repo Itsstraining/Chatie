@@ -5,10 +5,10 @@ const Database = require('../database');
 const router = app.Router();
 
 
-router.put("/", async (req, res) => {
+router.post("/", async (req, res) => {
     const { id, friendId } = req.body;
     try {
-        let addfriend = await Database.instance.addFriend(id, friendId);
+        let addfriend = await Database.instance.User.addFriend(id, friendId);
         res.send({ message: addfriend });
     } catch (erro) {
         res.status(400).send({ message: `Cannot add` });

@@ -23,7 +23,8 @@ import { DialogUnfriendComponent } from './components/dialog-unfriend/dialog-unf
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
-import {AngularFireAuthModule} from '@angular/fire/auth'
+import {AngularFireAuthModule} from '@angular/fire/auth';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth'
     DialogSettingfriendComponent,
     DialogSettingComponent,
     DialogNotificationComponent,
-    DialogUnfriendComponent
+    DialogUnfriendComponent,
   ],
   imports: [
     BrowserModule,
