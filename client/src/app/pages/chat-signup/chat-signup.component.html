@@ -1,33 +1,21 @@
-<div class="main">
-     <div class="page">
-        <div class="header">
-          <h1 class="logo">Picturegram</h1>
-          <p>Sign up to message with your friend.</p>
-          <!-- <button><i class="fab fa-facebook-square"></i> Log in with Facebook</button> -->
-          
+<main>
+    <div class="log-in-container">
+        <div class="log-in">
+            <!-- Logo -->
+            <img src="../../../assets/images/chatie-logo.png" class="logo" style="margin-bottom: 3rem;" />
+            <p style="font-size: 1.3rem;font-weight: 700;color:grey;margin-bottom: auto;">Sign up to message with your friend.</p>
+            <!-- Log in form -->
+            <div class="log-in-form">
+                <input type="text" placeholder="Email">
+                <input type="text" placeholder="Username">
+                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Retype password">
+                <button class="sign-in-btn" mat-raised-button><a  href="/">SIGN UP</a> </button>
+            </div>
         </div>
-        <div class="container">
-          <form action="">
-            <input type="text" placeholder="Phone Number or Email">
-            <input type="text" placeholder="Full Name">
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
-            <button class="sign-in-btn" mat-raised-button><a style="text-decoration: none;" href="/">Sign Up</a> </button>
-          </form>
-          
-          <ul>
-            <li>By signing up, you agree to our</li>
-            <li><a href="">Terms</a></li>
-            <li><a href="">Data Policy</a></li>
-            <li>and</li>
-            <li><a href="">Cookies Policy</a> .</li>
-         </ul>
+        <!-- Sign up -->
+        <div class="sign-up" style="border-width: 2px; border-radius: 5px;border-style: ridge;">
+            <span>Have an account?</span><a href="/chat-login">Log in</a>
         </div>
     </div>
-    <div class="option">
-       <p>Have an account? <a href="/">Log in</a></p>
-    </div>
-
-</div>
-   
-  
+</main>
