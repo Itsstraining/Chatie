@@ -7,14 +7,20 @@ import { ConversationComponent } from '../../components/conversation/conversatio
 
 import { FormsModule } from '@angular/forms'
 import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import { ChatRecentComponent } from '../../components/chat-recent/chat-recent.component';
+
+
 
 @NgModule({
-  declarations: [ChatSocketComponent, ConversationComponent],
+  declarations: [ChatSocketComponent ,ChatRecentComponent, ConversationComponent],
   imports: [
     CommonModule,
     ChatSocketRoutingModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    MatDividerModule,
+
   ]
 })
 export class ChatSocketModule { }

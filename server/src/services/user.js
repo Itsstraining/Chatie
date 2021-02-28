@@ -4,7 +4,7 @@ const userSchema = require('../../schemas/user.schemas');
 const ConversationClass = require('../services/conversation');
 
 class UserClass {
-    constructor(){
+    constructor() {
         /**
          * @type {mongoose.Model<any>}
          */
@@ -12,9 +12,9 @@ class UserClass {
         this.Conversation = new ConversationClass();
     }
 
-     /**
-     * @param {UserModel} newUser
-     */
+    /**
+    * @param {UserModel} newUser
+    */
     async createUser(newUser) {
         return await this.User.create(newUser);
     }
@@ -24,7 +24,7 @@ class UserClass {
     }
 
     async getUserByEmail(email) {
-        return await this.User.findOne({email: email});
+        return await this.User.findOne({ email: email });
     }
 
     /**
@@ -34,29 +34,28 @@ class UserClass {
      * @param {String} avatar 
      * @param {Boolean} status 
      */
-    async updateProfile(id, email, displayname , avatar , status)
-    {
-        return await this.User.findOneAndUpdate({_id: id}, {
+    async updateProfile(id, email, displayname, avatar, status) {
+        return await this.User.findOneAndUpdate({ _id: id }, {
             email: email,
             displayname: displayname,
             avatar: avatar,
-            status:status
+            status: status
         });
     }
 
-    async chat(id, receiverId, newConSend, newConRec){
+    async chat(id, receiverId, newConSend, newConRec) {
         await this.User.findOneAndUpdate(
-            {_id: id}, {
-                $push: {
-                    conversations: [newConSend]
-                }
-            });
+            { _id: id }, {
+            $push: {
+                conversations: [newConSend]
+            }
+        });
         await this.User.findOneAndUpdate(
-            {_id: receiverId}, {
-                $push: {
-                    conversations: [newConRec]
-                }
-            });
+            { _id: receiverId }, {
+            $push: {
+                conversations: [newConRec]
+            }
+        });
         return 'You two are chatting'
     }
 
@@ -74,7 +73,9 @@ class UserClass {
      * @param {String} friendId 
      * 
      */
-    async addFriend(id, friendId) {
+
+    /// ds chờ
+    async addFriendRequest(id, friendId) {
         // Optional. Use this if you create a lot of connections and don't want
         // to copy/paste `{ useNewUrlParser: true }`.
         mongoose.set('useNewUrlParser', true);
@@ -84,11 +85,28 @@ class UserClass {
                 return 'Already be friend';
             }
         }
+<<<<<<< HEAD
         // user.friendList.push(friendId);
         await this.User.updateOne({ _id: id }, { $push: { friendListRequest: [friendId] } });
+=======
+        // user.friendList.push(friendId);                  
+        await this.User.updateOne({ _id: friendId }, { $push: { friendListRequest: [id] } });
+>>>>>>> 6834d63e9d210cadca1659746620d4fcb363389d
         return 'Friends'
     }
 
+
+    async addFriend(id, friendId, accept) {
+        mongoose.set('useNewUrlParser', true);
+        let user = await this.getId(id);
+        // for (let i = 0; i < user.friendListRequest.length; i++) {
+        if (accept) {
+            await this.User.updateOne({ _id: id }, { $pull: { friendListRequest: { $in: [friendId] } }, $push: { friendList: [friendId] } });
+            await this.User.updateOne({_id: friendId}, { $push: {friendList: [id]}})
+            return 'You two are friends now.';
+        }
+        // }
+    }
     /**
      * 
      * @param {String} id 
@@ -102,7 +120,7 @@ class UserClass {
         await this.User.updateOne({ _id: id }, { $pull: { friendList: { $in: [friendId] } } });
         return 'Deleted'
     }
-    
+
     async LoginWithEmail(newUser) {
         return await this.User.create(newUser);
     }
