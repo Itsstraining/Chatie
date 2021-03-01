@@ -19,11 +19,15 @@ import { DialogSettingComponent } from './components/dialog-setting/dialog-setti
 import { DialogNotificationComponent } from './components/dialog-notification/dialog-notification.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogUnfriendComponent } from './components/dialog-unfriend/dialog-unfriend.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
+import { DialogBlockComponent } from './components/dialog-block/dialog-block.component';
+import { DialogSettingprofileComponent } from './components/dialog-settingprofile/dialog-settingprofile.component';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +38,8 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
     DialogSettingComponent,
     DialogNotificationComponent,
     DialogUnfriendComponent,
+    DialogBlockComponent,
+    DialogSettingprofileComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +52,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
     MatBadgeModule,
     MatGridListModule,
     MatDialogModule,
+    MatFormFieldModule,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
