@@ -3,7 +3,7 @@
         <span style='height: 64px;'><img src="../../../assets/images/chatie-logo-removebg-preview.png" style="height: 63px; width: 160px"></span>
         <span class="example-spacer"></span>
         <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-          <mat-icon>home</mat-icon>
+          <mat-icon><a href="/home-page" style="text-decoration: none;color: white;">home</a></mat-icon>
         </button>
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
           <mat-icon>notifications_none</mat-icon>
@@ -13,7 +13,8 @@
         </button>
         <mat-menu #menu="matMenu">
             <button *ngIf="this.auth.user != undefined" mat-menu-item>
-              <mat-icon>account_circle</mat-icon>
+              <!-- <img src="../../../assets/images/avatar.png" alt=""> -->
+              <mat-icon>manage_accounts</mat-icon>
               <span>Setting profile</span>
             </button>
             <button *ngIf="this.auth.user != undefined" mat-menu-item (click)="LogOut()">
@@ -21,7 +22,5 @@
               <span>Logout</span>
             </button>
         </mat-menu>
-
-
     </mat-toolbar-row>
 </mat-toolbar>
