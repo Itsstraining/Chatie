@@ -25,14 +25,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
-<<<<<<< HEAD
 import { ReceivedMsgComponent } from './components/received-msg/received-msg.component';
-=======
 import { DialogBlockComponent } from './components/dialog-block/dialog-block.component';
 import { DialogSettingprofileComponent } from './components/dialog-settingprofile/dialog-settingprofile.component';
 import { FindComponent } from './components/find/find.component';
 
->>>>>>> da0092eaa8344297ba76355511f812e976a71d9b
 
 @NgModule({
   declarations: [
@@ -43,13 +40,10 @@ import { FindComponent } from './components/find/find.component';
     DialogSettingComponent,
     DialogNotificationComponent,
     DialogUnfriendComponent,
-<<<<<<< HEAD
     ReceivedMsgComponent,
-=======
     DialogBlockComponent,
     DialogSettingprofileComponent,
     FindComponent,
->>>>>>> da0092eaa8344297ba76355511f812e976a71d9b
   ],
   imports: [
     BrowserModule,

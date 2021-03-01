@@ -20,11 +20,11 @@ export class AuthGuardService implements CanActivate{
         this.login.user = usr;
         // this._router.navigate(['main-page'])
         return true;
+      }else{
+        console.log('NULL user');
+        this.router.navigate([''])
+        return false;
       }
-
-      console.log('NULL user');
-      this.router.navigate([''])
-      return false;
     }))
   }
   

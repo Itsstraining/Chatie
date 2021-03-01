@@ -12,9 +12,9 @@ router.post('/', async (req, res) => {
     try {
         let conver = await Database.instance.Conversation.getAllUserConversation(senderId);
         let existed = 0;
-        if (conver != null) {
+        // if (conver) {
             for (let i = 0; i < conver.length; i++) {
-                for (let j = 0; j < conver[i].receiver.length; i++) {
+                for (let j = 0; j < conver[i].receiver.length; j++) {
                     if (receiverId == conver[i].receiver[j]) {
                         existed = 1;
                         res.send({
@@ -24,18 +24,17 @@ router.post('/', async (req, res) => {
                     }
                 }
             }
-        }
-        if (existed == 0) {
-            //create sender conversation
-            let newConSend = await Database.instance.Conversation.createConversation(senderId, receiverId);
-            // create receiver conversation
-            let newConRec = await Database.instance.Conversation.createConversation(receiverId, senderId);
-            let chat = await Database.instance.User.chat(senderId, receiverId, newConSend._id, newConRec._id);
-            res.send({
-                message: chat,
-            })
-        }
-        console.log("bug")
+        // }
+
+        //create sender conversation
+        let newConSend = await Database.instance.Conversation.createConversation(senderId, receiverId);
+        // create receiver conversation
+        let newConRec = await Database.instance.Conversation.createConversation(receiverId, senderId);
+        let chat = await Database.instance.User.chat(senderId, receiverId, newConSend._id, newConRec._id);
+        res.send({
+            message: chat,
+        })
+
     } catch (err) {
         res.send({
             message: "Can not send message"

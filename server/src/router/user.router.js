@@ -51,6 +51,7 @@ router.post("/email", async (req, res) => {
         })
     }
 });
+
 router.get("/getByEmail", async (req, res) => {
     const { email } = req.query;
     let getByEmail = await Database.instance.User.getUserByEmail(email);
@@ -58,6 +59,16 @@ router.get("/getByEmail", async (req, res) => {
         getByEmail: getByEmail
     });
 });
+
+//get user by id
+router.get("/getById", async (req, res) => {
+    const { id } = req.query;
+    let getById = await Database.instance.User.getUserById(id);
+    res.send({
+        getById: getById
+    });
+});
+
 
 //get all user from database
 router.get("/", async (req, res) => {
@@ -67,14 +78,6 @@ router.get("/", async (req, res) => {
     });
 });
 
-//get user by email
-router.get("/getByEmail", async (req, res) => {
-    const { email } = req.query;
-    let getByEmail = await Database.instance.User.getUserByEmail(email);
-    res.send({
-        getByEmail: getByEmail
-    });
-});
 
 //update user info
 router.put("/updateUser", async (req, res) => {

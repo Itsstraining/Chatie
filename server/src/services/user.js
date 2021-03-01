@@ -56,10 +56,11 @@ class UserClass {
                 conversations: [newConRec]
             }
         });
+        console.log("bug")
         return 'You two are chatting'
     }
 
-    async getId(id) {
+    async getUserById(id) {
         return await this.User.findOne({ _id: id });
     }
 

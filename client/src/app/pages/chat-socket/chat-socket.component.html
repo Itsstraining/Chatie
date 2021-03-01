@@ -1,12 +1,9 @@
-<<<<<<< HEAD
 <div class="container" *ngIf=" this.auth.user != null">
   <div class="chat-box">
 
-    <!-- chat-container -->
-    <div class="chat-container">
-      <div class="receiver-info">
-        <!-- <img src="../../../assets/images/chatie-logo.png">
-        <h3>{{this.auth.user.displayName}}</h3> -->
+      <!-- <div class="receiver-info">
+        <img src="../../../assets/images/chatie-logo.png">
+        <h3>{{this.auth.user.displayName}}</h3>
         <img src="../../../assets/images/avatar-1.jpg">
         <h3>Tan Trung</h3>
 
@@ -15,11 +12,7 @@
           <mat-icon style="color: #4290E4; margin-right: 1rem; cursor: pointer;" aria-hidden="false" aria-label="Example home icon">videocam</mat-icon>
           <mat-icon style="color: #4290E4; cursor: pointer;" aria-hidden="false" aria-label="Example home icon">more_vert</mat-icon>
         </div>
-      </div>
-=======
-<div class="container">
-    <div class="chat-box">
->>>>>>> da0092eaa8344297ba76355511f812e976a71d9b
+      </div> -->
 
         <!-- chat-container -->
         <div class="chat-container">
@@ -94,24 +87,12 @@
               </g>
             </svg>
           </button>
-<<<<<<< HEAD
-        </div>
-
-      </div>
-    </div>
-    <!-- sender-chat -->
-    <div class="user-container">
-      <div class="find">
-        <!-- <img style="width: 30px; height: 30px;" src="../../../assets/images/search.svg" alt="search"> -->
-        <input class="search-input" type="text" placeholder="Seach">
-=======
                 </div>
 
             </div>
         </div>
 
 
->>>>>>> da0092eaa8344297ba76355511f812e976a71d9b
 
         <!-- sender-chat -->
         <div class="user-container">
@@ -119,33 +100,16 @@
                 <!-- <img style="width: 30px; height: 30px;" src="../../../assets/images/search.svg" alt="search"> -->
                 <input class="search-input" type="text" placeholder="Seach">
 
-<<<<<<< HEAD
-      </div>
-      <!-- <div class="chat-recent" onmouseover="this.style.overflowY='scroll'"
-      onmouseout="this.style.overflowY='hidden'">
-        <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;" *ngFor="let conver of listConver" [conversation]="conver"></app-conversation>
-        <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;"></app-conversation>
-        <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;"></app-conversation>
-        <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;"></app-conversation>
-        <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;"></app-conversation>
-        <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;"></app-conversation>
-        <app-conversation style="display: flex; justify-content: center; flex-direction: column; text-align: center; align-items: center;"></app-conversation>
-      </div> -->
-    </div>
-  </div>
-</div>
-=======
             </div>
-            <div class="chat-recent" onmouseover="this.style.overflowY='scroll'" onmouseout="this.style.overflowY='hidden'">
+            <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
+                <app-chat-recent *ngFor="let conversation of listConver" [conversation] = "conversation"></app-chat-recent>
+                <!-- <app-chat-recent></app-chat-recent>
                 <app-chat-recent></app-chat-recent>
                 <app-chat-recent></app-chat-recent>
                 <app-chat-recent></app-chat-recent>
                 <app-chat-recent></app-chat-recent>
-                <app-chat-recent></app-chat-recent>
-                <app-chat-recent></app-chat-recent>
-                <app-chat-recent></app-chat-recent>
+                <app-chat-recent></app-chat-recent> -->
             </div>
         </div>
     </div>
 </div>
->>>>>>> da0092eaa8344297ba76355511f812e976a71d9b

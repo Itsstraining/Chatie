@@ -30,9 +30,9 @@ export class ChatSocketComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.auth.user) {
-      console.log("bug 2");
       this.setupSocketConnection();
       this.checkUser();
+      console.log(this.listConver);
     }
   }
 
@@ -48,7 +48,7 @@ export class ChatSocketComponent implements OnInit{
       await this.userService.getUserAllConver(
         userId
       );
-      // this.listConver = this.userService.getAllConver();
+      this.listConver = this.userService.getAllConver();
       console.log("heello" + this.listConver);
 
   }
