@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-notification',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogNotificationComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<DialogNotificationComponent>) { }
 
   ngOnInit(): void {
   }
