@@ -6,7 +6,7 @@ import  {AuthGuardService} from './services/auth-guard.service'
 const routes: Routes = [{ path: '', loadChildren: () => import('./pages/home-page/home-page.module').then(m => m.HomePageModule) },
 {
   path: 'chat-socket', loadChildren: () => import('./pages/chat-socket/chat-socket.module').then(m => m.ChatSocketModule),
-  canActivate: [AuthGuardService]
+  // canActivate: [AuthGuardService]
 },
 {
   path: 'chat-page', component: ChatPageComponent, loadChildren: () => import('./pages/chat-page/chat-page.module').then(m => m.ChatPageModule),

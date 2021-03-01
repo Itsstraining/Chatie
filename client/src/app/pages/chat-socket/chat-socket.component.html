@@ -8,25 +8,41 @@
         <h3>Tan Trung</h3>
 
         <div class="option">
-          <mat-icon style="color: #4290E4; margin-right: 1rem; cursor: pointer;" aria-hidden="false" aria-label="Example home icon">phone</mat-icon>
-          <mat-icon style="color: #4290E4; margin-right: 1rem; cursor: pointer;" aria-hidden="false" aria-label="Example home icon">videocam</mat-icon>
-          <mat-icon style="color: #4290E4; cursor: pointer;" aria-hidden="false" aria-label="Example home icon">more_vert</mat-icon>
+          <!-- <div class="example-button-row"> -->
+            <button class="button-option">
+              <img src="../../../assets/images/videocam-filled-tool.svg">
+            </button>
+
+            <button class="button-option">
+              <img src="../../../assets/images/phone-auricular.svg">
+            </button>
+
+            <button class="button-option">
+              <img src="../../../assets/images/more.svg">
+            </button>
+          <!-- </div> -->
+
+
+
         </div>
       </div>
 
       <div class="chat-frame">
 
         <div class="chat-messages-show-container">
-          <ul class="chat-messages-show-list" id="message-list" >
-            
+          <ul class="chat-messages-show-list" id="message-list">
+
           </ul>
         </div>
         <div class="chat-messages-create-container">
-          <button class="chat-messages-option-button"><mat-icon style="color: #ffffff;">add</mat-icon></button>
-          <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message" (keyup.enter) ="SendMessage()">
-            <button class="chat-messages-create-button" (click)="SendMessage()">
-            <svg fill="#ffffff" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px" viewBox="0 0 512.005 512.005"
-              width="15px" xmlns="http://www.w3.org/2000/svg">
+          <button class="chat-messages-option-button">
+            <mat-icon style="color: #ffffff;">add</mat-icon>
+          </button>
+          <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message"
+            (keyup.enter)="SendMessage()">
+          <button class="chat-messages-create-button" (click)="SendMessage()">
+            <svg fill="#ffffff" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px"
+              viewBox="0 0 512.005 512.005" width="15px" xmlns="http://www.w3.org/2000/svg">
               <g>
                 <path
                   d="m511.658 51.675c2.496-11.619-8.895-21.416-20.007-17.176l-482 184c-5.801 2.215-9.638 7.775-9.65 13.984-.012 6.21 3.803 11.785 9.596 14.022l135.403 52.295v164.713c0 6.948 4.771 12.986 11.531 14.593 6.715 1.597 13.717-1.598 16.865-7.843l56.001-111.128 136.664 101.423c8.313 6.17 20.262 2.246 23.287-7.669 127.599-418.357 122.083-400.163 122.31-401.214zm-118.981 52.718-234.803 167.219-101.028-39.018zm-217.677 191.852 204.668-145.757c-176.114 185.79-166.916 176.011-167.684 177.045-1.141 1.535 1.985-4.448-36.984 72.882zm191.858 127.546-120.296-89.276 217.511-229.462z" />
@@ -49,16 +65,18 @@
         <input class="search-input" type="text" placeholder="Seach">
 
       </div>
-      <div class="chat-recent" onmouseover="this.style.overflowY='scroll'"
-      onmouseout="this.style.overflowY='hidden'">
-      <app-chat-recent></app-chat-recent>
-      <app-chat-recent></app-chat-recent>
-      <app-chat-recent></app-chat-recent>
-      <app-chat-recent></app-chat-recent>
-      <app-chat-recent></app-chat-recent>
-      <app-chat-recent></app-chat-recent>
-      <app-chat-recent></app-chat-recent>
-
+      <div class="chat-recent">
+        <!-- onmouseover="this.style.overflowY='scroll'"
+      onmouseout="this.style.overflowY='hidden'"> -->
+        <app-chat-recent></app-chat-recent>
+        <app-chat-recent></app-chat-recent>
+        <app-chat-recent></app-chat-recent>
+        <app-chat-recent></app-chat-recent>
+        <app-chat-recent></app-chat-recent>
+        <app-chat-recent></app-chat-recent>
+        <app-chat-recent></app-chat-recent>
+        <app-chat-recent></app-chat-recent>
+        <app-chat-recent></app-chat-recent>
       </div>
     </div>
 
