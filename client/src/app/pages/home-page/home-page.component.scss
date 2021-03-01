@@ -88,7 +88,8 @@
         --copyright-gray: #bfbfbf;
     }
     
-    $blue: #4B6BAF;
+    $blue: #63B2F3;
+    ;
     $red: #CD594B;
     /* Overwrite browser defaults */
     
@@ -253,7 +254,7 @@
         &:hover {
             background-color: white;
             svg {
-                fill: #4B6BAF,
+                fill: #63B2F3,
             }
         }
     }
@@ -338,13 +339,13 @@
             }
             @keyframes slides {
                 25% {
-                    background-image: url(../../../assets/images/1chat-benefits.png);
+                    background-image: url(../../../assets/images/logochatblue.png);
                 }
                 50% {
-                    background-image: url(../../../assets/images/logo.png);
+                    background-image: url(../../../assets/images/mainlogo_auto_x2_toned.png);
                 }
                 75% {
-                    background-image: url(../../../assets/images/chatieslide.png);
+                    background-image: url(../../../assets/images/logochatie.png);
                 }
                 100% {
                     background-image: url(../../../assets/images/chatieslide.png);

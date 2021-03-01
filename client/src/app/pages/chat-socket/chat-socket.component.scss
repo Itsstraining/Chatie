@@ -2,7 +2,9 @@ $black: #18191A;
 $light-black: #242526;
 $green-neon: #53B46C;
 $light-green-neon: #cff8ab;
+$light-light-green: #00efd1;
 $blue: #4290E4;
+$light-blue: #4290E4;
 
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -161,7 +163,7 @@ $blue: #4290E4;
     }
 
     .chat-messages-create-button {
-      background-color: $blue;
+      background-color: $light-light-green;
       height: 38px;
       width: 38px;
       margin: auto 20px auto 5px;
@@ -173,7 +175,7 @@ $blue: #4290E4;
     }
 
     .chat-messages-option-button {
-      background-color: $blue;
+      background-color: $light-light-green;
       height: 28px;
       width: 28px;
       margin: auto 5px auto 15px;
@@ -201,7 +203,7 @@ $blue: #4290E4;
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      border: 0.015rem solid white;
+      border: 0.19rem solid rgba(112, 112, 112, 0.6);
       float: left;
     }
 
@@ -209,6 +211,7 @@ $blue: #4290E4;
       margin: 1.1rem 0 0 0.4rem;
       float: left;
       color: white;
+      opacity: 70%;
     }
 
     .option {
@@ -230,13 +233,14 @@ $blue: #4290E4;
         border-width: 0;
         outline: none;
         margin-left: 1rem;
+        cursor: pointer;
 
 
         &:hover {
           background-color: $light-black;
         }
         &:active {
-          background-color: $black;
+          background-color: rgba(112, 112, 112, 0.8);
         }
 
 
