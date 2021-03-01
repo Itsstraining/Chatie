@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~10.2.4",
     "@angular/router": "~10.2.4",
     "@auth0/angular-jwt": "^5.0.2",
+    "@ctrl/ngx-emoji-mart": "^5.0.2",
     "firebase": "^8.2.9",
     "jwt-decode": "^3.1.2",
     "ngx-socket-io": "^3.2.0",
