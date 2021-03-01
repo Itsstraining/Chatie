@@ -58,7 +58,7 @@ $blue: #4290E4;
     width: 90%;
     height: 88%;
     background-color: $light-black;
-    overflow: hidden;
+    overflow: auto;
 
 
   }
@@ -141,8 +141,8 @@ $blue: #4290E4;
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
 
-      // background: #c3c3c3;
-      background-color: $light-black;
+      
+      background-color: rgba(112, 112, 112, 0.3);
       height: 15%;
       display: flex;
       justify-content: center;
@@ -214,6 +214,41 @@ $blue: #4290E4;
     .option {
       margin: 1.3rem 1rem 0 0.4rem;
       float: right;
+      display: flex;
+      justify-content: space-around;
+
+      .button-option {
+        height: 2.3rem;
+        width: 2.3rem;
+        background-color: $black;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-style: solid;
+        border-radius: 50%;
+        border-width: 0;
+        outline: none;
+        margin-left: 1rem;
+
+
+        &:hover {
+          background-color: $light-black;
+        }
+        &:active {
+          background-color: $black;
+        }
+
+
+        img {
+          width: 1.5rem;
+          height: 1.5rem;
+          border-style: solid;
+          border-width: 0;
+          margin: 0px;
+
+        }
+      }
     }
 
   }
@@ -231,25 +266,25 @@ $blue: #4290E4;
 }
 
 
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
+// /* width */
+// ::-webkit-scrollbar {
+//   width: 10px;
+// }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
+// /* Track */
+// ::-webkit-scrollbar-track {
+//   background: #f1f1f1;
+// }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+//   background: #888;
+// }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+// /* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #555;
+// }
 
 
 //chat-socket
