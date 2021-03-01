@@ -5,6 +5,7 @@ import { DialogSettingprofileComponent } from '../dialog-settingprofile/dialog-s
 import {MatDialog} from '@angular/material/dialog';
 import { DialogUnfriendComponent } from '../dialog-unfriend/dialog-unfriend.component';
 import { DialogNotificationComponent } from '../dialog-notification/dialog-notification.component';
+import { FindComponent } from '../find/find.component';
 
 @Component({
   selector: 'app-navbar',
@@ -29,6 +30,14 @@ export class NavbarComponent implements OnInit {
       data: {
         type: 'Add',
       },
+    });
+  }
+
+  public openDialogFriend() {
+    
+    const dialogRef = this.dialog.open(FindComponent, {
+      width: '60%',
+      height: '75%'
     });
   }
   

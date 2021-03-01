@@ -5,7 +5,7 @@
         <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
           <mat-icon><a href="/home-page" style="text-decoration: none;color: white;">home</a></mat-icon>
         </button>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="openDialogFriend()">
           <mat-icon>notifications_none</mat-icon>
         </button>
         <button mat-icon-button *ngIf="this.auth.user != undefined" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
