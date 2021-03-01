@@ -1,245 +1,303 @@
+/*************** 
+ * BASE STYLES *
+ ***************/
+
+
+/* Variables */
+
+ :root {
+    --background-color: #fafafa;
+    --white: #ffffff;
+    --border-color: 112, 112, 112;
+    --placeholder-color: #837979;
+    --or-text: #8e8e8e;
+    --fb-logo: #385185;
+    --log-in-button: #0095f6;
+    --black: #262626;
+    --footer-links: #1e4f7c;
+    --copyright-gray: #bfbfbf;
+}
+
+$blue: #4B6BAF;
+$red: #CD594B;
+
+/* Overwrite browser defaults */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+ul {
+    list-style-type: none;
+}
+
+html {
+    font-size: 62.5%;
 }
 
 body {
+    font-family: "Segoe";
+    background: var(--background-color);
+}
+
+
+/********** 
+   * LOG IN *
+   **********/
+
+
+/* Log in container */
+
+.log-in {
+    background: white;
+    width: 30rem;
+    height: 36rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-radius: 5px;
+    border-color: rgba(112, 112, 112, 0.5);
+    padding: 1.5rem 4rem;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+
+.sign-in-btn {
+    width: 100%;
+    font-size: 1.15rem;
+    background-color: $blue;
+    text-align: center;
+    border: 0.15rem solid $blue !important;
+    &:hover {
+        color: $blue;
+        background-color: white;
+    }
+}
+
+
+/* Logo */
+
+.logo {
+    width: 19rem;
+    margin-bottom: 1rem;
+}
+
+
+/* Log in form */
+
+.log-in-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+/* Styles in common for the form fields and the login button*/
+
+.log-in-form input,
+.mat-raised-button {
+    padding: 1rem 0 1rem 1rem;
+    border-radius: 0.5rem;
+}
+
+
+/* Styles in common for the form fields and their placeholders */
+
+.log-in-form input,
+.log-in-form input::placeholder {
+    font-size: 1rem;
+    opacity: 60%;
+    // font-family: "Segoe";
+}
+
+
+/* Form fields */
+
+.log-in-form input {
     background-color: #fafafa;
-}
-
-.main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 30px;
+    border-style: solid;
+    border-color: rgba(112, 112, 112, 0.5);
+    border-width: 0.1rem;
+    outline: none;
 }
 
 
-/* header style */
+/* Styles for the username text field */
 
-.page .header {
-    text-align: center;
+.log-in-form input[type="text"] {
+    margin-bottom: 0.5rem;
 }
 
-.page .header .logo,
-.page .header p,
-.page .header button {
-    margin-bottom: 15px;
-}
-
-.page .header>p {
-    font-weight: bold;
-    color: #8e8e8e;
-    font-size: 18px;
-}
-
-.page .header>button {
-    width: inherit;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    background-color: #0095f6;
-    color: #ffffff;
-}
-
-.page .header div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: #8e8e8e;
-}
-
-.page .header div p {
-    padding: 0 20px;
-}
-
-.page .header div hr {
-    width: 200px;
+.log-in-form input[type="password"] {
+    margin-bottom: 0.5rem;
 }
 
 
-/* container style*/
+/* Placeholder for the text fields */
 
-.page .container {
-    display: flex;
-    flex-direction: column;
-}
-
-.page .container form,
-input {
-    width: inherit;
-}
-
-.page .container form input {
-    border: 1px solid #dbdbdb;
-    background-color: #fafafa;
-    padding: 10px 5px;
-    margin: 5px 0;
-}
-
-.page .container form input:last-of-type {
-    margin-bottom: 10px;
-}
-
-.page .container form button {
-    width: inherit;
-    margin-bottom: 20px;
-    padding: 7px 20px;
-    border-radius: 5px;
-    border: none;
-    background-color: #0095f6;
-    color: #ffffff;
-    font-size: x-large;
-}
-
-.page .container ul {
-    list-style: none;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.page .container ul li {
-    display: inline;
-    color: #8e9096;
-}
-
-.page .container ul li a {
-    text-decoration: none;
-    font-weight: bold;
-    color: #8e9096;
+.log-in-form input::placeholder {
+    color: var(--placeholder-color);
 }
 
 
-/* option style */
+/* Styles for the text fields when they are focused */
 
-.option p>a {
-    text-decoration: none;
-    color: #00a0f7;
+.log-in-form input:focus {
+    border-color: rgba(var(--border-color), 0.8);
 }
 
 
-/* otherapps style */
+/* Log in button */
 
-.otherapps {
-    text-align: center;
-}
-
-.otherapps p {
-    margin-bottom: 15px;
-}
-
-.otherapps>button {
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: black;
+.mat-raised-button {
+    // background-color: #0095f6;
     color: white;
-    padding: 10px;
-    font-size: 18px;
+    margin: 1rem 0 0rem 0;
+    // width: 100%;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    border: none;
 }
 
-//   /* footer style */
-//   .footer{
-//     bottom: 0;
-//     height: 2.5rem;
-//     margin-top: 50px;
-//   }
-//   .footer ul{
-//     text-align: center;
-//   }
-//   .footer ul li{
-//     display: inline;
-//     margin-right: 5px;
-//   }
-//   .footer ul li a{
-//     text-decoration: none;
-//     font-size: 12px; 
-//     color: #00376b;
-//   }
-//   .footer p{
-//     margin: 10px 0;
-//     text-align: center;
-//     color: #8e9096;
-//     font-size: 14px;
-//   }
 
-/* Mobile Styles */
+/* OR divider */
 
-@media only screen and (max-width: 400px) {
-    body {
-        font-family: Freight Sans
-    }
-    .page {
-        width: 250px;
-        background-color: #fafafa;
-    }
-    .page .header {
-        width: inherit;
-        margin-top: 10px;
-    }
-    .page .container {
-        width: inherit;
-    }
-    .option {
-        margin: 80px 0;
-    }
-    .page .container input {
-        padding: 10px 5px;
-        margin: 5px 0;
-    }
-    .page .footer {
-        width: inherith
-    }
+.or-divider {
+    color: #8e8e8e;
+    font-weight: 700;
+    position: relative;
+    font-size: 1.2rem;
 }
 
-@media only screen and (min-width: 401px) {
-    body {
-        font-family: Neue Helvetica
-    }
-    .page {
-        border: 1px solid #dbdbdb;
-        width: 350px;
-        background-color: white;
-        margin: 40px 40px 10px 40px;
-        border-radius: 2%;
-    }
-    .page .header {
-        width: 270px;
-        margin-top: 15px;
-    }
-    .page .container {
-        width: 270px;
-    }
-    .option {
-        border: 1px solid #dbdbdb;
-        background-color: white;
-        width: 350px;
-        height: 70px;
-        margin-top: 20px 0;
+.or-divider::before,
+.or-divider::after {
+    content: "";
+    display: block;
+    width: 11rem;
+    height: 0.1rem;
+    position: absolute;
+    background-color: rgba(112, 112, 112, 0.4);
+    top: 50%;
+}
+
+.or-divider::before {
+    left: 3rem;
+}
+
+.or-divider::after {
+    right: 3rem;
+}
+
+
+/* Forgot password? */
+
+.forgot-password {
+    color: var(--fb-logo);
+    font-size: 1.2rem;
+}
+
+
+/********** 
+   * SIGN UP *
+   **********/
+
+
+/* Sign up container */
+
+.sign-up {
+    background-color: white;
+    width: 30.1rem;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+
+/* Don't have an account? */
+
+.sign-up span {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+
+/* Sign up link */
+
+.sign-up a {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #4B6BAF;
+    text-decoration: underline;
+}
+
+
+/**********
+ * TABLET *
+ **********/
+
+
+/* These styles will be applied to devices that have a minimum width of 876px */
+
+@media screen and (min-width: 876px) {
+    main {
         display: flex;
-        align-items: center;
+        margin-top: 2rem;
         justify-content: center;
-        margin-bottom: 35px;
-        border-radius: 10px;
     }
-    .otherapps {
-        margin: 20px 0;
+    .log-in-container {
+        order: 1;
     }
-    .otherapps button {
-        margin-right: 5px;
-    }
-    .otherapps button:after-of-type {
-        margin-right: none;
-    }
-    .page .footer {
+    footer {
         width: 100%;
+        justify-content: flex-start;
+        padding-left: 4rem;
+        padding-bottom: 4rem;
+    }
+    .footer-links {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+    .footer-links li {
+        flex-basis: auto;
+        margin-right: 1rem;
+    }
+    .footer-links a {
+        margin-bottom: 0;
+    }
+    .copyright {
+        text-align: left;
+    }
+}
+
+
+/*********** 
+   * DESKTOP *
+   ***********/
+
+@media screen and (min-width: 1527px) {
+    footer {
+        flex-direction: row;
+        justify-content: space-around;
     }
 }

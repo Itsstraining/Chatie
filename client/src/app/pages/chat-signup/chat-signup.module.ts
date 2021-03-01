@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { ChatSignupRoutingModule } from './chat-signup-routing.module';
 import { ChatSignupComponent } from './chat-signup.component';
-
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [ChatSignupComponent],
   imports: [
     CommonModule,
-    ChatSignupRoutingModule
+    ChatSignupRoutingModule,
+    MatButtonModule
   ]
 })
 export class ChatSignupModule { }

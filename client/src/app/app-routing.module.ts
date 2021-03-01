@@ -14,7 +14,7 @@ const routes: Routes = [{ path: '', loadChildren: () => import('./pages/home-pag
 },
 {
   path: 'chat-test', loadChildren: () => import('./pages/chat-test/chat-test.module').then(m => m.ChatTestModule),
-  canActivate: [AuthGuardService]
+  // canActivate: [AuthGuardService]
 },
 { path: 'chat-signup', loadChildren: () => import('./pages/chat-signup/chat-signup.module').then(m => m.ChatSignupModule)}];
 

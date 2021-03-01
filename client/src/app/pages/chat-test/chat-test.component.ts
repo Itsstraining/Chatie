@@ -6,9 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-test.component.scss']
 })
 export class ChatTestComponent implements OnInit {
+  public textArea: string = '';
+   public isEmojiPickerVisible: boolean;
+   public addEmoji(event) {
+      this.textArea = `${this.textArea}${event.emoji.native}`;
+      this.isEmojiPickerVisible = true;
+      
+   }
+  
+   
 
   constructor() { }
-
   ngOnInit(): void {
   }
 
