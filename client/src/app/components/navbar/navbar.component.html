@@ -12,7 +12,7 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button *ngIf="this.auth.user != undefined" mat-menu-item>
+            <button *ngIf="this.auth.user != undefined" mat-menu-item (click)="openDialog()">
               <!-- <img src="../../../assets/images/avatar.png" alt=""> -->
               <mat-icon>manage_accounts</mat-icon>
               <span>Setting profile</span>
