@@ -1,3 +1,10 @@
+<div class="Emoji">
+  <input placeholder="Type a message" type="text" name="textarea" [(ngModel)]="textArea">
+ <button (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀</button>
+<br>
+<emoji-mart class="emoji-mart" *ngIf="isEmojiPickerVisible" (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
+</div>      
+
 <div class="container">
   <div class="chat-box">
 
@@ -20,7 +27,15 @@
         </div>
         <div class="chat-messages-create-container">
           <input class="chat-messages-create-input" type="text" >
+          
+          
+          
           <button class="chat-messages-create-button">
+      
+         
+           
+
+            
             <svg fill="#ffffff" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px" viewBox="0 0 512.005 512.005"
               width="15px" xmlns="http://www.w3.org/2000/svg">
               <g>
