@@ -27,6 +27,7 @@ import { environment } from '../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import { DialogBlockComponent } from './components/dialog-block/dialog-block.component';
 import { DialogSettingprofileComponent } from './components/dialog-settingprofile/dialog-settingprofile.component';
+import { FindComponent } from './components/find/find.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { DialogSettingprofileComponent } from './components/dialog-settingprofil
     DialogUnfriendComponent,
     DialogBlockComponent,
     DialogSettingprofileComponent,
+    FindComponent,
   ],
   imports: [
     BrowserModule,
