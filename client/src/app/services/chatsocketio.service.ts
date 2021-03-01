@@ -12,7 +12,7 @@ export class ChatsocketioService {
   socket: any;
   send_msg: any;
   received_msg: any;
-  readonly uri: string = "http://localhost:9999"
+  readonly uri: string = "http://localhost:8080"
 
   constructor() {
     this.socket = io(this.uri);

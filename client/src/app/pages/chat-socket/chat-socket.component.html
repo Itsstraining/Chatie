@@ -1,16 +1,13 @@
-<div class="container">
+<div class="container" *ngIf=" this.auth.user != null">
   <div class="chat-box">
 
     <!-- chat-container -->
     <div class="chat-container">
       <div class="receiver-info">
-<<<<<<< HEAD
-        <img src="../../../assets/images/chatie-logo.png">
-        <h3>{{this.auth.user.displayName}}</h3>
-=======
+        <!-- <img src="../../../assets/images/chatie-logo.png">
+        <h3>{{this.auth.user.displayName}}</h3> -->
         <img src="../../../assets/images/avatar-1.jpg">
         <h3>Tan Trung</h3>
->>>>>>> 6834d63e9d210cadca1659746620d4fcb363389d
 
         <div class="option">
           <mat-icon style="color: #4290E4; margin-right: 1rem; cursor: pointer;" aria-hidden="false" aria-label="Example home icon">phone</mat-icon>
@@ -42,9 +39,6 @@
 
       </div>
     </div>
-
-
-
     <!-- sender-chat -->
     <div class="user-container">
       <div class="find">

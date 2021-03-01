@@ -21,12 +21,17 @@ export class UserService {
     this.user = temp['getByEmail'];
   }
 
-  public async getAllConver(){
-    let tempAllConver = await this.httpClient.get(environment.endpoint + `user/getByEmail?email=${this.user._id}`).toPromise();
+  public async getUserAllConver(userId){
+    let tempAllConver = await this.httpClient.get(environment.endpoint + `conversation/allUserConver?senderId=${userId}`).toPromise();
     this.listConver = tempAllConver['allUserConver'];
+    console.log(tempAllConver['allUserConver'])
   }
 
   // public async getConverInfo(){
   //   let tempConverInfo = await this.httpClient.get(environment.endpoint + 'conversation/oneConver?id')
   // }
+
+  public getAllConver(){
+    return this.listConver;
+  }
 }

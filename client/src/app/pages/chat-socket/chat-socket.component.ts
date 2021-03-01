@@ -6,50 +6,70 @@ import * as io from 'socket.io-client/dist/socket.io';
 import { UserService } from 'src/app/services/user.service';
 import { LoginService } from 'src/app/services/login.service';
 
-
 @Component({
   selector: 'app-chat-socket',
   templateUrl: './chat-socket.component.html',
-  styleUrls: ['./chat-socket.component.scss']
+  styleUrls: ['./chat-socket.component.scss'],
 })
-export class ChatSocketComponent implements OnInit {
+export class ChatSocketComponent implements OnInit{
   socket: any;
   message: any;
-  userInfo:any;
+  userInfo: any;
   public listConver: Array<any>;
-  readonly uri: string = "http://localhost:9999";
-
-  constructor(private sock: ChatsocketioService, public userService: UserService, public auth: LoginService) {
-    console.log("bug")
+  readonly uri: string = 'http://localhost:8080';
+  user;
+  constructor(
+    private sock: ChatsocketioService,
+    public userService: UserService,
+    public auth: LoginService
+  ) {
+    this.userInfo = this.userService.user;
+    
     this.socket = io(this.uri);
-
   }
 
   ngOnInit(): void {
-    this.listen('message-broadcast').subscribe((data) => {
-      console.log(data);
-    });
-    this.setupSocketConnection();
-    this.getUserInfos()
+    if (this.auth.user) {
+      console.log("bug 2");
+      this.setupSocketConnection();
+      this.checkUser();
+    }
   }
 
-  public async getUserInfos(){
-    await this.userService.getUserInfo(this.auth.user.email);
-    this.userInfo = this.userService.user;
-    console.log(this.userInfo.email);
+  // //get all user information
+  public async getUserInfos() {
+      await this.userService.getUserInfo(this.auth.user.email);
+      this.userInfo = this.userService.user;
   }
 
-  public async getAllUserConver(){
-    await this.userService.getAllConver();
-    this.listConver = this.userService.listConver;
+  // get all user's recent conversation
+  public async getAllUserConver(userId) {
+    console.log('bug 1');
+      await this.userService.getUserAllConver(
+        userId
+      );
+      // this.listConver = this.userService.getAllConver();
+      console.log("heello" + this.listConver);
+
   }
-  
+
+  //all function about the content of the chat page
+  public async checkUser() {
+    this.user = this.auth.user;
+    console.log("user ne" + this.userInfo);
+    if (this.user ) {
+      console.log('hello');
+      await this.getUserInfos();
+      this.getAllUserConver(this.userInfo._id);
+      
+    }
+  }
+
   listen(eventName: string) {
     return new Observable((Subscriber) => {
       this.socket.on(eventName, (data) => {
         Subscriber.next(data);
-
-      })
+      });
     });
   }
 
@@ -58,7 +78,7 @@ export class ChatSocketComponent implements OnInit {
   }
 
   setupSocketConnection() {
-    // this.socket = io(this.uri);
+    this.socket = io(this.uri);
     this.socket.on('message-broadcast', (data: string) => {
       if (data) {
         const element = document.createElement('li');
@@ -73,13 +93,14 @@ export class ChatSocketComponent implements OnInit {
         document.getElementById('message-list').appendChild(element);
       }
     });
+    this.listen('message-broadcast').subscribe((data) => {
+      console.log(data);
+    });
   }
-
-
 
   SendMessage() {
     this.socket.emit('message', this.message);
-    if(this.message == '' || this.message == null) {
+    if (this.message == '' || this.message == null) {
       return;
     }
     const element = document.createElement('li');
@@ -92,12 +113,10 @@ export class ChatSocketComponent implements OnInit {
     element.style.float = 'right';
     element.style.width = 'fit-content';
     element.style.marginLeft = '45%';
-    element.style.marginRight = '3%'
+    element.style.marginRight = '3%';
     element.style.borderRadius = '25px';
     const messList = document.getElementById('message-list');
     messList.appendChild(element);
     this.message = '';
   }
-
-
 }

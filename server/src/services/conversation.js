@@ -38,7 +38,7 @@ class ConversationClass {
 
     //Get all conversation 
     async getAllUserConversation(senderId) {
-        return await this.Conversation.find({senderId: senderId});
+        return (await this.Conversation.find({senderId: senderId}));
     }
 
     //Get one friend recent

@@ -9,11 +9,12 @@ import { environment } from 'src/environments/environment';
 export class LoginService {
   public user: firebase.default.User = null;
   public newUser;
-  constructor(private auth: AngularFireAuth, private client: HttpClient) {
+  public idToken;
+  constructor(public auth: AngularFireAuth, private client: HttpClient) {
     this.auth.authState.subscribe((test) => {
       if (test) {
         this.user = test;
-        // console.log(this.user.displayName);
+        console.log(this.user.displayName);
       } else {
         this.user = null;
       }
@@ -35,6 +36,8 @@ export class LoginService {
       await this.auth.signInWithPopup(provider).then((data) => {
         this.user = data.user;
       });
+      // //get user token
+      // this.idToken = this.user.getIdToken();
       let data = { email: this.user.email, avatar: this.user.photoURL };
       await this.client
         .post(environment.endpoint + 'user/email',data)
@@ -42,6 +45,7 @@ export class LoginService {
           console.log(temp);
         });
       alert('login successfully');
+      // return { idToken: this.idToken, user: this.user };
     } catch (erro) {
       alert('Login failed');
     }
