@@ -19,12 +19,20 @@ import { DialogSettingComponent } from './components/dialog-setting/dialog-setti
 import { DialogNotificationComponent } from './components/dialog-notification/dialog-notification.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogUnfriendComponent } from './components/dialog-unfriend/dialog-unfriend.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
+<<<<<<< HEAD
 import { ReceivedMsgComponent } from './components/received-msg/received-msg.component';
+=======
+import { DialogBlockComponent } from './components/dialog-block/dialog-block.component';
+import { DialogSettingprofileComponent } from './components/dialog-settingprofile/dialog-settingprofile.component';
+import { FindComponent } from './components/find/find.component';
+
+>>>>>>> da0092eaa8344297ba76355511f812e976a71d9b
 
 @NgModule({
   declarations: [
@@ -35,7 +43,13 @@ import { ReceivedMsgComponent } from './components/received-msg/received-msg.com
     DialogSettingComponent,
     DialogNotificationComponent,
     DialogUnfriendComponent,
+<<<<<<< HEAD
     ReceivedMsgComponent,
+=======
+    DialogBlockComponent,
+    DialogSettingprofileComponent,
+    FindComponent,
+>>>>>>> da0092eaa8344297ba76355511f812e976a71d9b
   ],
   imports: [
     BrowserModule,
@@ -48,6 +62,7 @@ import { ReceivedMsgComponent } from './components/received-msg/received-msg.com
     MatBadgeModule,
     MatGridListModule,
     MatDialogModule,
+    MatFormFieldModule,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,

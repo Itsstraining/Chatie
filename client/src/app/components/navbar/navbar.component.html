@@ -1,11 +1,15 @@
 <mat-toolbar style="background-color: #4290E4; color: white;" *ngIf="this.auth.user != null">
     <mat-toolbar-row>
+<<<<<<< HEAD
         <span [routerLink]="'/chat-page'" style='height: 64px;'><img src="../../../assets/images/chatie-logo-removebg-preview.png" style="height: 63px; width: 160px"></span>
+=======
+        <img src="../../../assets/images/logochatie.png" style="height: 33px; width: 87px">
+>>>>>>> da0092eaa8344297ba76355511f812e976a71d9b
         <span class="example-spacer"></span>
         <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-          <mat-icon>home</mat-icon>
+          <mat-icon><a href="/home-page" style="text-decoration: none;color: white;">home</a></mat-icon>
         </button>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="openDialogFriend()">
           <mat-icon>notifications_none</mat-icon>
         </button>
         <button mat-icon-button *ngIf="this.auth.user != undefined" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
@@ -13,8 +17,9 @@
           <img [src]="this.auth.user.photoURL" alt="" style="width: 40px; height: 40px; border-radius: 50%">
         </button>
         <mat-menu #menu="matMenu">
-            <button *ngIf="this.auth.user != undefined" mat-menu-item>
-              <mat-icon>account_circle</mat-icon>
+            <button *ngIf="this.auth.user != undefined" mat-menu-item (click)="openDialog()">
+              <!-- <img src="../../../assets/images/avatar.png" alt=""> -->
+              <mat-icon>manage_accounts</mat-icon>
               <span>Setting profile</span>
             </button>
             <button *ngIf="this.auth.user != undefined" mat-menu-item (click)="LogOut()">
@@ -22,7 +27,5 @@
               <span>Logout</span>
             </button>
         </mat-menu>
-
-
     </mat-toolbar-row>
 </mat-toolbar>

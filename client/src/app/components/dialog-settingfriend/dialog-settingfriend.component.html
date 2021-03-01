@@ -1,13 +1,20 @@
 <h1 mat-dialog-title><b>Setting-friend</b></h1>
-<div mat-dialog-content style="font-size: 15px;">
-    <div mat-dialog-actions class="button">
-        <!-- <button (click)="join()" [mat-dialog-close]="true" routerLinkActive="router-link-active" mat-button>Báo cáo</button> -->
-        <!-- <button (click)="join()" [mat-dialog-close]="true" routerLinkActive="router-link-active" mat-button>Chặn</button> -->
-        <!-- <button (click)="join()" [mat-dialog-close]="true" routerLinkActive="router-link-active" mat-button>Hủy kết bạn</button> -->
-        <!-- <button (click)="join()" [mat-dialog-close]="true" routerLinkActive="router-link-active" mat-button>Xem bộ sưu tập</button> -->
-        <button mat-button (click)="onNoClick()" style="font-size: 15px;">Hủy</button>
-    </div>
-</div>
+<!-- <div mat-dialog-content style="font-size: 15px;"> -->
+<!-- <mat-menu #menu="matMenu"> -->
+<button mat-menu-item>
+          <span  style="color: red">Chặn</span>
+        </button>
+<button mat-menu-item mat-button>
+          <span  style="color: red">Hủy kết bạn</span>
+        </button>
+<button mat-menu-item>
+          <span>Xem bộ sưu tập</span>
+        </button>
+<button mat-menu-item>
+          <span>Hủy</span>
+        </button>
+<!-- </mat-menu> -->
+<!-- </div> -->
 
 <!-- <div mat-dialog-actions class="button">
     <button (click) = "createRoom()" [mat-dialog-close]="true" routerLinkActive="router-link-active" mat-button cdkFocusInitial>Create</button>

@@ -1,3 +1,4 @@
+
 $black: #1A1B20;
 $light-black: #21242A;
 $green-neon: #53B46C;
@@ -204,6 +205,21 @@ $light-green-neon: #cff8ab;
     color: rgba(255, 255, 255, 0.9);
 }
 
+.Emoji {
+  display: grid;
+  grid-template-columns: 100% 0%;
+  width: 36%;
+  
+  button {
+     background: transparent;
+     border: 0;
+     transform: translateX(-40px);
+     cursor: pointer;
+     &:focus {
+        outline: 0;
+     }
+  }
+}
 
 //chat-socket
 

@@ -8,6 +8,12 @@ import { ConversationComponent } from '../../components/conversation/conversatio
 import { FormsModule } from '@angular/forms'
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
+<<<<<<< HEAD
+=======
+import {MatMenuModule} from '@angular/material/menu';
+
+import { from } from 'rxjs';
+>>>>>>> da0092eaa8344297ba76355511f812e976a71d9b
 import { ChatRecentComponent } from '../../components/chat-recent/chat-recent.component';
 
 
@@ -20,7 +26,7 @@ import { ChatRecentComponent } from '../../components/chat-recent/chat-recent.co
     FormsModule,
     MatIconModule,
     MatDividerModule,
-
+    MatMenuModule
   ]
 })
 export class ChatSocketModule { }
