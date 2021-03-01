@@ -7,3 +7,13 @@
 .example-full-width {
     width: 100%;
 }
+
+.button {
+    padding: 8px 26px;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 60px;
+    min-width: 204px;
+    align-items: center;
+    margin-bottom: -24px;
+}

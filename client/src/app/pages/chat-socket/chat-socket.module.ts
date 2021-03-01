@@ -6,6 +6,7 @@ import { ChatSocketComponent } from './chat-socket.component';
 import { FormsModule } from '@angular/forms'
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { from } from 'rxjs';
 import { ChatRecentComponent } from '../../components/chat-recent/chat-recent.component';
@@ -20,7 +21,7 @@ import { ChatRecentComponent } from '../../components/chat-recent/chat-recent.co
     FormsModule,
     MatIconModule,
     MatDividerModule,
-
+    MatMenuModule
   ]
 })
 export class ChatSocketModule { }
