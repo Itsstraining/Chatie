@@ -14,14 +14,11 @@ export class ChatRecentComponent implements OnInit {
   constructor(private userService: UserService, public auth: LoginService) { }
   
   ngOnInit(): void {
-    console.log(this.conversation)
     this.getUserConverInfo();
   }
 
   public async getUserConverInfo(){
-    console.log("bug")
    await this.userService.getUserById(this.conversation.receiver[0]);
    this.receiverInfo = this.userService.user;
-   console.log(this.receiverInfo)
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
@@ -18,6 +18,9 @@ export class ChatSocketComponent implements OnInit{
   public listConver: Array<any>;
   readonly uri: string = 'http://localhost:8080';
   user;
+
+  @Output() public converIndex: Number;
+
   constructor(
     private sock: ChatsocketioService,
     public userService: UserService,
@@ -65,6 +68,11 @@ export class ChatSocketComponent implements OnInit{
     }
   }
 
+  public getConnverIndex(index){
+    // this.converIndex = index;
+    console.log(index)
+  }
+
   listen(eventName: string) {
     return new Observable((Subscriber) => {
       this.socket.on(eventName, (data) => {
@@ -83,13 +91,15 @@ export class ChatSocketComponent implements OnInit{
       if (data) {
         const element = document.createElement('li');
         element.innerHTML = data;
-        element.style.background = 'white';
+        element.style.background = 'rgba(112, 112, 112, 0.7)';
+        element.style.color = 'white';
         element.style.padding = '10px 20px';
         element.style.margin = '10px';
         element.style.float = 'left';
         element.style.marginRight = '45%';
         element.style.marginLeft = '3%';
         element.style.borderRadius = '20px';
+
         document.getElementById('message-list').appendChild(element);
       }
     });

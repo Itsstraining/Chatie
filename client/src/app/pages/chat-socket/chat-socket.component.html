@@ -1,23 +1,10 @@
 <div class="container" *ngIf=" this.auth.user != null">
   <div class="chat-box">
 
-    <!-- <div class="receiver-info">
-        <img src="../../../assets/images/chatie-logo.png">
-        <h3>{{this.auth.user.displayName}}</h3>
-        <img src="../../../assets/images/avatar-1.jpg">
-        <h3>Tan Trung</h3>
-
-        <div class="option">
-          <mat-icon style="color: #4290E4; margin-right: 1rem; cursor: pointer;" aria-hidden="false" aria-label="Example home icon">phone</mat-icon>
-          <mat-icon style="color: #4290E4; margin-right: 1rem; cursor: pointer;" aria-hidden="false" aria-label="Example home icon">videocam</mat-icon>
-          <mat-icon style="color: #4290E4; cursor: pointer;" aria-hidden="false" aria-label="Example home icon">more_vert</mat-icon>
-        </div>
-      </div> -->
-
     <!-- chat-container -->
     <div class="chat-container">
       <div class="receiver-info">
-        <img src="../../../assets/images/avatar-1.jpg">
+        <img src="../../../assets/images/avatar-1.jpg" class="ava-receiver">
         <h3>Tan Trung</h3>
 
         <div class="option">
@@ -30,9 +17,8 @@
             <img src="../../../assets/images/phone-auricular.svg">
           </button>
 
-          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
-            class="button-option" style="color:#4290E4 ;">
-            <mat-icon>more_horiz</mat-icon>
+          <button [matMenuTriggerFor]="menu" class="button-option">
+            <img src="../../../assets/images/more.svg">
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item>
@@ -65,12 +51,12 @@
         </div>
         <div class="chat-messages-create-container">
           <button class="chat-messages-option-button">
-            <mat-icon style="color: #ffffff;">add</mat-icon>
+            <mat-icon style="color: #242526;">add</mat-icon>
           </button>
           <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message"
             (keyup.enter)="SendMessage()">
           <button class="chat-messages-create-button" (click)="SendMessage()">
-            <svg fill="#ffffff" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px"
+            <svg fill="#242526" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px"
               viewBox="0 0 512.005 512.005" width="15px" xmlns="http://www.w3.org/2000/svg">
               <!-- <div class="chat-messages-show-container">
                     <ul class="chat-messages-show-list" id="message-list">
@@ -94,8 +80,6 @@
       </div>
     </div>
 
-
-
     <!-- sender-chat -->
     <div class="user-container">
       <div class="find">
@@ -104,7 +88,7 @@
 
       </div>
       <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
-        <app-chat-recent *ngFor="let conversation of listConver" [conversation]="conversation"></app-chat-recent>
+        <app-chat-recent *ngFor="let conversation of listConver; let i = index" [conversation]="conversation" (click)="getConnverIndex(i)"></app-chat-recent>
       </div>
     </div>
   </div>
