@@ -12,11 +12,15 @@ import {MatMenuModule} from '@angular/material/menu';
 
 import { from } from 'rxjs';
 import { ChatRecentComponent } from '../../components/chat-recent/chat-recent.component';
+import { SendermessageComponent } from '../../components/sendermessage/sendermessage.component';
+import { ReceivermessageComponent } from '../../components/receivermessage/receivermessage.component';
+
+
 
 
 
 @NgModule({
-  declarations: [ChatSocketComponent ,ChatRecentComponent, ConversationComponent],
+    declarations: [ChatSocketComponent ,ChatRecentComponent, SendermessageComponent, ReceivermessageComponent],
   imports: [
     CommonModule,
     ChatSocketRoutingModule,
