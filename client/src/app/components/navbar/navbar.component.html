@@ -5,14 +5,14 @@
         <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
           <mat-icon><a href="/home-page" style="text-decoration: none;color: white;">home</a></mat-icon>
         </button>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="openDialogFriend()">
           <mat-icon>notifications_none</mat-icon>
         </button>
         <button mat-icon-button *ngIf="this.auth.user != undefined" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button *ngIf="this.auth.user != undefined" mat-menu-item>
+            <button *ngIf="this.auth.user != undefined" mat-menu-item (click)="openDialog()">
               <!-- <img src="../../../assets/images/avatar.png" alt=""> -->
               <mat-icon>manage_accounts</mat-icon>
               <span>Setting profile</span>

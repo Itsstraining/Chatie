@@ -89,8 +89,10 @@ body {
     text-align: center;
     border: 0.15rem solid $blue !important;
     &:hover {
-        color: $blue;
         background-color: white;
+        a {
+            color: $blue;
+        }
     }
 }
 

@@ -4,7 +4,7 @@
     <!-- chat-container -->
     <div class="chat-container">
       <div class="receiver-info">
-        <img src="../../../assets/images/avatar-1.jpg">
+        <img src="../../../assets/images/avatar-1.jpg" class="ava-receiver">
         <h3>Tan Trung</h3>
 
         <div class="option">
@@ -17,9 +17,24 @@
             <img src="../../../assets/images/phone-auricular.svg">
           </button>
 
-          <button class="button-option">
+          <button [matMenuTriggerFor]="menu" class="button-option">
             <img src="../../../assets/images/more.svg">
           </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <span style="color: red;">Chặn</span>
+            </button>
+            <button mat-menu-item mat-button>
+              <span style="color: red">Hủy kết bạn</span>
+            </button>
+            <button mat-menu-item>
+              <span>Xem bộ sưu tập</span>
+            </button>
+            <button mat-menu-item>
+              <span>Hủy</span>
+            </button>
+          </mat-menu>
+
           <!-- </div> -->
 
 
@@ -86,6 +101,6 @@
         <app-chat-recent></app-chat-recent>
 
       </div>
-      
+
     </div>
   </div>

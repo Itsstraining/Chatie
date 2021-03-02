@@ -19,9 +19,8 @@ $light-blue: #4290E4;
 }
 
 
-
-
 /* Clear floats after the columns */
+
 .container {
   background-color: $black;
   display: flex;
@@ -42,13 +41,9 @@ $light-blue: #4290E4;
   // background-color: lightcyan;
   width: 83%;
   height: 85%;
-
 }
 
-
-
 //sender
-
 .chat-box .user-container {
   width: 30%;
   height: 100%;
@@ -61,8 +56,6 @@ $light-blue: #4290E4;
     height: 88%;
     background-color: $light-black;
     overflow: auto;
-
-
   }
 
   .find {
@@ -73,7 +66,6 @@ $light-blue: #4290E4;
     border-radius: 15px;
     display: flex;
     justify-content: center;
-
 
     img {
       margin: auto 10px auto 0;
@@ -92,17 +84,10 @@ $light-blue: #4290E4;
 
       &::placeholder {
         background-image: url("../../../assets/images/search.svg");
-
       }
     }
   }
-
 }
-
-
-
-
-
 
 // container
 .chat-box .chat-container {
@@ -110,14 +95,13 @@ $light-blue: #4290E4;
   height: 100%;
   float: left;
   background-color: $black;
-  // border-radius: 25px;
 
-  .chat-frame {
+
+  .chat-frame{
     float: left;
-    width: 100%;
-    height: 88%;
-    background-color: $black;
-
+        width: 100%;
+        height: 88%;
+        background-color: $black;
 
     .chat-messages-show-container {
       border-top-left-radius: 20px;
@@ -129,27 +113,25 @@ $light-blue: #4290E4;
       overflow: auto;
       background-color: $light-black;
     }
-
+  
     .chat-messages-show-list {
       list-style-type: none;
       margin: 0;
       padding: 0;
       // display: flex;
       // flex-direction: column;
-
+  
     }
-
+  
     .chat-messages-create-container {
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
-
-      
       background-color: rgba(112, 112, 112, 0.3);
       height: 15%;
       display: flex;
       justify-content: center;
     }
-
+  
     .chat-messages-create-input {
       border-width: 0px;
       border-radius: 50px;
@@ -161,7 +143,7 @@ $light-blue: #4290E4;
       background-color: $black;
       color: white;
     }
-
+  
     .chat-messages-create-button {
       background-color: $light-light-green;
       height: 38px;
@@ -173,9 +155,9 @@ $light-blue: #4290E4;
       outline: none;
       cursor: pointer;
     }
-
+  
     .chat-messages-option-button {
-      background-color: $light-light-green;
+      background-color: $light-blue;
       height: 28px;
       width: 28px;
       margin: auto 5px auto 15px;
@@ -187,8 +169,9 @@ $light-blue: #4290E4;
       justify-content: center;
       cursor: pointer;
     }
-
   }
+
+
 
   .receiver-info {
     background-color: $black;
@@ -198,7 +181,7 @@ $light-blue: #4290E4;
     border-radius: 15px;
     // margin-bottom: 2.2%;
 
-    img {
+    .ava-receiver {
       margin: 0.7rem 0.5rem 0.5rem 1rem;
       width: 40px;
       height: 40px;
@@ -239,30 +222,87 @@ $light-blue: #4290E4;
         &:hover {
           background-color: $light-black;
         }
+
         &:active {
           background-color: rgba(112, 112, 112, 0.8);
         }
-
-
         img {
           width: 1.5rem;
           height: 1.5rem;
           border-style: solid;
           border-width: 0;
           margin: 0px;
-
-        }
+      }
       }
     }
+  }
+    .chat-messages-create-container {
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      background-color: rgba(112, 112, 112, 0.3);
+      height: 15%;
+      display: flex;
+      justify-content: center;
+    
 
+    .chat-messages-create-input {
+      border-width: 0px;
+      border-radius: 50px;
+      height: 30%;
+      margin: auto 10px auto 10px;
+      padding: 8px;
+      flex: 2;
+      outline: none;
+      background-color: $black;
+      color: white;
+    }
+
+    .chat-messages-create-button {
+      background-color: $blue;
+      height: 38px;
+      width: 38px;
+      margin: auto 20px auto 5px;
+      border-style: solid;
+      border-width: 0;
+      border-radius: 50%;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .chat-messages-option-button {
+      background-color: $blue;
+      height: 28px;
+      width: 28px;
+      margin: auto 5px auto 15px;
+      border-style: solid;
+      border-width: 0;
+      border-radius: 50%;
+      outline: none;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+    }
   }
 
 }
 
 
+/* mat-menu */
+
+.mat-focus-indicator {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  border-radius: 20px;
+}
 
 
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+
 @media screen and (max-width:600px) {
   .column {
     width: 100%;
@@ -270,58 +310,22 @@ $light-blue: #4290E4;
 }
 
 
-// /* width */
-// ::-webkit-scrollbar {
-//   width: 10px;
-// }
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
-// /* Track */
-// ::-webkit-scrollbar-track {
-//   background: #f1f1f1;
-// }
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
 
-// /* Handle */
-// ::-webkit-scrollbar-thumb {
-//   background: #888;
-// }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
 
-// /* Handle on hover */
-// ::-webkit-scrollbar-thumb:hover {
-//   background: #555;
-// }
-
-
-//chat-socket
-
-// .chat-messages-show-container {
-//   background: #c3c3c3;
-//   height: 60%;
-//   display: flex;
-//   flex-direction: column;
-//   overflow: auto;
-// }
-
-// .chat-messages-show-list {
-//   list-style-type: none;
-//   margin: 0;
-//   padding: 0;
-// }
-
-// .chat-messages-create-container {
-//   background: #616161;
-//   height: 100px;
-//   display: flex;
-//   justify-content: center;
-// }
-
-// .chat-messages-create-input {
-//   padding: 12px;
-//   margin: 29px 30px;
-//   flex: 2
-// }
-
-// .chat-messages-create-button {
-//   height: 50px;
-//   margin: auto 40px;
-//   width: 100px;
-// }
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
