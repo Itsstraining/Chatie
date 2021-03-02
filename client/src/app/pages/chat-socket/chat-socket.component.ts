@@ -13,7 +13,7 @@ import * as io from 'socket.io-client/dist/socket.io';
 export class ChatSocketComponent implements OnInit {
   socket: any;
   message: any;
-  readonly uri: string = "http://0.0.0.0:8080";
+  readonly uri: string = "http://192.168.31.245:8080";
 
   constructor(private sock: ChatsocketioService) {
     console.log("bug")
@@ -49,13 +49,15 @@ export class ChatSocketComponent implements OnInit {
       if (data) {
         const element = document.createElement('li');
         element.innerHTML = data;
-        element.style.background = 'white';
+        element.style.background = 'rgba(112, 112, 112, 0.7)';
+        element.style.color = 'white';
         element.style.padding = '10px 20px';
         element.style.margin = '10px';
         element.style.float = 'left';
         element.style.marginRight = '45%';
         element.style.marginLeft = '3%';
         element.style.borderRadius = '20px';
+
         document.getElementById('message-list').appendChild(element);
       }
     });
