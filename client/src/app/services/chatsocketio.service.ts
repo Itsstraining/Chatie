@@ -1,36 +1,32 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import * as io from 'socket.io-client/dist/socket.io';
 
-
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChatsocketioService {
-
   socket: any;
   send_msg: any;
   received_msg: any;
-  readonly uri: string = "http://localhost:8080"
+  readonly url: string = 'http://localhost:8080';
 
-  constructor() {
-    this.socket = io(this.uri);
+  constructor(private httpClient: HttpClient) {
+    this.socket = io(this.url);
   }
 
   listen(eventName: string) {
     return new Observable((Subscriber) => {
       this.socket.on(eventName, (data) => {
         Subscriber.next(data);
-
-      })
+      });
     });
   }
 
-
   emit(eventName: string, data: any) {
     this.socket.emit(eventName, data);
-  };
+  }
 
   setupSocketConnection() {
     // this.socket = io(this.uri);
@@ -47,10 +43,12 @@ export class ChatsocketioService {
     });
   }
 
-
-
   public sendMessage(message) {
     this.socket.emit('message', message);
+    this.send_msg = message;
+    console.log(message)
+    message = ''
+    // message = '';
     // const element = document.createElement('li');
     // document.getElementById('message-list').appendChild(element);
     // element.innerHTML = this.send_msg;

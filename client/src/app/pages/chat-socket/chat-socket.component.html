@@ -1,11 +1,11 @@
-<div class="container" *ngIf=" this.auth.user != null">
+<div class="container" *ngIf=" this.userInfo != null">
   <div class="chat-box">
 
     <!-- chat-container -->
     <div class="chat-container">
       <div class="receiver-info">
         <img src="../../../assets/images/avatar-1.jpg" class="ava-receiver">
-        <h3>Tan Trung</h3>
+        <h3 *ngIf="this.recentFriendChat">{{this.recentFriendChat.userName}}</h3>
 
         <div class="option">
           <!-- <div class="example-button-row"> -->
@@ -45,9 +45,9 @@
       <div class="chat-frame" >
 
         <div class="chat-messages-show-container">
-          <div class="chat-messages-show-list" id="message-list">
-            <app-sendermessage></app-sendermessage>
-            <app-receivermessage></app-receivermessage>
+          <div class="chat-messages-show-list" id="message-list" *ngFor="let message of conversation">
+            <app-sendermessage *ngIf="this.message.senderId == this.userInfo._id" [send_msg] = "message.content"></app-sendermessage>
+            <app-receivermessage *ngIf="this.message.senderId != this.userInfo._id" [receive_msg] = "message.content"></app-receivermessage>
           </div>
         </div>
         <div class="chat-messages-create-container">
@@ -56,9 +56,9 @@
           </button>
           <!-- <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message"
             (keyup.enter)="SendMessage()"> -->
-            <input class="chat-messages-create-input" type="text" placeholder="Type message here...">
+            <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message" (keyup.enter)="SendMessage()">
           <!-- <button class="chat-messages-create-button" (click)="SendMessage()"> -->
-          <button class="chat-messages-create-button">
+          <button class="chat-messages-create-button" (click)="SendMessage()">
 
             <svg fill="#242526" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px"
               viewBox="0 0 512.005 512.005" width="15px" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +92,7 @@
 
       </div>
       <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
-        <app-chat-recent *ngFor="let conversation of listConver; let i = index" [conversation]="conversation" (click)="getConnverIndex(i)"></app-chat-recent>
+        <app-chat-recent *ngFor="let conver of listConver; let i = index" [conversation]="conver" (click)="getConnverIndex(i)"></app-chat-recent>
       </div>
     </div>
   </div>

@@ -1,21 +1,20 @@
 const app = require('express');
 const Database = require('../database');
-
 const router = app.Router();
 
 router.post('/', async (req, res) => {
     const {
         senderId,
-        receiverId,
-        message
+        receiverId
     } = req.body;
     try {
-        let conver = await Database.instance.Conversation.getAllUserConversation(senderId);
+        let conver = await Database.instance.User.getAllUserConversation(senderId);
         let existed = 0;
-        // if (conver) {
+        if (conver) {
             for (let i = 0; i < conver.length; i++) {
-                for (let j = 0; j < conver[i].receiver.length; j++) {
-                    if (receiverId == conver[i].receiver[j]) {
+                let temp = await Database.instance.Conversation.getOneConversation(conver[i])
+                for (let j = 0; j < temp.participants.length; j++) {
+                    if (receiverId == temp.participants[j]) {
                         existed = 1;
                         res.send({
                             message: "you already talk to this friend"
@@ -24,13 +23,11 @@ router.post('/', async (req, res) => {
                     }
                 }
             }
-        // }
+        }
 
-        //create sender conversation
-        let newConSend = await Database.instance.Conversation.createConversation(senderId, receiverId);
-        // create receiver conversation
-        let newConRec = await Database.instance.Conversation.createConversation(receiverId, senderId);
-        let chat = await Database.instance.User.chat(senderId, receiverId, newConSend._id, newConRec._id);
+        //create conversation
+        let newConversation = await Database.instance.Conversation.createConversation(senderId, receiverId);
+        let chat = await Database.instance.User.chat(senderId, receiverId, newConversation._id);
         res.send({
             message: chat,
         })
@@ -47,22 +44,11 @@ router.get('/allUserConver', async (req, res) => {
     const {
         senderId
     } = req.query;
-    let allUserConver = await Database.instance.Conversation.getAllUserConversation(senderId);
+    let allUserConver = await Database.instance.User.getAllUserConversation(senderId);
     res.send({
         allUserConver: allUserConver
     })
 })
-
-// router.post('/', async (req, res) => {
-//     const {
-//         sender,
-//         receiver
-//     } = req.body;
-//     let conver = await Database.instance.Conversation.createConversation(new ConversationModel(receiver));
-//     res.send({
-//         conver: conver,
-//     })
-// })
 
 //get all conversation in database
 router.get('/', async (req, res) => {
@@ -75,10 +61,9 @@ router.get('/', async (req, res) => {
 //get one conversation 
 router.get('/oneConver', async (req, res) => {
     const {
-        senderId,
-        receiverId
-    } = req.body
-    let conversation = await Database.instance.Conversation.getOneConversation(senderId, receiverId);
+        conversationId,
+    } = req.query
+    let conversation = await Database.instance.Conversation.getOneConversation(conversationId);
     res.send({
         conversation: conversation,
     })
@@ -94,17 +79,21 @@ router.get('/oneConver', async (req, res) => {
 //     })
 // });
 
-router.put('/', async (req, res) => {
+router.put('/sendMess', async (req, res) => {
     const {
         senderId,
-        receiverId,
+        conversationId,
         message
     } = req.body;
     try {
-        console.log("bug")
-        let conversation = await Database.instance.Conversation.updateConversation(senderId, receiverId, message);
+        let conversation = await Database.instance.Conversation.updateConversation(senderId, conversationId, message);
+        // io.broadcast.emit('message', req.body);
+        // io.on('message', (msg) => {
+        //     console.log(msg);
+        //     io.broadcast.emit('message-broadcast', req.body);
+        // });
         res.send({
-            message: conversation
+            newMess: conversation
         })
     } catch (err) {
         res.send({

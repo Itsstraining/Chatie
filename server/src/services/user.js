@@ -27,6 +27,11 @@ class UserClass {
         return await this.User.findOne({ email: email });
     }
 
+    //Get all conversation 
+    async getAllUserConversation(userId) {
+        return (await this.User.findOne({_id: userId})).conversations;
+    }
+
     /**
      * 
      * @param {String} email 
@@ -43,18 +48,18 @@ class UserClass {
         });
     }
 
-    async chat(id, receiverId, newConSend, newConRec) {
-        const changeStream = this.User.watch().on('change', change => console.log(change));
+    async chat(id, receiverId, newConversationId) {
+        // const changeStream = this.User.watch().on('change', change => console.log(change));
         await this.User.findOneAndUpdate(
             { _id: id }, {
             $push: {
-                conversations: [newConSend]
+                conversations: [newConversationId]
             }
         });
         await this.User.findOneAndUpdate(
             { _id: receiverId }, {
             $push: {
-                conversations: [newConRec]
+                conversations: [newConversationId]
             }
         });
         // console.log(changeStream)

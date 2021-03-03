@@ -26,10 +26,9 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/getMessageID", async (req, res) => {
-    const{id} = req.body;
+    const{id} = req.query;
     try {
         let messageID = await Database.instance.Message.getMessageByID(id);
-        console.log(messageID)
         res.send({ content: messageID})
     } catch (error) {
         res.send('err')

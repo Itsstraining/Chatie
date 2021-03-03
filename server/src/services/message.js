@@ -28,7 +28,7 @@ class MessageClass {
     async getMessageByID(id) {
         return (await this.Message.findOne({
             _id: id,
-        })).content;
+        }));
 
     }
 
