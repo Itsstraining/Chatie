@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import * as io from 'socket.io-client/dist/socket.io';
+import { DialogUnfriendComponent } from 'src/app/components/dialog-unfriend/dialog-unfriend.component';
+import { DialogBlockComponent } from 'src/app/components/dialog-block/dialog-block.component';
 
 
 @Component({
@@ -13,12 +16,33 @@ import * as io from 'socket.io-client/dist/socket.io';
 export class ChatSocketComponent implements OnInit {
   socket: any;
   message: any;
-  readonly uri: string = "http://0.0.0.0:8080";
+  readonly uri: string = "http://localhost:8080";
 
-  constructor(private sock: ChatsocketioService) {
+  constructor(private sock: ChatsocketioService, public dialog: MatDialog) {
     console.log("bug")
-    this.socket = io(this.uri);
+    this.socket = io(this.uri); 
+  }
 
+  public openDialogUnfriend(): void {
+    const dialogRef = this.dialog.open(DialogUnfriendComponent, {
+      // data : {name : this.name, avatar: this.avatar}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
+  }
+
+  public openDialogBlock(): void {
+    const dialogRef = this.dialog.open(DialogBlockComponent, {
+      // data : {name : this.name, avatar: this.avatar}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
   }
 
   ngOnInit(): void {

@@ -17,14 +17,14 @@
               <img src="../../../assets/images/phone-auricular.svg">
             </button>
 
-                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="button-option" style="color:#4290E4 ;">
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="button-option" style="color:#4290E4;">
               <mat-icon>more_horiz</mat-icon>
             </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button mat-menu-item mat-raised-button (click)="openDialogBlock()">
                     <span  style="color: red;">Chặn</span>
                   </button>
-                        <button mat-menu-item mat-button>
+                        <button mat-menu-item mat-raised-button (click)="openDialogUnfriend()">
                     <span  style="color: red">Hủy kết bạn</span>
                   </button>
                         <button mat-menu-item>
