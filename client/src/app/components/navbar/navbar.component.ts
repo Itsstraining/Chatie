@@ -36,8 +36,8 @@ export class NavbarComponent implements OnInit {
   public openDialogFriend() {
     
     const dialogRef = this.dialog.open(FindComponent, {
-      width: '60%',
-      height: '75%'
+      width: '30%',
+      height: '55%'
     });
   }
   

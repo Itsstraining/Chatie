@@ -7,8 +7,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class LoginService {
+  
   public user: firebase.default.User = null;
   public newUser;
+  
   constructor(private auth: AngularFireAuth, private client: HttpClient) {
     this.auth.authState.subscribe((test) => {
       if (test) {
@@ -60,5 +62,19 @@ export class LoginService {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  async loginByAccount(email,password)
+  {
+    try{
+      let result;
+      let registerUrl ="http://192.168.31.158:8080/user/check"
+      let temp = await this.client.get(registerUrl+"?email="+email+"&password="+password).toPromise();
+       return temp
+    }catch(err){
+      console.log(err)
+    }
+   
+     
   }
 }
