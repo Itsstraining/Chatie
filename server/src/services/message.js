@@ -28,6 +28,7 @@ class MessageClass {
     async getMessageByID(id) {
         return (await this.Message.findOne({
             _id: id,
+<<<<<<< HEAD
         })).content;
     }
 
@@ -37,6 +38,16 @@ class MessageClass {
     //     return await this.Message.find({date: {$lte: from, $gte: to}});
     // }
 
+=======
+        }));
+    }
+
+    async getAllMessageByConverId(conversationId){
+        return await this.Message.find({
+            conversationId: conversationId
+        }, null,{sort: {date: -1}, limit: 30});
+    }
+>>>>>>> 33217856777a92f8d1001dcd69aa592aa63ba4ca
 }
 
 module.exports = MessageClass;

@@ -2,10 +2,11 @@ class ConversationModel {
 
     /**
      * 
-     * @param {String} receiver 
+     * @param {String} senderId 
+     * @param {String} receiverId
      */
-    constructor(receiver) {
-        this.receiver = [];
+    constructor(senderId, receiverId) {
+        this.participants.push(senderId,receiverId);
         this.messages = [];
         this.file = [];
     }

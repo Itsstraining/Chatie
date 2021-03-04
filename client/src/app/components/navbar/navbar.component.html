@@ -1,12 +1,12 @@
-<mat-toolbar style="background-color: #4290E4; color: white;" *ngIf="this.auth.user != null">
+<mat-toolbar style="background-color: #4290E4; color: white;" *ngIf="this.auth.user">
     <mat-toolbar-row>
         <img src="../../../assets/images/logochatie.png" style="height: 33px; width: 87px">
         <span class="example-spacer"></span>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-          <mat-icon><a href="/home-page" style="text-decoration: none;color: white;">home</a></mat-icon>
+        <button mat-icon-button (click)="openDialogNoti()" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+          <mat-icon style="text-decoration: none;color: white;">notifications_none</mat-icon>
         </button>
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="openDialogFriend()">
-          <mat-icon>notifications_none</mat-icon>
+          <mat-icon>person_add_alt</mat-icon>
         </button>
         <button mat-icon-button *ngIf="this.auth.user != undefined" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <!-- <mat-icon>more_vert</mat-icon> -->

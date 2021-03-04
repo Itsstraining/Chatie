@@ -5,8 +5,7 @@ const userSchema = require('./user.schemas');
 
 
 const conversationSchema = new mongoose.Schema({
-    senderId: String,
-    receiver: [String],
+    participants: [String],
     messages: [String],
     listFile: [fileSchema],
 });

@@ -4,8 +4,8 @@ import { LoginService } from 'src/app/services/login.service';
 import { DialogSettingprofileComponent } from '../dialog-settingprofile/dialog-settingprofile.component';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogUnfriendComponent } from '../dialog-unfriend/dialog-unfriend.component';
-import { DialogNotificationComponent } from '../dialog-notification/dialog-notification.component';
 import { FindComponent } from '../find/find.component';
+import { NotiComponent } from '../noti/noti.component';
 
 @Component({
   selector: 'app-navbar',
@@ -16,12 +16,10 @@ export class NavbarComponent implements OnInit {
 
   public user: any;
   constructor(public auth: LoginService, private router: Router, public dialog: MatDialog) { 
-    console.log(this.auth.user)
   }
 
   ngOnInit(): void {
     this.user=this.auth.user;
-    console.log(this.auth.user)
   }
 
   public openDialog() {
@@ -36,8 +34,16 @@ export class NavbarComponent implements OnInit {
   public openDialogFriend() {
     
     const dialogRef = this.dialog.open(FindComponent, {
-      width: '60%',
-      height: '75%'
+      width: '30%',
+      height: '55%'
+    });
+  }
+
+  public openDialogNoti() {
+    
+    const dialogRef = this.dialog.open(NotiComponent, {
+      // width: '60%',
+      // height: '75%'
     });
   }
   

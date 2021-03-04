@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const ConversationModel = require('../../models/conversation.model');
 const MessageClass = require('./message');
 const MessageModel = require('../../models/message.model');
-
 class ConversationClass {
     constructor() {
         /**
@@ -19,14 +18,19 @@ class ConversationClass {
      * 
      */
     async createConversation(senderID, receiverID) {
-        return await this.Conversation.create({
-            senderId: senderID,
-            receiver: [receiverID],
+        let newConver = await this.Conversation.create({
             ...conversationSchema
         });
+        return this.Conversation.findOneAndUpdate({
+            _id: newConver._id
+        }, {
+            $push: {
+                participants: [senderID, receiverID]
+            }
+        })
     }
 
-    async createChatGroup(){
+    async createChatGroup() {
 
     }
 
@@ -36,17 +40,11 @@ class ConversationClass {
         return await this.Conversation.find();
     }
 
-    //Get all conversation 
-    async getAllUserConversation(senderId) {
-        const changeStream = this.Conversation.watch().on('change', change => console.log(change));
-        return (await this.Conversation.find({senderId: senderId}));
-    }
 
     //Get one friend recent
-    async getOneConversation(senderId, receiverId) {
+    async getOneConversation(conversationId) {
         return await this.Conversation.findOne({
-            senderId: senderId,
-            receiver: { $elemMatch: {$eq: receiverId} } 
+            _id: conversationId
         });
     }
 
@@ -55,6 +53,7 @@ class ConversationClass {
      * @param {*} receiverId 
      * @param {String} message 
      */
+<<<<<<< HEAD
     async updateConversation(senderId, receiverId, message, date) {
         let convers = await this.getAllUserConversation(senderId);
         let conversationId = '';
@@ -72,6 +71,17 @@ class ConversationClass {
                     messages: [newMessage]
                 }
             })
+=======
+    async updateConversation(senderId, conversationId, message) {
+        let newMessage = (await this.message.createMessage(new MessageModel(message, conversationId, senderId)))._id;
+        await this.Conversation.findOneAndUpdate({
+            _id: conversationId
+        }, {
+            $push: {
+                messages: [newMessage]
+            }
+        });
+>>>>>>> 33217856777a92f8d1001dcd69aa592aa63ba4ca
     }
 }
 

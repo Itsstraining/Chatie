@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReceivedMsgComponent } from './received-msg.component';
+import { PushnotifyingComponent } from './pushnotifying.component';
 
-describe('ReceivedMsgComponent', () => {
-  let component: ReceivedMsgComponent;
-  let fixture: ComponentFixture<ReceivedMsgComponent>;
+describe('PushnotifyingComponent', () => {
+  let component: PushnotifyingComponent;
+  let fixture: ComponentFixture<PushnotifyingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReceivedMsgComponent ]
+      declarations: [ PushnotifyingComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReceivedMsgComponent);
+    fixture = TestBed.createComponent(PushnotifyingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

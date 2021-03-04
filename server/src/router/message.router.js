@@ -47,6 +47,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/getMessageID", async (req, res) => {
+<<<<<<< HEAD
     const {
         id
     } = req.body;
@@ -56,9 +57,27 @@ router.get("/getMessageID", async (req, res) => {
         res.send({
             content: messageID
         })
+=======
+    const{id} = req.query;
+    try {
+        let messageID = await Database.instance.Message.getMessageByID(id);
+        res.send({ content: messageID})
+>>>>>>> 33217856777a92f8d1001dcd69aa592aa63ba4ca
     } catch (error) {
         res.send('err')
     }
 });
+
+router.get("/getAllMessageId", async (req, res) => {
+    const {conversationId} = req.query;
+    try{
+        let messageContent = await Database.instance.Message.getAllMessageByConverId(conversationId);
+        res.send({
+            messageContent: messageContent,
+        });
+    }catch(err){
+        res.send(err)
+    }
+})
 
 module.exports = router;

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { HomePageComponent } from './home-page.component';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     HomePageRoutingModule,
     MatButtonModule,
+    FormsModule
    
   ]
 })

@@ -7,19 +7,18 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class LoginService {
-  public user: firebase.default.User = null;
-  public newUser;
+  
+  public user: any;
+  public newUser: any = null;
   public idToken;
   constructor(public auth: AngularFireAuth, private client: HttpClient) {
     this.auth.authState.subscribe((test) => {
       if (test) {
         this.user = test;
-        console.log(this.user.displayName);
       } else {
         this.user = null;
       }
     })
-    // console.log(this.user.uid);
   }
   public isAuthenticated(): boolean {
     if(this.user!=undefined){
@@ -61,5 +60,19 @@ export class LoginService {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  async loginByAccount(email,password)
+  {
+    try{
+      let result;
+      let registerUrl ="http://localhost:8080/user/check";
+      this.newUser = await this.client.get(registerUrl+"?email="+email+"&password="+password).toPromise();
+      localStorage.setItem("user", JSON.stringify(this.newUser.user));
+       return this.newUser;
+    }catch(err){
+      console.log(err)
+    }
+   
   }
 }
