@@ -32,6 +32,7 @@ import { DialogBlockComponent } from './components/dialog-block/dialog-block.com
 import { DialogSettingprofileComponent } from './components/dialog-settingprofile/dialog-settingprofile.component';
 import { FindComponent } from './components/find/find.component';
 import { NotiComponent } from './components/noti/noti.component';
+import { OptionComponent } from './components/option/option.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { NotiComponent } from './components/noti/noti.component';
     DialogSettingprofileComponent,
     FindComponent,
     NotiComponent,
+    OptionComponent,
   ],
   imports: [
     BrowserModule,
