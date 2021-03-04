@@ -1,1 +1,29 @@
-<h1> hahahahah</h1>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Tìm tên bạn bè:</mat-label>
+    <input class="bar" placeholder="Ex: Nguyễn Tấn Trung" maxlength="35" class="bar" type="text" matInput
+      [formControl]="myControl" [matAutocomplete]="auto">
+       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option" >
+            <img [src]="option.avatar" alt="" style="width: 40px; height: 40px; border-radius: 50%;display: inline-block ;margin-top: 24px">
+          {{option.name}}
+          <button mat-icon-button>
+            ADD
+           </button>
+           
+          <!-- <button mat-button>
+            <mat-icon>
+              clear
+            </mat-icon>
+          </button>
+          <button mat-button>
+            <mat-icon>
+              clear
+            </mat-icon>
+          </button> -->
+        </mat-option>
+     
+    </mat-autocomplete>
+  
+  </mat-form-field>
+</form>

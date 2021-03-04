@@ -6,11 +6,11 @@
             <p style="font-size: 1.3rem;font-weight: 700;color:grey;margin-bottom: auto;">Sign up to message with your friend.</p>
             <!-- Log in form -->
             <div class="log-in-form">
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="Username">
-                <input type="password" placeholder="Password">
-                <input type="password" placeholder="Retype password">
-                <button class="sign-in-btn" mat-raised-button><a  href="/">SIGN UP</a> </button>
+                <input type="text" placeholder="Email" [(ngModel)]="email" required>
+                <input type="text" placeholder="Username" maxlength="30"[(ngModel)]="userName"required >
+                <input type="password" placeholder="Password" [(ngModel)]="password"required >
+                <input type="password" placeholder="Retype password"required >
+                <button  (click)="registerAccount()" class="sign-in-btn" mat-raised-button><a  >SIGN UP</a> </button>
             </div>
         </div>
         <!-- Sign up -->

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogNotificationComponent } from './dialog-notification.component';
+import { PushnotifyingComponent } from './pushnotifying.component';
 
-describe('DialogNotificationComponent', () => {
-  let component: DialogNotificationComponent;
-  let fixture: ComponentFixture<DialogNotificationComponent>;
+describe('PushnotifyingComponent', () => {
+  let component: PushnotifyingComponent;
+  let fixture: ComponentFixture<PushnotifyingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogNotificationComponent ]
+      declarations: [ PushnotifyingComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogNotificationComponent);
+    fixture = TestBed.createComponent(PushnotifyingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

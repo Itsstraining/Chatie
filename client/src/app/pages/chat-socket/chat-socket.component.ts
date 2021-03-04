@@ -11,7 +11,11 @@ import {
 import { from, Observable } from 'rxjs';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import * as io from 'socket.io-client/dist/socket.io';
+import { DialogUnfriendComponent } from 'src/app/components/dialog-unfriend/dialog-unfriend.component';
+import { DialogBlockComponent } from 'src/app/components/dialog-block/dialog-block.component';
+
 import { UserService } from 'src/app/services/user.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ConversationService } from 'src/app/services/conversation.service';
@@ -42,13 +46,11 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     public socketIo: ChatsocketioService,
     public userService: UserService,
     public auth: LoginService,
-    private conversationService: ConversationService
+    private conversationService: ConversationService,
+    public dialog: MatDialog
   ) {
     this.userInfo = this.userService.user;
   }
-  // ngOnChanges(receive_msg): void {
-  //   throw new Error('Method not implemented.');
-  // }
 
   ngOnInit(): void {
     if (this.auth.user) {
@@ -64,6 +66,28 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked() {
     this.scrollToBottom();
   }
+  public openDialogUnfriend(): void {
+    const dialogRef = this.dialog.open(DialogUnfriendComponent, {
+      // data : {name : this.name, avatar: this.avatar}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
+  }
+
+  public openDialogBlock(): void {
+    const dialogRef = this.dialog.open(DialogBlockComponent, {
+      // data : {name : this.name, avatar: this.avatar}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
+  }
+  
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
