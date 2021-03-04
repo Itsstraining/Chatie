@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import { Component, OnInit, Output, ElementRef, ViewChild } from '@angular/core';
-=======
 import {
   Component,
   OnInit,
@@ -11,7 +8,6 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
->>>>>>> 33217856777a92f8d1001dcd69aa592aa63ba4ca
 import { from, Observable } from 'rxjs';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
@@ -29,11 +25,7 @@ import { ConversationService } from 'src/app/services/conversation.service';
   templateUrl: './chat-socket.component.html',
   styleUrls: ['./chat-socket.component.scss'],
 })
-<<<<<<< HEAD
-export class ChatSocketComponent implements OnInit {
-=======
 export class ChatSocketComponent implements OnInit, AfterViewChecked {
->>>>>>> 33217856777a92f8d1001dcd69aa592aa63ba4ca
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   socket: any;
   message: any;
@@ -58,11 +50,6 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     public dialog: MatDialog
   ) {
     this.userInfo = this.userService.user;
-<<<<<<< HEAD
-
-    this.socket = io(this.uri);
-=======
->>>>>>> 33217856777a92f8d1001dcd69aa592aa63ba4ca
   }
 
   ngOnInit(): void {
@@ -78,32 +65,6 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
 
   }
 
-<<<<<<< HEAD
-//   ngAfterViewChecked() {        
-//     this.scrollToBottom();        
-// } 
-
-  scrollToBottom(): void {
-    try {
-        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch(err) { }                 
-}
-
-  // //get all user information
-  public async getUserInfos() {
-    await this.userService.getUserInfo(this.auth.user.email);
-    this.userInfo = this.userService.user;
-  }
-
-  // get all user's recent conversation
-  public async getAllUserConver(userId) {
-    console.log('bug 1');
-    await this.userService.getUserAllConver(
-      userId
-    );
-    this.listConver = this.userService.getAllConver();
-    console.log("heello" + this.listConver);
-=======
   ngAfterViewChecked() {
     this.scrollToBottom();
   }
@@ -122,7 +83,6 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     const dialogRef = this.dialog.open(DialogBlockComponent, {
       // data : {name : this.name, avatar: this.avatar}
     });
->>>>>>> 33217856777a92f8d1001dcd69aa592aa63ba4ca
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
@@ -138,25 +98,6 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
 
   //all function about the content of the chat page
   public async checkUser() {
-<<<<<<< HEAD
-    this.user = this.auth.user;
-    console.log("user ne" + this.userInfo);
-    if (this.user) {
-      console.log('hello');
-      await this.getUserInfos();
-      this.getAllUserConver(this.userInfo._id);
-
-    }
-  }
-
-  public getConnverIndex(index) {
-    // this.converIndex = index;
-    console.log(index)
-    this.listen('message-broadcast').subscribe((data) => {
-      console.log(data);
-    });
-    // this.setupSocketConnection();
-=======
     await this.getUserInfos();
     await this.getListConver(this.userInfo.conversations);
     await this.getAllConverInfo(this.listConver);
@@ -181,7 +122,6 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     await this.userService.getUserInfo(this.auth.user.email);
     this.userInfo = this.userService.user;
   }
->>>>>>> 33217856777a92f8d1001dcd69aa592aa63ba4ca
 
   //get all user list conversations
   public async getListConver(listOfConver) {

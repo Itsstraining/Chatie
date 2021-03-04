@@ -53,25 +53,6 @@ class ConversationClass {
      * @param {*} receiverId 
      * @param {String} message 
      */
-<<<<<<< HEAD
-    async updateConversation(senderId, receiverId, message, date) {
-        let convers = await this.getAllUserConversation(senderId);
-        let conversationId = '';
-        for(let i = 0; i < convers.length; i++){
-            for(let j = 0; j < convers[i].receiver.length; j++){
-                if(receiverId == convers[i].receiver[j]){
-                    conversationId = convers[i]._id;
-                }
-            }
-        }
-        let newMessage =(await this.message.createMessage(new MessageModel(message, conversationId, senderId, date)))._id ;
-        return await this.Conversation.findOneAndUpdate(
-            {_id: conversationId}, {
-                $push: {
-                    messages: [newMessage]
-                }
-            })
-=======
     async updateConversation(senderId, conversationId, message) {
         let newMessage = (await this.message.createMessage(new MessageModel(message, conversationId, senderId)))._id;
         await this.Conversation.findOneAndUpdate({
@@ -81,7 +62,6 @@ class ConversationClass {
                 messages: [newMessage]
             }
         });
->>>>>>> 33217856777a92f8d1001dcd69aa592aa63ba4ca
     }
 }
 

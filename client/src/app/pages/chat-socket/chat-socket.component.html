@@ -44,26 +44,6 @@
 
       <div class="chat-frame">
 
-<<<<<<< HEAD
-        <div class="chat-messages-show-container" #scrollMe [scrollTop] ="scrollMe.scrollHeight"
-        onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
-          <div class="chat-messages-show-list" id="message-list">
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-sendermessage></app-sendermessage>
-            <app-receivermessage></app-receivermessage>
-=======
         <div class="chat-messages-show-container" *ngIf="this.recentConver" #scrollMe [scrollTop]="scrollMe.scrollHeight">
           <div class="chat-messages-show-list" id="message-list">
             <div *ngFor="let message of this.recentConver.conversation">
@@ -72,7 +52,6 @@
               <app-receivermessage *ngIf="this.message.senderId != this.userInfo._id" [receive_msg]="message.content">
               </app-receivermessage>
             </div>
->>>>>>> 33217856777a92f8d1001dcd69aa592aa63ba4ca
           </div>
         </div>
         <div class="chat-messages-create-container">

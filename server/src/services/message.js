@@ -28,17 +28,6 @@ class MessageClass {
     async getMessageByID(id) {
         return (await this.Message.findOne({
             _id: id,
-<<<<<<< HEAD
-        })).content;
-    }
-
-    // async getMessageByTime(from, to) {
-    //     let from = Date.now();
-    //     let to = Date.now() - (30*6000);
-    //     return await this.Message.find({date: {$lte: from, $gte: to}});
-    // }
-
-=======
         }));
     }
 
@@ -47,7 +36,6 @@ class MessageClass {
             conversationId: conversationId
         }, null,{sort: {date: -1}, limit: 30});
     }
->>>>>>> 33217856777a92f8d1001dcd69aa592aa63ba4ca
 }
 
 module.exports = MessageClass;
