@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, ElementRef, ViewChild } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
@@ -11,7 +11,8 @@ import { LoginService } from 'src/app/services/login.service';
   templateUrl: './chat-socket.component.html',
   styleUrls: ['./chat-socket.component.scss'],
 })
-export class ChatSocketComponent implements OnInit{
+export class ChatSocketComponent implements OnInit {
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   socket: any;
   message: any;
   userInfo: any;
@@ -27,7 +28,7 @@ export class ChatSocketComponent implements OnInit{
     public auth: LoginService
   ) {
     this.userInfo = this.userService.user;
-    
+
     this.socket = io(this.uri);
   }
 
@@ -37,22 +38,34 @@ export class ChatSocketComponent implements OnInit{
       this.checkUser();
       console.log(this.listConver);
     }
+    this.scrollToBottom();
+
   }
+
+//   ngAfterViewChecked() {        
+//     this.scrollToBottom();        
+// } 
+
+  scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }                 
+}
 
   // //get all user information
   public async getUserInfos() {
-      await this.userService.getUserInfo(this.auth.user.email);
-      this.userInfo = this.userService.user;
+    await this.userService.getUserInfo(this.auth.user.email);
+    this.userInfo = this.userService.user;
   }
 
   // get all user's recent conversation
   public async getAllUserConver(userId) {
     console.log('bug 1');
-      await this.userService.getUserAllConver(
-        userId
-      );
-      this.listConver = this.userService.getAllConver();
-      console.log("heello" + this.listConver);
+    await this.userService.getUserAllConver(
+      userId
+    );
+    this.listConver = this.userService.getAllConver();
+    console.log("heello" + this.listConver);
 
   }
 
@@ -60,15 +73,15 @@ export class ChatSocketComponent implements OnInit{
   public async checkUser() {
     this.user = this.auth.user;
     console.log("user ne" + this.userInfo);
-    if (this.user ) {
+    if (this.user) {
       console.log('hello');
       await this.getUserInfos();
       this.getAllUserConver(this.userInfo._id);
-      
+
     }
   }
 
-  public getConnverIndex(index){
+  public getConnverIndex(index) {
     // this.converIndex = index;
     console.log(index)
     this.listen('message-broadcast').subscribe((data) => {

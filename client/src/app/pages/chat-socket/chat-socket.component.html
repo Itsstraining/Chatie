@@ -44,8 +44,22 @@
 
       <div class="chat-frame" >
 
-        <div class="chat-messages-show-container">
+        <div class="chat-messages-show-container" #scrollMe [scrollTop] ="scrollMe.scrollHeight"
+        onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
           <div class="chat-messages-show-list" id="message-list">
+            <app-sendermessage></app-sendermessage>
+            <app-sendermessage></app-sendermessage>
+            <app-sendermessage></app-sendermessage>
+            <app-sendermessage></app-sendermessage>
+            <app-sendermessage></app-sendermessage>
+            <app-sendermessage></app-sendermessage>
+            <app-sendermessage></app-sendermessage>
+            <app-sendermessage></app-sendermessage>
+            <app-sendermessage></app-sendermessage>
+            <app-sendermessage></app-sendermessage>
+            <app-sendermessage></app-sendermessage>
+            <app-sendermessage></app-sendermessage>
+            <app-sendermessage></app-sendermessage>
             <app-sendermessage></app-sendermessage>
             <app-receivermessage></app-receivermessage>
           </div>

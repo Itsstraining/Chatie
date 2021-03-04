@@ -29,6 +29,7 @@ export class UserService {
   public async getUserAllConver(userId){
     let tempAllConver = await this.httpClient.get(environment.endpoint + `conversation/allUserConver?senderId=${userId}`).toPromise();
     this.listConver = tempAllConver['allUserConver'];
+    console.log(typeof this.listConver);
   }
 
   // public async getConverInfo(){

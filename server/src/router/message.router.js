@@ -1,22 +1,43 @@
 const app = require('express');
 const Database = require('../database');
+const MessageModel = require('../../models/message.model')
 
 const router = app.Router();
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     const {
         senderId,
         message,
-        conversationId
+        conversationId,
+        date
     } = req.body;
     try {
-        let newMessage = Database.instance.Message.createMessage(new MessageModel(senderId, message, conversationId));
+        // res.send({senderId:senderId,
+        //     message:message,
+        //     conversationId:conversationId,
+        //     date:date})
+        let newMessage = await Database.instance.Message.createMessage(new MessageModel(senderId, message, conversationId, date));
         res.send('Messsage has been created')
     } catch (error) {
         res.send('Message has not been created')
 
     }
 });
+
+// router.get("/loadMessage", async (req, res) => {
+//     const {
+//         dateFrom,
+//         dateTo
+//     } = req.query;
+//     let loadMessage = [];
+//     if (dateFrom != undefined || dateTo != undefined) {
+//         dateFrom = dateFrom == undefined ? 0 : dateFrom;
+//         dateTo = dateTo == undefined ? dateFrom : dateTo;
+//         let loadMessage = await Database.instance.Message.getMessageByTime(dateFrom, dateTo);
+//         res.send({loadMessage : loadMessage});
+//         return;
+//     }
+// })
 
 router.get("/", async (req, res) => {
     let getMessage = await Database.instance.Message.getAllMessage();
@@ -26,11 +47,15 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/getMessageID", async (req, res) => {
-    const{id} = req.body;
+    const {
+        id
+    } = req.body;
     try {
         let messageID = await Database.instance.Message.getMessageByID(id);
         console.log(messageID)
-        res.send({ content: messageID})
+        res.send({
+            content: messageID
+        })
     } catch (error) {
         res.send('err')
     }

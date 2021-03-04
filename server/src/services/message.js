@@ -29,8 +29,13 @@ class MessageClass {
         return (await this.Message.findOne({
             _id: id,
         })).content;
-
     }
+
+    // async getMessageByTime(from, to) {
+    //     let from = Date.now();
+    //     let to = Date.now() - (30*6000);
+    //     return await this.Message.find({date: {$lte: from, $gte: to}});
+    // }
 
 }
 
