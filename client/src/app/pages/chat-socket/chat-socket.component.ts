@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  ElementRef,
-  ViewChild,
-  AfterViewChecked,
-  OnChanges,
-  SimpleChanges,
+import {  Component, OnInit,  Output,  ElementRef,  ViewChild,  AfterViewChecked,  EventEmitter
 } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
@@ -39,8 +31,8 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   public recentConverIndex: any;
 
   @Output() public converIndexInfo: any;
-  @Output() public receive_msg: any;
-  @Output() public send_msg: any;
+  @Output() public receive_msg: EventEmitter<any> = new EventEmitter();
+  @Output() public send_msg:  EventEmitter<any> = new EventEmitter();
 
   constructor(
     public socketIo: ChatsocketioService,
@@ -193,6 +185,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
             });
           }
         }
+        this.receive_msg = data.message;
       }
     });
   }

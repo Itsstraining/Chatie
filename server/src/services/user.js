@@ -29,7 +29,7 @@ class UserClass {
 
     //Get all conversation 
     async getAllUserConversation(userId) {
-        return (await this.User.findOne({_id: userId})).conversations;
+        return (await this.User.findOne({_id: userId}, {sort: {date: -1}})).conversations;
     }
 
     /**

@@ -26,6 +26,7 @@ io.on('connection', (socket) => {
     // }
     socket.broadcast.emit('message-broadcast', msg);
     Database.instance.Conversation.updateConversation(msg.userId, msg.conversationId, msg.message);
+    Database.instance.User.getAllUserConversation(msg.userId);
   });
 
   // socket.emit('update-conversation',)

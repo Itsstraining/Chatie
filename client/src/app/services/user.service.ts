@@ -31,6 +31,11 @@ export class UserService {
     this.listConver = tempAllConver['allUserConver'];
   }
 
+  public async getUserFromDB(){
+    let tempAllUser = await this.httpClient.get(environment.endpoint + 'user');
+    return tempAllUser['getUser'];
+  }
+
   // public async getConverInfo(){
   //   let tempConverInfo = await this.httpClient.get(environment.endpoint + 'conversation/oneConver?id')
   // }

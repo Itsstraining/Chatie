@@ -37,6 +37,7 @@ import { LoginService } from './services/login.service';
 import { PushnotifyingComponent } from './components/pushnotifying/pushnotifying.component';
 
 import { NotiComponent } from './components/noti/noti.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -51,7 +52,6 @@ import { NotiComponent } from './components/noti/noti.component';
     DialogSettingprofileComponent,
     FindComponent,
     PushnotifyingComponent,
-
     NotiComponent,
   ],
   imports: [
@@ -75,7 +75,8 @@ import { NotiComponent } from './components/noti/noti.component';
     AngularFireAuthModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [LoginService],
