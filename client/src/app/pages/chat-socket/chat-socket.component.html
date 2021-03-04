@@ -43,8 +43,8 @@
 
             <div class="chat-frame">
 
-                <div class="chat-messages-show-container" *ngIf="this.recentConver" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-                    <div class="chat-messages-show-list" id="message-list">
+                <div class="chat-messages-show-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                    <div class="chat-messages-show-list" id="message-list" *ngIf="this.recentConver">
                         <div *ngFor="let message of this.recentConver.conversation">
                             <app-sendermessage *ngIf="this.message.senderId == this.userInfo._id" [send_msg]="message.content">
                             </app-sendermessage>
