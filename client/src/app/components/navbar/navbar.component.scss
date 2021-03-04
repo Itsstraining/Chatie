@@ -1,3 +1,4 @@
+$green: #53B46C;
 * {
     padding: 0%;
     margin: 0%;
@@ -16,5 +17,7 @@
     flex-direction: row;
     align-items: center;
     white-space: nowrap;
+    // background-color: $green;
+    // justify-content: space-around;
     background-color: #4290E4;
 }

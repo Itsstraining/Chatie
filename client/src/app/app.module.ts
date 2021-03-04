@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
+import { ReceivedMsgComponent } from './components/received-msg/received-msg.component';
 import { DialogBlockComponent } from './components/dialog-block/dialog-block.component';
 import { DialogSettingprofileComponent } from './components/dialog-settingprofile/dialog-settingprofile.component';
 import { FindComponent } from './components/find/find.component';
@@ -41,6 +42,7 @@ import { NotiComponent } from './components/noti/noti.component';
     DialogSettingfriendComponent,
     DialogSettingComponent,
     DialogUnfriendComponent,
+    ReceivedMsgComponent,
     DialogBlockComponent,
     DialogSettingprofileComponent,
     FindComponent,

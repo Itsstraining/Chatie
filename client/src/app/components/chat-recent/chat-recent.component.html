@@ -1,7 +1,10 @@
-<div class="personal">
+<div class="personal" *ngIf="this.receiverInfo">
   <div class="personal-image">
-    <div class="images" style="background-image: url(../../../assets/images/avatar-1.jpg);">
-      <div class="status">
+    <div class="images" style="background-image: url('../../../assets/images/avatar-1.jpg');">
+      <div class="status" *ngIf="this.receiverInfo.status">
+
+      </div>
+      <div class="status" *ngIf="!this.receiverInfo.status" style="background-color: #CD594B">
 
       </div>
       <!-- <img src="../../../assets/images/avatar-1.jpg" alt="name"> -->
@@ -10,14 +13,15 @@
   </div>
   <div class="personal-info-chat-recent">
     <div class="name-time">
-      <h4>Uyen Tran</h4>
+      <h4>{{this.receiverInfo.userName}}</h4>
+      <!-- <h4>Uyen Tran</h4> -->
       <p>12:00</p>
     </div>
 
     <div class="content-notification">
       <p>Hello World!</p>
       <div class="notification">
-          <p>5</p>
+          <p>10</p>
       </div>
     </div>
 

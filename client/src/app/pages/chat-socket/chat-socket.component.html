@@ -1,21 +1,23 @@
-<div class="container">
+<div class="container" *ngIf=" this.auth.user != null">
     <div class="chat-box">
 
         <!-- chat-container -->
         <div class="chat-container">
             <div class="receiver-info">
-                <img src="../../../assets/images/avatar-1.jpg">
+                <img src="../../../assets/images/avatar-1.jpg" class="ava-receiver">
                 <h3>Tan Trung</h3>
 
                 <div class="option">
                     <!-- <div class="example-button-row"> -->
                     <button class="button-option">
-              <img src="../../../assets/images/videocam-filled-tool.svg">
-            </button>
+            <img src="../../../assets/images/videocam-filled-tool.svg">
+          </button>
 
                     <button class="button-option">
-              <img src="../../../assets/images/phone-auricular.svg">
-            </button>
+            <img src="../../../assets/images/phone-auricular.svg">
+          </button>
+
+
 
                     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="button-option" style="color:#4290E4;">
               <mat-icon>more_horiz</mat-icon>
@@ -37,6 +39,8 @@
 
                     <!-- </div> -->
 
+                    <!-- </div> -->
+
 
 
                 </div>
@@ -45,19 +49,24 @@
             <div class="chat-frame">
 
                 <div class="chat-messages-show-container">
-                    <ul class="chat-messages-show-list" id="message-list">
-
-                    </ul>
+                    <div class="chat-messages-show-list" id="message-list">
+                        <app-sendermessage></app-sendermessage>
+                        <app-receivermessage></app-receivermessage>
+                    </div>
                 </div>
                 <div class="chat-messages-create-container">
                     <button class="chat-messages-option-button">
-            <mat-icon style="color: #ffffff;">add</mat-icon>
+            <mat-icon style="color: #242526;">add</mat-icon>
           </button>
-                    <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message" (keyup.enter)="SendMessage()">
-                    <button class="chat-messages-create-button" (click)="SendMessage()">
-            <svg fill="#ffffff" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px"
+                    <!-- <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message"
+            (keyup.enter)="SendMessage()"> -->
+                    <input class="chat-messages-create-input" type="text" placeholder="Type message here...">
+                    <!-- <button class="chat-messages-create-button" (click)="SendMessage()"> -->
+                    <button class="chat-messages-create-button">
+
+            <svg fill="#242526" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px"
               viewBox="0 0 512.005 512.005" width="15px" xmlns="http://www.w3.org/2000/svg">
-                <!-- <div class="chat-messages-show-container">
+              <!-- <div class="chat-messages-show-container">
                     <ul class="chat-messages-show-list" id="message-list">
 
                     </ul>
@@ -79,8 +88,6 @@
             </div>
         </div>
 
-
-
         <!-- sender-chat -->
         <div class="user-container">
             <div class="find">
@@ -88,14 +95,8 @@
                 <input class="search-input" type="text" placeholder="Seach">
 
             </div>
-            <div class="chat-recent" onmouseover="this.style.overflowY='scroll'" onmouseout="this.style.overflowY='hidden'">
-                <app-chat-recent></app-chat-recent>
-                <app-chat-recent></app-chat-recent>
-                <app-chat-recent></app-chat-recent>
-                <app-chat-recent></app-chat-recent>
-                <app-chat-recent></app-chat-recent>
-                <app-chat-recent></app-chat-recent>
-                <app-chat-recent></app-chat-recent>
+            <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
+                <app-chat-recent *ngFor="let conversation of listConver; let i = index" [conversation]="conversation" (click)="getConnverIndex(i)"></app-chat-recent>
             </div>
         </div>
     </div>
