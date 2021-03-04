@@ -13,7 +13,7 @@ import * as io from 'socket.io-client/dist/socket.io';
 export class ChatSocketComponent implements OnInit {
   socket: any;
   message: any;
-  readonly uri: string = "http://0.0.0.0:8080";
+  readonly uri: string = "http://192.168.31.159:8080";
 
   constructor(private sock: ChatsocketioService) {
     console.log("bug")

@@ -23,19 +23,17 @@ export class HomePageComponent implements OnInit {
   }
   async loginByAccount() {
     try {
-      console.log("clicked" )
       let res;
       await this.auth.loginByAccount(this.email, this.password).then(data=>{res=data});
       console.log(res)
       if(res.message==true){
         this.router.navigate(['/chat-socket'])
       }else{
-        alert("Login cai con cac")
+        alert("Login ")
       }
     } catch (err) {
       console.log(err)
     }
 
   }
-
 }

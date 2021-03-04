@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { RegisterService } from 'src/app/services/register.service';
 
@@ -8,7 +9,7 @@ import { RegisterService } from 'src/app/services/register.service';
   styleUrls: ['./chat-signup.component.scss']
 })
 export class ChatSignupComponent implements OnInit {
-  constructor(private register: RegisterService) { }
+  constructor(private register: RegisterService,private router: Router) { }
   public email: String;
   public userName: String;
   public password: String;
@@ -22,6 +23,7 @@ export class ChatSignupComponent implements OnInit {
       alert("This email is already existed")
     }else {
       alert("Sign up success")
+      this.router.navigate(['/'])
     }
   }
 

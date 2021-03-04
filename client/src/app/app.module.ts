@@ -34,6 +34,7 @@ import { DialogBlockComponent } from './components/dialog-block/dialog-block.com
 import { DialogSettingprofileComponent } from './components/dialog-settingprofile/dialog-settingprofile.component';
 import { FindComponent } from './components/find/find.component';
 import { LoginService } from './services/login.service';
+import { PushnotifyingComponent } from './components/pushnotifying/pushnotifying.component';
 
 
 
@@ -49,6 +50,7 @@ import { LoginService } from './services/login.service';
     DialogBlockComponent,
     DialogSettingprofileComponent,
     FindComponent,
+    PushnotifyingComponent,
 
   ],
   imports: [
