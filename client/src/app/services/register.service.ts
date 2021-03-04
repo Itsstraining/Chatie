@@ -9,7 +9,7 @@ export class RegisterService {
   async registerAccount(email,userName,password){ 
     let result;
     let temp;
-    let registerUrl ="http://192.168.31.159:8080/user/email"
+    let registerUrl ="http://localhost:8080/user/email"
    result = await this.http.post(registerUrl,{
     email:email, 
     userName:userName , 

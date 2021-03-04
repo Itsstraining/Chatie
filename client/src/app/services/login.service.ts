@@ -66,7 +66,7 @@ export class LoginService {
   {
     try{
       let result;
-      let registerUrl ="http://192.168.31.159:8080/user/check"
+      let registerUrl ="http://localhost:8080/user/check"
       this.user = await this.client.get(registerUrl+"?email="+email+"&password="+password).toPromise();
        return this.user;
     }catch(err){

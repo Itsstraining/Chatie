@@ -39,14 +39,6 @@
           </mat-menu>
 
           <!-- </div> -->
-<<<<<<< HEAD
-=======
-
-          <!-- </div> -->
-
-
-
->>>>>>> bbb2ee71163c8c5a18da62e0d72859768b21abb2
         </div>
       </div>
 
@@ -66,17 +58,9 @@
           <button class="chat-messages-option-button">
             <mat-icon style="color: #242526;">add</mat-icon>
           </button>
-<<<<<<< HEAD
           <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message"
             (keyup.enter)="SendMessage()">
           <button class="chat-messages-create-button" (click)="SendMessage()">
-=======
-          <!-- <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message"
-            (keyup.enter)="SendMessage()"> -->
-          <input class="chat-messages-create-input" type="text" placeholder="Type message here...">
-          <!-- <button class="chat-messages-create-button" (click)="SendMessage()"> -->
-          <button class="chat-messages-create-button">
->>>>>>> bbb2ee71163c8c5a18da62e0d72859768b21abb2
 
             <svg fill="#242526" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px"
               viewBox="0 0 512.005 512.005" width="15px" xmlns="http://www.w3.org/2000/svg">
@@ -98,13 +82,8 @@
 
       </div>
       <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
-<<<<<<< HEAD
         <app-chat-recent *ngFor="let conver of listConver; let i = index" [conversation]="conver"
           (click)="getConverIndex(i)"></app-chat-recent>
-=======
-        <app-chat-recent *ngFor="let conversation of listConver; let i = index" [conversation]="conversation"
-          (click)="getConnverIndex(i)"></app-chat-recent>
->>>>>>> bbb2ee71163c8c5a18da62e0d72859768b21abb2
       </div>
     </div>
   </div>
