@@ -1,20 +1,10 @@
-<mat-toolbar style="background-color: #4290E4; color: white;" *ngIf="this.auth.user != null">
+<mat-toolbar style="background-color: #4290E4; color: white;" *ngIf="this.auth.user">
     <mat-toolbar-row>
         <img src="../../../assets/images/logochatie.png" style="height: 33px; width: 87px">
         <span class="example-spacer"></span>
-        <button mat-icon-button (click)="openDialogNoti()" class="example-icon favorite-icon" [matMenuTriggerFor]="noti" aria-label="Example icon-button with heart icon">
+        <button mat-icon-button (click)="openDialogNoti()" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
           <mat-icon style="text-decoration: none;color: white;">notifications_none</mat-icon>
         </button>
-        <!-- <mat-menu #noti="matMenu">
-            <button mat-menu-item>
-            <mat-icon>manage_accounts</mat-icon>
-            <span>Trung chơi đá đã gửi lời mời kết bạn</span>
-          </button>
-            <button mat-menu-item>
-            <mat-icon>manage_accounts</mat-icon>
-            <span>Trung chơi đá đã gửi lời mời kết bạn</span>
-          </button>
-        </mat-menu> -->
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="openDialogFriend()">
           <mat-icon>person_add_alt</mat-icon>
         </button>

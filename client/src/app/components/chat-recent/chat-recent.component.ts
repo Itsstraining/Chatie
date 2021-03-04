@@ -18,7 +18,13 @@ export class ChatRecentComponent implements OnInit {
   }
 
   public async getUserConverInfo(){
-   await this.userService.getUserById(this.conversation.receiver[0]);
-   this.receiverInfo = this.userService.user;
+  for(let i = 0; i < this.conversation.participants.length; i++){
+    if(this.conversation.participants[i] == this.userService.user._id){
+      continue;
+    }
+    let tempRecInfo = await this.userService.getUserById(this.conversation.participants[i]);
+    
+   this.receiverInfo = tempRecInfo;
+  }
   }
 }

@@ -16,12 +16,10 @@ export class NavbarComponent implements OnInit {
 
   public user: any;
   constructor(public auth: LoginService, private router: Router, public dialog: MatDialog) { 
-    console.log(this.auth.user)
   }
 
   ngOnInit(): void {
     this.user=this.auth.user;
-    console.log(this.auth.user)
   }
 
   public openDialog() {
@@ -36,8 +34,8 @@ export class NavbarComponent implements OnInit {
   public openDialogFriend() {
     
     const dialogRef = this.dialog.open(FindComponent, {
-      width: '60%',
-      height: '75%'
+      width: '30%',
+      height: '55%'
     });
   }
 
