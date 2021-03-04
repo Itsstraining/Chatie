@@ -1,0 +1,33 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.main {
+    width: 22rem;
+    img {
+        margin: 0 0.5rem 0.5rem 1rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 0.015rem solid white;
+        float: left;
+    }
+    .noti {
+        margin: 15px 0 30px 0;
+        .info {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .button {
+            min-height: 60px;
+            min-width: 204px;
+            align-items: center;
+            margin-bottom: -24px;
+            margin-left: 107px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+    }
+}

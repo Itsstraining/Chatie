@@ -1,18 +1,35 @@
 <div class="setting">
+    <div class="profile">
+        <h1 style="font-size: xx-large; margin-bottom: 30px;"><b>SETTING PROFILE</b></h1>
+        <div class="img">
+            <img style="border-radius: 50%;" src="../../../assets/images/avatar-1.jpg">
+            <h1>_Trungchoido </h1>
+
+        </div>
+    </div>
+    <mat-divider style="margin: 10px 90px 10px 90px; border-top-color: currentcolor;"></mat-divider>
     <div class="form">
         <form class="example-form">
             <mat-form-field class="example-full-width">
+                <mat-label>Nhập vào email mới</mat-label>
+                <input matInput placeholder="Ex. NguyenVanA@example.com" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
                 <mat-label>Nhập vào tên mới</mat-label>
+                <input matInput placeholder="Ex. Nguyen Van A" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Nhập vào mật khẩu mới</mat-label>
+                <input matInput placeholder="Ex. Nguyen Van A" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Nhập lại mật khẩu mới</mat-label>
                 <input matInput placeholder="Ex. Nguyen Van A" />
             </mat-form-field>
         </form>
     </div>
     <div class="button">
-        <button>
-      <span>Xác nhận</span>
-    </button>
-        <button>
-    <span>Hủy</span>
-  </button>
+        <button mat-raised-button color="warn">Đồng ý</button>
+        <button mat-raised-button target="_blank" (click)="onNoClick()">Hủy</button>
     </div>
 </div>
