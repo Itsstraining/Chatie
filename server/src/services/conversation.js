@@ -38,7 +38,8 @@ class ConversationClass {
 
     //Get all conversation 
     async getAllUserConversation(senderId) {
-        return await this.Conversation.find({senderId: senderId});
+        const changeStream = this.Conversation.watch().on('change', change => console.log(change));
+        return (await this.Conversation.find({senderId: senderId}));
     }
 
     //Get one friend recent

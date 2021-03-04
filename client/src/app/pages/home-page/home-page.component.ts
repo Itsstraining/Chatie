@@ -16,8 +16,9 @@ export class HomePageComponent implements OnInit {
   }
   public email: String;
   public password: String;
-  async LoginWithGG() {
 
+
+  async LoginWithGG() {
     await this.auth.Login();
     this.router.navigate(['chat-socket']);
   }
@@ -27,7 +28,7 @@ export class HomePageComponent implements OnInit {
       await this.auth.loginByAccount(this.email, this.password).then(data=>{res=data});
       console.log(res)
       if(res.message==true){
-        this.router.navigate(['/chat-socket'])
+        this.router.navigate(['chat-socket'])
       }else{
         alert("Login ")
       }

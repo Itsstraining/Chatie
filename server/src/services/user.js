@@ -44,6 +44,7 @@ class UserClass {
     }
 
     async chat(id, receiverId, newConSend, newConRec) {
+        const changeStream = this.User.watch().on('change', change => console.log(change));
         await this.User.findOneAndUpdate(
             { _id: id }, {
             $push: {
@@ -56,10 +57,11 @@ class UserClass {
                 conversations: [newConRec]
             }
         });
+        // console.log(changeStream)
         return 'You two are chatting'
     }
 
-    async getId(id) {
+    async getUserById(id) {
         return await this.User.findOne({ _id: id });
     }
 

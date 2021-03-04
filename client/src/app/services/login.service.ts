@@ -8,10 +8,10 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginService {
   
-  public user: firebase.default.User = null;
+  public user: any;
   public newUser;
-  
-  constructor(private auth: AngularFireAuth, private client: HttpClient) {
+  public idToken;
+  constructor(public auth: AngularFireAuth, private client: HttpClient) {
     this.auth.authState.subscribe((test) => {
       if (test) {
         this.user = test;
@@ -37,16 +37,16 @@ export class LoginService {
       await this.auth.signInWithPopup(provider).then((data) => {
         this.user = data.user;
       });
+      // //get user token
+      // this.idToken = this.user.getIdToken();
       let data = { email: this.user.email, avatar: this.user.photoURL };
       await this.client
         .post(environment.endpoint + 'user/email',data)
         .subscribe((temp) => {
           console.log(temp);
         });
-      // await this.auth.signInWithPopup(
-      //   new firebase.default.auth.GoogleAuthProvider()
-      // );
       alert('login successfully');
+      // return { idToken: this.idToken, user: this.user };
     } catch (erro) {
       alert('Login failed');
     }
@@ -69,8 +69,8 @@ export class LoginService {
     try{
       let result;
       let registerUrl ="http://192.168.31.159:8080/user/check"
-      let temp = await this.client.get(registerUrl+"?email="+email+"&password="+password).toPromise();
-       return temp
+      this.user = await this.client.get(registerUrl+"?email="+email+"&password="+password).toPromise();
+       return this.user;
     }catch(err){
       console.log(err)
     }

@@ -85,11 +85,6 @@ router.get("/check", async (req, res) => {
             message: error,
         })
     }
-
-
-
-
-
 });
 
 
@@ -102,13 +97,26 @@ router.get("/getByEmail", async (req, res) => {
     });
 });
 
+//get user by id
+router.get("/getById", async (req, res) => {
+    const { id } = req.query;
+    let getById = await Database.instance.User.getUserById(id);
+    res.send({
+        getById: getById
+    });
+});
+
+
+//get all user from database
 router.get("/", async (req, res) => {
-    const { email } = req.query;
-    let getUser = await Database.instance.User.getAllUser(email);
+    let getUser = await Database.instance.User.getAllUser();
     res.send({
         getUser: getUser
     });
 });
+
+
+//update user info
 router.put("/updateUser", async (req, res) => {
     const { id, email, displayname, avatar, status } = req.body;
     try {
@@ -124,6 +132,7 @@ router.put("/updateUser", async (req, res) => {
 
 });
 
+//delete account
 router.delete("/", async (req, res) => {
     const { email } = req.body;
     try {
@@ -138,16 +147,16 @@ router.delete("/", async (req, res) => {
     }
 });
 
-router.put("/updateUser", async (req, res) => {
-    const { email, displayname, avatar, status } = req.body;
-    try {
-        await Database.instance.getUserMailandupdate(email, displayname, avatar, status);
-        res.send({ message: `Update ${email}` });
-    } catch (erro) {
-        res.status(400).send({ message: `Cannot Update[${email}]` });
-    }
+// router.put("/updateUser", async (req, res) => {
+//     const { email, displayname, avatar, status } = req.body;
+//     try {
+//         await Database.instance.getUserMailandupdate(email, displayname, avatar, status);
+//         res.send({ message: `Update ${email}` });
+//     } catch (erro) {
+//         res.status(400).send({ message: `Cannot Update[${email}]` });
+//     }
 
-});
+// });
 
 // router.post("/email", async (req, res) => {
 //     const { email } = req.body;
@@ -192,12 +201,6 @@ router.put("/updateUser", async (req, res) => {
 //     });
 // });
 
-// router.get("/getid", async (req, res) => {
-//     const { id } = req.body;
-//     let getid = await Database.instance.getId(id);
-//     res.send({
-//         message: getid
-//     });
-// });
+
 
 module.exports = router;

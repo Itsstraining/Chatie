@@ -17,7 +17,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DialogSettingfriendComponent } from './components/dialog-settingfriend/dialog-settingfriend.component';
 import { DialogSettingComponent } from './components/dialog-setting/dialog-setting.component';
-import { DialogNotificationComponent } from './components/dialog-notification/dialog-notification.component';
+import {MatDividerModule} from '@angular/material/divider';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogUnfriendComponent } from './components/dialog-unfriend/dialog-unfriend.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -30,12 +30,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
+import { ReceivedMsgComponent } from './components/received-msg/received-msg.component';
 import { DialogBlockComponent } from './components/dialog-block/dialog-block.component';
 import { DialogSettingprofileComponent } from './components/dialog-settingprofile/dialog-settingprofile.component';
 import { FindComponent } from './components/find/find.component';
 import { LoginService } from './services/login.service';
 import { PushnotifyingComponent } from './components/pushnotifying/pushnotifying.component';
 
+import { NotiComponent } from './components/noti/noti.component';
 
 
 @NgModule({
@@ -45,13 +47,14 @@ import { PushnotifyingComponent } from './components/pushnotifying/pushnotifying
     FooterComponent,
     DialogSettingfriendComponent,
     DialogSettingComponent,
-    DialogNotificationComponent,
     DialogUnfriendComponent,
+    ReceivedMsgComponent,
     DialogBlockComponent,
     DialogSettingprofileComponent,
     FindComponent,
     PushnotifyingComponent,
 
+    NotiComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,8 @@ import { PushnotifyingComponent } from './components/pushnotifying/pushnotifying
     MatFormFieldModule,
     MatAutocompleteModule,
     MatInputModule,
+    MatDividerModule,
+    
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,

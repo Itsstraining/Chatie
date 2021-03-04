@@ -12,9 +12,9 @@ router.post('/', async (req, res) => {
     try {
         let conver = await Database.instance.Conversation.getAllUserConversation(senderId);
         let existed = 0;
-        if (conver != null) {
+        // if (conver) {
             for (let i = 0; i < conver.length; i++) {
-                for (let j = 0; j < conver[i].receiver.length; i++) {
+                for (let j = 0; j < conver[i].receiver.length; j++) {
                     if (receiverId == conver[i].receiver[j]) {
                         existed = 1;
                         res.send({
@@ -24,19 +24,17 @@ router.post('/', async (req, res) => {
                     }
                 }
             }
-        }
-        if (existed == 0) {
-            //create sender conversation
-            let newConSend = await Database.instance.Conversation.createConversation(senderId, receiverId);
-            // create receiver conversation
-            let newConRec = await Database.instance.Conversation.createConversation(receiverId, senderId);
-            let chat = await Database.instance.User.chat(senderId, receiverId, newConSend._id, newConRec._id);
-            res.send({
-                message: chat,
-            })
-        }
+        // }
 
-        console.log("bug")
+        //create sender conversation
+        let newConSend = await Database.instance.Conversation.createConversation(senderId, receiverId);
+        // create receiver conversation
+        let newConRec = await Database.instance.Conversation.createConversation(receiverId, senderId);
+        let chat = await Database.instance.User.chat(senderId, receiverId, newConSend._id, newConRec._id);
+        res.send({
+            message: chat,
+        })
+
     } catch (err) {
         res.send({
             message: "Can not send message"
@@ -44,6 +42,16 @@ router.post('/', async (req, res) => {
     }
 
 });
+
+router.get('/allUserConver', async (req, res) => {
+    const {
+        senderId
+    } = req.query;
+    let allUserConver = await Database.instance.Conversation.getAllUserConversation(senderId);
+    res.send({
+        allUserConver: allUserConver
+    })
+})
 
 // router.post('/', async (req, res) => {
 //     const {
@@ -65,14 +73,14 @@ router.get('/', async (req, res) => {
 });
 
 //get one conversation 
-router.get('/one', async (req, res) => {
+router.get('/oneConver', async (req, res) => {
     const {
         senderId,
         receiverId
     } = req.body
-    let conversations = await Database.instance.Conversation.getOneConversation(senderId, receiverId);
+    let conversation = await Database.instance.Conversation.getOneConversation(senderId, receiverId);
     res.send({
-        message: conversations,
+        conversation: conversation,
     })
 });
 
