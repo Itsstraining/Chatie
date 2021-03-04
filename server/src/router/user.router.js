@@ -62,23 +62,17 @@ router.get("/check", async (req, res) => {
     try {
         const { email, password } = req.query;
         var allUser;
-
-        console.log(email, password)
         allUser = await Database.instance.User.getUserByEmail(email);
-        console.log(allUser)
-
-        
+        console.log(allUser)     
         if (allUser.email== email  &&  allUser.password==password ) {
             res.send({
                 message: true,
+                user: allUser
             });
-
         }
         else {
             res.send({ message: false })
         }
-
-
     } catch (error) {
         console.log(error)
         res.send({

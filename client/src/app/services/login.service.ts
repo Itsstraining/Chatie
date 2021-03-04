@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class LoginService {
   
   public user: any;
-  public newUser;
+  public newUser: any = null;
   public idToken;
   constructor(public auth: AngularFireAuth, private client: HttpClient) {
     this.auth.authState.subscribe((test) => {
@@ -66,13 +66,13 @@ export class LoginService {
   {
     try{
       let result;
-      let registerUrl ="http://localhost:8080/user/check"
-      this.user = await this.client.get(registerUrl+"?email="+email+"&password="+password).toPromise();
-       return this.user;
+      let registerUrl ="http://localhost:8080/user/check";
+      this.newUser = await this.client.get(registerUrl+"?email="+email+"&password="+password).toPromise();
+      localStorage.setItem("user", JSON.stringify(this.newUser.user));
+       return this.newUser;
     }catch(err){
       console.log(err)
     }
    
-     
   }
 }
