@@ -7,7 +7,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class LoginService {
-  public user: firebase.default.User = null;
+  
+  public user: any;
   public newUser;
   public idToken;
   constructor(public auth: AngularFireAuth, private client: HttpClient) {
@@ -61,5 +62,19 @@ export class LoginService {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  async loginByAccount(email,password)
+  {
+    try{
+      let result;
+      let registerUrl ="http://192.168.31.159:8080/user/check"
+      this.user = await this.client.get(registerUrl+"?email="+email+"&password="+password).toPromise();
+       return this.user;
+    }catch(err){
+      console.log(err)
+    }
+   
+     
   }
 }

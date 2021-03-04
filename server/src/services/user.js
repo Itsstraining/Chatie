@@ -24,7 +24,7 @@ class UserClass {
     }
 
     async getUserByEmail(email) {
-        return await this.User.findOne({ email: email });
+        return await this.User.findOne({ email: email }).exec();
     }
 
     /**

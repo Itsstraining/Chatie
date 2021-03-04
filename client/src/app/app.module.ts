@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 //ANGULAR MATERIAL import
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,8 +21,10 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogUnfriendComponent } from './components/dialog-unfriend/dialog-unfriend.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+
+
 
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
@@ -31,6 +34,9 @@ import { ReceivedMsgComponent } from './components/received-msg/received-msg.com
 import { DialogBlockComponent } from './components/dialog-block/dialog-block.component';
 import { DialogSettingprofileComponent } from './components/dialog-settingprofile/dialog-settingprofile.component';
 import { FindComponent } from './components/find/find.component';
+import { LoginService } from './services/login.service';
+import { PushnotifyingComponent } from './components/pushnotifying/pushnotifying.component';
+
 import { NotiComponent } from './components/noti/noti.component';
 
 
@@ -46,6 +52,8 @@ import { NotiComponent } from './components/noti/noti.component';
     DialogBlockComponent,
     DialogSettingprofileComponent,
     FindComponent,
+    PushnotifyingComponent,
+
     NotiComponent,
   ],
   imports: [
@@ -67,9 +75,12 @@ import { NotiComponent } from './components/noti/noti.component';
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
