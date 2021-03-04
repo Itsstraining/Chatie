@@ -18,15 +18,19 @@ class ConversationClass {
      * 
      */
     async createConversation(senderID, receiverID) {
-        let newConver = await this.Conversation.create({ 
-                ...conversationSchema
+        let newConver = await this.Conversation.create({
+            ...conversationSchema
         });
-        return this.Conversation.findOneAndUpdate({_id: newConver._id}, {
-            $push: {participants: [senderID, receiverID]}
+        return this.Conversation.findOneAndUpdate({
+            _id: newConver._id
+        }, {
+            $push: {
+                participants: [senderID, receiverID]
+            }
         })
     }
 
-    async createChatGroup(){
+    async createChatGroup() {
 
     }
 
@@ -40,7 +44,7 @@ class ConversationClass {
     //Get one friend recent
     async getOneConversation(conversationId) {
         return await this.Conversation.findOne({
-            _id: conversationId 
+            _id: conversationId
         });
     }
 
@@ -50,22 +54,14 @@ class ConversationClass {
      * @param {String} message 
      */
     async updateConversation(senderId, conversationId, message) {
-        // let convers = await this.getAllUserConversation(senderId);
-        // let conversationId = '';
-        // for(let i = 0; i < convers.length; i++){
-        //     for(let j = 0; j < convers[i].receiver.length; j++){
-        //         if(receiverId == convers[i].receiver[j]){
-        //             conversationId = convers[i]._id;
-        //         }
-        //     }
-        // }
-        let newMessage =(await this.message.createMessage(new MessageModel(message, conversationId, senderId)))._id;
-        return await this.Conversation.findOneAndUpdate(
-            {_id: conversationId}, {
-                $push: {
-                    messages: [newMessage]
-                }
-            })
+        let newMessage = (await this.message.createMessage(new MessageModel(message, conversationId, senderId)))._id;
+        await this.Conversation.findOneAndUpdate({
+            _id: conversationId
+        }, {
+            $push: {
+                messages: [newMessage]
+            }
+        });
     }
 }
 

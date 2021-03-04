@@ -29,9 +29,13 @@ class MessageClass {
         return (await this.Message.findOne({
             _id: id,
         }));
-
     }
 
+    async getAllMessageByConverId(conversationId){
+        return await this.Message.find({
+            conversationId: conversationId
+        }, null,{sort: {date: -1}, limit: 30});
+    }
 }
 
 module.exports = MessageClass;

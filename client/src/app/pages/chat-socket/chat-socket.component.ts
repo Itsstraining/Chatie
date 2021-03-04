@@ -1,4 +1,13 @@
-import { Component, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  ElementRef,
+  ViewChild,
+  AfterViewChecked,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
@@ -12,72 +21,84 @@ import { ConversationService } from 'src/app/services/conversation.service';
   templateUrl: './chat-socket.component.html',
   styleUrls: ['./chat-socket.component.scss'],
 })
-export class ChatSocketComponent implements OnInit {
+export class ChatSocketComponent implements OnInit, AfterViewChecked {
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   socket: any;
   message: any;
   userInfo: any;
   public listConver = [];
-  readonly url: string = 'http://localhost:8080';
-  user;
+  public listChat = [];
   public isClicked: boolean = false;
   public recentFriendChat: any;
   public conversation = [];
+  public recentConver: any;
+  public recentConverIndex: any;
 
   @Output() public converIndexInfo: any;
   @Output() public receive_msg: any;
   @Output() public send_msg: any;
 
   constructor(
-    private socketIo: ChatsocketioService,
+    public socketIo: ChatsocketioService,
     public userService: UserService,
     public auth: LoginService,
     private conversationService: ConversationService
   ) {
     this.userInfo = this.userService.user;
-
-    // this.socket = io(this.url);
   }
+  // ngOnChanges(receive_msg): void {
+  //   throw new Error('Method not implemented.');
+  // }
 
   ngOnInit(): void {
     if (this.auth.user) {
       this.socketIo.listen('message-broadcast').subscribe((data) => {
         console.log(data);
       });
-      this.setupSocketConnection();
-      // this.setupSocketConnection();
+      this.getReceiveMsg();
       this.checkUser();
-      // this.updateScrollbar();
+      this.scrollToBottom();
     }
   }
 
-    //all function about the content of the chat page
-    public async checkUser() {
-      console.log("bug")
-      await this.getUserInfos();
-      await this.getOneConverInfo(this.userInfo.conversations);
-      if (this.isClicked == false) {
-        if (this.userInfo.conversations.length != 0) {
-          let temp = this.listConver[0];
-          for (let i = 0; i < temp.participants.length; i++) {
-            if (this.userInfo._id != temp.participants[i]) {
-              let tempUser = await this.userService.getUserById(temp.participants[i]);
-              this.recentFriendChat = tempUser;
-            }
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch (err) {}
+  }
+
+  //all function about the content of the chat page
+  public async checkUser() {
+    await this.getUserInfos();
+    await this.getListConver(this.userInfo.conversations);
+    await this.getAllConverInfo(this.listConver);
+    if (this.isClicked == false) {
+      if (this.userInfo.conversations.length != 0) {
+        let temp = this.listConver[0];
+        for (let i = 0; i < temp.participants.length; i++) {
+          if (this.userInfo._id != temp.participants[i]) {
+            let tempUser = await this.userService.getUserById(
+              temp.participants[i]
+            );
+            this.recentFriendChat = tempUser;
           }
-          this.getMessage(temp.messages);
         }
+        await this.getConverIndexContent(temp._id);
       }
     }
-
-  // //get all user information
-  public async getUserInfos() {
-    console.log("bug 1")
-    await this.userService.getUserInfo(this.auth.user.email);
-    this.userInfo = this.userService.user;
-    console.log(this.userService.user)
   }
 
-  public async getOneConverInfo(listOfConver) {
+  //get all user information
+  public async getUserInfos() {
+    await this.userService.getUserInfo(this.auth.user.email);
+    this.userInfo = this.userService.user;
+  }
+
+  //get all user list conversations
+  public async getListConver(listOfConver) {
     if (listOfConver == null) {
       return;
     }
@@ -87,9 +108,19 @@ export class ChatSocketComponent implements OnInit {
     }
   }
 
+  //get all conversations info
+  public async getAllConverInfo(listConver) {
+    for (let i = 0; i < listConver.length; i++) {
+      await this.getAllMessage(listConver[i]._id);
+      this.listChat.push({
+        converId: listConver[i]._id,
+        conversation: this.conversation,
+      });
+    }
+  }
 
-  //get conversation at index information(list mess and receiver info)
-  public async getConnverIndex(index) {
+  //get conversation information(list mess and receiver info) at index (when click on the list conversations)
+  public async getConverIndex(index) {
     let temp = this.listConver[index];
     for (let i = 0; i < temp.participants.length; i++) {
       if (this.userInfo._id != temp.participants[i]) {
@@ -97,83 +128,70 @@ export class ChatSocketComponent implements OnInit {
         this.recentFriendChat = tempUser;
       }
     }
-    this.getMessage(temp.messages);
+    this.getConverIndexContent(temp._id);
     this.isClicked = true;
   }
 
-  //get the content message
-  public async getMessage(conversationMessList) {
-    this.conversation = [];
-    for (let i = 0; i < conversationMessList.length; i++) {
-      let temp = await this.conversationService.getMessContent(
-        conversationMessList[i]
-      );
-      this.conversation.push(temp);
+  //get the conversation message between people
+  public async getConverIndexContent(conversationId) {
+    for (let i = 0; i < this.listChat.length; i++) {
+      if (conversationId == this.listChat[i].converId) {
+        this.recentConver = this.listChat[i];
+        return;
+      }
     }
   }
 
-  // listen(eventName: string) {
-  //   return new Observable((Subscriber) => {
-  //     this.socket.on(eventName, (data) => {
-  //       Subscriber.next(data);
-  //     });
-  //   });
-  // }
+  //get the content message
+  public async getAllMessage(conversationMessList) {
+    this.conversation = [];
+    let temp = await this.conversationService.getAllMessContent(
+      conversationMessList
+    );
+    for (let i = 0; i < temp.length; i++) {
+      this.conversation.unshift({
+        senderId: temp[i].senderId,
+        content: temp[i].content,
+        date: temp[i].date,
+      });
+    }
+  }
 
-  // emit(eventName: string, data: any) {
-  //   this.socket.emit(eventName, data);
-  // }
-
-  setupSocketConnection() {
-    this.socketIo.setupSocketConnection();
-    this.receive_msg = this.socketIo.received_msg;
-    console.log(this.receive_msg);
-    //   // this.socket = io(this.uri);
-    //   this.socket.on('message-broadcast', (data: string) => {
-    //     if (data) {
-    //       const element = document.createElement('li');
-    //       element.innerHTML = data;
-    //       element.style.background = 'rgba(112, 112, 112, 0.7)';
-    //       element.style.color = 'white';
-    //       element.style.padding = '10px 20px';
-    //       element.style.margin = '10px';
-    //       element.style.float = 'left';
-    //       element.style.marginRight = '45%';
-    //       element.style.marginLeft = '3%';
-    //       element.style.borderRadius = '20px';
-
-    //       document.getElementById('message-list').appendChild(element);
-    //     }
-    //   });
+  async getReceiveMsg() {
+    this.socketIo.socket.on('message-broadcast', (data) => {
+      if (data) {
+        for (let i = 0; i < this.listChat.length; i++) {
+          if (data.conversationId == this.listChat[i].converId) {
+            this.listChat[i].conversation.push({
+              senderId: data.userId,
+              content: data.message,
+              date: Date.now(),
+            });
+          }
+        }
+      }
+    });
   }
 
   SendMessage() {
     if (this.message == '' || this.message == null) {
       return;
     }
-    this.socketIo.sendMessage(this.message);
-    this.send_msg = this.socketIo.send_msg;
-    console.log(this.send_msg);
+    this.socketIo.sendMessage(
+      this.message,
+      this.userInfo._id,
+      this.recentConver.converId
+    );
+    for (let i = 0; i < this.listChat.length; i++) {
+      if (this.recentConver.converId == this.listChat[i].converId) {
+        this.listChat[i].conversation.push({
+          senderId: this.userInfo._id,
+          content: this.message,
+          date: Date.now(),
+        });
+      }
+    }
     this.message = '';
-    //   this.socket.emit('message', this.message);
-    //   if (this.message == '' || this.message == null) {
-    //     return;
-    //   }
-    //   const element = document.createElement('li');
-    //   element.innerHTML = this.message;
-    //   element.style.background = '#4290E4';
-    //   element.style.padding = '10px 20px';
-    //   element.style.margin = '10px';
-    //   element.style.textAlign = 'left';
-    //   element.style.color = 'white';
-    //   element.style.float = 'right';
-    //   element.style.width = 'fit-content';
-    //   element.style.marginLeft = '45%';
-    //   element.style.marginRight = '3%'
-    //   element.style.borderRadius = '25px';
-    //   const messList = document.getElementById('message-list');
-    //   messList.appendChild(element);
-    //   this.message = '';
   }
 
   // updateScrollbar() {

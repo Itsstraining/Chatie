@@ -14,12 +14,10 @@ export class LoginService {
     this.auth.authState.subscribe((test) => {
       if (test) {
         this.user = test;
-        console.log(this.user.displayName);
       } else {
         this.user = null;
       }
     })
-    // console.log(this.user.uid);
   }
   public isAuthenticated(): boolean {
     if(this.user!=undefined){

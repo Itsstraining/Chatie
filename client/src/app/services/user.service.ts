@@ -19,7 +19,6 @@ export class UserService {
   public async getUserInfo(email){
     let temp = await this.httpClient.get(environment.endpoint + `user/getByEmail?email=${email}`).toPromise();
     this.user =  temp['getByEmail'];
-    console.log("bug 2")
   }
 
   public async getUserById(id){

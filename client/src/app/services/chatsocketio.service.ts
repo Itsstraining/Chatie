@@ -7,9 +7,10 @@ import * as io from 'socket.io-client/dist/socket.io';
   providedIn: 'root',
 })
 export class ChatsocketioService {
-  socket: any;
-  send_msg: any;
-  received_msg: any;
+  public socket: any;
+  public send_msg: any;
+  public received_msg: any;
+  public tempMessList = [];
   readonly url: string = 'http://localhost:8080';
 
   constructor(private httpClient: HttpClient) {
@@ -28,23 +29,30 @@ export class ChatsocketioService {
     this.socket.emit(eventName, data);
   }
 
-  setupSocketConnection() {
-    // this.socket = io(this.uri);
-    this.socket.on('message-broadcast', (data: string) => {
-      if (data) {
-        // const element = document.createElement('li');
-        // element.innerHTML = data;
-        // element.style.background = 'white';
-        // element.style.padding = '15px 30px';
-        // element.style.margin = '10px';
-        // document.getElementById('message-list').appendChild(element);
-        this.received_msg = data;
-      }
-    });
+  public setupSocketConnection() {
+    console.log("vao duoc 2")
+    try{
+      this.socket.on('message-broadcast', (data) => {
+      
+        console.log("vao duoc 3")
+          if (data) {
+            // const element = document.createElement('li');
+            // element.innerHTML = data;
+            // element.style.background = 'white';
+            // element.style.padding = '15px 30px';
+            // element.style.margin = '10px';
+            // document.getElementById('message-list').appendChild(element);
+            this.received_msg = data;
+            console.log(this.received_msg)
+          }
+        });
+    }catch(er){
+      console.log("can not get receive mess")
+    }
   }
 
-  public sendMessage(message) {
-    this.socket.emit('message', message);
+  public sendMessage(message, senderId, conversationId) {
+    this.socket.emit('message', {message: message, userId: senderId, conversationId: conversationId});
     this.send_msg = message;
     console.log(message)
     message = ''

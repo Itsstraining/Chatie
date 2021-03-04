@@ -35,4 +35,16 @@ router.get("/getMessageID", async (req, res) => {
     }
 });
 
+router.get("/getAllMessageId", async (req, res) => {
+    const {conversationId} = req.query;
+    try{
+        let messageContent = await Database.instance.Message.getAllMessageByConverId(conversationId);
+        res.send({
+            messageContent: messageContent,
+        });
+    }catch(err){
+        res.send(err)
+    }
+})
+
 module.exports = router;
