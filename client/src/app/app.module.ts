@@ -37,6 +37,7 @@ import { LoginService } from './services/login.service';
 import { PushnotifyingComponent } from './components/pushnotifying/pushnotifying.component';
 
 import { NotiComponent } from './components/noti/noti.component';
+import { OptionComponent } from './components/option/option.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { NotiComponent } from './components/noti/noti.component';
     PushnotifyingComponent,
 
     NotiComponent,
+    OptionComponent,
   ],
   imports: [
     BrowserModule,
