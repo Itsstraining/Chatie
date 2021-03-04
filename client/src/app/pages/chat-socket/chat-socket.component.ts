@@ -53,6 +53,8 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
       this.checkUser();
       this.scrollToBottom();
     }
+    this.scrollToBottom();
+
   }
 
   ngAfterViewChecked() {

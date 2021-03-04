@@ -37,7 +37,11 @@ import { LoginService } from './services/login.service';
 import { PushnotifyingComponent } from './components/pushnotifying/pushnotifying.component';
 
 import { NotiComponent } from './components/noti/noti.component';
+<<<<<<< HEAD
 import { ServiceWorkerModule } from '@angular/service-worker';
+=======
+import { OptionComponent } from './components/option/option.component';
+>>>>>>> bd7fc455abe7cfb896c7f689696a9fc0cff1522d
 
 
 @NgModule({
@@ -53,6 +57,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     FindComponent,
     PushnotifyingComponent,
     NotiComponent,
+    OptionComponent,
   ],
   imports: [
     BrowserModule,
