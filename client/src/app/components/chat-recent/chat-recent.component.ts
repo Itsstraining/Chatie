@@ -9,6 +9,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ChatRecentComponent implements OnInit {
   @Input() public conversation: any;
+  @Input() public receive_msg: any;
+  @Input() public send_msg: any;
   public receiverInfo: any;
   constructor(private userService: UserService, public auth: LoginService) {}
 

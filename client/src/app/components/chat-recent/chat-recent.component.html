@@ -19,7 +19,8 @@
     </div>
 
     <div class="content-notification">
-      <p>Hello World!</p>
+      <p *ngIf="this.receive_msg">{{this.receive_msg}}</p>
+      <p *ngIf="this.send_msg">You: {{this.send_msg}}</p>
       <div class="notification">
           <p>10</p>
       </div>

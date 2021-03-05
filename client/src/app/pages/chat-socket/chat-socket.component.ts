@@ -31,8 +31,8 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   public recentConverIndex: any;
 
   @Output() public converIndexInfo: any;
-  @Output() public receive_msg: EventEmitter<any> = new EventEmitter();
-  @Output() public send_msg:  EventEmitter<any> = new EventEmitter();
+  @Output() public receive_msg: any;
+  @Output() public send_msg: any;
 
   constructor(
     public socketIo: ChatsocketioService,
@@ -224,6 +224,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
       }
     }
     this.sortRecentConver(this.listConver, this.recentConver.converId);
+    this.send_msg = this.message;
     this.message = '';
   }
 

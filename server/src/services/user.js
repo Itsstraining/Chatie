@@ -137,7 +137,6 @@ class UserClass {
             }
         }
         await this.User.findByIdAndUpdate({_id: userId}, {conversations: tempUser.conversations})
-        console.log(tempUser.conversations)
     }
 }
 
