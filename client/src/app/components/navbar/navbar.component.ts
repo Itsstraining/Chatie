@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { DialogUnfriendComponent } from '../dialog-unfriend/dialog-unfriend.component';
 import { FindComponent } from '../find/find.component';
 import { NotiComponent } from '../noti/noti.component';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,7 @@ import { NotiComponent } from '../noti/noti.component';
 export class NavbarComponent implements OnInit {
 
   public user: any;
-  constructor(public auth: LoginService, private router: Router, public dialog: MatDialog) { 
+  constructor(public auth: LoginService, private router: Router, public dialog: MatDialog , public use:UserService) { 
   }
 
   ngOnInit(): void {
@@ -51,4 +52,5 @@ export class NavbarComponent implements OnInit {
     await this.auth.LogOut();
     this.router.navigate(['']);
   }
+  
 }
