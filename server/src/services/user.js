@@ -126,6 +126,19 @@ class UserClass {
     async LoginWithEmail(newUser) {
         return await this.User.create(newUser);
     }
+    //sort conversation base on recent update
+    async sortRecentConver(userId, conversationId){
+        let tempUser = await this.getUserById(userId);
+        for(let i = 0; i < tempUser.conversations.length; i++){
+            if(conversationId == tempUser.conversations[i]){
+                let temp = tempUser.conversations[0];
+                tempUser.conversations[0] = tempUser.conversations[i];
+                tempUser.conversations[i] = temp; 
+            }
+        }
+        await this.User.findByIdAndUpdate({_id: userId}, {conversations: tempUser.conversations})
+        console.log(tempUser.conversations)
+    }
 }
 
 module.exports = UserClass;

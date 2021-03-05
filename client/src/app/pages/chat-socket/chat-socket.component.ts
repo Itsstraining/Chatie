@@ -1,4 +1,4 @@
-import {  Component, OnInit,  Output,  ElementRef,  ViewChild,  AfterViewChecked,  EventEmitter
+import {  Component, OnInit,  Output,  ElementRef,  ViewChild,  AfterViewChecked,  EventEmitter, DoCheck
 } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
@@ -43,6 +43,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   ) {
     this.userInfo = this.userService.user;
   }
+  
 
   ngOnInit(): void {
     if (this.auth.user) {
@@ -59,6 +60,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     this.scrollToBottom();
+    this.listConver;
   }
   public openDialogUnfriend(): void {
     const dialogRef = this.dialog.open(DialogUnfriendComponent, {
@@ -175,6 +177,17 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  //sort again after chat
+  public sortRecentConver(listConver, conversationId){
+    for(let i = 0; i < listConver.length; i++){
+      if(conversationId == listConver[i]._id){
+        let temp = listConver[0];
+        listConver[0] = listConver[i];
+        listConver[i] = temp;
+      }
+    }
+  }
+
   async getReceiveMsg() {
     this.socketIo.socket.on('message-broadcast', (data) => {
       if (data) {
@@ -210,6 +223,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
         });
       }
     }
+    this.sortRecentConver(this.listConver, this.recentConver.converId);
     this.message = '';
   }
 

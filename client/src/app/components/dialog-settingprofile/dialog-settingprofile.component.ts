@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dialog-settingprofile',
@@ -8,14 +9,20 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 })
 export class DialogSettingprofileComponent implements OnInit {
 
+  public userInfo: any;
+
   constructor(
-    public dialogRef: MatDialogRef<DialogSettingprofileComponent>
+    public dialogRef: MatDialogRef<DialogSettingprofileComponent>,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
+    this.userInfo = this.userService.user
   }
 
   onNoClick(): void{
     this.dialogRef.close();
   }
+
+
 }

@@ -16,10 +16,7 @@ export class RegisterService {
     password: password
    }).toPromise().then(data=>{ 
      temp=data;
-      console.log(temp.message);
-      
    })
-   console.log(temp)
    return temp
   }
 }

@@ -37,7 +37,7 @@ class ConversationClass {
 
     //Get all conversation 
     async getAllConversation() {
-        return await this.Conversation.find();
+        return await (this.Conversation.find().sort({date: 1}));
     }
 
 
@@ -63,6 +63,8 @@ class ConversationClass {
             }
         });
     }
+
+    
 }
 
 

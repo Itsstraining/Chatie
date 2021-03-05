@@ -23,6 +23,7 @@ import { DialogUnfriendComponent } from './components/dialog-unfriend/dialog-unf
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -37,11 +38,8 @@ import { LoginService } from './services/login.service';
 import { PushnotifyingComponent } from './components/pushnotifying/pushnotifying.component';
 
 import { NotiComponent } from './components/noti/noti.component';
-<<<<<<< HEAD
 import { ServiceWorkerModule } from '@angular/service-worker';
-=======
 import { OptionComponent } from './components/option/option.component';
->>>>>>> bd7fc455abe7cfb896c7f689696a9fc0cff1522d
 
 
 @NgModule({
@@ -74,6 +72,7 @@ import { OptionComponent } from './components/option/option.component';
     MatAutocompleteModule,
     MatInputModule,
     MatDividerModule,
+    MatSlideToggleModule,
     
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
