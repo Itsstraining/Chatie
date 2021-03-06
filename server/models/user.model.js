@@ -6,12 +6,12 @@ class UserModel {
      * @param {String} displayname 
      * @param {String} password 
      */
-    constructor(email,displayname,password)
+    constructor(email, displayname, avatar, password)
     {
         this.email = email;
-        this.username = displayname;
+        this.userName = displayname;
         this.password=password;
-        this.avatar = '';
+        this.avatar = avatar;
         this.friendList =[];
         this.friendListRequest = [];
         this.conversations = [];

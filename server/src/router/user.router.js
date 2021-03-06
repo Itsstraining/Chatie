@@ -36,6 +36,34 @@ const router = app.Router();
 
 //create account for user use gmail
 router.post("/email", async (req, res) => {
+    const { email, userName, avatar } = req.body;
+    try {
+        let allUser = await Database.instance.User.getAllUser();
+        for (let i = 0; i < allUser.length; i++) {
+            if (email == (allUser[i]).email) {
+                res.send({
+                    message: 'This email is already existed',
+                });
+                return;
+            }
+        }
+        let displayname = '';
+        console.log(email)
+        let test = new UserModel(email, userName, avatar, '');
+        console.log(test.email)
+        let user = await Database.instance.User.createUser(test);
+        console.log(user)
+        res.send({
+            message: user,
+        });
+    } catch (err) {
+        res.send({
+            message: 'Can not create account',
+        })
+    }
+});
+
+router.post("/createAccount", async (req, res) => {
     const { email, userName, password } = req.body;
     try {
         let allUser = await Database.instance.User.getAllUser();
@@ -49,8 +77,8 @@ router.post("/email", async (req, res) => {
         }
         let displayname = '';
         console.log(email)
-        let test = new UserModel(email, userName, password);
-        console.log(test.email)
+        let test = new UserModel(email, userName, '', password);
+        console.log(test.userName)
         let user = await Database.instance.User.createUser(test);
         console.log(user)
         res.send({
