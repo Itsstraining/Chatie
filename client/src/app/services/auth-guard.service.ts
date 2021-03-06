@@ -24,6 +24,11 @@ export class AuthGuardService implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
+      if(this.login.newUser){
+        this.login.user = this.login.newUser.user
+        console.log(this.login.newUser.user)
+        return true
+      }
     return this.login.auth.authState.pipe(
       map((usr) => {
         if (usr != null) {

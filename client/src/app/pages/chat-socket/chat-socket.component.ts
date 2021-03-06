@@ -28,9 +28,10 @@ import { ConversationService } from 'src/app/services/conversation.service';
 })
 export class ChatSocketComponent implements OnInit, AfterViewChecked {
   public textArea: string = '';
+  public emojiArray = [];
    public isEmojiPickerVisible: boolean;
    public addEmoji(event) {
-      this.textArea = `${this.textArea}${event.emoji.native}`;
+      this.message = this.emojiArray.push(`${this.textArea}${event.emoji.native}`);
       this.isEmojiPickerVisible = true;
       
    }
@@ -227,6 +228,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     }
     this.message = '';
   }
+  
 
   // updateScrollbar() {
   //   const element = document.getElementById("chat-messages-show-container");
@@ -234,4 +236,5 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   //   document.getElementById('message-list').appendChild(element);
 
   // }
+ 
 }
