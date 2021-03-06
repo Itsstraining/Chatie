@@ -54,9 +54,17 @@
                     </div>
                 </div>
                 <div class="chat-messages-create-container">
-                    <button class="chat-messages-option-button">
-            <mat-icon style="color: #242526;">add</mat-icon>
-          </button>
+                    <button class="chat-messages-option-button" mat-icon-button [matMenuTriggerFor]="option">
+                      <mat-icon style="color: #242526;">add</mat-icon>
+                    </button>
+                    <mat-menu #option="matMenu">
+                        <button mat-menu-item>
+                          <span>Send images/videos</span>
+                        </button>
+                        <button mat-menu-item>
+                          <span>Send file</span>
+                        </button>
+                    </mat-menu>
 
                     <div class="content-emoji">
                         <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message" (keyup.enter)="SendMessage()">
