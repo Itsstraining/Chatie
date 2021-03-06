@@ -28,9 +28,7 @@ export class FindComponent implements OnInit {
   }
   
   myControl = new FormControl();
-  options: User[] = [
-    
-  ];
+  
   userTemp:User[] = [];
   user:User[]=[];
   userName:String;
@@ -60,10 +58,6 @@ export class FindComponent implements OnInit {
     return user && user.name ? user.name : '';
   }
 
-  private _filter(name: string): User[] {
-    const filterValue = name.toLowerCase();
-
-    return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue)=== 0);
-  }
+  
   
 }
