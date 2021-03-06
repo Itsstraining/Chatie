@@ -41,18 +41,13 @@ export class ChatRecentComponent implements OnInit, DoCheck {
 
   ngOnInit(): void {
     this.getUserConverInfo();
-    // if(this.conversation.conversation.length != this.conversation.conversation.length + 1){
-    //   this.newestContent = this.getLastestMess(this.conversation.conversation[this.conversation.conversation.length]);
-    // }else{
     this.newestContent = this.getLastestMess(
       this.conversation.conversation[this.conversation.conversation.length - 1]
     );
-    // }
     if (this.conversation.isClicked == true) {
       this.count = 0;
     }
     this.length = this.conversation.conversation.length;
-    console.log(this.newestContent);
   }
 
   //get receiver username, ava

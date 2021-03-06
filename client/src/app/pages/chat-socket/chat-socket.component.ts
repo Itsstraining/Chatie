@@ -188,7 +188,6 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   public sortRecentConver(listChat, conversationId){
     for(let i = 0; i < listChat.length; i++){
       if(conversationId == listChat[i].converId){
-        console.log(listChat[0].converId)
         let temp = listChat[0];
         listChat[0] = listChat[i];
         listChat[i] = temp;
