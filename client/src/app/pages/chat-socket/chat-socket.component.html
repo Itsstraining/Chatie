@@ -59,13 +59,19 @@
           </button>
 
           <div class="content-emoji">
-            <input class="chat-messages-create-input" type="text" placeholder="Type message here..."
+            <input class="chat-messages-create-input" type="text"  placeholder="Type message here..."
               [(ngModel)]="message" (keyup.enter)="SendMessage()">
-            <button class="emoji" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">
+
+
+            <button class="emoji" [matMenuTriggerFor]="aboveMenu" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;" (keyup.enter)="SendMessage()" >
               
-              
-              <emoji-mart class="emoji-mart" emoji="point_up" *ngIf="isEmojiPickerVisible" (emojiSelect)="addEmoji($event)"
+
+              <mat-menu #aboveMenu="matMenu" yPosition="above" >
+                <emoji-mart class="emoji-mart" emoji="point_up" *ngIf="isEmojiPickerVisible" (emojiSelect)="addEmoji($event)"
                 title="Choose your emoji"></emoji-mart>
+              </mat-menu>
+              
+              
               
               
               
