@@ -37,9 +37,11 @@ export class UserService {
     return tempAllUser['getUser'];
   }
 
-  // public async getConverInfo(){
-  //   let tempConverInfo = await this.httpClient.get(environment.endpoint + 'conversation/oneConver?id')
-  // }
+  public async updateProfile(id, userName, avatar){
+    let data = { id: id, userName: userName, avatar: avatar}
+    let tempConverInfo = await this.httpClient.put(environment.endpoint + 'user/updateUser?id', data);
+    return tempConverInfo['message'];
+  }
 
   public getAllConver(){
     return this.listConver;

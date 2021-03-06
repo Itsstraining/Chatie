@@ -47,14 +47,17 @@ class UserClass {
      * @param {String} avatar 
      * @param {Boolean} status 
      */
-    async updateProfile(id, email, displayname, avatar, status) {
+    async updateProfile(id, userName, avatar) {
+        if(avatar){
+            avatar = avatar;
+        }else{
+            avatar = '';
+        };
         return await this.User.findOneAndUpdate({
             _id: id
         }, {
-            email: email,
-            displayname: displayname,
+            userName: userName,
             avatar: avatar,
-            status: status
         });
     }
 

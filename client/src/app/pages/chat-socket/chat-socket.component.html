@@ -109,7 +109,7 @@
       </div>
       <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
         <app-chat-recent *ngFor="let conver of listChat; let i = index" [conversation]="conver"
-          (click)="getConverIndex(i)"></app-chat-recent>
+          (click)="getConverIndex(i)" (hasRead) = "hasRead($event)"></app-chat-recent>
       </div>
     </div>
   </div>

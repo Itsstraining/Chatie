@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class DialogSettingprofileComponent implements OnInit {
 
   public userInfo: any;
+  public userName: any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogSettingprofileComponent>,
@@ -24,5 +25,9 @@ export class DialogSettingprofileComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  public async updateProfile(){
+    let mess = await this.userService.updateProfile(this.userInfo._id, this.userName, '');
+    alert(mess)
+  }
 
 }

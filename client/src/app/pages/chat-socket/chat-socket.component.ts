@@ -195,6 +195,10 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  public hasRead(read){
+    this.isClickedIndex = read;
+  }
+
   async getReceiveMsg() {
     this.socketIo.socket.on('message-broadcast',async (data) => {
       if (data) {

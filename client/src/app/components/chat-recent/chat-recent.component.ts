@@ -17,6 +17,8 @@ import { UserService } from 'src/app/services/user.service';
 export class ChatRecentComponent implements OnInit, DoCheck {
   @Input() public conversation: any;
   // @Input() public newestContent: any;
+
+  @Output() public hasRead: EventEmitter<boolean> = new EventEmitter<boolean>();
   public newestContent: any;
   public length: any;
   public receiverInfo: any;
@@ -36,6 +38,7 @@ export class ChatRecentComponent implements OnInit, DoCheck {
     if (this.conversation.isClicked == true) {
       this.count = 0;
       this.conversation.isClicked = false;
+      this.hasRead.emit(this.conversation.isClicked);
     }
   }
 
