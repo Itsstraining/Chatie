@@ -30,7 +30,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   public textArea: string = '';
    public isEmojiPickerVisible: boolean;
    public addEmoji(event) {
-      this.textArea = `${this.textArea}${event.emoji.native}`;
+      this.message = `${this.textArea}${event.emoji.native}`;
       this.isEmojiPickerVisible = true;
       
    }
