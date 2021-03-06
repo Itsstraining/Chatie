@@ -58,15 +58,15 @@ const upload = multer({ storage: storage })
 
 //Upload file và hình
 
-app.get('/getFile', function (req, res) {
+server.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/hi', function (req, res) {
+server.get('/hi', function (req, res) {
   res.send('HI')
 })
 
-app.post('/uploadfile', upload.single('myFile'), (req, res,next) => {
+server.post('/uploadfile', upload.single('myFile'), (req, res,next) => {
   const file = req.file;
   console.log(file);
   if(!file)
@@ -77,7 +77,7 @@ app.post('/uploadfile', upload.single('myFile'), (req, res,next) => {
   }
   res.send(file , {
     msg: 'File upload!',
-    file: `uploads/${req.file.fieldname}`
+    file: `/uploads/${req.file.fieldname}`
   });
 });
 
