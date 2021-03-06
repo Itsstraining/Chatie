@@ -161,7 +161,7 @@ $light-blue: #4290E4;
         }
         
         .chat-messages-create-button {
-            background-color: $light-light-green;
+            background-color: $light-blue;
             height: 38px;
             width: 38px;
             margin: auto 20px auto 5px;
@@ -170,6 +170,11 @@ $light-blue: #4290E4;
             border-radius: 50%;
             outline: none;
             cursor: pointer;
+
+            &:active {
+                background-color: $light-blue;
+                opacity: 90%;
+            }
         }
         .chat-messages-option-button {
             background-color: $light-blue;
@@ -183,6 +188,11 @@ $light-blue: #4290E4;
             display: flex;
             justify-content: center;
             cursor: pointer;
+
+            &:active {
+                background-color: $light-blue;
+                opacity: 90%;
+            }
         }
     }
     .receiver-info {
@@ -244,14 +254,25 @@ $light-blue: #4290E4;
     
 }
 
-.Emoji {
-    display: grid;
-    grid-template-columns: 100% 0%;
-    width: 36%;
-}
+// .Emoji {
+//     display: grid;
+//     grid-template-columns: 100% 0%;
+//     width: 36%;
+// }
 
+// .emoji-mart emoji-mart-dark {
+//     width: 17.4rem;
+// }
+
+// section.emoji-mart.emoji-mart-dark {
+//     width: 0;
+// }
 
 /* mat-menu */
+// .mat-menu-content:not(:empty) {
+//     padding-top: 0;
+//     padding-bottom: 0;
+// }
 
 .mat-focus-indicator {
     padding-top: 8px;
