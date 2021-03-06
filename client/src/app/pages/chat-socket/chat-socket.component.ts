@@ -29,9 +29,11 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   public conversation = [];
   public recentConver: any;
   public recentConverIndex: any;
+  public isClickedIndex: boolean = false;
 
   @Output() public converIndexInfo: any;
-  @Output() public newMessage: EventEmitter<any> = new EventEmitter<any>();
+  // @Output() public isClickedIndex: boolean = false
+  // @Output() public newMessage: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     public socketIo: ChatsocketioService,
@@ -101,6 +103,8 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
             let tempUser = await this.userService.getUserById(
               temp.participants[i]
             );
+            this.isClickedIndex = true;
+            temp.isClicked = this.isClickedIndex;
             this.recentFriendChat = tempUser;
           }
         }
@@ -135,6 +139,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
         participants: listConver[i].participants,
         listFile: listConver[i].listFile,
         conversation: this.conversation,
+        isClicked: this.isClickedIndex,
       });
     }
   }
@@ -146,22 +151,14 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
       if (this.userInfo._id != temp.participants[i]) {
         let tempUser = await this.userService.getUserById(temp.participants[i]);
         this.recentFriendChat = tempUser;
+        this.isClickedIndex = true;
+        temp.isClicked = this.isClickedIndex;
       }
     }
     this.recentConver = temp;
     this.isClicked = true;
   }
 
-  // //get the conversation message between people
-  // public async getConverIndexContent(conversationId) {
-  //   for (let i = 0; i < this.listChat.length; i++) {
-  //     if (conversationId == this.listChat[i].converId) {
-  //       this.recentConver = this.listChat[i];
-  //       this.converIndexInfo = this.listChat[i]
-  //       return;
-  //     }
-  //   }
-  // }
 
   //get the content message
   public async getAllMessage(conversationMessList) {
@@ -182,6 +179,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   public sortRecentConver(listChat, conversationId){
     for(let i = 0; i < listChat.length; i++){
       if(conversationId == listChat[i].converId){
+        console.log(listChat[0].converId)
         let temp = listChat[0];
         listChat[0] = listChat[i];
         listChat[i] = temp;
@@ -190,7 +188,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   }
 
   async getReceiveMsg() {
-    this.socketIo.socket.on('message-broadcast', (data) => {
+    this.socketIo.socket.on('message-broadcast',async (data) => {
       if (data) {
         for (let i = 0; i < this.listChat.length; i++) {
           if (data.conversationId == this.listChat[i].converId) {
@@ -214,7 +212,8 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     this.socketIo.sendMessage(
       this.message,
       this.userInfo._id,
-      this.recentConver.converId
+      this.recentConver.converId,
+      this.recentFriendChat._id
     );
     for (let i = 0; i < this.listChat.length; i++) {
       if (this.recentConver.converId == this.listChat[i].converId) {
@@ -227,7 +226,6 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     }
     
     this.sortRecentConver(this.listChat, this.recentConver.converId);
-    this.newMessage.emit(this.message);
     this.message = '';
   }
 }

@@ -47,8 +47,8 @@ export class ChatsocketioService {
     }
   }
 
-  public sendMessage(message, senderId, conversationId) {
-    this.socket.emit('message', {message: message, userId: senderId, conversationId: conversationId});
+  public sendMessage(message, senderId, conversationId, receiverId) {
+    this.socket.emit('message', {message: message, userId: senderId, conversationId: conversationId, receiverId: receiverId});
     this.send_msg = message;
     message = ''
     // message = '';

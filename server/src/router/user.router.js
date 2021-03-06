@@ -141,16 +141,6 @@ router.delete("/", async (req, res) => {
     }
 });
 
-// router.put("/updateUser", async (req, res) => {
-//     const { email, displayname, avatar, status } = req.body;
-//     try {
-//         await Database.instance.getUserMailandupdate(email, displayname, avatar, status);
-//         res.send({ message: `Update ${email}` });
-//     } catch (erro) {
-//         res.status(400).send({ message: `Cannot Update[${email}]` });
-//     }
-
-// });
 
 // router.post("/email", async (req, res) => {
 //     const { email } = req.body;

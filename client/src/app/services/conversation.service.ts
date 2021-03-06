@@ -33,4 +33,10 @@ export class ConversationService {
     let data = { senderId: senderId, conversationId: conversationId, message: message}
     let tempMess = await this.httpClient.put(environment.endpoint + 'conversation/sendMess', data).toPromise();
   }
+
+  public async updateIndexConver(userId, covnersationId){
+    let data = {userId: userId, covnersationId: covnersationId}
+    let mess = await this.httpClient.put(environment.endpoint + 'user/updateConver', data).toPromise();
+    console.log(mess)
+  }
 }

@@ -13,8 +13,8 @@ class UserClass {
     }
 
     /**
-    * @param {UserModel} newUser
-    */
+     * @param {UserModel} newUser
+     */
     async createUser(newUser) {
         return await this.User.create(newUser);
     }
@@ -24,12 +24,20 @@ class UserClass {
     }
 
     async getUserByEmail(email) {
-        return await this.User.findOne({ email: email }).exec();
+        return await this.User.findOne({
+            email: email
+        }).exec();
     }
 
     //Get all conversation 
     async getAllUserConversation(userId) {
-        return (await this.User.findOne({_id: userId}, {sort: {date: -1}})).conversations;
+        return (await this.User.findOne({
+            _id: userId
+        }, {
+            sort: {
+                date: -1
+            }
+        })).conversations;
     }
 
     /**
@@ -40,7 +48,9 @@ class UserClass {
      * @param {Boolean} status 
      */
     async updateProfile(id, email, displayname, avatar, status) {
-        return await this.User.findOneAndUpdate({ _id: id }, {
+        return await this.User.findOneAndUpdate({
+            _id: id
+        }, {
             email: email,
             displayname: displayname,
             avatar: avatar,
@@ -50,14 +60,16 @@ class UserClass {
 
     async chat(id, receiverId, newConversationId) {
         // const changeStream = this.User.watch().on('change', change => console.log(change));
-        await this.User.findOneAndUpdate(
-            { _id: id }, {
+        await this.User.findOneAndUpdate({
+            _id: id
+        }, {
             $push: {
                 conversations: [newConversationId]
             }
         });
-        await this.User.findOneAndUpdate(
-            { _id: receiverId }, {
+        await this.User.findOneAndUpdate({
+            _id: receiverId
+        }, {
             $push: {
                 conversations: [newConversationId]
             }
@@ -67,11 +79,15 @@ class UserClass {
     }
 
     async getUserById(id) {
-        return await this.User.findOne({ _id: id });
+        return await this.User.findOne({
+            _id: id
+        });
     }
 
     async deleteUser(id) {
-        await this.User.findOneAndDelete({ _id: id });
+        await this.User.findOneAndDelete({
+            _id: id
+        });
     }
 
     /**
@@ -93,7 +109,13 @@ class UserClass {
             }
         }
         // user.friendList.push(friendId);                  
-        await this.User.updateOne({ _id: friendId }, { $push: { friendListRequest: [id] } });
+        await this.User.updateOne({
+            _id: friendId
+        }, {
+            $push: {
+                friendListRequest: [id]
+            }
+        });
         return 'Friends'
     }
 
@@ -103,8 +125,25 @@ class UserClass {
         let user = await this.getId(id);
         // for (let i = 0; i < user.friendListRequest.length; i++) {
         if (accept) {
-            await this.User.updateOne({ _id: id }, { $pull: { friendListRequest: { $in: [friendId] } }, $push: { friendList: [friendId] } });
-            await this.User.updateOne({_id: friendId}, { $push: {friendList: [id]}})
+            await this.User.updateOne({
+                _id: id
+            }, {
+                $pull: {
+                    friendListRequest: {
+                        $in: [friendId]
+                    }
+                },
+                $push: {
+                    friendList: [friendId]
+                }
+            });
+            await this.User.updateOne({
+                _id: friendId
+            }, {
+                $push: {
+                    friendList: [id]
+                }
+            })
             return 'You two are friends now.';
         }
         // }
@@ -119,7 +158,15 @@ class UserClass {
         // Optional. Use this if you create a lot of connections and don't want
         // to copy/paste `{ useNewUrlParser: true }`.
         mongoose.set('useNewUrlParser', true);
-        await this.User.updateOne({ _id: id }, { $pull: { friendList: { $in: [friendId] } } });
+        await this.User.updateOne({
+            _id: id
+        }, {
+            $pull: {
+                friendList: {
+                    $in: [friendId]
+                }
+            }
+        });
         return 'Deleted'
     }
 
@@ -127,16 +174,23 @@ class UserClass {
         return await this.User.create(newUser);
     }
     //sort conversation base on recent update
-    async sortRecentConver(userId, conversationId){
+    async sortRecentConver(userId, conversationId) {
         let tempUser = await this.getUserById(userId);
-        for(let i = 0; i < tempUser.conversations.length; i++){
-            if(conversationId == tempUser.conversations[i]){
+        for (let i = 0; i < tempUser.conversations.length; i++) {
+            if (conversationId == tempUser.conversations[i] && i != 0) {
+                console.log(tempUser.conversations)
+                console.log(tempUser.conversations[0])
                 let temp = tempUser.conversations[0];
                 tempUser.conversations[0] = tempUser.conversations[i];
-                tempUser.conversations[i] = temp; 
+                tempUser.conversations[i] = temp;
+                console.log(tempUser.conversations[0])
             }
         }
-        await this.User.findByIdAndUpdate({_id: userId}, {conversations: tempUser.conversations})
+        await this.User.findByIdAndUpdate({
+            _id: userId
+        }, {
+            conversations: tempUser.conversations
+        })
     }
 }
 
