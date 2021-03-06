@@ -17,42 +17,23 @@
             <img src="../../../assets/images/phone-auricular.svg">
           </button>
 
-<<<<<<< HEAD
-          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
-            class="button-option" style="color:#4290E4;">
-            <mat-icon>more_horiz</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item mat-raised-button (click)="openDialogBlock()">
-              <span style="color: red;">Chặn</span>
-            </button>
-            <button mat-menu-item mat-raised-button (click)="openDialogUnfriend()">
-              <span style="color: red">Hủy kết bạn</span>
-            </button>
-            <button mat-menu-item>
-              <span>Xem bộ sưu tập</span>
-            </button>
-            <button mat-menu-item>
-              <span>Hủy</span>
-=======
 
 
-                    <button mat-icon-button [matMenuTriggerFor]="menu" class="button-option">
+          <button mat-icon-button [matMenuTriggerFor]="menu" class="button-option">
             <img src="../../../assets/images/more.svg">
           </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
               <span>Collection</span>
             </button>
-                        <button mat-menu-item mat-raised-button (click)="openDialogBlock()">
-                <span style="color: red;">Block</span>
-              </button>
-                        <button mat-menu-item mat-raised-button (click)="openDialogUnfriend()">
-                <span style="color: red">Unfriend</span>
-              </button>
-                        <button mat-menu-item>
+            <button mat-menu-item mat-raised-button (click)="openDialogBlock()">
+              <span style="color: red;">Block</span>
+            </button>
+            <button mat-menu-item mat-raised-button (click)="openDialogUnfriend()">
+              <span style="color: red">Unfriend</span>
+            </button>
+            <button mat-menu-item>
               <span>Cancel</span>
->>>>>>> 006efce5538b0bc4ee2b24ec5f9bffdfa3b83f52
             </button>
           </mat-menu>
 
@@ -78,10 +59,11 @@
           </button>
 
           <div class="content-emoji">
-<<<<<<< HEAD
             <input class="chat-messages-create-input" type="text" placeholder="Type message here..."
               [(ngModel)]="message" (keyup.enter)="SendMessage()">
-            <button class="emoji">
+
+            <button class="emoji" [matMenuTriggerFor]="aboveMenu"
+              (click)="isEmojiPickerVisible = !isEmojiPickerVisible;" (keyup.enter)="SendMessage()">
               <svg fill="gray" height="20" viewBox="0 0 192 192" width="20" xmlns="http://www.w3.org/2000/svg">
                 <g id="_10-humor" data-name="10-humor">
                   <path
@@ -92,32 +74,17 @@
                     d="m136 96h-80a8 8 0 0 0 -8 8 48 48 0 0 0 96 0 8 8 0 0 0 -8-8zm-40 40a32.054 32.054 0 0 1 -30.987-24h61.974a32.054 32.054 0 0 1 -30.987 24z" />
                 </g>
               </svg>
-=======
-            <input class="chat-messages-create-input" type="text"  placeholder="Type message here..."
-              [(ngModel)]="message" (keyup.enter)="SendMessage()">
-
-            <button class="emoji" [matMenuTriggerFor]="aboveMenu" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;" (keyup.enter)="SendMessage()" >
-                <svg fill="gray" height="20" viewBox="0 0 192 192" width="20" xmlns="http://www.w3.org/2000/svg"><g id="_10-humor" data-name="10-humor"><path d="m96 0a96 96 0 1 0 96 96 96.108 96.108 0 0 0 -96-96zm0 176a80 80 0 1 1 80-80 80.091 80.091 0 0 1 -80 80z"/><path d="m64 72a8.009 8.009 0 0 1 8 8h16a24 24 0 0 0 -48 0h16a8.009 8.009 0 0 1 8-8z"/><path d="m128 56a24.027 24.027 0 0 0 -24 24h16a8 8 0 0 1 16 0h16a24.027 24.027 0 0 0 -24-24z"/><path d="m136 96h-80a8 8 0 0 0 -8 8 48 48 0 0 0 96 0 8 8 0 0 0 -8-8zm-40 40a32.054 32.054 0 0 1 -30.987-24h61.974a32.054 32.054 0 0 1 -30.987 24z"/></g></svg>
->>>>>>> 006efce5538b0bc4ee2b24ec5f9bffdfa3b83f52
             </button>
-            <mat-menu #aboveMenu="matMenu" yPosition="above" >
-              <emoji-mart class="emoji-mart"  (emojiSelect)="addEmoji($event)"
-                title="Choose your emoji"></emoji-mart>
+            <mat-menu #aboveMenu="matMenu" yPosition="above">
+              <emoji-mart class="emoji-mart" (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
             </mat-menu>
 
           </div>
-<<<<<<< HEAD
+
           <!-- <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message"
             (keyup.enter)="SendMessage()"> -->
 
           <button class="chat-messages-create-button" (click)="SendMessage()">
-=======
-
-          <!-- <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message"
-            (keyup.enter)="SendMessage()"> -->
-
-                    <button class="chat-messages-create-button" (click)="SendMessage()">
->>>>>>> 006efce5538b0bc4ee2b24ec5f9bffdfa3b83f52
 
             <svg fill="#242526" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px"
               viewBox="0 0 512.005 512.005" width="15px" xmlns="http://www.w3.org/2000/svg">
@@ -129,27 +96,20 @@
           </button>
 
 
-                </div>
-            </div>
         </div>
+      </div>
+    </div>
 
-<<<<<<< HEAD
     <!-- sender-chat -->
     <div class="user-container">
       <div class="find">
         <!-- <img style="width: 30px; height: 30px;" src="../../../assets/images/search.svg" alt="search"> -->
         <input class="search-input" type="text" placeholder="Seach">
-=======
-        <!-- sender-chat -->
-        <div class="user-container">
-            <div class="find">
-                <!-- <img style="width: 30px; height: 30px;" src="../../../assets/images/search.svg" alt="search"> -->
-                <input  class="search-input" type="text" placeholder="Seach">
->>>>>>> 006efce5538b0bc4ee2b24ec5f9bffdfa3b83f52
 
       </div>
       <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
-        <app-chat-recent *ngFor="let conver of listChat; let i = index" [conversation]="conver" (click)="getConverIndex(i)"></app-chat-recent>
+        <app-chat-recent *ngFor="let conver of listChat; let i = index" [conversation]="conver"
+          (click)="getConverIndex(i)"></app-chat-recent>
       </div>
     </div>
   </div>

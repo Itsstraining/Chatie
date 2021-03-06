@@ -237,16 +237,4 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     this.sortRecentConver(this.listChat, this.recentConver.converId);
     this.message = '';
   }
-<<<<<<< HEAD
-=======
-  
-
-  // updateScrollbar() {
-  //   const element = document.getElementById("chat-messages-show-container");
-  //   element.scrollTop = element.scrollHeight;
-  //   document.getElementById('message-list').appendChild(element);
-
-  // }
- 
->>>>>>> 006efce5538b0bc4ee2b24ec5f9bffdfa3b83f52
 }

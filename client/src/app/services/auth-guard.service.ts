@@ -9,14 +9,6 @@ import { LoginService } from './login.service';
   providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate {
-<<<<<<< HEAD
-
-  constructor(public login: LoginService, public router: Router) {
-
-  }
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-      return this.login.auth.authState.pipe(map(usr => {
-=======
   constructor(public login: LoginService, public router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -33,7 +25,6 @@ export class AuthGuardService implements CanActivate {
       }
     return this.login.auth.authState.pipe(
       map((usr) => {
->>>>>>> 006efce5538b0bc4ee2b24ec5f9bffdfa3b83f52
         if (usr != null) {
           this.login.user = usr;
           return true;
