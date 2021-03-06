@@ -23,17 +23,17 @@
             <mat-icon>more_horiz</mat-icon>
           </button>
                     <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+              <span>Collection</span>
+            </button>
                         <button mat-menu-item mat-raised-button (click)="openDialogBlock()">
-              <span style="color: red;">Chặn</span>
-            </button>
+                <span style="color: red;">Block</span>
+              </button>
                         <button mat-menu-item mat-raised-button (click)="openDialogUnfriend()">
-              <span style="color: red">Hủy kết bạn</span>
-            </button>
+                <span style="color: red">Unfriend</span>
+              </button>
                         <button mat-menu-item>
-              <span>Xem bộ sưu tập</span>
-            </button>
-                        <button mat-menu-item>
-              <span>Hủy</span>
+              <span>Cancel</span>
             </button>
                     </mat-menu>
 
@@ -54,9 +54,13 @@
                     </div>
                 </div>
                 <div class="chat-messages-create-container">
-                    <button class="chat-messages-option-button">
+                    <button class="chat-messages-option-button" mat-button [matMenuTriggerFor]="option">
             <mat-icon style="color: #242526;">add</mat-icon>
           </button>
+                    <mat-menu #option="matMenu">
+                        <button mat-menu-item>Record a Voice</button>
+                        <button mat-menu-item>Add Attachment(s)</button>
+                    </mat-menu>
                     <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message" (keyup.enter)="SendMessage()">
                     <button class="chat-messages-create-button" (click)="SendMessage()">
 
