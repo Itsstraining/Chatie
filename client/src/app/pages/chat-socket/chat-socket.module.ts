@@ -14,7 +14,7 @@ import { from } from 'rxjs';
 import { ChatRecentComponent } from '../../components/chat-recent/chat-recent.component';
 import { SendermessageComponent } from '../../components/sendermessage/sendermessage.component';
 import { ReceivermessageComponent } from '../../components/receivermessage/receivermessage.component';
-
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 
 
@@ -27,7 +27,8 @@ import { ReceivermessageComponent } from '../../components/receivermessage/recei
     FormsModule,
     MatIconModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
+    PickerModule
   ]
 })
 export class ChatSocketModule { }

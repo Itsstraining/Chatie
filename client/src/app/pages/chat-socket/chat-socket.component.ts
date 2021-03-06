@@ -20,12 +20,20 @@ import { UserService } from 'src/app/services/user.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ConversationService } from 'src/app/services/conversation.service';
 
+
 @Component({
   selector: 'app-chat-socket',
   templateUrl: './chat-socket.component.html',
   styleUrls: ['./chat-socket.component.scss'],
 })
 export class ChatSocketComponent implements OnInit, AfterViewChecked {
+  public textArea: string = '';
+   public isEmojiPickerVisible: boolean;
+   public addEmoji(event) {
+      this.textArea = `${this.textArea}${event.emoji.native}`;
+      this.isEmojiPickerVisible = true;
+      
+   }
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   socket: any;
   message: any;
@@ -61,6 +69,8 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
       this.checkUser();
       this.scrollToBottom();
     }
+    this.scrollToBottom();
+
   }
 
   ngAfterViewChecked() {
