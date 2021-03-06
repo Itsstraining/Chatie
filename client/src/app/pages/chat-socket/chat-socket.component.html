@@ -1,60 +1,60 @@
 <div class="container" *ngIf=" this.userInfo != null">
-  <div class="chat-box">
+    <div class="chat-box">
 
-    <!-- chat-container -->
-    <div class="chat-container">
-      <div class="receiver-info">
-        <img src="../../../assets/images/avatar-1.jpg" class="ava-receiver">
-        <h3 *ngIf="this.recentFriendChat">{{this.recentFriendChat.userName}}</h3>
+        <!-- chat-container -->
+        <div class="chat-container">
+            <div class="receiver-info">
+                <img src="../../../assets/images/avatar-1.jpg" class="ava-receiver">
+                <h3 *ngIf="this.recentFriendChat">{{this.recentFriendChat.userName}}</h3>
 
-        <div class="option">
-          <!-- <div class="example-button-row"> -->
-          <button class="button-option">
+                <div class="option">
+                    <!-- <div class="example-button-row"> -->
+                    <button class="button-option">
             <img src="../../../assets/images/videocam-filled-tool.svg">
           </button>
 
-          <button class="button-option">
+                    <button class="button-option">
             <img src="../../../assets/images/phone-auricular.svg">
           </button>
 
 
 
-          <button mat-icon-button [matMenuTriggerFor]="menu" class="button-option">
+                    <button mat-icon-button [matMenuTriggerFor]="menu" class="button-option">
             <img src="../../../assets/images/more.svg">
           </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item mat-raised-button (click)="openDialogBlock()">
-              <span style="color: red;">Chặn</span>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+              <span>Collection</span>
             </button>
-            <button mat-menu-item mat-raised-button (click)="openDialogUnfriend()">
-              <span style="color: red">Hủy kết bạn</span>
+                        <button mat-menu-item mat-raised-button (click)="openDialogBlock()">
+                <span style="color: red;">Block</span>
+              </button>
+                        <button mat-menu-item mat-raised-button (click)="openDialogUnfriend()">
+                <span style="color: red">Unfriend</span>
+              </button>
+                        <button mat-menu-item>
+              <span>Cancel</span>
             </button>
-            <button mat-menu-item>
-              <span>Xem bộ sưu tập</span>
-            </button>
-            <button mat-menu-item>
-              <span>Hủy</span>
-            </button>
-          </mat-menu>
+                    </mat-menu>
 
-          <!-- </div> -->
-        </div>
-      </div>
-
-      <div class="chat-frame">
-
-        <div class="chat-messages-show-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-          <div class="chat-messages-show-list" id="message-list" *ngIf="this.recentConver">
-            <div *ngFor="let message of this.recentConver.conversation">
-              <app-sendermessage *ngIf="this.message.senderId == this.userInfo._id" [send_msg]="message.content">
-              </app-sendermessage>
-              <app-receivermessage *ngIf="this.message.senderId != this.userInfo._id" [receive_msg]="message.content">
-              </app-receivermessage>
+                    <!-- </div> -->
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="chat-messages-create-container">
-          <button class="chat-messages-option-button">
+
+            <div class="chat-frame">
+
+                <div class="chat-messages-show-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                    <div class="chat-messages-show-list" id="message-list" *ngIf="this.recentConver">
+                        <div *ngFor="let message of this.recentConver.conversation">
+                            <app-sendermessage *ngIf="this.message.senderId == this.userInfo._id" [send_msg]="message.content">
+                            </app-sendermessage>
+                            <app-receivermessage *ngIf="this.message.senderId != this.userInfo._id" [receive_msg]="message.content">
+                            </app-receivermessage>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-messages-create-container">
+                    <button class="chat-messages-option-button">
             <mat-icon style="color: #242526;">add</mat-icon>
           </button>
 
@@ -75,7 +75,7 @@
           <!-- <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message"
             (keyup.enter)="SendMessage()"> -->
 
-          <button class="chat-messages-create-button" (click)="SendMessage()">
+                    <button class="chat-messages-create-button" (click)="SendMessage()">
 
             <svg fill="#242526" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px"
               viewBox="0 0 512.005 512.005" width="15px" xmlns="http://www.w3.org/2000/svg">
@@ -87,21 +87,20 @@
           </button>
 
 
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- sender-chat -->
-    <div class="user-container">
-      <div class="find">
-        <!-- <img style="width: 30px; height: 30px;" src="../../../assets/images/search.svg" alt="search"> -->
-        <input class="search-input" type="text" placeholder="Seach">
+        <!-- sender-chat -->
+        <div class="user-container">
+            <div class="find">
+                <!-- <img style="width: 30px; height: 30px;" src="../../../assets/images/search.svg" alt="search"> -->
+                <input  class="search-input" type="text" placeholder="Seach">
 
-      </div>
-      <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
-        <app-chat-recent *ngFor="let conver of listConver; let i = index" [conversation]="conver"
-          (click)="getConverIndex(i)"></app-chat-recent>
-      </div>
+            </div>
+            <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
+                <app-chat-recent *ngFor="let conver of listConver; let i = index" [conversation]="conver" (click)="getConverIndex(i)"></app-chat-recent>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

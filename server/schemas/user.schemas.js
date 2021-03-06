@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema({
     friendListRequest: [String],
     conversations: [String],
     status :Boolean,
-    friendListRequest: [String]
 });
 
 module.exports = userSchema;

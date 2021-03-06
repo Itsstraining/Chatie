@@ -228,6 +228,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     }
     this.message = '';
   }
+  
 
   // updateScrollbar() {
   //   const element = document.getElementById("chat-messages-show-container");
@@ -235,4 +236,5 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   //   document.getElementById('message-list').appendChild(element);
 
   // }
+ 
 }
