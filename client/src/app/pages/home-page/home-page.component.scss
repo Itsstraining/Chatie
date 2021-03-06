@@ -74,31 +74,31 @@
  * BASE STYLES *
  ***************/
     /* Variables */
-    
-     :root {
-        --background-color: #fafafa;
-        --white: #ffffff;
-        --border-color: 112, 112, 112;
-        --placeholder-color: #837979;
-        --or-text: #8e8e8e;
-        --fb-logo: #385185;
-        --log-in-button: #0095f6;
-        --black: #262626;
-        --footer-links: #1e4f7c;
-        --copyright-gray: #bfbfbf;
+
+    :root {
+      --background-color: #fafafa;
+      --white: #ffffff;
+      --border-color: 112, 112, 112;
+      --placeholder-color: #837979;
+      --or-text: #8e8e8e;
+      --fb-logo: #385185;
+      --log-in-button: #0095f6;
+      --black: #262626;
+      --footer-links: #1e4f7c;
+      --copyright-gray: #bfbfbf;
     }
-    
+
     $blue: #63B2F3;
     ;
     $red: #CD594B;
     /* Overwrite browser defaults */
-    
+
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    
+
     h1,
     h2,
     h3,
@@ -106,283 +106,317 @@
     h5,
     h6,
     p {
-        font-weight: 400;
+      font-weight: 400;
     }
-    
+
     a {
-        text-decoration: none;
+      text-decoration: none;
     }
-    
+
     ul {
-        list-style-type: none;
+      list-style-type: none;
     }
-    
+
     html {
-        font-size: 62.5%;
+      font-size: 62.5%;
     }
-    
+
     body {
-        font-family: "Segoe";
-        background: var(--background-color);
+      font-family: "Segoe";
+      background: var(--background-color);
     }
+
     /********** 
    * LOG IN *
    **********/
     /* Log in container */
-    
+
     .log-in {
-        background: white;
-        width: 30rem;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border-style: solid;
-        border-width: 0.1rem;
-        border-radius: 5px;
-        border-color: rgba(112, 112, 112, 0.5);
-        padding: 1.5rem 4rem;
-        margin-top: 4rem;
-        margin-bottom: 2rem;
+      background: white;
+      width: 30rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-style: solid;
+      border-width: 0.1rem;
+      border-radius: 5px;
+      border-color: rgba(112, 112, 112, 0.5);
+      padding: 1.5rem 4rem;
+      margin-top: 4rem;
+      margin-bottom: 2rem;
     }
-    
+
     .sign-in-btn {
-        width: 100%;
-        font-size: 1.15rem;
-        background-color: $blue;
-        text-align: center;
-        border: 0.15rem solid $blue !important;
-        &:hover {
-            color: $blue;
-            background-color: white;
-        }
+      width: 100%;
+      font-size: 1.15rem;
+      background-color: $blue;
+      text-align: center;
+      border: 0.15rem solid $blue !important;
+
+      &:hover {
+        color: $blue;
+        background-color: white;
+      }
     }
+
     /* Logo */
-    
+
     .logo {
-        width: 19rem;
-        margin-bottom: 1rem;
+      width: 19rem;
+      margin-bottom: 1rem;
     }
+
     /* Log in form */
-    
+
     .log-in-form {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
     }
+
     /* Styles in common for the form fields and the login button*/
-    
+
     .log-in-form input,
     .mat-raised-button {
-        padding: 1rem 0 1rem 1rem;
-        border-radius: 0.5rem;
+      padding: 1rem 0 1rem 1rem;
+      border-radius: 0.5rem;
     }
+
     /* Styles in common for the form fields and their placeholders */
-    
+
     .log-in-form input,
     .log-in-form input::placeholder {
-        font-size: 1rem;
-        opacity: 60%;
-        // font-family: "Segoe";
+      font-size: 1rem;
+      opacity: 60%;
+      // font-family: "Segoe";
     }
+
     /* Form fields */
-    
+
     .log-in-form input {
-        background-color: #fafafa;
-        border-style: solid;
-        border-color: rgba(112, 112, 112, 0.5);
-        border-width: 0.1rem;
-        outline: none;
+      background-color: #fafafa;
+      border-style: solid;
+      border-color: rgba(112, 112, 112, 0.5);
+      border-width: 0.1rem;
+      outline: none;
     }
+
     /* Styles for the username text field */
-    
+
     .log-in-form input[type="text"] {
-        margin-bottom: 0.5rem;
+      margin-bottom: 0.5rem;
     }
+
     /* Placeholder for the text fields */
-    
+
     .log-in-form input::placeholder {
-        color: var(--placeholder-color);
+      color: var(--placeholder-color);
     }
+
     /* Styles for the text fields when they are focused */
-    
+
     .log-in-form input:focus {
-        border-color: rgba(var(--border-color), 0.8);
+      border-color: rgba(var(--border-color), 0.8);
     }
+
     /* Log in button */
-    
+
     .mat-raised-button {
-        // background-color: #0095f6;
-        color: white;
-        margin: 2rem 0;
-        // width: 100%;
-        font-weight: 700;
-        cursor: pointer;
-        outline: none;
-        border: none;
+      // background-color: #0095f6;
+      color: white;
+      margin: 2rem 0;
+      // width: 100%;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+      border: none;
     }
-    
+
     .login-with-serviceGG {
-        background-color: $red;
-        margin: 1rem 0.5rem 1rem 0;
-        padding: 0.3rem;
-        border-radius: 50%;
-        border: 0.15rem solid $red;
-        text-align: center;
-        height: 3rem;
-        width: 3rem;
-        outline: none;
-        cursor: pointer;
-        &:hover {
-            background-color: white;
-            svg {
-                fill: $red,
-            }
+      background-color: $red;
+      margin: 1rem 0.5rem 1rem 0;
+      padding: 0.3rem;
+      border-radius: 50%;
+      border: 0.15rem solid $red;
+      text-align: center;
+      height: 3rem;
+      width: 3rem;
+      outline: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: white;
+
+        svg {
+          fill: $red,
         }
+      }
     }
-    
+
     .login-with-serviceFB {
-        background-color: $blue;
-        margin: 1rem 0.5rem 1rem 0;
-        padding: 0.3rem;
-        border-radius: 50%;
-        border: 0.15rem solid $blue;
-        height: 3rem;
-        width: 3rem;
-        cursor: pointer;
-        text-align: center;
-        &:hover {
-            background-color: white;
-            svg {
-                fill: #63B2F3,
-            }
+      background-color: $blue;
+      margin: 1rem 0.5rem 1rem 0;
+      padding: 0.3rem;
+      border-radius: 50%;
+      border: 0.15rem solid $blue;
+      height: 3rem;
+      width: 3rem;
+      cursor: pointer;
+      text-align: center;
+
+      &:hover {
+        background-color: white;
+
+        svg {
+          fill: #63B2F3,
         }
+      }
     }
+
     /* OR divider */
-    
+
     .or-divider {
-        color: #8e8e8e;
-        font-weight: 700;
-        position: relative;
-        font-size: 1.2rem;
+      color: #8e8e8e;
+      font-weight: 700;
+      position: relative;
+      font-size: 1.2rem;
     }
-    
+
     .or-divider::before,
     .or-divider::after {
-        content: "";
-        display: block;
-        width: 11rem;
-        height: 0.1rem;
-        position: absolute;
-        background-color: rgba(112, 112, 112, 0.4);
-        top: 50%;
+      content: "";
+      display: block;
+      width: 11rem;
+      height: 0.1rem;
+      position: absolute;
+      background-color: rgba(112, 112, 112, 0.4);
+      top: 50%;
     }
-    
+
     .or-divider::before {
-        left: 3rem;
+      left: 3rem;
     }
-    
+
     .or-divider::after {
-        right: 3rem;
+      right: 3rem;
     }
+
     /* Forgot password? */
-    
+
     .forgot-password {
-        color: var(--fb-logo);
-        font-size: 1.2rem;
+      color: var(--fb-logo);
+      font-size: 1.2rem;
     }
+
     /********** 
    * SIGN UP *
    **********/
     /* Sign up container */
-    
+
     .sign-up {
-        background-color: white;
-        width: 35rem;
-        margin: 0 auto;
-        padding: 2rem;
-        text-align: center;
+      background-color: white;
+      width: 35rem;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
     }
+
     /* Don't have an account? */
-    
+
     .sign-up span {
-        font-size: 1.2rem;
-        margin-right: 0.5rem;
+      font-size: 1.2rem;
+      margin-right: 0.5rem;
     }
+
     /* Sign up link */
-    
+
     .sign-up a {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: #4B6BAF;
-        text-decoration: underline;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #4B6BAF;
+      text-decoration: underline;
     }
+
     /**********
  * TABLET *
  **********/
     /* These styles will be applied to devices that have a minimum width of 876px */
-    
+
     @media screen and (min-width: 876px) {
-        main {
-            display: flex;
-            margin-top: 2rem;
-            justify-content: center;
+      main {
+        display: flex;
+        margin-top: 2rem;
+        justify-content: center;
+      }
+
+      .phones-container {
+        display: initial;
+
+        .slide {
+          height: 336px;
+          width: 465px;
+          position: absolute;
+          margin: -386px auto 0 69px;
+          animation: slides 10s infinite;
         }
-        .phones-container {
-            display: initial;
-            .slide {
-                height: 336px;
-                width: 465px;
-                position: absolute;
-                margin: -386px auto 0 69px;
-                animation: slides 10s infinite;
-            }
-            @keyframes slides {
-                25% {
-                    background-image: url(../../../assets/images/logochatblue.png);
-                }
-                50% {
-                    background-image: url(../../../assets/images/mainlogo_auto_x2_toned.png);
-                }
-                75% {
-                    background-image: url(../../../assets/images/logochatie.png);
-                }
-                100% {
-                    background-image: url(../../../assets/images/chatieslide.png);
-                }
-            }
+
+        @keyframes slides {
+          25% {
+            background-image: url(../../../assets/images/logochatblue.png);
+          }
+
+          50% {
+            background-image: url(../../../assets/images/mainlogo_auto_x2_toned.png);
+          }
+
+          75% {
+            background-image: url(../../../assets/images/logochatie.png);
+          }
+
+          100% {
+            background-image: url(../../../assets/images/chatieslide.png);
+          }
         }
-        .log-in-container {
-            order: 1;
-        }
-        footer {
-            width: 100%;
-            justify-content: flex-start;
-            padding-left: 4rem;
-            padding-bottom: 4rem;
-        }
-        .footer-links {
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-        }
-        .footer-links li {
-            flex-basis: auto;
-            margin-right: 1rem;
-        }
-        .footer-links a {
-            margin-bottom: 0;
-        }
-        .copyright {
-            text-align: left;
-        }
+      }
+
+      .log-in-container {
+        order: 1;
+      }
+
+      footer {
+        width: 100%;
+        justify-content: flex-start;
+        padding-left: 4rem;
+        padding-bottom: 4rem;
+      }
+
+      .footer-links {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+      }
+
+      .footer-links li {
+        flex-basis: auto;
+        margin-right: 1rem;
+      }
+
+      .footer-links a {
+        margin-bottom: 0;
+      }
+
+      .copyright {
+        text-align: left;
+      }
     }
+
     /*********** 
    * DESKTOP *
    ***********/
-    
+
     @media screen and (min-width: 1527px) {
-        footer {
-            flex-direction: row;
-            justify-content: space-around;
-        }
+      footer {
+        flex-direction: row;
+        justify-content: space-around;
+      }
     }

@@ -14,6 +14,6 @@ server.use("/conversation", require('./router/conversation.router'));
 server.use("/user", require('./router/user.router'));
 server.use("/mess", require('./router/message.router'));
 server.use("/friend", require('./router/friend.router'));
-server.use("/upload", require('./router/upload.router'));
+// server.use("/upload", require('./router/upload.router'));
 
 module.exports = server;

@@ -1,3 +1,6 @@
+const express = require('express');
+const app = express();
+const bodyParser= require('body-parser')
 const server = require('./src/server');
 const config = require('./src/config');
 const multer = require('multer');
@@ -37,6 +40,45 @@ io.on('connection', (socket) => {
   //   console.log(data);
   //   io.emit('new-message', { message: data });
   // });
+});
+
+
+
+//khai báo kho lưu trữ multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+const upload = multer({ storage: storage })
+
+
+//Upload file và hình
+
+app.get('/getFile', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/hi', function (req, res) {
+  res.send('HI')
+})
+
+app.post('/uploadfile', upload.single('myFile'), (req, res,next) => {
+  const file = req.file;
+  console.log(file);
+  if(!file)
+  {
+    const error = new Error("Please upload a file");
+    error.httpStatusCode=400;
+    return next(error);
+  }
+  res.send(file , {
+    msg: 'File upload!',
+    file: `uploads/${req.file.fieldname}`
+  });
 });
 
 

@@ -1,18 +1,15 @@
 const app = require('express');
-const server = require('../server');
-const config = require('../config');
 const multer = require('multer');
 const path = require('path');
-const Database = require('../database');
-const mongoose = require('mongoose');
-const httpServer = require('../http');
-const io = require('../socketio')
+const router = app.Router();
+
+// const Database = require('../database');
+// const mongoose = require('mongoose');
+// const httpServer = require('../http');
+// const io = require('../socketio')
 // const cors = require('cors');
 // const MessageModel = require('./models/message.model');
 // const MessageModel = require('../../models/message.model')
-
-const router = app.Router();
-
 // server.use(cors);
 
 
@@ -25,13 +22,14 @@ const storage = multer.diskStorage({
       cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
   });
-  const upload = multer({
-    storage: storage
-  })
+  const upload = multer({ storage: storage });
   
-  
+  router.get('/hi', (req, res) => {
+      res.send('Hello!')
+  });
+
+
   //Upload file và hình
-  
   router.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
   });
