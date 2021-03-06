@@ -4,9 +4,13 @@ const Database = require('../database');
 const body = require('body-parser')
 const router = app.Router();
 
-router.get('/hi', (req, res) => {
-    res.send('hello')
-})
+ router.get('/search', (req, res) => {
+    const {id} = req.query;
+    let getById = Database.instance.User.findFriend(id);
+    res.send({
+        getById: getById
+    });
+});
 // router.post("/", async (req, res) => {
 //     const { email, displayname, avatar } = req.body;
 //     try {

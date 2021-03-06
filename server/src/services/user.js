@@ -126,6 +126,15 @@ class UserClass {
     async LoginWithEmail(newUser) {
         return await this.User.create(newUser);
     }
+///fiend Friend
+    
+    async findFriend(id)
+    {
+        mongoose.set('useNewUrlParser', true);
+        await this.User.Model.find({_id:{
+            $nin:friendList,
+        }},(err,result)=>{});
+    }
 }
 
 module.exports = UserClass;
