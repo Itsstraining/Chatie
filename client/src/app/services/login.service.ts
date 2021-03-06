@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginService {
   
-  public user: any;
+  public user: firebase.default.UserInfo;
   public newUser: any = null;
   public idToken;
   constructor(public auth: AngularFireAuth, private client: HttpClient) {
@@ -37,7 +37,7 @@ export class LoginService {
       });
       // //get user token
       // this.idToken = this.user.getIdToken();
-      let data = { email: this.user.email, avatar: this.user.photoURL };
+      let data = { email: this.user.email, userName: this.user.displayName, avatar: this.user.photoURL};
       await this.client
         .post(environment.endpoint + 'user/email',data)
         .subscribe((temp) => {
@@ -66,8 +66,8 @@ export class LoginService {
   {
     try{
       let result;
-      let registerUrl ="http://localhost:8080/user/check";
-      this.newUser = await this.client.get(registerUrl+"?email="+email+"&password="+password).toPromise();
+      // let registerUrl ="http://localhost:8080/user/check";
+      this.newUser = await this.client.get(environment.endpoint+`user/check?email=${email}&password=${password}`).toPromise();
       localStorage.setItem("user", JSON.stringify(this.newUser.user));
        return this.newUser;
     }catch(err){

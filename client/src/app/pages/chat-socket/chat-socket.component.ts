@@ -12,12 +12,21 @@ import { UserService } from 'src/app/services/user.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ConversationService } from 'src/app/services/conversation.service';
 
+
 @Component({
   selector: 'app-chat-socket',
   templateUrl: './chat-socket.component.html',
   styleUrls: ['./chat-socket.component.scss'],
 })
 export class ChatSocketComponent implements OnInit, AfterViewChecked {
+  public textArea: string = '';
+  public emojiArray = [];
+   public isEmojiPickerVisible: boolean;
+   public addEmoji(event) {
+      this.message = this.emojiArray.push(`${this.textArea}${event.emoji.native}`);
+      this.isEmojiPickerVisible = true;
+      
+   }
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   socket: any;
   message: any;
@@ -228,4 +237,16 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     this.sortRecentConver(this.listChat, this.recentConver.converId);
     this.message = '';
   }
+<<<<<<< HEAD
+=======
+  
+
+  // updateScrollbar() {
+  //   const element = document.getElementById("chat-messages-show-container");
+  //   element.scrollTop = element.scrollHeight;
+  //   document.getElementById('message-list').appendChild(element);
+
+  // }
+ 
+>>>>>>> 006efce5538b0bc4ee2b24ec5f9bffdfa3b83f52
 }

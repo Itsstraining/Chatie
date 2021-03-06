@@ -173,6 +173,7 @@ class UserClass {
     async LoginWithEmail(newUser) {
         return await this.User.create(newUser);
     }
+<<<<<<< HEAD
     //sort conversation base on recent update
     async sortRecentConver(userId, conversationId) {
         let tempUser = await this.getUserById(userId);
@@ -191,6 +192,16 @@ class UserClass {
         }, {
             conversations: tempUser.conversations
         })
+=======
+///fiend Friend
+    
+    async findFriend(id)
+    {
+        mongoose.set('useNewUrlParser', true);
+        await this.User.Model.find({_id:{
+            $nin:friendList,
+        }},(err,result)=>{});
+>>>>>>> 006efce5538b0bc4ee2b24ec5f9bffdfa3b83f52
     }
 }
 
