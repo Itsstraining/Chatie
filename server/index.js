@@ -20,6 +20,7 @@ io.on('connection', (socket) => {
   });
   // socket.emit('message-broadcast', 'this is some new data');
   socket.on('message', (msg) => {
+    console.log(msg)
     socket.broadcast.emit('message-broadcast', msg);
     Database.instance.Conversation.updateConversation(msg.userId, msg.conversationId, msg.message);
     Database.instance.User.sortRecentConver(msg.userId, msg.conversationId);
