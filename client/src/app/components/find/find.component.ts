@@ -32,7 +32,7 @@ export class FindComponent implements OnInit {
   userTemp:User[] = [];
   user:User[]=[];
   userName:String;
-  filteredOptions: Observable<User[]>;
+  
   public tempUrl;
   ngOnInit() {
    
@@ -53,6 +53,10 @@ export class FindComponent implements OnInit {
       });
     }
   }
+  // Add()
+  // {
+  //   let addfriend = await Database.instance.User.addFriend(id);
+  // }
   
   displayFn(user: User): string {
     return user && user.name ? user.name : '';
