@@ -23,7 +23,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   public emojiArray = [];
    public isEmojiPickerVisible: boolean;
    public addEmoji(event) {
-      this.message = this.emojiArray.push(`${this.textArea}${event.emoji.native}`);
+      this.message = `${this.textArea}${event.emoji.native}`;
       this.isEmojiPickerVisible = true;
       
    }

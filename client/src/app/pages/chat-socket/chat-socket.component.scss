@@ -118,13 +118,11 @@ $light-blue: #4290E4;
             height: 15%;
             display: flex;
             justify-content: center;
-
             .content-emoji {
                 height: 100%;
                 width: 82%;
                 display: flex;
                 justify-content: center;
-
                 .chat-messages-create-input {
                     border-width: 0px;
                     border-top-left-radius: 50px;
@@ -137,7 +135,6 @@ $light-blue: #4290E4;
                     background-color: $black;
                     color: white;
                 }
-
                 .emoji {
                     background-color: $black;
                     height: 2.45rem;
@@ -149,7 +146,6 @@ $light-blue: #4290E4;
                     border-bottom-right-radius: 50px;
                     outline: none;
                     cursor: pointer;
-
                     &:active {
                         svg {
                             fill: #ffffff;
@@ -157,9 +153,7 @@ $light-blue: #4290E4;
                     }
                 }
             }
-            
         }
-        
         .chat-messages-create-button {
             background-color: $light-blue;
             height: 38px;
@@ -170,7 +164,6 @@ $light-blue: #4290E4;
             border-radius: 50%;
             outline: none;
             cursor: pointer;
-
             &:active {
                 background-color: $light-blue;
                 opacity: 90%;
@@ -188,7 +181,6 @@ $light-blue: #4290E4;
             display: flex;
             justify-content: center;
             cursor: pointer;
-
             &:active {
                 background-color: $light-blue;
                 opacity: 90%;
@@ -251,7 +243,6 @@ $light-blue: #4290E4;
             }
         }
     }
-    
 }
 
 // .Emoji {
@@ -259,21 +250,19 @@ $light-blue: #4290E4;
 //     grid-template-columns: 100% 0%;
 //     width: 36%;
 // }
-
 // .emoji-mart emoji-mart-dark {
 //     width: 17.4rem;
 // }
-
 // section.emoji-mart.emoji-mart-dark {
 //     width: 0;
 // }
 
 /* mat-menu */
+
 // .mat-menu-content:not(:empty) {
 //     padding-top: 0;
 //     padding-bottom: 0;
 // }
-
 .mat-focus-indicator {
     padding-top: 8px;
     padding-bottom: 8px;
@@ -285,8 +274,42 @@ $light-blue: #4290E4;
     border-radius: 20px;
 }
 
-
-
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .file-upload {
+        height: 200px;
+        width: 200px;
+        border-radius: 100px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 4px solid #FFFFFF;
+        overflow: hidden;
+        background-image: linear-gradient(to bottom, #2590EB 50%, #FFFFFF 50%);
+        background-size: 100% 200%;
+        transition: all 1s;
+        color: #FFFFFF;
+        font-size: 100px;
+        input[type='file'] {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        &:hover {
+            background-position: 0 -100%;
+            color: #2590EB;
+        }
+    }
+}
 
 
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
