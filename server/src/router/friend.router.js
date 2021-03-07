@@ -5,7 +5,6 @@ const Database = require('../database');
 const router = app.Router();
 
 
-
 router.put("/addfriend", async (req, res) => {
     const { id, friendListRequest , accept } = req.body;
     try {
@@ -17,24 +16,15 @@ router.put("/addfriend", async (req, res) => {
 });
 
 router.put("/addfriendrequest", async (req, res) => {
-    const { id, friendId } = req.body;
+    const {userName, id, friendName } = req.body;
     try {
-        let sendFriendRequest = await Database.instance.User.addFriendRequest(id, friendId);
+        let sendFriendRequest = await Database.instance.User.addFriendRequest(userName, id, friendName);
         res.send({ message: sendFriendRequest });
     } catch (erro) {
         res.status(400).send({ message: `Cannot add` });
     }
 });
 
-router.get("/getusername", async (req,res)=>{
-    const {userName} = req.body;
-    try {
-        let getUserName = await Database.instance.User.addFriendRequest(id, friendId);
-        res.send({ message: getUserName });
-    } catch (erro) {
-        res.status(400).send({ message: `Cannot find` });
-    }
-})
 
 router.put("/delete", async (req, res) => {
     const { id, friendId } = req.body;
@@ -45,6 +35,7 @@ router.put("/delete", async (req, res) => {
         res.status(400).send({ message: `Cannot delete` });
     }
 });
+
 
 
 module.exports = router;

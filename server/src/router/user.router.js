@@ -15,13 +15,22 @@ const router = app.Router();
 
 
 router.get('/getusername',async (req, res) => {
-    const {userName} = req.query;
-    let getUserByUsername = await Database.instance.User.getUserByUsername(userName);
+    const {userName,id} = req.query;
+    let getUserByUsername = await Database.instance.User.getUserByUsername(userName,id);
     res.send({
         getUserByUsername:getUserByUsername
     });
 });
 
+router.put("/addfriendrequest", async (req, res) => {
+    const { userName,_id, friendName} = req.body;
+    try {
+        let sendFriendRequest = await Database.instance.User.addFriendRequest(userName,_id,friendName);
+        res.send({ message: sendFriendRequest });
+    } catch (erro) {
+        res.status(400).send({ message: `Cannot send` });
+    }
+});
 
 // router.post("/", async (req, res) => {
 //     const { email, displayname, avatar } = req.body;
@@ -47,14 +56,14 @@ router.get('/getusername',async (req, res) => {
 // });
 
 //create account for user use gmail
-router.post("/email", async (req, res) => {
+router.post("/createAccount", async (req, res) => {
     const { email, userName, avatar } = req.body;
     try {
         let allUser = await Database.instance.User.getAllUser();
         for (let i = 0; i < allUser.length; i++) {
-            if (email == (allUser[i]).email) {
+            if (email == (allUser[i]).email || userName == (allUser[i]).userName) {
                 res.send({
-                    message: 'This email is already existed',
+                    message: 'This email or username is already existed',
                 });
                 return;
             }
@@ -75,33 +84,33 @@ router.post("/email", async (req, res) => {
     }
 });
 
-router.post("/createAccount", async (req, res) => {
-    const { email, userName, password } = req.body;
-    try {
-        let allUser = await Database.instance.User.getAllUser();
-        for (let i = 0; i < allUser.length; i++) {
-            if (email == (allUser[i]).email) {
-                res.send({
-                    message: 'This email is already existed',
-                });
-                return;
-            }
-        }
-        let displayname = '';
-        console.log(email)
-        let test = new UserModel(email, userName, '', password);
-        console.log(test.userName)
-        let user = await Database.instance.User.createUser(test);
-        console.log(user)
-        res.send({
-            message: user,
-        });
-    } catch (err) {
-        res.send({
-            message: 'Can not create account',
-        })
-    }
-});
+// router.post("/createAccount", async (req, res) => {
+//     const { email, userName, password } = req.body;
+//     try {
+//         let allUser = await Database.instance.User.getAllUser();
+//         for (let i = 0; i < allUser.length; i++) {
+//             if (email == (allUser[i]).email) {
+//                 res.send({
+//                     message: 'This email is already existed',
+//                 });
+//                 return;
+//             }
+//         }
+//         let displayname = '';
+//         console.log(email)
+//         let test = new UserModel(email, userName, '', password);
+//         console.log(test.userName)
+//         let user = await Database.instance.User.createUser(test);
+//         console.log(user)
+//         res.send({
+//             message: user,
+//         });
+//     } catch (err) {
+//         res.send({
+//             message: 'Can not create account',
+//         })
+//     }
+// });
 router.get("/check", async (req, res) => {
     try {
         const { email, password } = req.query;

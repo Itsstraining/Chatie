@@ -23,6 +23,7 @@ import { DialogUnfriendComponent } from './components/dialog-unfriend/dialog-unf
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -37,6 +38,7 @@ import { LoginService } from './services/login.service';
 import { PushnotifyingComponent } from './components/pushnotifying/pushnotifying.component';
 
 import { NotiComponent } from './components/noti/noti.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { OptionComponent } from './components/option/option.component';
 
 
@@ -52,7 +54,6 @@ import { OptionComponent } from './components/option/option.component';
     DialogSettingprofileComponent,
     FindComponent,
     PushnotifyingComponent,
-
     NotiComponent,
     OptionComponent,
   ],
@@ -71,13 +72,15 @@ import { OptionComponent } from './components/option/option.component';
     MatAutocompleteModule,
     MatInputModule,
     MatDividerModule,
+    MatSlideToggleModule,
     
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [LoginService],

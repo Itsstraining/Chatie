@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  ElementRef,
-  ViewChild,
-  AfterViewChecked,
-  OnChanges,
-  SimpleChanges,
+import {  Component, OnInit,  Output,  ElementRef,  ViewChild,  AfterViewChecked,  EventEmitter, DoCheck
 } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
@@ -28,9 +20,10 @@ import { ConversationService } from 'src/app/services/conversation.service';
 })
 export class ChatSocketComponent implements OnInit, AfterViewChecked {
   public textArea: string = '';
+  public emojiArray = [];
    public isEmojiPickerVisible: boolean;
    public addEmoji(event) {
-      this.textArea = `${this.textArea}${event.emoji.native}`;
+      this.message = this.emojiArray.push(`${this.textArea}${event.emoji.native}`);
       this.isEmojiPickerVisible = true;
       
    }
@@ -45,10 +38,11 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   public conversation = [];
   public recentConver: any;
   public recentConverIndex: any;
+  public isClickedIndex: boolean = false;
 
   @Output() public converIndexInfo: any;
-  @Output() public receive_msg: any;
-  @Output() public send_msg: any;
+  // @Output() public isClickedIndex: boolean = false
+  // @Output() public newMessage: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     public socketIo: ChatsocketioService,
@@ -59,7 +53,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   ) {
     this.userInfo = this.userService.user;
   }
-
+  
   ngOnInit(): void {
     if (this.auth.user) {
       this.socketIo.listen('message-broadcast').subscribe((data) => {
@@ -75,6 +69,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     this.scrollToBottom();
+    this.listConver;
   }
   public openDialogUnfriend(): void {
     const dialogRef = this.dialog.open(DialogUnfriendComponent, {
@@ -111,16 +106,18 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     await this.getAllConverInfo(this.listConver);
     if (this.isClicked == false) {
       if (this.userInfo.conversations.length != 0) {
-        let temp = this.listConver[0];
+        let temp = this.listChat[0];
         for (let i = 0; i < temp.participants.length; i++) {
           if (this.userInfo._id != temp.participants[i]) {
             let tempUser = await this.userService.getUserById(
               temp.participants[i]
             );
+            this.isClickedIndex = true;
+            temp.isClicked = this.isClickedIndex;
             this.recentFriendChat = tempUser;
           }
         }
-        await this.getConverIndexContent(temp._id);
+        this.recentConver = temp;
       }
     }
   }
@@ -148,33 +145,29 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
       await this.getAllMessage(listConver[i]._id);
       this.listChat.push({
         converId: listConver[i]._id,
+        participants: listConver[i].participants,
+        listFile: listConver[i].listFile,
         conversation: this.conversation,
+        isClicked: this.isClickedIndex,
       });
     }
   }
 
   //get conversation information(list mess and receiver info) at index (when click on the list conversations)
   public async getConverIndex(index) {
-    let temp = this.listConver[index];
+    let temp = this.listChat[index];
     for (let i = 0; i < temp.participants.length; i++) {
       if (this.userInfo._id != temp.participants[i]) {
         let tempUser = await this.userService.getUserById(temp.participants[i]);
         this.recentFriendChat = tempUser;
+        this.isClickedIndex = true;
+        temp.isClicked = this.isClickedIndex;
       }
     }
-    this.getConverIndexContent(temp._id);
+    this.recentConver = temp;
     this.isClicked = true;
   }
 
-  //get the conversation message between people
-  public async getConverIndexContent(conversationId) {
-    for (let i = 0; i < this.listChat.length; i++) {
-      if (conversationId == this.listChat[i].converId) {
-        this.recentConver = this.listChat[i];
-        return;
-      }
-    }
-  }
 
   //get the content message
   public async getAllMessage(conversationMessList) {
@@ -191,8 +184,23 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  //sort again after chat
+  public sortRecentConver(listChat, conversationId){
+    for(let i = 0; i < listChat.length; i++){
+      if(conversationId == listChat[i].converId){
+        let temp = listChat[0];
+        listChat[0] = listChat[i];
+        listChat[i] = temp;
+      }
+    }
+  }
+
+  public hasRead(read){
+    this.isClickedIndex = read;
+  }
+
   async getReceiveMsg() {
-    this.socketIo.socket.on('message-broadcast', (data) => {
+    this.socketIo.socket.on('message-broadcast',async (data) => {
       if (data) {
         for (let i = 0; i < this.listChat.length; i++) {
           if (data.conversationId == this.listChat[i].converId) {
@@ -203,6 +211,8 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
             });
           }
         }
+        // this.receive_msg = data.mesage;
+        this.sortRecentConver(this.listChat, data.conversationId);
       }
     });
   }
@@ -214,7 +224,8 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     this.socketIo.sendMessage(
       this.message,
       this.userInfo._id,
-      this.recentConver.converId
+      this.recentConver.converId,
+      this.recentFriendChat._id
     );
     for (let i = 0; i < this.listChat.length; i++) {
       if (this.recentConver.converId == this.listChat[i].converId) {
@@ -225,15 +236,8 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
         });
       }
     }
+    
+    this.sortRecentConver(this.listChat, this.recentConver.converId);
     this.message = '';
   }
-  
-
-  // updateScrollbar() {
-  //   const element = document.getElementById("chat-messages-show-container");
-  //   element.scrollTop = element.scrollHeight;
-  //   document.getElementById('message-list').appendChild(element);
-
-  // }
- 
 }

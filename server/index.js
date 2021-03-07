@@ -1,3 +1,6 @@
+const express = require('express');
+const app = express();
+const bodyParser= require('body-parser')
 const server = require('./src/server');
 const config = require('./src/config');
 const multer = require('multer');
@@ -20,12 +23,10 @@ io.on('connection', (socket) => {
   });
   // socket.emit('message-broadcast', 'this is some new data');
   socket.on('message', (msg) => {
-    console.log(msg);
-    // for(let i = 0; i < msg.conversationId.participants.length; i++){
-    //   socket.to(msg.conversationId.participants[i]).emit('message-broadcast', msg.message)
-    // }
     socket.broadcast.emit('message-broadcast', msg);
     Database.instance.Conversation.updateConversation(msg.userId, msg.conversationId, msg.message);
+    Database.instance.User.sortRecentConver(msg.userId, msg.conversationId);
+    Database.instance.User.sortRecentConver(msg.receiverId, msg.conversationId);
   });
 
   // socket.emit('update-conversation',)
@@ -39,6 +40,8 @@ io.on('connection', (socket) => {
   // });
 });
 
+
+
 //khai báo kho lưu trữ multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -48,9 +51,7 @@ const storage = multer.diskStorage({
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }
 });
-const upload = multer({
-  storage: storage
-})
+const upload = multer({ storage: storage })
 
 
 //Upload file và hình
@@ -59,19 +60,26 @@ server.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-server.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
+server.get('/hi', function (req, res) {
+  res.send('HI')
+})
+
+server.post('/uploadfile', upload.single('myFile'), (req, res,next) => {
   const file = req.file;
   console.log(file);
-  if (!file) {
+  if(!file)
+  {
     const error = new Error("Please upload a file");
-    error.httpStatusCode = 400;
+    error.httpStatusCode=400;
     return next(error);
   }
-  res.send(file, {
+  res.send(file , {
     msg: 'File upload!',
-    file: `uploads/${req.file.fieldname}`
+    file: `/uploads/${req.file.fieldname}`
   });
 });
+
+
 
 //connect DB
 async function main() {
