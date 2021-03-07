@@ -3,10 +3,11 @@ class UserModel {
     /**
      * 
      * @param {String} email 
+     * @param {String} userName 
      * @param {String} displayname 
      * @param {String} password 
      */
-    constructor(email, displayname, avatar, password)
+    constructor(email, displayname, avatar, password,userName)
     {
         this.email = email;
         this.userName = displayname;
