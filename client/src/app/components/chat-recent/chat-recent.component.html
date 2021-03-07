@@ -1,12 +1,13 @@
 <div class="personal" *ngIf="this.receiverInfo" [ngStyle] = "{'background-color': this.conversation.isClickedIndex == true? 'rgba(112, 112, 112, 0.5)' : '#242526'}" >
   <div class="personal-image">
-    <div class="images" style="background-image: url('../../../assets/images/avatar-1.jpg');">
+    <div class="images" style="background-image: url('{{this.receiverInfo.avatar}}');">
       <div class="status" *ngIf="this.receiverInfo.status">
 
       </div>
       <div class="status" *ngIf="!this.receiverInfo.status" style="background-color: #CD594B">
 
       </div>
+      <!-- <img src="../../../assets/images/avatar-1.jpg" alt="name"> -->
     </div>
 
   </div>

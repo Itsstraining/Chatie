@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { DialogSettingprofileComponent } from '../dialog-settingprofile/dialog-settingprofile.component';
@@ -13,14 +13,20 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit{
 
   public user: any;
-  constructor(public auth: LoginService, private router: Router, public dialog: MatDialog , public use:UserService) { 
+  constructor(public auth: LoginService, private router: Router, public dialog: MatDialog , public userService: UserService,) {
+    console.log(this.auth.user)
+    if(this.auth.user){
+      this.getUserInfos()
+      
+    console.log(this.user)
+    }; 
   }
 
   ngOnInit(): void {
-    this.user=this.auth.user;
+    
   }
 
   public openDialog() {
@@ -47,6 +53,13 @@ export class NavbarComponent implements OnInit {
       // height: '75%'
     });
   }
+
+  //get all user information
+  public async getUserInfos() {
+    await this.userService.getUserInfo(this.auth.user.email);
+    this.user = this.userService.user;
+  }
+
   
   async LogOut() {
     await this.auth.LogOut();

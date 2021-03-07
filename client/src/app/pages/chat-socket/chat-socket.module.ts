@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { ChatSocketRoutingModule } from './chat-socket-routing.module';
 import { ChatSocketComponent } from './chat-socket.component';
-import { ConversationComponent } from '../../components/conversation/conversation.component'
-
 import { FormsModule } from '@angular/forms'
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';

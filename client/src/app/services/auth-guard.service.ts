@@ -23,6 +23,7 @@ export class AuthGuardService implements CanActivate {
         console.log(this.login.newUser.user)
         return true
       }
+      
     return this.login.auth.authState.pipe(
       map((usr) => {
         if (usr != null) {

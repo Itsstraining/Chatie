@@ -181,12 +181,9 @@ class UserClass {
         let tempUser = await this.getUserById(userId);
         for (let i = 0; i < tempUser.conversations.length; i++) {
             if (conversationId == tempUser.conversations[i] && i != 0) {
-                console.log(tempUser.conversations)
-                console.log(tempUser.conversations[0])
                 let temp = tempUser.conversations[0];
                 tempUser.conversations[0] = tempUser.conversations[i];
                 tempUser.conversations[i] = temp;
-                console.log(tempUser.conversations[0])
             }
         }
         await this.User.findByIdAndUpdate({

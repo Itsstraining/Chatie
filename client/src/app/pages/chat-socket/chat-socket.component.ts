@@ -4,15 +4,13 @@ import {
   Output,
   ElementRef,
   ViewChild,
-  AfterViewChecked,
+  AfterContentChecked,
   EventEmitter,
-  DoCheck,
+  OnChanges,
 } from '@angular/core';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
 import {MatDialog} from '@angular/material/dialog';
 import * as io from 'socket.io-client/dist/socket.io';
-import { DialogUnfriendComponent } from 'src/app/components/dialog-unfriend/dialog-unfriend.component';
-import { DialogBlockComponent } from 'src/app/components/dialog-block/dialog-block.component';
 
 import { UserService } from 'src/app/services/user.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -23,31 +21,26 @@ import { ConversationService } from 'src/app/services/conversation.service';
   templateUrl: './chat-socket.component.html',
   styleUrls: ['./chat-socket.component.scss'],
 })
-export class ChatSocketComponent implements OnInit, AfterViewChecked {
-  public textArea: string = '';
-  public emojiArray = [];
-  public isEmojiPickerVisible: boolean;
+export class ChatSocketComponent implements OnInit{
 
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   socket: any;
-  message: any;
   userInfo: any;
   public listConver = [];
   public listChat = [];
   public isClicked: boolean = false;
   public recentFriendChat: any;
   public conversation = [];
-  public recentConver: any;
+  @Output() public recentConver: any;  
+  @Output() public converIndexInfo: any;
   public recentConverIndex: any;
 
-  @Output() public converIndexInfo: any;
-
+  // @ViewChild ('newMess') newMessInConver;
   constructor(
     public socketIo: ChatsocketioService,
     public userService: UserService,
     public auth: LoginService,
     private conversationService: ConversationService,
-    public dialog: MatDialog
+
   ) {
     this.userInfo = this.userService.user;
   }
@@ -59,47 +52,22 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
       });
       this.getReceiveMsg();
       this.checkUser();
-      this.scrollToBottom();
+      // this.scrollToBottom();
     }
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-    this.listConver;
-  }
-  public addEmoji(event) {
-    this.message = this.emojiArray.push(
-      `${this.textArea}${event.emoji.native}`
-    );
-    this.isEmojiPickerVisible = true;
-  }
+  // ngOnChanges() {
+  //   console.log(this.recentConver._id)
+  //   this.sortRecentConver(this.listChat, this.recentConver._id);
+  // }
 
-  public openDialogUnfriend(): void {
-    const dialogRef = this.dialog.open(DialogUnfriendComponent, {
-      // data : {name : this.name, avatar: this.avatar}
-    });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  public openDialogBlock(): void {
-    const dialogRef = this.dialog.open(DialogBlockComponent, {
-      // data : {name : this.name, avatar: this.avatar}
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  scrollToBottom(): void {
-    try {
-      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch (err) {}
-  }
+  // scrollToBottom(): void {
+  //   try {
+  //     this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+  //   } catch (err) {}
+  // }
 
   //all function about the content of the chat page
   public async checkUser() {
@@ -109,7 +77,6 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     if (this.isClicked == false) {
       if (this.userInfo.conversations.length != 0) {
         this.listChat[0].isClickedIndex = true;
-        this.recentFriendChat = this.listChat[0].participants;
         this.recentConver = this.listChat[0];
       }
     }
@@ -159,7 +126,6 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     for (let i = 0; i < this.listChat.length ; i++) {
       if (i == index) {
         this.listChat[i].isClickedIndex = true;
-        this.recentFriendChat = this.listChat[i].participants;
         this.recentConver = this.listChat[i];
         continue;
       }
@@ -179,6 +145,12 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
         content: temp[i].content,
         date: temp[i].date,
       });
+    }
+  }
+
+  public newMess(event){
+    if(event){
+      this.sortRecentConver(this.listChat, event)
     }
   }
 
@@ -205,32 +177,10 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
             });
           }
         }
+        // this.receive_msg = data.mesage;
         this.sortRecentConver(this.listChat, data.conversationId);
       }
     });
   }
 
-  SendMessage() {
-    if (this.message == '' || this.message == null) {
-      return;
-    }
-    this.socketIo.sendMessage(
-      this.message,
-      this.userInfo._id,
-      this.recentConver.converId,
-      this.recentFriendChat._id
-    );
-    for (let i = 0; i < this.listChat.length; i++) {
-      if (this.recentConver.converId == this.listChat[i].converId) {
-        this.listChat[i].conversation.push({
-          senderId: this.userInfo._id,
-          content: this.message,
-          date: Date.now(),
-        });
-      }
-    }
-
-    this.sortRecentConver(this.listChat, this.recentConver.converId);
-    this.message = '';
-  }
 }
