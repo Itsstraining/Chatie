@@ -54,8 +54,12 @@
           </div>
         </div>
         <div class="chat-messages-create-container">
-          <button class="chat-messages-option-button">
+          <button class="chat-messages-option-button" [matMenuTriggerFor]="aboveMenu">
             <mat-icon style="color: #242526;">add</mat-icon>
+            <mat-menu #aboveMenu="matMenu" yPosition="above">
+              <!-- <button mat-menu-item type="file" name="myFile">Insert File</button> -->
+              <!-- <input mat-menu-item type="file" name="myFile" size="60" /> -->
+            </mat-menu>
           </button>
 
           <div class="content-emoji">

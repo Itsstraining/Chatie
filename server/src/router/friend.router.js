@@ -15,7 +15,7 @@ router.put("/addfriend", async (req, res) => {
     }
 });
 
-router.put("/addfriendrequest", async (req, res) => {
+router.post("/addfriendrequest", async (req, res) => {
     const { id, friendId } = req.body;
     try {
         let sendFriendRequest = await Database.instance.User.addFriendRequest(id, friendId);
@@ -25,7 +25,7 @@ router.put("/addfriendrequest", async (req, res) => {
     }
 });
 
-router.put("/delete", async (req, res) => {
+router.delete("/", async (req, res) => {
     const { id, friendId } = req.body;
     try {
         let Deletefriend = await Database.instance.DeleteFriend(id, friendId);

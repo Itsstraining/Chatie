@@ -14,6 +14,8 @@ import { from } from 'rxjs';
 import { ChatRecentComponent } from '../../components/chat-recent/chat-recent.component';
 import { SendermessageComponent } from '../../components/sendermessage/sendermessage.component';
 import { ReceivermessageComponent } from '../../components/receivermessage/receivermessage.component';
+import { OptionComponent } from '../../components/option/option.component';
+
 
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
@@ -21,7 +23,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 
 @NgModule({
-    declarations: [ChatSocketComponent ,ChatRecentComponent, SendermessageComponent, ReceivermessageComponent],
+    declarations: [ChatSocketComponent ,ChatRecentComponent, SendermessageComponent, ReceivermessageComponent, OptionComponent],
   imports: [
     CommonModule,
     ChatSocketRoutingModule,
