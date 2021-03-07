@@ -11,6 +11,27 @@ const router = app.Router();
         getById: getById
     });
 });
+
+
+
+router.get('/getusername',async (req, res) => {
+    const {userName,id} = req.query;
+    let getUserByUsername = await Database.instance.User.getUserByUsername(userName,id);
+    res.send({
+        getUserByUsername:getUserByUsername
+    });
+});
+
+router.put("/addfriendrequest", async (req, res) => {
+    const { userName,_id, friendName} = req.body;
+    try {
+        let sendFriendRequest = await Database.instance.User.addFriendRequest(userName,_id,friendName);
+        res.send({ message: sendFriendRequest });
+    } catch (erro) {
+        res.status(400).send({ message: `Cannot send` });
+    }
+});
+
 // router.post("/", async (req, res) => {
 //     const { email, displayname, avatar } = req.body;
 //     try {
@@ -35,14 +56,19 @@ const router = app.Router();
 // });
 
 //create account for user use gmail
+<<<<<<< HEAD
 router.post("/email", async (req, res) => {
     const { email, userName } = req.body;
+=======
+router.post("/createAccount", async (req, res) => {
+    const { email, userName, avatar } = req.body;
+>>>>>>> df57cb138d7b9597f4e8002721fcb0bf70873b9b
     try {
         let allUser = await Database.instance.User.getAllUser();
         for (let i = 0; i < allUser.length; i++) {
-            if (email == (allUser[i]).email) {
+            if (email == (allUser[i]).email || userName == (allUser[i]).userName) {
                 res.send({
-                    message: 'This email is already existed',
+                    message: 'This email or username is already existed',
                 });
                 return;
             }
@@ -60,6 +86,7 @@ router.post("/email", async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
 router.post("/createAccount", async (req, res) => {
     const { email, userName, password } = req.body;
     try {
@@ -84,6 +111,35 @@ router.post("/createAccount", async (req, res) => {
         })
     }
 });
+=======
+// router.post("/createAccount", async (req, res) => {
+//     const { email, userName, password } = req.body;
+//     try {
+//         let allUser = await Database.instance.User.getAllUser();
+//         for (let i = 0; i < allUser.length; i++) {
+//             if (email == (allUser[i]).email) {
+//                 res.send({
+//                     message: 'This email is already existed',
+//                 });
+//                 return;
+//             }
+//         }
+//         let displayname = '';
+//         console.log(email)
+//         let test = new UserModel(email, userName, '', password);
+//         console.log(test.userName)
+//         let user = await Database.instance.User.createUser(test);
+//         console.log(user)
+//         res.send({
+//             message: user,
+//         });
+//     } catch (err) {
+//         res.send({
+//             message: 'Can not create account',
+//         })
+//     }
+// });
+>>>>>>> df57cb138d7b9597f4e8002721fcb0bf70873b9b
 router.get("/check", async (req, res) => {
     try {
         const { email, password } = req.query;
@@ -138,12 +194,11 @@ router.get("/", async (req, res) => {
 
 //update user info
 router.put("/updateUser", async (req, res) => {
-    const { id, userName, avatar} = req.body;
+    const { id, email, displayname, avatar, status } = req.body;
     try {
-        let user = await Database.instance.User.updateProfile(id, userName, avatar);
+        await Database.instance.User.updateProfile(id, email, displayname, avatar, status);
         res.send({
-            message: "Update successfully",
-            user: user
+            message: "Update successfully"
         });
     } catch (erro) {
         res.status(400).send({
@@ -168,6 +223,16 @@ router.delete("/", async (req, res) => {
     }
 });
 
+// router.put("/updateUser", async (req, res) => {
+//     const { email, displayname, avatar, status } = req.body;
+//     try {
+//         await Database.instance.getUserMailandupdate(email, displayname, avatar, status);
+//         res.send({ message: `Update ${email}` });
+//     } catch (erro) {
+//         res.status(400).send({ message: `Cannot Update[${email}]` });
+//     }
+
+// });
 
 // router.post("/email", async (req, res) => {
 //     const { email } = req.body;
@@ -211,6 +276,7 @@ router.delete("/", async (req, res) => {
 //         message: getemail
 //     });
 // });
+
 
 
 
