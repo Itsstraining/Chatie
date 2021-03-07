@@ -1,9 +1,9 @@
-<div class="setting">
+<div class="setting" *ngIf="this.userInfo">
     <div class="profile">
         <h1 style="font-size: xx-large; margin-bottom: 30px;"><b>SETTING PROFILE</b></h1>
         <div class="img">
             <img style="border-radius: 50%;" src="../../../assets/images/avatar-1.jpg">
-            <h1>_Trungchoido </h1>
+            <h1>{{this.userInfo.userName}}</h1>
 
         </div>
     </div>
@@ -11,25 +11,25 @@
     <div class="form">
         <form class="example-form">
             <mat-form-field class="example-full-width">
-                <mat-label>Input new email</mat-label>
-                <input matInput placeholder="Ex. NguyenVanA@example.com" />
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Ex. NguyenVanA@example.com" [value] = "this.userInfo.email"  disabled/>
             </mat-form-field>
             <mat-form-field class="example-full-width">
-                <mat-label>Input new name</mat-label>
-                <input matInput placeholder="Ex. Nguyen Van A" />
+                <mat-label>UserName</mat-label>
+                <input type="text" matInput placeholder="Ex. Nguyen Van A" [value] = "this.userInfo.userName" [(ngModel)]="userName"/>
             </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>Input new password</mat-label>
-                <input matInput placeholder="Ex. Nguyen Van A" />
+            <!-- <mat-form-field class="example-full-width">
+                <mat-label>Nhập vào mật khẩu mới</mat-label>
+                <input type="password" matInput placeholder="Ex. Nguyen Van A" />
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Input repeat new password</mat-label>
                 <input matInput placeholder="Ex. Nguyen Van A" />
-            </mat-form-field>
+            </mat-form-field> -->
         </form>
     </div>
     <div class="button">
-        <button mat-raised-button color="warn">Accept</button>
+        <button mat-raised-button color="warn" (click)="updateProfile()">Accept</button>
         <button mat-raised-button target="_blank" (click)="onNoClick()">Cancel</button>
     </div>
 </div>

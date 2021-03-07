@@ -144,11 +144,12 @@ router.get("/", async (req, res) => {
 
 //update user info
 router.put("/updateUser", async (req, res) => {
-    const { id, email, displayname, avatar, status } = req.body;
+    const { id, userName, avatar} = req.body;
     try {
-        await Database.instance.User.updateProfile(id, email, displayname, avatar, status);
+        let user = await Database.instance.User.updateProfile(id, userName, avatar);
         res.send({
-            message: "Update successfully"
+            message: "Update successfully",
+            user: user
         });
     } catch (erro) {
         res.status(400).send({
@@ -173,16 +174,6 @@ router.delete("/", async (req, res) => {
     }
 });
 
-// router.put("/updateUser", async (req, res) => {
-//     const { email, displayname, avatar, status } = req.body;
-//     try {
-//         await Database.instance.getUserMailandupdate(email, displayname, avatar, status);
-//         res.send({ message: `Update ${email}` });
-//     } catch (erro) {
-//         res.status(400).send({ message: `Cannot Update[${email}]` });
-//     }
-
-// });
 
 // router.post("/email", async (req, res) => {
 //     const { email } = req.body;

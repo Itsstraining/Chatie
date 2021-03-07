@@ -18,6 +18,12 @@
               <mat-icon>manage_accounts</mat-icon>
               <span>Setting profile</span>
             </button>
+            <div mat-menu-item>
+              <mat-slide-toggle (click)="$event.stopPropagation();">Status</mat-slide-toggle>
+            </div>
+            <div mat-menu-item>
+              <mat-slide-toggle (click)="$event.stopPropagation();">Dark mode</mat-slide-toggle>
+            </div>
             <button *ngIf="this.auth.user != undefined" mat-menu-item (click)="LogOut()">
               <mat-icon>logout</mat-icon>
               <span>Logout</span>

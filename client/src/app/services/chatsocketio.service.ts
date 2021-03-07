@@ -30,11 +30,8 @@ export class ChatsocketioService {
   }
 
   public setupSocketConnection() {
-    console.log("vao duoc 2")
     try{
       this.socket.on('message-broadcast', (data) => {
-      
-        console.log("vao duoc 3")
           if (data) {
             // const element = document.createElement('li');
             // element.innerHTML = data;
@@ -43,7 +40,6 @@ export class ChatsocketioService {
             // element.style.margin = '10px';
             // document.getElementById('message-list').appendChild(element);
             this.received_msg = data;
-            console.log(this.received_msg)
           }
         });
     }catch(er){
@@ -51,10 +47,9 @@ export class ChatsocketioService {
     }
   }
 
-  public sendMessage(message, senderId, conversationId) {
-    this.socket.emit('message', {message: message, userId: senderId, conversationId: conversationId});
+  public sendMessage(message, senderId, conversationId, receiverId) {
+    this.socket.emit('message', {message: message, userId: senderId, conversationId: conversationId, receiverId: receiverId});
     this.send_msg = message;
-    console.log(message)
     message = ''
     // message = '';
     // const element = document.createElement('li');
