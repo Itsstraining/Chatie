@@ -39,7 +39,6 @@ import { PushnotifyingComponent } from './components/pushnotifying/pushnotifying
 
 import { NotiComponent } from './components/noti/noti.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { OptionComponent } from './components/option/option.component';
 
 
 @NgModule({
@@ -55,7 +54,6 @@ import { OptionComponent } from './components/option/option.component';
     FindComponent,
     PushnotifyingComponent,
     NotiComponent,
-    OptionComponent,
   ],
   imports: [
     BrowserModule,
