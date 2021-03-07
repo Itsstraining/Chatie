@@ -36,7 +36,7 @@ const router = app.Router();
 
 //create account for user use gmail
 router.post("/email", async (req, res) => {
-    const { email, userName, avatar } = req.body;
+    const { email, userName } = req.body;
     try {
         let allUser = await Database.instance.User.getAllUser();
         for (let i = 0; i < allUser.length; i++) {
@@ -47,12 +47,9 @@ router.post("/email", async (req, res) => {
                 return;
             }
         }
-        let displayname = '';
-        console.log(email)
+        let avatar = 'https://i1.sndcdn.com/avatars-000480605109-m7g7ci-t500x500.jpg';
         let test = new UserModel(email, userName, avatar, '');
-        console.log(test.email)
         let user = await Database.instance.User.createUser(test);
-        console.log(user)
         res.send({
             message: user,
         });
@@ -75,12 +72,9 @@ router.post("/createAccount", async (req, res) => {
                 return;
             }
         }
-        let displayname = '';
-        console.log(email)
-        let test = new UserModel(email, userName, '', password);
-        console.log(test.userName)
+        let avatar = 'https://i1.sndcdn.com/avatars-000480605109-m7g7ci-t500x500.jpg';
+        let test = new UserModel(email, userName, avatar, password);
         let user = await Database.instance.User.createUser(test);
-        console.log(user)
         res.send({
             message: user,
         });

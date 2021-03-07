@@ -31,6 +31,7 @@ export class ChatContentComponent implements OnInit, OnChanges {
   public textArea: string = '';
   public emojiArray = [];
   public recentFriendChat: any;
+  private selectedFile: File;
 
   @Output() public newMess: EventEmitter<any> = new EventEmitter<any>();
 
@@ -67,6 +68,12 @@ export class ChatContentComponent implements OnInit, OnChanges {
     } catch (err) {}
   }
 
+  //send file
+  onFileSelect(event) {
+    this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile.name);
+  }
+
   public addEmoji(event) {
     this.message += `${this.textArea}${event.emoji.native}`
     this.isEmojiPickerVisible = true;
@@ -93,19 +100,6 @@ export class ChatContentComponent implements OnInit, OnChanges {
       console.log('The dialog was closed');
     });
   }
-
-  // async getReceiveMsg() {
-  //   this.socketIo.socket.on('message-broadcast', async (data) => {
-  //     if (data) {
-  //       this.recentConver.conversation.push({
-  //         senderId: data.userId,
-  //         content: data.message,
-  //         date: Date.now(),
-  //       });
-  //       this.newMess.emit(this.recentConver.converId);
-  //     }
-  //   });
-  // }
 
   SendMessage() {
     if (this.message == '' || this.message == null) {
