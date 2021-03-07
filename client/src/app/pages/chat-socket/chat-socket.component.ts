@@ -1,9 +1,15 @@
-import {  Component, OnInit,  Output,  ElementRef,  ViewChild,  AfterViewChecked,  EventEmitter, DoCheck
+import {
+  Component,
+  OnInit,
+  Output,
+  ElementRef,
+  ViewChild,
+  AfterViewChecked,
+  EventEmitter,
+  DoCheck,
 } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import * as io from 'socket.io-client/dist/socket.io';
 import { DialogUnfriendComponent } from 'src/app/components/dialog-unfriend/dialog-unfriend.component';
 import { DialogBlockComponent } from 'src/app/components/dialog-block/dialog-block.component';
@@ -11,7 +17,6 @@ import { DialogBlockComponent } from 'src/app/components/dialog-block/dialog-blo
 import { UserService } from 'src/app/services/user.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ConversationService } from 'src/app/services/conversation.service';
-
 
 @Component({
   selector: 'app-chat-socket',
@@ -21,12 +26,8 @@ import { ConversationService } from 'src/app/services/conversation.service';
 export class ChatSocketComponent implements OnInit, AfterViewChecked {
   public textArea: string = '';
   public emojiArray = [];
-   public isEmojiPickerVisible: boolean;
-   public addEmoji(event) {
-      this.message = this.emojiArray.push(`${this.textArea}${event.emoji.native}`);
-      this.isEmojiPickerVisible = true;
-      
-   }
+  public isEmojiPickerVisible: boolean;
+
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   socket: any;
   message: any;
@@ -38,11 +39,8 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   public conversation = [];
   public recentConver: any;
   public recentConverIndex: any;
-  public isClickedIndex: boolean = false;
 
   @Output() public converIndexInfo: any;
-  // @Output() public isClickedIndex: boolean = false
-  // @Output() public newMessage: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     public socketIo: ChatsocketioService,
@@ -53,7 +51,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   ) {
     this.userInfo = this.userService.user;
   }
-  
+
   ngOnInit(): void {
     if (this.auth.user) {
       this.socketIo.listen('message-broadcast').subscribe((data) => {
@@ -64,21 +62,26 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
       this.scrollToBottom();
     }
     this.scrollToBottom();
-
   }
 
   ngAfterViewChecked() {
     this.scrollToBottom();
     this.listConver;
   }
+  public addEmoji(event) {
+    this.message = this.emojiArray.push(
+      `${this.textArea}${event.emoji.native}`
+    );
+    this.isEmojiPickerVisible = true;
+  }
+
   public openDialogUnfriend(): void {
     const dialogRef = this.dialog.open(DialogUnfriendComponent, {
       // data : {name : this.name, avatar: this.avatar}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      
     });
   }
 
@@ -87,12 +90,11 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
       // data : {name : this.name, avatar: this.avatar}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      
     });
   }
-  
+
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
@@ -106,18 +108,9 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     await this.getAllConverInfo(this.listConver);
     if (this.isClicked == false) {
       if (this.userInfo.conversations.length != 0) {
-        let temp = this.listChat[0];
-        for (let i = 0; i < temp.participants.length; i++) {
-          if (this.userInfo._id != temp.participants[i]) {
-            let tempUser = await this.userService.getUserById(
-              temp.participants[i]
-            );
-            this.isClickedIndex = true;
-            temp.isClicked = this.isClickedIndex;
-            this.recentFriendChat = tempUser;
-          }
-        }
-        this.recentConver = temp;
+        this.listChat[0].isClickedIndex = true;
+        this.recentFriendChat = this.listChat[0].participants;
+        this.recentConver = this.listChat[0];
       }
     }
   }
@@ -142,32 +135,37 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   //get all conversations info
   public async getAllConverInfo(listConver) {
     for (let i = 0; i < listConver.length; i++) {
+      let tempUser;
       await this.getAllMessage(listConver[i]._id);
+      for (let j = 0; j < listConver[i].participants.length; j++) {
+        if (this.userInfo._id != listConver[i].participants[j]) {
+          tempUser = await this.userService.getUserById(
+            listConver[i].participants[j]
+          );
+        }
+      }
       this.listChat.push({
         converId: listConver[i]._id,
-        participants: listConver[i].participants,
+        participants: tempUser,
         listFile: listConver[i].listFile,
         conversation: this.conversation,
-        isClicked: this.isClickedIndex,
+        isClickedIndex: false,
       });
     }
   }
 
   //get conversation information(list mess and receiver info) at index (when click on the list conversations)
   public async getConverIndex(index) {
-    let temp = this.listChat[index];
-    for (let i = 0; i < temp.participants.length; i++) {
-      if (this.userInfo._id != temp.participants[i]) {
-        let tempUser = await this.userService.getUserById(temp.participants[i]);
-        this.recentFriendChat = tempUser;
-        this.isClickedIndex = true;
-        temp.isClicked = this.isClickedIndex;
+    for (let i = 0; i < this.listChat.length ; i++) {
+      if (i == index) {
+        this.listChat[i].isClickedIndex = true;
+        this.recentFriendChat = this.listChat[i].participants;
+        this.recentConver = this.listChat[i];
+        continue;
       }
+      this.listChat[i].isClickedIndex = false;
     }
-    this.recentConver = temp;
-    this.isClicked = true;
   }
-
 
   //get the content message
   public async getAllMessage(conversationMessList) {
@@ -185,9 +183,9 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
   }
 
   //sort again after chat
-  public sortRecentConver(listChat, conversationId){
-    for(let i = 0; i < listChat.length; i++){
-      if(conversationId == listChat[i].converId){
+  public sortRecentConver(listChat, conversationId) {
+    for (let i = 0; i < listChat.length; i++) {
+      if (conversationId == listChat[i].converId) {
         let temp = listChat[0];
         listChat[0] = listChat[i];
         listChat[i] = temp;
@@ -195,12 +193,8 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  public hasRead(read){
-    this.isClickedIndex = read;
-  }
-
   async getReceiveMsg() {
-    this.socketIo.socket.on('message-broadcast',async (data) => {
+    this.socketIo.socket.on('message-broadcast', async (data) => {
       if (data) {
         for (let i = 0; i < this.listChat.length; i++) {
           if (data.conversationId == this.listChat[i].converId) {
@@ -211,7 +205,6 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
             });
           }
         }
-        // this.receive_msg = data.mesage;
         this.sortRecentConver(this.listChat, data.conversationId);
       }
     });
@@ -236,7 +229,7 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
         });
       }
     }
-    
+
     this.sortRecentConver(this.listChat, this.recentConver.converId);
     this.message = '';
   }

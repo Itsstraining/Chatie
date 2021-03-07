@@ -16,12 +16,13 @@ import { SendermessageComponent } from '../../components/sendermessage/sendermes
 import { ReceivermessageComponent } from '../../components/receivermessage/receivermessage.component';
 
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { ChatContentComponent } from './components/chat-content/chat-content.component';
 
 
 
 
 @NgModule({
-    declarations: [ChatSocketComponent ,ChatRecentComponent, SendermessageComponent, ReceivermessageComponent],
+    declarations: [ChatSocketComponent ,ChatRecentComponent, SendermessageComponent, ReceivermessageComponent, ChatContentComponent],
   imports: [
     CommonModule,
     ChatSocketRoutingModule,

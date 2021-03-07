@@ -16,7 +16,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ChatRecentComponent implements OnInit, DoCheck {
   @Input() public conversation: any;
-  // @Input() public newestContent: any;
+  @Input() public isClicked: any;
 
   @Output() public hasRead: EventEmitter<boolean> = new EventEmitter<boolean>();
   public newestContent: any;
@@ -35,10 +35,10 @@ export class ChatRecentComponent implements OnInit, DoCheck {
         ]
       );
     }
-    if (this.conversation.isClicked == true) {
+    if (this.conversation.isClickedIndex == true) {
       this.count = 0;
-      this.conversation.isClicked = false;
-      this.hasRead.emit(this.conversation.isClicked);
+      // this.conversation.isClicked = false;
+      // this.hasRead.emit(this.conversation.isClicked);
     }
   }
 
@@ -47,7 +47,7 @@ export class ChatRecentComponent implements OnInit, DoCheck {
     this.newestContent = this.getLastestMess(
       this.conversation.conversation[this.conversation.conversation.length - 1]
     );
-    if (this.conversation.isClicked == true) {
+    if (this.conversation.isClickedIndex == true) {
       this.count = 0;
     }
     this.length = this.conversation.conversation.length;
@@ -55,15 +55,7 @@ export class ChatRecentComponent implements OnInit, DoCheck {
 
   //get receiver username, ava
   public async getUserConverInfo() {
-    for (let i = 0; i < this.conversation.participants.length; i++) {
-      if (this.conversation.participants[i] == this.userService.user._id) {
-        continue;
-      }
-      let tempRecInfo = await this.userService.getUserById(
-        this.conversation.participants[i]
-      );
-      this.receiverInfo = tempRecInfo;
-    }
+    this.receiverInfo = this.conversation.participants;
   }
 
   public getLastestMess(newChat) {
