@@ -55,7 +55,6 @@ import { NgAudioRecorderModule } from 'ng-audio-recorder';
     FindComponent,
     PushnotifyingComponent,
     NotiComponent,
-    OptionComponent,
   ],
   imports: [
     BrowserModule,
