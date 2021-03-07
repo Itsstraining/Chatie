@@ -27,7 +27,6 @@
     font-size: 100px;
 
     input[type='file'] {
-
       height: 200px;
       width: 200px;
       position: absolute;
@@ -35,17 +34,11 @@
       left: 0;
       opacity: 0;
       cursor: pointer;
-
     }
 
     &:hover {
-
       background-position: 0 -100%;
-
       color: #2590EB;
-
     }
-
-
   }
 }
