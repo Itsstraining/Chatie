@@ -11,6 +11,18 @@ const router = app.Router();
         getById: getById
     });
 });
+
+
+
+router.get('/getusername',async (req, res) => {
+    const {userName} = req.query;
+    let getUserByUsername = await Database.instance.User.getUserByUsername(userName);
+    res.send({
+        getUserByUsername:getUserByUsername
+    });
+});
+
+
 // router.post("/", async (req, res) => {
 //     const { email, displayname, avatar } = req.body;
 //     try {
@@ -226,6 +238,7 @@ router.delete("/", async (req, res) => {
 //         message: getemail
 //     });
 // });
+
 
 
 

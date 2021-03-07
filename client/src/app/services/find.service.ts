@@ -11,9 +11,5 @@ export class FindService {
     let registerUrl ="http://localhost:8080/user/";
     return this.client.get(registerUrl).toPromise();
   }
-  // addFriend(id,friendId)
-  // {
-  //   let registerUrl ="http://localhost:8080/friend/addfriendrequest";
-  //   return this.client.put(registerUrl,id,friendId);
-  // }
+  
 }
