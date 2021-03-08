@@ -39,7 +39,8 @@ import { PushnotifyingComponent } from './components/pushnotifying/pushnotifying
 
 import { NotiComponent } from './components/noti/noti.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-
+import { OptionComponent } from './components/option/option.component';
+import { NgAudioRecorderModule } from 'ng-audio-recorder';
 
 @NgModule({
   declarations: [
@@ -72,16 +73,19 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MatDividerModule,
     MatSlideToggleModule,
     
-
+    NgAudioRecorderModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+  
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [LoginService],
   bootstrap: [AppComponent]
+
+
 })
 export class AppModule { }

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  endpoint: "http://192.168.31.245:8080/",
+  endpoint: "http://localhost:8080/",
   firebaseConfig : {
     apiKey: "AIzaSyDoQOu-2kV96AZJXQFId0MvjTuPiP9zbHs",
     authDomain: "chatie-7db34.firebaseapp.com",

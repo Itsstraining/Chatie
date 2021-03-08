@@ -11,6 +11,27 @@ const router = app.Router();
         getById: getById
     });
 });
+
+
+
+router.get('/getusername',async (req, res) => {
+    const {userName,id} = req.query;
+    let getUserByUsername = await Database.instance.User.getUserByUsername(userName,id);
+    res.send({
+        getUserByUsername:getUserByUsername
+    });
+});
+
+router.put("/addfriendrequest", async (req, res) => {
+    const { userName,_id, friendName} = req.body;
+    try {
+        let sendFriendRequest = await Database.instance.User.addFriendRequest(userName,_id,friendName);
+        res.send({ message: sendFriendRequest });
+    } catch (erro) {
+        res.status(400).send({ message: `Cannot send` });
+    }
+});
+
 // router.post("/", async (req, res) => {
 //     const { email, displayname, avatar } = req.body;
 //     try {
@@ -36,23 +57,20 @@ const router = app.Router();
 
 //create account for user use gmail
 router.post("/email", async (req, res) => {
-    const { email, userName, avatar } = req.body;
+    const { email, userName } = req.body;
     try {
         let allUser = await Database.instance.User.getAllUser();
         for (let i = 0; i < allUser.length; i++) {
-            if (email == (allUser[i]).email) {
+            if (email == (allUser[i]).email || userName == (allUser[i]).userName) {
                 res.send({
-                    message: 'This email is already existed',
+                    message: 'This email or username is already existed',
                 });
                 return;
             }
         }
-        let displayname = '';
-        console.log(email)
+        let avatar = 'https://i1.sndcdn.com/avatars-000480605109-m7g7ci-t500x500.jpg';
         let test = new UserModel(email, userName, avatar, '');
-        console.log(test.email)
         let user = await Database.instance.User.createUser(test);
-        console.log(user)
         res.send({
             message: user,
         });
@@ -75,12 +93,9 @@ router.post("/createAccount", async (req, res) => {
                 return;
             }
         }
-        let displayname = '';
-        console.log(email)
-        let test = new UserModel(email, userName, '', password);
-        console.log(test.userName)
+        let avatar = 'https://i1.sndcdn.com/avatars-000480605109-m7g7ci-t500x500.jpg';
+        let test = new UserModel(email, userName, avatar, password);
         let user = await Database.instance.User.createUser(test);
-        console.log(user)
         res.send({
             message: user,
         });
@@ -146,10 +161,11 @@ router.get("/", async (req, res) => {
 router.put("/updateUser", async (req, res) => {
     const { id, userName, avatar} = req.body;
     try {
-        let user = await Database.instance.User.updateProfile(id, userName, avatar);
+        let temp = await Database.instance.User.updateProfile(id, userName, avatar);
+        console.log(temp)
         res.send({
             message: "Update successfully",
-            user: user
+            user: temp
         });
     } catch (erro) {
         res.status(400).send({
@@ -174,50 +190,33 @@ router.delete("/", async (req, res) => {
     }
 });
 
+router.get('/getfriendlist', async (req, res) => {
+    const { userId } = req.query;
+    try{
+        let tempListFriend = await Database.instance.User.getUserFriendList(userId);
+        res.send({
+            tempListFriend: tempListFriend,
+        })
+    }catch(err){
+        res.send({
+            message: 'You do not any friend.'
+        })
+    }
+})
 
-// router.post("/email", async (req, res) => {
-//     const { email } = req.body;
-//     try {
-//         await Database.instance.Login(email);
-//         res.send({ message: `Update ${email}` });
-//     } catch (erro) {
-//         res.status(400).send({ message: `Cannot Login with[${email}]` });
+// router.get('/getusernotfriend', (req, res) => {
+//     const { userId } = req.query;
+//     try{
+//         let tempListFriend = await Database.instance.User.getUserFriendList(userId);
+//         res.send({
+//             tempListFriend: tempListFriend,
+//         })
+//     }catch(err){
+//         res.send({
+//             message: 'You do not any friend.'
+//         })
 //     }
-// });
-
-// router.post("/createUser", async (req, res) => {
-//     const { email, displayname, avatar, status } = req.body;
-//     let user = await Database.instance.createUser(new User(email, displayname, avatar, status));
-//     res.send({ message: user });
-// });
-
-// router.delete("/deleteUser", async (req, res) => {
-//     const { id } = req.query;
-//     console.log(id)
-//      await Database.instance.deleteUser(id);
-//     res.send({ message: `Delete ${id} ` });
-// });
-
-
-
-// router.get("/getUser", async (req, res) => {
-//     const {
-//         email
-//     } = req.query;
-//     let getUser = await Database.instance.getUser();
-//     res.send({
-//         getUser: getUser
-//     });
-// });
-
-// router.get("/getemail", async (req, res) => {
-//     const { email } = req.body;
-//     let getemail = await Database.instance.getUserMail(email);
-//     res.send({
-//         message: getemail
-//     });
-// });
-
+// })
 
 
 module.exports = router;
