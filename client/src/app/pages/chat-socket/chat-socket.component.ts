@@ -12,11 +12,12 @@ import {
   AfterViewChecked,
 } from '@angular/core';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 import { UserService } from 'src/app/services/user.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ConversationService } from 'src/app/services/conversation.service';
+import { DialogNotiComponent } from 'src/app/components/dialog-noti/dialog-noti.component';
 
 @Component({
   selector: 'app-chat-socket',
@@ -42,6 +43,7 @@ export class ChatSocketComponent implements OnInit{
     public userService: UserService,
     public auth: LoginService,
     private conversationService: ConversationService,
+    public dialog: MatDialog,
 
   ) {
     this.userInfo = this.auth.user;
@@ -62,7 +64,6 @@ export class ChatSocketComponent implements OnInit{
   //all function about the content of the chat page
   public async checkUser() {
     await this.getUserInfos();
-    this.emitAccountId();
     await this.getListConver(this.userInfo.conversations);
     await this.getAllConverInfo(this.listConver);
     if (this.isClicked == false) {
@@ -73,16 +74,28 @@ export class ChatSocketComponent implements OnInit{
     }
   }
 
+  public openDialogNoti(): void {
+    // const dialogConfig = new MatDialogConfig();
+
+    // dialogConfig.data = this.recentFriendChat
+    const dialogRef = this.dialog.open(DialogNotiComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
+
   //get all user information
   public async getUserInfos() {
     await this.userService.getUserInfo(this.auth.user.email);
     this.userInfo = this.userService.user;
+    console.log(this.userService.user)
   }
 
   //get all user list conversations
   public async getListConver(listOfConver) {
     if (listOfConver == null) {
-      return;
+      this.openDialogNoti()
     }
     for (let i = 0; i < listOfConver.length; i++) {
       let temp = await this.conversationService.getConverInfo(listOfConver[i]);
@@ -155,10 +168,6 @@ export class ChatSocketComponent implements OnInit{
         listChat[i] = temp;
       }
     }
-  }
-
-  async emitAccountId(){
-    this.socketIo.socket.emit('emit-account', this.userInfo._id);
   }
 
   async getReceiveMsg() {

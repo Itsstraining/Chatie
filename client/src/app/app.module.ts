@@ -41,6 +41,7 @@ import { NotiComponent } from './components/noti/noti.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { OptionComponent } from './components/option/option.component';
 import { NgAudioRecorderModule } from 'ng-audio-recorder';
+import { DialogNotiComponent } from './components/dialog-noti/dialog-noti.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { NgAudioRecorderModule } from 'ng-audio-recorder';
     FindComponent,
     PushnotifyingComponent,
     NotiComponent,
+    DialogNotiComponent,
   ],
   imports: [
     BrowserModule,

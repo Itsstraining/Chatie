@@ -20,7 +20,7 @@ export class HomePageComponent implements OnInit {
 
   async LoginWithGG() {
     await this.auth.Login();
-    this.router.navigate(['chat-socket']);
+    // this.router.navigate(['chat-socket']);
   }
   async loginByAccount() {
     try {
