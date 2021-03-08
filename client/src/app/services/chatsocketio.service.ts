@@ -11,7 +11,7 @@ export class ChatsocketioService {
   public send_msg: any;
   public received_msg: any;
   public tempMessList = [];
-  readonly url: string = 'http://192.168.31.245:8080';
+  readonly url: string = 'http://192.168.31.106:8080';
 
   constructor(private httpClient: HttpClient) {
     this.socket = io(this.url);

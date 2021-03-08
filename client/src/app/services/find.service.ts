@@ -8,7 +8,7 @@ export class FindService {
   constructor(private client:HttpClient) { }
    getUser()
   {
-    let registerUrl ="http://192.168.31.245:8080/user/";
+    let registerUrl ="http://192.168.31.106:8080/user/";
     return this.client.get(registerUrl).toPromise();
   }
   // addFriend(id,friendId)
