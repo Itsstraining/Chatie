@@ -41,7 +41,7 @@ export class LoginService {
       });
       // //get user token
       // this.idToken = this.user.getIdToken();
-      let data = { email: this.user.email, userName: this.user.displayName, avatar: this.user.photoURL};
+      let data = { email: this.user.email, userName: this.user.displayName};
       await this.client
         .post(environment.endpoint + 'user/email',data)
         .subscribe((temp) => {

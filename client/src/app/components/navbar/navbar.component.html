@@ -2,17 +2,17 @@
     <mat-toolbar-row *ngIf="this.auth.userAccount" class="example-button-row">
         <img src="../../../assets/images/logochatie.png" style="height: 33px; width: 87px">
         <span class="example-spacer"></span>
-        <button mat-icon-button (click)="openDialogNoti()" class="example-icon hello">
+        <button mat-icon-button (click)="openDialogNoti()" matTooltip="Noti Friend Request" class="example-icon hello"  style="margin: 5px;">
           <mat-icon style="text-decoration: none;color: white;">notifications_none
             <div class="status" *ngIf="this.count > 0">
               <p>{{this.count}}</p>
             </div>
           </mat-icon>
         </button>
-        <button mat-icon-button class="example-icon hello" (click)="openDialogFriend()">
+        <button mat-icon-button class="example-icon hello" matTooltip="Search Friend"  (click)="openDialogFriend()" style="margin: 5px;">
           <mat-icon>person_add_alt</mat-icon>
         </button>
-        <button mat-icon-button class="hello" *ngIf="this.auth.user != undefined" [matMenuTriggerFor]="menu">
+        <button mat-icon-button class="hello" *ngIf="this.auth.user != undefined" matTooltip="Setting Profile" [matMenuTriggerFor]="menu" style="margin: 5px;">
           <!-- <mat-icon>more_vert</mat-icon> -->
           <img [src]="this.auth.userAccount.avatar" alt="" style="width: 40px; height: 40px; border-radius: 50%">
         </button>

@@ -5,14 +5,14 @@
           <h3 *ngIf="this.recentFriendChat">{{this.recentFriendChat.userName}}</h3>
           <div class="option">
             <!-- <div class="example-button-row"> -->
-            <button class="button-option">
+            <button class="button-option" matTooltip="Video call">
               <img src="../../../assets/images/videocam-filled-tool.svg">
             </button>
   
-            <button class="button-option">
+            <button class="button-option" matTooltip="Audio call">
               <img src="../../../assets/images/phone-auricular.svg">
             </button>
-            <button mat-icon-button [matMenuTriggerFor]="menu" class="button-option">
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="button-option" matTooltip="Setting">
               <img src="../../../assets/images/more.svg">
             </button>
             <mat-menu #menu="matMenu">
@@ -48,7 +48,7 @@
           </div>
           <div class="chat-messages-create-container">
             <button class="chat-messages-option-button" [matMenuTriggerFor]="aboveMenu">
-              <mat-icon style="color: #242526;">add</mat-icon>
+              <mat-icon style="color: #242526;" matTooltip="Add media">add</mat-icon>
               <mat-menu #aboveMenu="matMenu" yPosition="above">
                 <!-- <button mat-menu-item></button> -->
                   <!-- <div class="wrapper"> -->
@@ -69,7 +69,7 @@
               <input class="chat-messages-create-input" type="text" placeholder="Type message here..."
                 [(ngModel)]="message" (keyup.enter)="SendMessage()">
   
-              <button class="emoji" [matMenuTriggerFor]="aboveMenu"
+              <button class="emoji" [matMenuTriggerFor]="aboveMenu" matTooltip="Send an emoji"
                 (click)="isEmojiPickerVisible = !isEmojiPickerVisible;" (keyup.enter)="SendMessage()">
                 <svg fill="gray" height="20" viewBox="0 0 192 192" width="20" xmlns="http://www.w3.org/2000/svg">
                   <g id="_10-humor" data-name="10-humor">

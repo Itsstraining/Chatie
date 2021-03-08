@@ -11,7 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { ChatRecentComponent } from '../../components/chat-recent/chat-recent.component';
 import { SendermessageComponent } from '../../components/sendermessage/sendermessage.component';
@@ -36,6 +36,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
     PickerModule,
     MatTabsModule,
     MatButtonModule,
+    MatTooltipModule,
 
     MatToolbarModule,
     MatSlideToggleModule,

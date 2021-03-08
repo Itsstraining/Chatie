@@ -59,6 +59,9 @@ export class ChatRecentComponent implements OnInit, DoCheck {
   }
 
   public getLastestMess(newChat) {
+    if(newChat.content.length > 25){
+      newChat.content = newChat.content.substring(0, 24) + '...';
+    }
     newChat.date = new Date(newChat.date);
     let hour = newChat.date.getHours();
     let minute = newChat.date.getMinutes();

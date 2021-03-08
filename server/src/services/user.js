@@ -73,7 +73,7 @@ class UserClass {
             }
         });
         // console.log(changeStream)
-        return 'You two are chatting'
+        return 'You two are connected now'
     }
 
     async getUserById(id) {
