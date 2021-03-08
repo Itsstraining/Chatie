@@ -2,13 +2,17 @@
     <mat-toolbar-row *ngIf="this.auth.userAccount">
         <img src="../../../assets/images/logochatie.png" style="height: 33px; width: 87px">
         <span class="example-spacer"></span>
-        <button mat-icon-button (click)="openDialogNoti()" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-          <mat-icon style="text-decoration: none;color: white;">notifications_none</mat-icon>
+        <button mat-icon-button (click)="openDialogNoti()" class="example-icon hello">
+          <mat-icon style="text-decoration: none;color: white;">notifications_none
+            <div class="status" *ngIf="this.count > 0">
+              <p>{{this.count}}</p>
+            </div>
+          </mat-icon>
         </button>
-        <button   mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="openDialogFriend()">
+        <button mat-icon-button class="example-icon hello" (click)="openDialogFriend()">
           <mat-icon>person_add_alt</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="this.auth.user != undefined" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <button mat-icon-button class="hello" *ngIf="this.auth.user != undefined" [matMenuTriggerFor]="menu">
           <!-- <mat-icon>more_vert</mat-icon> -->
           <img [src]="this.auth.userAccount.avatar" alt="" style="width: 40px; height: 40px; border-radius: 50%">
         </button>

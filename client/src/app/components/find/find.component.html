@@ -11,8 +11,13 @@
       <img src="{{user.userInfo.avatar}}" alt="">
       <h3>{{user.userInfo.userName}}</h3>
     </div>
-    <button mat-flat-button style="background-color: #4290E4; color: white;" *ngIf="!user.status && user.add == 0" (click) ="acceptToAddFriend(user.userInfo._id, user)">Add Friend</button>
-    <button mat-flat-button style="background-color: #b8cfe7; color: #242526;" *ngIf="user.add == -1">Requested</button>
-    <button mat-flat-button style="background-color: #b8cfe7; color: #242526;" *ngIf="user.status && user.add == 1">Friends</button>
+    <div class="button-group">
+      <button class="add" style="background-color: #4290E4; color: white;" *ngIf="!user.status && user.add == 0" (click)="acceptToAddFriend(user.userInfo._id, user)">Add Friend</button>
+      <button class="add" style="background-color: #b8cfe7; color: #242526;" *ngIf="user.add == -1">Requested</button>
+      <button class="add" style="background-color: #b8cfe7; color: #242526;" *ngIf="user.status && user.add == 1">Friends</button>
+      <button class="chat" style="background-color: white; color: #4290E4;">
+        <mat-icon>chat</mat-icon>
+      </button>
+    </div>
   </div>
 </div>

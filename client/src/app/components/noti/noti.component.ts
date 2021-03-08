@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
 import { FindService } from 'src/app/services/find.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -13,13 +14,17 @@ export class NotiComponent implements OnInit {
   public mess: any;
   public userInfo: any;
   public messRequest: any;
-  constructor(public dialogRef: MatDialogRef<NotiComponent>, private userService: UserService, private findService: FindService, @Inject(MAT_DIALOG_DATA) data) { 
-    this.userInfo = data
+
+  @Output() public countChange: EventEmitter<any> = new EventEmitter<any>();
+  constructor(public dialogRef: MatDialogRef<NotiComponent>, private userService: UserService, public socketIo: ChatsocketioService, private findService: FindService, @Inject(MAT_DIALOG_DATA) data) { 
+    this.userInfo = data;
 }
 
   ngOnInit(): void {
     this.getListRequest()
   }
+
+  
 
   public async getListRequest(){
     let temp = await this.findService.getAllFriendRequest(this.userInfo._id);
@@ -36,7 +41,7 @@ export class NotiComponent implements OnInit {
     this.messRequest = await this.findService.addFriend(from, this.userInfo._id, status);
   }
 
-  onNoClick(): void{
-    this.dialogRef.close();
-  }
+  // onNoClick(): void{
+  //   this.dialogRef.close(this.count);
+  // }
 }

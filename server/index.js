@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const bodyParser= require('body-parser')
+const bodyParser = require('body-parser')
 const server = require('./src/server');
 const config = require('./src/config');
 const multer = require('multer');
@@ -15,20 +15,56 @@ server.use(cors);
 
 const connectionString = 'mongodb+srv://admin:admin@cluster0.9grd8.mongodb.net/chat_DB?retryWrites=true&w=majority'
 
+let tempUser = {};
+
 // connect socket server with client
 io.on('connection', (socket) => {
   console.log('a user is connected');
+  // socket.on('emit-account', (account) => {
+  //   console.log(account);
+  //   console.log(socket.id);
+  //   tempUser[account] = {
+  //     sId: socket.id
+  //   };
+  //   console.log(tempUser);
+  //   socket.on('message', (msg) => {
+  //     let receiversId;
+  //     receiversId = tempUser[msg.receiverId].sId
+  //     socket.to(receiversId).emit('message-broadcast', msg);
+  //     Database.instance.Conversation.updateConversation(msg.userId, msg.conversationId, msg.message);
+  //     Database.instance.User.sortRecentConver(msg.userId, msg.conversationId);
+  //     Database.instance.User.sortRecentConver(msg.receiverId, msg.conversationId);
+  //   });
+
+  //   socket.on('add-friend', (data) => {
+  //     console.log(data)
+  //     // let receiver_sId = tempUser[data].sId;
+  //     // console.log(receiver_sId)
+  //     socket.broadcast.emit('friend-request', data)
+  //   })
+  // });
+
+
   socket.on('disconnect', () => {
     console.log('a user disconnected')
   });
- 
-  // socket.emit('message-broadcast', 'this is some new data');
+
   socket.on('message', (msg) => {
     socket.broadcast.emit('message-broadcast', msg);
     Database.instance.Conversation.updateConversation(msg.userId, msg.conversationId, msg.message);
     Database.instance.User.sortRecentConver(msg.userId, msg.conversationId);
     Database.instance.User.sortRecentConver(msg.receiverId, msg.conversationId);
   });
+
+  socket.on('add-friend', (data) => {
+    console.log(data)
+    // let receiver_sId = tempUser[data].sId;
+    // console.log(receiver_sId)
+    socket.broadcast.emit('friend-request', data)
+  })
+
+  // socket.emit('message-broadcast', 'this is some new data');
+
 
   // socket.emit('update-conversation',)
   // socket.on('update-conversation', (data) =>{

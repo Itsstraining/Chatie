@@ -1,9 +1,10 @@
 import { AfterContentInit, Component, Inject, OnChanges, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
 import { FindService } from 'src/app/services/find.service';
 import { UserService } from 'src/app/services/user.service';
 import { Url } from 'url';
@@ -32,7 +33,8 @@ export interface User {
 export class FindComponent implements OnInit, AfterContentInit {
   public userInfo: any;
 
-  constructor(private userService:UserService, private find:FindService, @Inject(MAT_DIALOG_DATA) data) { 
+  constructor(private userService:UserService, private find:FindService, public socketIo: ChatsocketioService,
+    public dialogRef: MatDialogRef<FindComponent>, @Inject(MAT_DIALOG_DATA) data) { 
     this.userInfo = data;
 }
   
@@ -82,12 +84,18 @@ export class FindComponent implements OnInit, AfterContentInit {
   // }
   
   displayFn(user: User): string {
+    console.log(user.userInfo.userName)
     return user && user.userInfo.userName ? user.userInfo.userName : '';
   }
 
   public async acceptToAddFriend(to, user: User){
     console.log(this.userInfo._id)
+    this.socketIo.socket.emit('add-friend', to);
     user.add = (await this.find.createAddRequest(this.userInfo._id, to));
+  }
+
+  public onClose(){
+    
   }
   
 }

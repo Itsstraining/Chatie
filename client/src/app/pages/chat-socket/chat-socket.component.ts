@@ -46,12 +46,7 @@ export class ChatSocketComponent implements OnInit{
   ) {
     this.userInfo = this.auth.user;
   }
-  // ngAfterViewChecked(): void {
-  //   if(this.auth.userAccount){
-      
-  //     this.userInfo = this.auth.userAccount;
-  //   }
-  // }
+
 
   ngOnInit(): void {
     if (this.auth.user) {
@@ -60,26 +55,14 @@ export class ChatSocketComponent implements OnInit{
       });
       this.getReceiveMsg();
       this.checkUser();
-      // this.scrollToBottom();
     }
-    // this.scrollToBottom();
   }
 
-  // ngOnChanges() {
-  //   console.log(this.recentConver._id)
-  //   this.sortRecentConver(this.listChat, this.recentConver._id);
-  // }
-
-
-  // scrollToBottom(): void {
-  //   try {
-  //     this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-  //   } catch (err) {}
-  // }
 
   //all function about the content of the chat page
   public async checkUser() {
     await this.getUserInfos();
+    this.emitAccountId();
     await this.getListConver(this.userInfo.conversations);
     await this.getAllConverInfo(this.listConver);
     if (this.isClicked == false) {
@@ -171,6 +154,10 @@ export class ChatSocketComponent implements OnInit{
         listChat[i] = temp;
       }
     }
+  }
+
+  async emitAccountId(){
+    this.socketIo.socket.emit('emit-account', this.userInfo._id);
   }
 
   async getReceiveMsg() {

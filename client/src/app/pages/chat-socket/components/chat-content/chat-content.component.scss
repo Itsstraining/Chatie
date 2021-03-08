@@ -20,7 +20,7 @@ $light-blue: #4290E4;
         background-color: $black;
         .chat-messages-show-container {
             border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+            border-top-right-radius: 10px;
             // background: #c3c3c3;
             height: 85%;
             display: flex;
@@ -186,4 +186,34 @@ $light-blue: #4290E4;
     justify-content: center;
     width: 200px;
     border-radius: 20px;
+}
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #242526;
+    border-top-right-radius: 10px;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #4e4e4e;
+    border-radius: 10px;
+}
+
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4e4e4e;
+    border-radius: 10px;
 }

@@ -4,14 +4,11 @@ import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 //ANGULAR MATERIAL import
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -23,8 +20,10 @@ import { DialogUnfriendComponent } from './components/dialog-unfriend/dialog-unf
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
 
 
 import { HttpClientModule } from '@angular/common/http';
@@ -45,7 +44,6 @@ import { NgAudioRecorderModule } from 'ng-audio-recorder';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     FooterComponent,
     DialogSettingfriendComponent,
     DialogSettingComponent,
@@ -60,9 +58,6 @@ import { NgAudioRecorderModule } from 'ng-audio-recorder';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatMenuModule,
     MatButtonModule,
     MatBadgeModule,
     MatGridListModule,
@@ -71,6 +66,9 @@ import { NgAudioRecorderModule } from 'ng-audio-recorder';
     MatAutocompleteModule,
     MatInputModule,
     MatDividerModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
     MatSlideToggleModule,
     
     NgAudioRecorderModule,
