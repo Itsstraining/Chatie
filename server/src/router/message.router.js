@@ -12,10 +12,6 @@ router.post("/", async (req, res) => {
         date
     } = req.body;
     try {
-        // res.send({senderId:senderId,
-        //     message:message,
-        //     conversationId:conversationId,
-        //     date:date})
         let newMessage = await Database.instance.Message.createMessage(new MessageModel(senderId, message, conversationId, date));
         res.send('Messsage has been created')
     } catch (error) {
@@ -24,20 +20,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-// router.get("/loadMessage", async (req, res) => {
-//     const {
-//         dateFrom,
-//         dateTo
-//     } = req.query;
-//     let loadMessage = [];
-//     if (dateFrom != undefined || dateTo != undefined) {
-//         dateFrom = dateFrom == undefined ? 0 : dateFrom;
-//         dateTo = dateTo == undefined ? dateFrom : dateTo;
-//         let loadMessage = await Database.instance.Message.getMessageByTime(dateFrom, dateTo);
-//         res.send({loadMessage : loadMessage});
-//         return;
-//     }
-// })
+
 
 router.get("/", async (req, res) => {
     let getMessage = await Database.instance.Message.getAllMessage();

@@ -1,3 +1,9 @@
-<div class="sendermessage">
+<div class="sendermessage" *ngIf="!this.isMedia;else media">
     {{this.send_msg}}
 </div>
+<ng-template #media>
+    <div class="sendermessage">
+       <img [src]="this.send_msg">
+    </div>
+</ng-template>
+

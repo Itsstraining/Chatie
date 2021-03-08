@@ -15,6 +15,14 @@ export class ChatsocketioService {
   // readonly url: string = 'http://192.168.31.106:8080';
   readonly url: string = environment.endpoint;
 
+  mediaType = [
+    '.png',
+    '.jpeg'
+  ]
+  iconType = [
+    '.txt',
+    '.csv'
+  ]
   constructor(private httpClient: HttpClient) {
     this.socket = io(this.url);
   }
@@ -35,12 +43,6 @@ export class ChatsocketioService {
     try{
       this.socket.on('message-broadcast', (data) => {
           if (data) {
-            // const element = document.createElement('li');
-            // element.innerHTML = data;
-            // element.style.background = 'white';
-            // element.style.padding = '15px 30px';
-            // element.style.margin = '10px';
-            // document.getElementById('message-list').appendChild(element);
             this.received_msg = data;
           }
         });
@@ -50,18 +52,20 @@ export class ChatsocketioService {
   }
 
   public sendMessage(message, senderId, conversationId, receiverId) {
-    this.socket.emit('message', {message: message, userId: senderId, conversationId: conversationId, receiverId: receiverId});
+    let fileType = this.setFileType(message)
+    this.socket.emit('message', {message: message, userId: senderId, conversationId: conversationId, receiverId: receiverId,type:fileType});
     this.send_msg = message;
     message = ''
-    // message = '';
-    // const element = document.createElement('li');
-    // document.getElementById('message-list').appendChild(element);
-    // element.innerHTML = this.send_msg;
-    // element.style.background = 'pink';
-    // element.style.padding = '15px 30px';
-    // element.style.margin = '10px';
-    // element.style.textAlign = 'right';
-    // element.style.float = 'right';
-    // element.style.width = 'fit-content';
+  }
+
+  setFileType(fileName:string){
+    if (fileName.includes("http")) {
+      for (let index = 0; index < this.mediaType.length; index++) {
+          if (fileName.includes(this.mediaType[index])) {
+            return "media";
+          }        
+      }
+    }
+    return "text"
   }
 }

@@ -10,7 +10,6 @@ export class RegisterService {
   async registerAccount(email,userName,password){ 
     let result;
     let temp;
-    // let registerUrl ="http://192.168.31.245:8080/user/createAccount"
    result = await this.http.post(environment.endpoint+ 'user/createAccount',{
     email:email, 
     userName:userName , 

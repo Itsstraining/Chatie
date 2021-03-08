@@ -7,10 +7,18 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ReceivermessageComponent implements OnInit {
 
-  @Input() public receive_msg: any;
+  isMedia:boolean = false;
+  @Input() public receive_msg: String;
   constructor() { }
 
   ngOnInit(): void {
+    this.setType()
+  }
+
+  setType(){
+    if (this.receive_msg.includes("http")) {
+      this.isMedia=true
+    }
   }
 
 }
