@@ -6,7 +6,8 @@ import { ChatSocketComponent } from './chat-socket.component';
 import { FormsModule } from '@angular/forms'
 import {MatDividerModule} from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -34,10 +35,9 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
     MatMenuModule,
     PickerModule,
     MatTabsModule,
-    // MatButtonModule,
+    MatButtonModule,
 
     MatToolbarModule,
-    MatMenuModule,
     MatSlideToggleModule,
   ]
 })

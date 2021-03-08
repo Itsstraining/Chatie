@@ -1,5 +1,5 @@
 <mat-toolbar style="background-color: #4290E4; color: white;" *ngIf="this.auth.user">
-    <mat-toolbar-row *ngIf="this.auth.userAccount">
+    <mat-toolbar-row *ngIf="this.auth.userAccount" class="example-button-row">
         <img src="../../../assets/images/logochatie.png" style="height: 33px; width: 87px">
         <span class="example-spacer"></span>
         <button mat-icon-button (click)="openDialogNoti()" class="example-icon hello">
