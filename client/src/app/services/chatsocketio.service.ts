@@ -33,12 +33,6 @@ export class ChatsocketioService {
     try{
       this.socket.on('message-broadcast', (data) => {
           if (data) {
-            // const element = document.createElement('li');
-            // element.innerHTML = data;
-            // element.style.background = 'white';
-            // element.style.padding = '15px 30px';
-            // element.style.margin = '10px';
-            // document.getElementById('message-list').appendChild(element);
             this.received_msg = data;
           }
         });
@@ -51,15 +45,5 @@ export class ChatsocketioService {
     this.socket.emit('message', {message: message, userId: senderId, conversationId: conversationId, receiverId: receiverId});
     this.send_msg = message;
     message = ''
-    // message = '';
-    // const element = document.createElement('li');
-    // document.getElementById('message-list').appendChild(element);
-    // element.innerHTML = this.send_msg;
-    // element.style.background = 'pink';
-    // element.style.padding = '15px 30px';
-    // element.style.margin = '10px';
-    // element.style.textAlign = 'right';
-    // element.style.float = 'right';
-    // element.style.width = 'fit-content';
   }
 }

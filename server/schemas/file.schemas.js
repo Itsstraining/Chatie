@@ -2,9 +2,11 @@ const mongoose = require('mongoose');
 
 
 const fileSchema = new mongoose.Schema({
-    Date: Date,
+    date: Number,
+    nameFile: String,
     path: String,
-
+    senderId: String,
 });
+
 
 module.exports = fileSchema;

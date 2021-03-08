@@ -64,7 +64,6 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
       this.scrollToBottom();
     }
     this.scrollToBottom();
-
   }
 
   ngAfterViewChecked() {
@@ -89,7 +88,6 @@ export class ChatSocketComponent implements OnInit, AfterViewChecked {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      
     });
   }
   

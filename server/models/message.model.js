@@ -4,7 +4,7 @@ class MessageModel {
      * 
      * @param {String} senderId 
      * @param {String} content 
-     * @param {String} conversationId 
+     * @param {String} conversationId
      * @param {Number} date
      */
     constructor(content, conversationId, senderId) {

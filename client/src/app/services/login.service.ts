@@ -66,7 +66,6 @@ export class LoginService {
   {
     try{
       let result;
-      // let registerUrl ="http://localhost:8080/user/check";
       this.newUser = await this.client.get(environment.endpoint+`user/check?email=${email}&password=${password}`).toPromise();
       localStorage.setItem("user", JSON.stringify(this.newUser.user));
        return this.newUser;
