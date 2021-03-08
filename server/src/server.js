@@ -15,6 +15,7 @@ server.use("/conversation", require('./router/conversation.router'));
 server.use("/user", require('./router/user.router'));
 server.use("/mess", require('./router/message.router'));
 server.use("/friend", require('./router/friend.router'));
+server.use("/file", require('./router/file.router'));
 // server.use("/upload", require('./router/upload.router'));
 
 
@@ -33,10 +34,7 @@ const storage = multer.diskStorage({
   });
   const upload = multer({ storage: storage });
   
-  server.get('/hi', (req, res) => {
-      res.send('Hello!')
-  });
-
+  
 
   //Upload file và hình
   server.get('/', function (req, res) {
@@ -69,24 +67,24 @@ const storage = multer.diskStorage({
 })
 
 
-server.post('/uploadphoto', upload.single('picture'), (req, res) => {
-  var img = fs.readFileSync(req.file.path);
-  var encode_image = img.toString('base64');
-  // Define a JSONobject for the image attributes for saving to database
+// server.post('/uploadphoto', upload.single('picture'), (req, res) => {
+//   var img = fs.readFileSync(req.file.path);
+//   var encode_image = img.toString('base64');
+//   // Define a JSONobject for the image attributes for saving to database
 
-  var finalImg = {
-    contentType: req.file.mimetype,
-    image:  new Buffer(encode_image, 'base64')
-  };
-  db.collection('quotes').insertOne(finalImg, (err, result) => {
-    console.log(result)
+//   var finalImg = {
+//     contentType: req.file.mimetype,
+//     image:  new Buffer(encode_image, 'base64')
+//   };
+//   db.collection('quotes').insertOne(finalImg, (err, result) => {
+//     console.log(result)
 
-    if (err) return console.log(err)
+//     if (err) return console.log(err)
 
-    console.log('saved to database')
-    res.redirect('/')
-  })
-})
+//     console.log('saved to database')
+//     res.redirect('/')
+//   })
+// })
 
 
 module.exports = server;

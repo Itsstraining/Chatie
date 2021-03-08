@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
 
   socket.on('message', (msg) => {
     socket.broadcast.emit('message-broadcast', msg);
-    Database.instance.Conversation.updateConversation(msg.userId, msg.conversationId, msg.message);
+    Database.instance.Conversation.updateConversation(msg.userId, msg.conversationId, msg.message, msg.type);
     Database.instance.User.sortRecentConver(msg.userId, msg.conversationId);
     Database.instance.User.sortRecentConver(msg.receiverId, msg.conversationId);
   });

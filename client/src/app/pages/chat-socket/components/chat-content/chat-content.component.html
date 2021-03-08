@@ -50,26 +50,30 @@
             <button class="chat-messages-option-button" [matMenuTriggerFor]="aboveMenu">
               <mat-icon style="color: #242526;" matTooltip="Add media">add</mat-icon>
               <mat-menu #aboveMenu="matMenu" yPosition="above">
-                <!-- <button mat-menu-item></button> -->
-                  <!-- <div class="wrapper"> -->
-                  <!-- <div class="file-upload"> -->
-                    <form mat-menu-item action="/uploadfile" enctype="multipart/form-data" method="POST"> 
-                      <input type="file" name="1" class="inputfile" id="file"/>
-                      <!-- <input type="submit" value="Upload your file" (keyup.enter)="SendMessage()"> -->
-                      <!-- <img src="<" class="img-responsive"> -->
-                    </form>
-                    <!-- <button mat-menu-item ngf-select ng-model="picFile" accept="image/*"> Select Picture</button>File name: {{picFile.name}} -->
-                  <!-- </div> -->
-                <!-- </div> -->
-                <!-- <input mat-menu-item type="file" name="myFile" size="60" hidden/> -->
+                <div mat-menu-item class="form-group col-12">
+                  <input type="file"
+                  id="file"
+                  #userPhoto
+                  (change)="onFileSelected($event)"
+                  name="image"
+                  autocomplete="off"
+                  />
+                 </div>
               </mat-menu>
+
+
+              
             </button>
   
             <div class="content-emoji">
               <input class="chat-messages-create-input" type="text" placeholder="Type message here..."
                 [(ngModel)]="message" (keyup.enter)="SendMessage()">
   
+<<<<<<< HEAD
               <button class="emoji" [matMenuTriggerFor]="aboveMenu" matTooltip="Send an emoji"
+=======
+              <button class="emoji" [matMenuTriggerFor]="emojiMenu"
+>>>>>>> 5c9b9b1943d8c5afc0f5f49f30789bb8e666e09b
                 (click)="isEmojiPickerVisible = !isEmojiPickerVisible;" (keyup.enter)="SendMessage()">
                 <svg fill="gray" height="20" viewBox="0 0 192 192" width="20" xmlns="http://www.w3.org/2000/svg">
                   <g id="_10-humor" data-name="10-humor">
@@ -82,7 +86,7 @@
                   </g>
                 </svg>
               </button>
-              <mat-menu #aboveMenu="matMenu" yPosition="above">
+              <mat-menu #emojiMenu="matMenu" yPosition="above">
                 <emoji-mart class="emoji-mart" (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
               </mat-menu>
             </div>

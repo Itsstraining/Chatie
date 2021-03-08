@@ -6,6 +6,7 @@ const messageSchema = new mongoose.Schema({
     content: String,
     conversationId: String,
     senderId: String,
+    type: String
 });
 
 

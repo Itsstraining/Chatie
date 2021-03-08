@@ -9,13 +9,22 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-
 import { DialogUnfriendComponent } from 'src/app/components/dialog-unfriend/dialog-unfriend.component';
 import { DialogBlockComponent } from 'src/app/components/dialog-block/dialog-block.component';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
 import { UserService } from 'src/app/services/user.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ConversationService } from 'src/app/services/conversation.service';
+import { AngularFireStorage } from "@angular/fire/storage";
+import { map, finalize } from "rxjs/operators";
+import { Observable } from "rxjs";
+
+
+import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
+import { of } from 'rxjs';
+// import { url } from 'node:inspector';
+// import { catchError, map } from 'rxjs/operators';
+// import { FileService } from '../../../../services/file.service';
 
 @Component({
   selector: 'app-chat-content',
@@ -23,15 +32,23 @@ import { ConversationService } from 'src/app/services/conversation.service';
   styleUrls: ['./chat-content.component.scss'],
 })
 export class ChatContentComponent implements OnInit, OnChanges {
+  // @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef; files = [];
+  title = "cloudsSorage";
+  selectedFile: File = null;
+  fb;
+  downloadURL: Observable<string>;
+  //
+
   @Input() public recentConver: any;
 
   public isEmojiPickerVisible: boolean;
   message: string = '';
   userInfo: any;
+  isMedia:boolean = false;
   public textArea: string = '';
   public emojiArray = [];
   public recentFriendChat: any;
-  private selectedFile: File;
+  // private selectedFile: File;
 
   @Output() public newMess: EventEmitter<any> = new EventEmitter<any>();
 
@@ -41,7 +58,9 @@ export class ChatContentComponent implements OnInit, OnChanges {
     public userService: UserService,
     public auth: LoginService,
     private conversationService: ConversationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    // private fileService: FileService,
+    private storage: AngularFireStorage
   ) {
     this.userInfo = this.userService.user;
   }
@@ -74,14 +93,14 @@ export class ChatContentComponent implements OnInit, OnChanges {
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch (err) {}
+    } catch (err) { }
   }
 
   //send file
-  onFileSelect(event) {
-    this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile.name);
-  }
+  // onFileSelect(event) {
+  //   this.selectedFile = event.target.files[0];
+  //   console.log(this.selectedFile.name);
+  // }
 
   public addEmoji(event) {
     this.message += `${this.textArea}${event.emoji.native}`
@@ -114,11 +133,12 @@ export class ChatContentComponent implements OnInit, OnChanges {
     if (this.message == '' || this.message == null) {
       return;
     }
+    
     this.socketIo.sendMessage(
       this.message,
       this.userInfo._id,
       this.recentConver.converId,
-      this.recentFriendChat._id
+      this.recentFriendChat._id,
     );
     this.recentConver.conversation.push({
       senderId: this.userInfo._id,
@@ -127,5 +147,35 @@ export class ChatContentComponent implements OnInit, OnChanges {
     });
     this.newMess.emit(this.recentConver.converId);
     this.message = '';
+    // this.isMedia = false
   }
+
+  onFileSelected(event) {
+    const file = event.target.files[0];
+    var n = file.name;
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`RoomsImages/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+            }
+            this.message = this.fb;
+            // this.isMedia=true
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          // console.log(url);
+        }
+      });
+  }
+
+  
 }
