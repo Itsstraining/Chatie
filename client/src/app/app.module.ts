@@ -24,6 +24,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 import { HttpClientModule } from '@angular/common/http';
@@ -70,6 +71,7 @@ import { NgAudioRecorderModule } from 'ng-audio-recorder';
     MatIconModule,
     MatMenuModule,
     MatSlideToggleModule,
+    MatTooltipModule,
     
     NgAudioRecorderModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
