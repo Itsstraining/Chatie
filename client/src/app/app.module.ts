@@ -24,6 +24,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -72,6 +73,7 @@ import { NgAudioRecorderModule } from 'ng-audio-recorder';
     MatInputModule,
     MatDividerModule,
     MatSlideToggleModule,
+    MatTooltipModule,
     
     NgAudioRecorderModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

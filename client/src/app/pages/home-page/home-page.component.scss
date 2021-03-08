@@ -149,11 +149,11 @@
     .sign-in-btn {
         width: 100%;
         font-size: 1.15rem;
-        background-color: $blue;
+        background-color: #63B2F3;
         text-align: center;
-        border: 0.15rem solid $blue !important;
+        border: 0.15rem solid #63B2F3 !important;
         &:hover {
-            color: $blue;
+            color: #63B2F3;
             background-color: white;
         }
     }
@@ -325,35 +325,35 @@
     @media screen and (min-width: 876px) {
         main {
             display: flex;
-            margin-top: 2rem;
+            // margin-top: 2rem;
             justify-content: center;
             position: relative;
         }
         .phones-container {
             display: initial;
             .slide {
-                height: 336px;
-                width: 465px;
+                height: 475px;
+                width: 421px;
                 position: absolute;
-                margin: -386px auto 0 69px;
-                animation: slides 10s infinite;
+                margin: -535px auto 0 140px;
+                animation: slides 15s infinite;
                 animation-direction: alternate;
             }
             @keyframes slides {
                 0% {
-                    background-image: url(../../../assets/images/logo.png);
+                    background-image: url(../../../assets/images/chatie_slide.png);
                 }
                 25% {
-                    background-image: url(../../../assets/images/man_ava_slide.png);
+                    background-image: url(../../../assets/images/chatie_slide.png);
                 }
                 50% {
                     background-image: url(../../../assets/images/mainlogo_auto_x2_toned_slide.png);
                 }
                 75% {
-                    background-image: url(../../../assets/images/logochatieblue.png);
+                    background-image: url(../../../assets/images/man_ava_slide.png);
                 }
                 100% {
-                    background-image: url(../../../assets/images/chatieslide.png);
+                    background-image: url(../../../assets/images/chatie_slide.png);
                 }
             }
         }
