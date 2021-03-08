@@ -14,6 +14,14 @@ export class ChatsocketioService {
   public tempMessList = [];
   readonly url: string = environment.endpoint;
 
+  mediaType = [
+    '.png',
+    '.jpeg'
+  ]
+  iconType = [
+    '.txt',
+    '.csv'
+  ]
   constructor(private httpClient: HttpClient) {
     this.socket = io(this.url);
   }
@@ -43,8 +51,20 @@ export class ChatsocketioService {
   }
 
   public sendMessage(message, senderId, conversationId, receiverId) {
-    this.socket.emit('message', {message: message, userId: senderId, conversationId: conversationId, receiverId: receiverId});
+    let fileType = this.setFileType(message)
+    this.socket.emit('message', {message: message, userId: senderId, conversationId: conversationId, receiverId: receiverId,type:fileType});
     this.send_msg = message;
     message = ''
+  }
+
+  setFileType(fileName:string){
+    if (fileName.includes("http")) {
+      for (let index = 0; index < this.mediaType.length; index++) {
+          if (fileName.includes(this.mediaType[index])) {
+            return "media";
+          }        
+      }
+    }
+    return "text"
   }
 }

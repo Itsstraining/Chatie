@@ -152,6 +152,7 @@ export class ChatSocketComponent implements OnInit{
         senderId: temp[i].senderId,
         content: temp[i].content,
         date: temp[i].date,
+        type:temp[i].type
       });
     }
   }
@@ -182,6 +183,7 @@ export class ChatSocketComponent implements OnInit{
               senderId: data.userId,
               content: data.message,
               date: Date.now(),
+              type:data.type
             });
           }
         }

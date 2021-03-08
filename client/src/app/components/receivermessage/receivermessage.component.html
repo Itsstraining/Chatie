@@ -1,3 +1,9 @@
-<div class="receivermessage">
+<div class="receivermessage" *ngIf="!this.isMedia;else media">
     {{this.receive_msg}}
 </div>
+<ng-template #media>
+    <div class="receivermessage">
+       <img [src]="this.receive_msg">
+    </div>
+</ng-template>
+

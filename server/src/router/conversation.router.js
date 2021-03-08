@@ -83,10 +83,11 @@ router.put('/sendMess', async (req, res) => {
     const {
         senderId,
         conversationId,
-        message
+        message,
+        type
     } = req.body;
     try {
-        let conversation = await Database.instance.Conversation.updateConversation(senderId, conversationId, message);
+        let conversation = await Database.instance.Conversation.updateConversation(senderId, conversationId, message,type);
         // io.broadcast.emit('message', req.body);
         // io.on('message', (msg) => {
         //     console.log(msg);
@@ -98,6 +99,27 @@ router.put('/sendMess', async (req, res) => {
     } catch (err) {
         res.send({
             message: 'can not send messsage'
+        })
+    }
+});
+
+router.put('/sendFile', async (req, res) => {
+    const {
+        conversationId,
+        senderId,
+        nameFile,
+        path
+    } = req.body;
+    try {
+        let conversation = await Database.instance.Conversation.updateFileConversation(conversationId, senderId, nameFile, path);
+
+        console.log(conversation)
+        res.send({
+            newFile: conversation
+        })
+    } catch (err) {
+        res.send({
+            message: 'can not send files'
         })
     }
 });

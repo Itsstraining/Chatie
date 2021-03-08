@@ -2,10 +2,14 @@ const mongoose = require('mongoose');
 
 
 const fileSchema = new mongoose.Schema({
-    date: Number,
+    conversationId: String,
+    senderId: String,
     nameFile: String,
     path: String,
-    senderId: String,
+    date: Number,
+
+
+    
 });
 
 

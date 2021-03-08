@@ -17,7 +17,7 @@ class FileClass {
      * 
      * @param {FileModel} newFile 
      */
-    async createMessage(newFile) {
+    async createFile(newFile) {
         return await this.File.create(newFile)
     }
 

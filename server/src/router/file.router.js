@@ -6,13 +6,14 @@ const router = app.Router();
 
 router.post("/", async (req, res) => {
     const {
-        senderId,
-        path,
         conversationId,
+        senderId,
+        nameFile,
+        path,
         date
     } = req.body;
     try {
-        let newFile = await Database.instance.File.createFile(new FileModel(senderId, path, conversationId, date));
+        let newFile = await Database.instance.File.createFile(new FileModel(conversationId, senderId, nameFile, path, date));
         res.send('File has been created')
     } catch (error) {
         res.send('File has not been created')
