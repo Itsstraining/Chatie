@@ -159,11 +159,13 @@ router.get("/", async (req, res) => {
 
 //update user info
 router.put("/updateUser", async (req, res) => {
-    const { id, email, displayname, avatar, status } = req.body;
+    const { id, userName, avatar} = req.body;
     try {
-        await Database.instance.User.updateProfile(id, email, displayname, avatar, status);
+        let temp = await Database.instance.User.updateProfile(id, userName, avatar);
+        console.log(temp)
         res.send({
-            message: "Update successfully"
+            message: "Update successfully",
+            user: temp
         });
     } catch (erro) {
         res.status(400).send({
@@ -188,61 +190,33 @@ router.delete("/", async (req, res) => {
     }
 });
 
-// router.put("/updateUser", async (req, res) => {
-//     const { email, displayname, avatar, status } = req.body;
-//     try {
-//         await Database.instance.getUserMailandupdate(email, displayname, avatar, status);
-//         res.send({ message: `Update ${email}` });
-//     } catch (erro) {
-//         res.status(400).send({ message: `Cannot Update[${email}]` });
+router.get('/getfriendlist', async (req, res) => {
+    const { userId } = req.query;
+    try{
+        let tempListFriend = await Database.instance.User.getUserFriendList(userId);
+        res.send({
+            tempListFriend: tempListFriend,
+        })
+    }catch(err){
+        res.send({
+            message: 'You do not any friend.'
+        })
+    }
+})
+
+// router.get('/getusernotfriend', (req, res) => {
+//     const { userId } = req.query;
+//     try{
+//         let tempListFriend = await Database.instance.User.getUserFriendList(userId);
+//         res.send({
+//             tempListFriend: tempListFriend,
+//         })
+//     }catch(err){
+//         res.send({
+//             message: 'You do not any friend.'
+//         })
 //     }
-
-// });
-
-// router.post("/email", async (req, res) => {
-//     const { email } = req.body;
-//     try {
-//         await Database.instance.Login(email);
-//         res.send({ message: `Update ${email}` });
-//     } catch (erro) {
-//         res.status(400).send({ message: `Cannot Login with[${email}]` });
-//     }
-// });
-
-// router.post("/createUser", async (req, res) => {
-//     const { email, displayname, avatar, status } = req.body;
-//     let user = await Database.instance.createUser(new User(email, displayname, avatar, status));
-//     res.send({ message: user });
-// });
-
-// router.delete("/deleteUser", async (req, res) => {
-//     const { id } = req.query;
-//     console.log(id)
-//      await Database.instance.deleteUser(id);
-//     res.send({ message: `Delete ${id} ` });
-// });
-
-
-
-// router.get("/getUser", async (req, res) => {
-//     const {
-//         email
-//     } = req.query;
-//     let getUser = await Database.instance.getUser();
-//     res.send({
-//         getUser: getUser
-//     });
-// });
-
-// router.get("/getemail", async (req, res) => {
-//     const { email } = req.body;
-//     let getemail = await Database.instance.getUserMail(email);
-//     res.send({
-//         message: getemail
-//     });
-// });
-
-
+// })
 
 
 module.exports = router;

@@ -1,4 +1,4 @@
-<div class="container" *ngIf=" this.userInfo != null">
+<div class="container" *ngIf=" this.auth.user != null">
     <div class="chat-box">
 
     <app-chat-content [recentConver]="recentConver" (newMess) = "newMess($event)"></app-chat-content>

@@ -20,6 +20,7 @@ class Database {
         this.Conversation = new ConversationClass();
         this.Message = new MessageClass();
         this.User = new UserClass();
+        this.Friend = new FriendClass();
     }
 
     /**

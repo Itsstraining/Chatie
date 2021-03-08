@@ -7,10 +7,12 @@ import {
   AfterContentChecked,
   EventEmitter,
   OnChanges,
+  SimpleChanges,
+  DoCheck,
+  AfterViewChecked,
 } from '@angular/core';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
 import {MatDialog} from '@angular/material/dialog';
-import * as io from 'socket.io-client/dist/socket.io';
 
 import { UserService } from 'src/app/services/user.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -42,8 +44,14 @@ export class ChatSocketComponent implements OnInit{
     private conversationService: ConversationService,
 
   ) {
-    this.userInfo = this.userService.user;
+    this.userInfo = this.auth.user;
   }
+  // ngAfterViewChecked(): void {
+  //   if(this.auth.userAccount){
+      
+  //     this.userInfo = this.auth.userAccount;
+  //   }
+  // }
 
   ngOnInit(): void {
     if (this.auth.user) {

@@ -42,17 +42,12 @@ class UserClass {
 
     /**
      * 
-     * @param {String} email 
-     * @param {String} displayname 
+     * @param {String} id 
+     * @param {String} userName 
      * @param {String} avatar 
-     * @param {Boolean} status 
      */
     async updateProfile(id, userName, avatar) {
-        if(avatar){
-            avatar = avatar;
-        }else{
-            avatar = '';
-        };
+        
         return await this.User.findOneAndUpdate({
             _id: id
         }, {
@@ -153,34 +148,40 @@ class UserClass {
         return 'Have send friend request'
     }
 
-    async addFriend(id, friendId, accept) {
-        mongoose.set('useNewUrlParser', true);
-        let user = await this.getId(id);
-        for (let i = 0; i < user.friendListRequest.length; i++) {
-        if (accept) {
-            await this.User.updateOne({
-                _id: id
-            }, {
-                $pull: {
-                    friendListRequest: {
-                        $in: [friendId]
-                    }
-                },
-                $push: {
-                    friendList: [friendId]
-                }
-            });
-            await this.User.updateOne({
-                _id: friendId
-            }, {
-                $push: {
-                    friendList: [id]
-                }
-            })
-            return 'You two are friends now.';
-        }
-        }
+    // async addFriend(id, friendId, accept) {
+    //     mongoose.set('useNewUrlParser', true);
+    //     let user = await this.getId(id);
+    //     for (let i = 0; i < user.friendListRequest.length; i++) {
+    //     if (accept) {
+    //         await this.User.updateOne({
+    //             _id: id
+    //         }, {
+    //             $push: {
+    //                 friendList: [friendId]
+    //             }
+    //         });
+    //         await this.User.updateOne({
+    //             _id: friendId
+    //         }, {
+    //             $push: {
+    //                 friendList: [id]
+    //             }
+    //         })
+    //         return 'You two are friends now.';
+    //     }
+    //     }
+    // }
+
+    async addFriend(userId, friendId){
+        await this.User.findOneAndUpdate({_id: userId}, {
+            $push: { friendList: [friendId]},
+        });
+        await this.User.findOneAndUpdate({_id: friendId}, {
+            $push: { friendList: [userId]},
+        });
+        return 'You two are friends now.'
     }
+
     /**
      * 
      * @param {String} id 
@@ -200,10 +201,17 @@ class UserClass {
                 }
             }
         });
-        return 'Deleted'
+        await this.User.updateOne({
+            _id: friendId
+        }, {
+            $pull: {
+                friendList: {
+                    $in: [id]
+                }
+            }
+        });
+        return 'Deleted';
     }
-
-
 
     async LoginWithEmail(newUser) {
         return await this.User.create(newUser);
@@ -234,6 +242,16 @@ class UserClass {
             }
         }, (err, result) => {});
     }
+
+    async getUserFriendList(userId){
+       let temp = await this.User.findOne({_id: userId});
+       return temp.friendList;
+    }
+
+    // async getUserNotFriend(userId){
+    //     let temp = (await this.User.findOne({_id: userId})).friendList;
+
+    // }
 }
 
 module.exports = UserClass;

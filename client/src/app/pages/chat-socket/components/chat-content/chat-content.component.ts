@@ -53,13 +53,22 @@ export class ChatContentComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     if (this.auth.user) {
-      
+      this.checkUser();
     }
     this.scrollToBottom();
   }
 
   ngAfterViewChecked() {
     this.scrollToBottom();
+  }
+
+  public async checkUser() {
+    await this.getUserInfos();
+  }
+
+  public async getUserInfos() {
+    await this.userService.getUserInfo(this.auth.user.email);
+    this.userInfo = this.userService.user;
   }
 
   scrollToBottom(): void {

@@ -19,6 +19,7 @@ export class DialogSettingprofileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userInfo = this.userService.user
+    this.userName = this.userInfo.userName
   }
 
   onNoClick(): void{
@@ -26,8 +27,10 @@ export class DialogSettingprofileComponent implements OnInit {
   }
 
   public async updateProfile(){
-    let mess = await this.userService.updateProfile(this.userInfo._id, this.userName, '');
-    alert(mess)
+    let mess = await this.userService.updateProfile(this.userInfo._id, this.userName, this.userInfo.avatar);
+    console.log(this.userInfo._id);
+    alert(mess);
+    this.dialogRef.close();
   }
 
 }

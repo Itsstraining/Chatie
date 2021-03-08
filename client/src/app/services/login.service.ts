@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
 import * as firebase from 'firebase';
 import { environment } from 'src/environments/environment';
+import { UserService } from './user.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,10 +11,13 @@ export class LoginService {
   
   public user: firebase.default.UserInfo;
   public newUser: any = null;
+  public userAccount: any;
   public idToken;
-  constructor(public auth: AngularFireAuth, private client: HttpClient) {
-    this.auth.authState.subscribe((test) => {
+  constructor(public auth: AngularFireAuth, private client: HttpClient, private userService: UserService) {
+    this.auth.authState.subscribe(async (test) => {
       if (test) {
+        await this.userService.getUserInfo(test.email);
+        this.userAccount = this.userService.user;
         this.user = test;
       } else {
         this.user = null;
@@ -43,6 +47,8 @@ export class LoginService {
         .subscribe((temp) => {
           console.log(temp);
         });
+      await this.userService.getUserInfo(this.user.email);
+      this.userAccount = this.userService.user;
       alert('login successfully');
       // return { idToken: this.idToken, user: this.user };
     } catch (erro) {

@@ -48,6 +48,10 @@
                 display: flex;
                 align-self: center;
                 flex-direction: column;
+
+                img{
+                    border: 0.1rem solid black;
+                }
             }
         }
         .form {

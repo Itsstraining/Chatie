@@ -13,7 +13,7 @@ export class UserService {
   public listFriends;
   public listFriendReq;
 
-  constructor(private login: LoginService, private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   //get user account information
   public async getUserInfo(email){
@@ -39,7 +39,8 @@ export class UserService {
 
   public async updateProfile(id, userName, avatar){
     let data = { id: id, userName: userName, avatar: avatar}
-    let tempConverInfo = await this.httpClient.put(environment.endpoint + 'user/updateUser?id', data);
+    let tempConverInfo = await this.httpClient.put(environment.endpoint + 'user/updateUser', data);
+    console.log(tempConverInfo['message'])
     return tempConverInfo['message'];
   }
 
