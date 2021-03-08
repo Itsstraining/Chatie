@@ -1,45 +1,52 @@
 <div class="main">
     <h1 style="font-size: xx-large; text-align: center; margin-bottom: 30px;"><b>FRIEND REQUEST</b></h1>
+    <p>{{this.mess}}</p>
     <mat-divider></mat-divider>
 
-    <div class="noti">
-        <div class="info">
-            <img src="../../../assets/images/avatar-1.jpg">
-            <p>Trung chơi đồ has sent friend request</p>
+    <div *ngFor="let request of listRequest">
+        <div class="noti">
+            <div class="info">
+                <img [src]="request.avatar">
+                <p>{{request.userName}} has sent friend request</p>
+            </div>
+            <div class="button" *ngIf="!this.messRequest">
+                <button mat-raised-button color="warn" (click) = "clickAddFriend(request._id, 1)">Accept</button>
+                <button mat-raised-button target="_blank" (click) = "clickAddFriend(request._id, 0)">Cancel</button>
+            </div>
+            <div class="button" *ngIf="this.messRequest">
+                <p>{{this.messRequest}}</p>
+            </div>
         </div>
-        <div class="button">
-            <button mat-raised-button color="warn">Accept</button>
-            <button mat-raised-button target="_blank" (click)="onNoClick()">Cancel</button>
-        </div>
+        <mat-divider></mat-divider>
     </div>
-
-    <mat-divider></mat-divider>
-
-    <div class="noti">
-        <div class="info">
-            <img src="../../../assets/images/avatar-1.jpg">
-            <p>Trung chơi đồ has sent friend request</p>
-        </div>
-        <div class="button">
-            <button mat-raised-button color="warn">Accept</button>
-            <button mat-raised-button target="_blank" (click)="onNoClick()">Cancel</button>
-        </div>
-    </div>
-
-    <mat-divider></mat-divider>
-
-    <div class="noti">
-        <div class="info">
-            <img src="../../../assets/images/avatar-1.jpg">
-            <p>Trung chơi đồ has sent friend request</p>
-        </div>
-        <div class="button">
-            <button mat-raised-button color="warn">Accept</button>
-            <button mat-raised-button target="_blank" (click)="onNoClick()">Cancel</button>
-        </div>
-    </div>
-
 </div>
+<!-- 
+    
+
+    <div class="noti">
+        <div class="info">
+            <img src="../../../assets/images/avatar-1.jpg">
+            <p>Trung chơi đồ has sent friend request</p>
+        </div>
+        <div class="button">
+            <button mat-raised-button color="warn">Accept</button>
+            <button mat-raised-button target="_blank" (click)="onNoClick()">Cancel</button>
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="noti">
+        <div class="info">
+            <img src="../../../assets/images/avatar-1.jpg">
+            <p>Trung chơi đồ has sent friend request</p>
+        </div>
+        <div class="button">
+            <button mat-raised-button color="warn">Accept</button>
+            <button mat-raised-button target="_blank" (click)="onNoClick()">Cancel</button>
+        </div>
+    </div> -->
+
 
 
 

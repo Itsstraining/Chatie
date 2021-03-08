@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import * as io from 'socket.io-client/dist/socket.io';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,8 @@ export class ChatsocketioService {
   public send_msg: any;
   public received_msg: any;
   public tempMessList = [];
-  readonly url: string = 'http://192.168.31.106:8080';
+  // readonly url: string = 'http://192.168.31.106:8080';
+  readonly url: string = environment.endpoint;
 
   constructor(private httpClient: HttpClient) {
     this.socket = io(this.url);

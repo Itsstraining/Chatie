@@ -4,8 +4,7 @@ const fileSchema = require('../schemas/file.schemas');
 const MessageClass = require('./services/message');
 const ConversationClass = require('./services/conversation');
 const UserClass = require("../src/services/user");
-
-
+const FriendClass = require("../src/services/friend")
 
 
 
@@ -21,6 +20,7 @@ class Database {
         this.Conversation = new ConversationClass();
         this.Message = new MessageClass();
         this.User = new UserClass();
+        this.Friend = new FriendClass();
     }
 
     /**

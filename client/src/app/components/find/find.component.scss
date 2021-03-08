@@ -1,18 +1,4 @@
-
-// .example-form {
-//   min-width: 150px;
-//   max-width: 500px;
-//   width: 100%;
-//   margin-right: 30%;
-// }
-
-// .example-full-width {
-//   width: 100%;
-// }
-// .bar{
-//   width: 500px;
-//     height: 20px;
-// }
+$blue: #4290E4;
 
 .example-form {
   min-width: 150px;
@@ -22,6 +8,39 @@
 
 .example-full-width {
   width: 100%;
-  
+
+}
+
+.friend {
+  width: 100%;
+
+  .friend-content {
+    margin: 0;
+    padding: 0.5rem 0 0.5rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+
+    .friend-info {
+      width: 50%;
+      display: flex;
+      flex-direction: row;
+      text-align: center;
+      align-items: center;
+
+      h3 {
+        margin: 0 0 0 0.25rem;
+      }
+    }
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: black;
+    }
+  }
 }
 

@@ -2,7 +2,7 @@
     <div class="profile">
         <h1 style="font-size: xx-large; margin-bottom: 30px;"><b>SETTING PROFILE</b></h1>
         <div class="img">
-            <img style="border-radius: 50%;" src="../../../assets/images/avatar-1.jpg">
+            <img style="border-radius: 50%;" [src]="this.userInfo.avatar">
             <h1 style="width: max-content; place-self: center; margin-top: 0.5rem;">{{this.userInfo.userName}}</h1>
 
         </div>
@@ -16,7 +16,7 @@
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>UserName</mat-label>
-                <input type="text" matInput placeholder="Ex. Nguyen Van A" [value]="this.userInfo.userName" [(ngModel)]="userName" />
+                <input type="text" matInput placeholder="Ex. Nguyen Van A" [value]="this.userInfo.userName" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}"/>
             </mat-form-field>
             <!-- <mat-form-field class="example-full-width">
                 <mat-label>Nhập vào mật khẩu mới</mat-label>

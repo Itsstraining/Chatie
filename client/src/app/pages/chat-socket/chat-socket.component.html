@@ -1,158 +1,18 @@
-<div class="container" *ngIf=" this.userInfo != null">
+<div class="container" *ngIf=" this.auth.user != null">
     <div class="chat-box">
 
-        <!-- chat-container -->
-        <div class="chat-container">
-            <div class="receiver-info">
-                <img src="../../../assets/images/avatar-1.jpg" class="ava-receiver">
-                <h3 *ngIf="this.recentFriendChat">{{this.recentFriendChat.userName}}</h3>
+    <app-chat-content [recentConver]="recentConver" (newMess) = "newMess($event)"></app-chat-content>
 
-                <div class="option">
-                    <!-- <div class="example-button-row"> -->
-                    <button class="button-option">
-            <img src="../../../assets/images/videocam-filled-tool.svg">
-          </button>
+    <!-- sender-chat -->
+    <div class="user-container">
+      <div class="find">
+        <!-- <img style="width: 30px; height: 30px;" src="../../../assets/images/search.svg" alt="search"> -->
+        <input class="search-input" type="text" placeholder="Seach">
 
-                    <button class="button-option">
-            <img src="../../../assets/images/phone-auricular.svg">
-          </button>
-
-
-
-                    <button mat-icon-button [matMenuTriggerFor]="menu" class="button-option">
-            <img src="../../../assets/images/more.svg">
-          </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
-              <span>Collection</span>
-            </button>
-                        <button mat-menu-item mat-raised-button (click)="openDialogBlock()">
-              <span style="color: red;">Block</span>
-            </button>
-                        <button mat-menu-item mat-raised-button (click)="openDialogUnfriend()">
-              <span style="color: red">Unfriend</span>
-            </button>
-                        <button mat-menu-item>
-              <span>Cancel</span>
-            </button>
-                    </mat-menu>
-
-                    <!-- </div> -->
-                </div>
-            </div>
-
-            <div class="chat-frame">
-
-                <div class="chat-messages-show-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-                    <div class="chat-messages-show-list" id="message-list" *ngIf="this.recentConver">
-                        <div *ngFor="let message of this.recentConver.conversation">
-                            <app-sendermessage *ngIf="this.message.senderId == this.userInfo._id" [send_msg]="message.content">
-                            </app-sendermessage>
-                            <app-receivermessage *ngIf="this.message.senderId != this.userInfo._id" [receive_msg]="message.content">
-                            </app-receivermessage>
-                        </div>
-                    </div>
-                </div>
-                <div class="chat-messages-create-container">
-                    <button class="chat-messages-option-button" [matMenuTriggerFor]="aboveMenu">
-            <mat-icon style="color: #242526;">add</mat-icon>
-            <mat-menu #aboveMenu="matMenu" yPosition="above">
-              <!-- <button mat-menu-item></button> -->
-                    <!-- <div class="wrapper"> -->
-                    <!-- <div class="file-upload"> -->
-                    <!-- <form mat-menu-item action="/uploadfile" enctype="multipart/form-data" method="POST"> 
-                    <input type="file" name="myFile" />
-                    <input type="submit" value="Upload your file" (keyup.enter)="SendMessage()">
-                    <img src="<" class="img-responsive">
-                  </form> -->
-                    <!-- <button mat-menu-item ngf-select ng-model="picFile" accept="image/*"> Select Picture</button>File name: {{picFile.name}} -->
-                    <!-- </div> -->
-                    <!-- </div> -->
-                    <!-- <input mat-menu-item type="file" name="myFile" size="60" hidden/> -->
-                    </mat-menu>
-                    </button>
-
-                    <div class="content-emoji">
-                        <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message" (keyup.enter)="SendMessage()">
-
-                        <div class="chat-frame">
-
-                            <div class="chat-messages-show-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-                                <div class="chat-messages-show-list" id="message-list" *ngIf="this.recentConver">
-                                    <div *ngFor="let message of this.recentConver.conversation">
-                                        <app-sendermessage *ngIf="this.message.senderId == this.userInfo._id" [send_msg]="message.content">
-                                        </app-sendermessage>
-                                        <app-receivermessage *ngIf="this.message.senderId != this.userInfo._id" [receive_msg]="message.content">
-                                        </app-receivermessage>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chat-messages-create-container">
-                                <button class="chat-messages-option-button" mat-icon-button [matMenuTriggerFor]="option">
-                      <mat-icon style="color: #242526;">add</mat-icon>
-                    </button>
-                                <mat-menu #option="matMenu">
-                                    <button mat-menu-item>
-                          <span>Send images/videos</span>
-                        </button>
-                                    <button mat-menu-item>
-                          <span>Send file</span>
-                        </button>
-                                    <button mat-menu-item>
-                          <span>Record Voive</span>
-                        </button>
-                                </mat-menu>
-
-                                <div class="content-emoji">
-                                    <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message" (keyup.enter)="SendMessage()">
-
-                                    <button class="emoji" [matMenuTriggerFor]="aboveMenu" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;" (keyup.enter)="SendMessage()">
-              <svg fill="gray" height="20" viewBox="0 0 192 192" width="20" xmlns="http://www.w3.org/2000/svg">
-                <g id="_10-humor" data-name="10-humor">
-                  <path
-                    d="m96 0a96 96 0 1 0 96 96 96.108 96.108 0 0 0 -96-96zm0 176a80 80 0 1 1 80-80 80.091 80.091 0 0 1 -80 80z" />
-                  <path d="m64 72a8.009 8.009 0 0 1 8 8h16a24 24 0 0 0 -48 0h16a8.009 8.009 0 0 1 8-8z" />
-                  <path d="m128 56a24.027 24.027 0 0 0 -24 24h16a8 8 0 0 1 16 0h16a24.027 24.027 0 0 0 -24-24z" />
-                  <path
-                    d="m136 96h-80a8 8 0 0 0 -8 8 48 48 0 0 0 96 0 8 8 0 0 0 -8-8zm-40 40a32.054 32.054 0 0 1 -30.987-24h61.974a32.054 32.054 0 0 1 -30.987 24z" />
-                </g>
-              </svg>
-            </button>
-                                    <mat-menu #aboveMenu="matMenu" yPosition="above">
-                                        <emoji-mart class="emoji-mart" (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
-                                    </mat-menu>
-
-                                </div>
-
-                                <!-- <input class="chat-messages-create-input" type="text" placeholder="Type message here..." [(ngModel)]="message"
-            (keyup.enter)="SendMessage()"> -->
-
-                                <button class="chat-messages-create-button" (click)="SendMessage()">
-
-            <svg fill="#242526" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px"
-              viewBox="0 0 512.005 512.005" width="15px" xmlns="http://www.w3.org/2000/svg">
-              <g>
-                <path
-                  d="m511.658 51.675c2.496-11.619-8.895-21.416-20.007-17.176l-482 184c-5.801 2.215-9.638 7.775-9.65 13.984-.012 6.21 3.803 11.785 9.596 14.022l135.403 52.295v164.713c0 6.948 4.771 12.986 11.531 14.593 6.715 1.597 13.717-1.598 16.865-7.843l56.001-111.128 136.664 101.423c8.313 6.17 20.262 2.246 23.287-7.669 127.599-418.357 122.083-400.163 122.31-401.214zm-118.981 52.718-234.803 167.219-101.028-39.018zm-217.677 191.852 204.668-145.757c-176.114 185.79-166.916 176.011-167.684 177.045-1.141 1.535 1.985-4.448-36.984 72.882zm191.858 127.546-120.296-89.276 217.511-229.462z" />
-              </g>
-            </svg>
-          </button>
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- sender-chat -->
-                    <div class="user-container">
-                        <div class="find">
-                            <!-- <img style="width: 30px; height: 30px;" src="../../../assets/images/search.svg" alt="search"> -->
-                            <input class="search-input" type="text" placeholder="Seach">
-
-                        </div>
-                        <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
-                            <app-chat-recent *ngFor="let conver of listChat; let i = index" [conversation]="conver" (click)="getConverIndex(i)" (hasRead)="hasRead($event)"></app-chat-recent>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
+        <app-chat-recent *ngFor="let conver of listChat; let i = index" [conversation]="conver"
+          (click)="getConverIndex(i)"></app-chat-recent>
+      </div>
+    </div>
+</div>

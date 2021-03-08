@@ -1,10 +1,18 @@
 <form class="example-form">
   <mat-form-field class="example-full-width">
     <mat-label>Tìm tên bạn bè:</mat-label>
-    <input class="bar" placeholder="Ex: Nguyễn Tấn Trung" maxlength="35" class="bar" type="text" matInput [(ngModel)] = "userName" (ngModelChange)="Search()"
-      [formControl]="myControl"> 
+    <input class="bar" placeholder="Ex: Nguyễn Tấn Trung" maxlength="35" class="bar" type="text" matInput
+      [(ngModel)]="userName" (ngModelChange)="Search()" [formControl]="myControl">
   </mat-form-field>
 </form>
-<div *ngFor ="let user of this.user">
-  <h3>{{user.userName}} <button> Add Friend </button></h3>
+<div *ngFor="let user of this.user" class="friend">
+  <div class="friend-content">
+    <div class="friend-info">
+      <img src="{{user.userInfo.avatar}}" alt="">
+      <h3>{{user.userInfo.userName}}</h3>
+    </div>
+    <button mat-flat-button style="background-color: #4290E4; color: white;" *ngIf="!user.status && user.add == 0" (click) ="acceptToAddFriend(user.userInfo._id, user)">Add Friend</button>
+    <button mat-flat-button style="background-color: #b8cfe7; color: #242526;" *ngIf="user.add == -1">Requested</button>
+    <button mat-flat-button style="background-color: #b8cfe7; color: #242526;" *ngIf="user.status && user.add == 1">Friends</button>
+  </div>
 </div>

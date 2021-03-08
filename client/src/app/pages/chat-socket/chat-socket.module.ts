@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { ChatSocketRoutingModule } from './chat-socket-routing.module';
 import { ChatSocketComponent } from './chat-socket.component';
-import { ConversationComponent } from '../../components/conversation/conversation.component'
-
 import { FormsModule } from '@angular/forms'
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
@@ -18,12 +16,13 @@ import { OptionComponent } from '../../components/option/option.component';
 
 
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { ChatContentComponent } from './components/chat-content/chat-content.component';
 
 
 
 
 @NgModule({
-    declarations: [ChatSocketComponent ,ChatRecentComponent, SendermessageComponent, ReceivermessageComponent, OptionComponent],
+    declarations: [ChatSocketComponent ,ChatRecentComponent, SendermessageComponent, ReceivermessageComponent, ChatContentComponent],
   imports: [
     CommonModule,
     ChatSocketRoutingModule,
