@@ -85,13 +85,13 @@ body {
 .sign-in-btn {
     width: 100%;
     font-size: 1.15rem;
-    background-color: $blue;
+    background-color: #63B2F3;
     text-align: center;
-    border: 0.15rem solid $blue !important;
+    border: 0.15rem solid #63B2F3 !important;
     &:hover {
         background-color: white;
         a {
-            color: $blue;
+            color: #63B2F3;
         }
     }
 }
@@ -264,7 +264,7 @@ body {
 @media screen and (min-width: 876px) {
     main {
         display: flex;
-        margin-top: 2rem;
+        // margin-top: 2rem;
         justify-content: center;
     }
     .log-in-container {
