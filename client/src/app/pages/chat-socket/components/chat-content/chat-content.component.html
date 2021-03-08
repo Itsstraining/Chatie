@@ -69,11 +69,7 @@
               <input class="chat-messages-create-input" type="text" placeholder="Type message here..."
                 [(ngModel)]="message" (keyup.enter)="SendMessage()">
   
-<<<<<<< HEAD
-              <button class="emoji" [matMenuTriggerFor]="aboveMenu" matTooltip="Send an emoji"
-=======
-              <button class="emoji" [matMenuTriggerFor]="emojiMenu"
->>>>>>> 5c9b9b1943d8c5afc0f5f49f30789bb8e666e09b
+              <button class="emoji" [matMenuTriggerFor]="emojiMenu" matTooltip="Send an emoji"
                 (click)="isEmojiPickerVisible = !isEmojiPickerVisible;" (keyup.enter)="SendMessage()">
                 <svg fill="gray" height="20" viewBox="0 0 192 192" width="20" xmlns="http://www.w3.org/2000/svg">
                   <g id="_10-humor" data-name="10-humor">
