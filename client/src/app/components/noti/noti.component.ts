@@ -14,8 +14,10 @@ export class NotiComponent implements OnInit {
   public mess: any;
   public userInfo: any;
   public messRequest: any;
+  // public fromId: any
+  @Output() public fromId: EventEmitter<any> = new EventEmitter<any>();
+  // @Output() public countChange: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output() public countChange: EventEmitter<any> = new EventEmitter<any>();
   constructor(public dialogRef: MatDialogRef<NotiComponent>, private userService: UserService, public socketIo: ChatsocketioService, private findService: FindService, @Inject(MAT_DIALOG_DATA) data) { 
     this.userInfo = data;
 }
@@ -24,8 +26,6 @@ export class NotiComponent implements OnInit {
     this.getListRequest()
   }
 
-  
-
   public async getListRequest(){
     let temp = await this.findService.getAllFriendRequest(this.userInfo._id);
     let templist = temp['listRequest'];
@@ -33,15 +33,24 @@ export class NotiComponent implements OnInit {
       let info = await this.userService.getUserById(templist[i].from);
       this.listRequest.push(info);
     }
-    console.log(this.listRequest)
     this.mess = temp['message'];
   }
 
-  public async clickAddFriend(from, status){
-    this.messRequest = await this.findService.addFriend(from, this.userInfo._id, status);
+  public async clickAddFriend(from, status, index){
+    let temp = await this.findService.addFriend(from, this.userInfo._id, status);
+    this.messRequest =  {
+      mess: temp['addmess'],
+      index: index
+    }
+    this.socketIo.socket.emit('friend-accept', {newConversation: temp['newConversation'], message: temp['message'], to: this.userInfo._id, from: from});
+    this.fromId.emit(from);
   }
 
-  // onNoClick(): void{
-  //   this.dialogRef.close(this.count);
-  // }
+  save() {
+    this.dialogRef.close(this.fromId);
+  }
+
+  close() {
+    this.dialogRef.close();
+  }
 }

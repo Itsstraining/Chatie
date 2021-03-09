@@ -67,35 +67,24 @@ export class FindComponent implements OnInit, AfterContentInit {
     // this.listTemp = this.find.listRep;
     
     this.userTemp = await this.find.getUser(this.userInfo._id) as Array<User>;
-    console.log(this.userTemp.length);
   }
 
   Search(){
-      console.log(this.userTemp.length);
       this.user = this.userTemp.filter(res=>{
-        console.log(res.userInfo.userName.toLocaleLowerCase());
         return res.userInfo.userName.toLocaleLowerCase().match(this.userName.toLocaleLowerCase());
       });
     
   }
-  // Add()
-  // {
-  //   let addfriend = await Database.instance.User.addFriend(id);
-  // }
+ 
   
   displayFn(user: User): string {
-    console.log(user.userInfo.userName)
     return user && user.userInfo.userName ? user.userInfo.userName : '';
   }
 
   public async acceptToAddFriend(to, user: User){
-    console.log(this.userInfo._id)
     this.socketIo.socket.emit('add-friend', to);
     user.add = (await this.find.createAddRequest(this.userInfo._id, to));
   }
 
-  public onClose(){
-    
-  }
   
 }

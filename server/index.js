@@ -63,6 +63,13 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('friend-request', data)
   })
 
+  socket.on('friend-accept', async (data) => {
+    console.log(data)
+    // let receiver_sId = tempUser[data].sId;
+    // console.log(receiver_sId);
+    socket.emit('new-friend-accept', data)
+  })
+
   // socket.emit('message-broadcast', 'this is some new data');
 
 

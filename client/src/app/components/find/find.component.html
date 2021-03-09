@@ -2,7 +2,7 @@
   <mat-form-field class="example-full-width">
     <mat-label>Tìm tên bạn bè:</mat-label>
     <input class="bar" placeholder="Ex: Nguyễn Tấn Trung" maxlength="35" class="bar" type="text" matInput
-      [(ngModel)]="userName" (ngModelChange)="Search()" [formControl]="myControl">
+      [(ngModel)]="userName" (ngModelChange)="Search()" [ngModelOptions]="{standalone: true}">
   </mat-form-field>
 </form>
 <div *ngFor="let user of this.user" class="friend">
@@ -15,9 +15,9 @@
       <button class="add" style="background-color: #4290E4; color: white;" *ngIf="!user.status && user.add == 0" (click)="acceptToAddFriend(user.userInfo._id, user)">Add Friend</button>
       <button class="add" style="background-color: #b8cfe7; color: #242526;" *ngIf="user.add == -1">Requested</button>
       <button class="add" style="background-color: #b8cfe7; color: #242526;" *ngIf="user.status && user.add == 1">Friends</button>
-      <button class="chat" style="background-color: white; color: #4290E4;">
+      <!-- <button class="chat" style="background-color: white; color: #4290E4;">
         <mat-icon>chat</mat-icon>
-      </button>
+      </button> -->
     </div>
   </div>
 </div>

@@ -32,28 +32,7 @@ router.put("/addfriendrequest", async (req, res) => {
     }
 });
 
-// router.post("/", async (req, res) => {
-//     const { email, displayname, avatar } = req.body;
-//     try {
-//         let allUser = await Database.instance.User.getAllUser();
-//         for (let i = 0; i < allUser.length; i++) {
-//             if (email == (allUser[i]).email) {
-//                 res.send({
-//                     message: 'This email is already existed',
-//                 });
-//                 return;
-//             }
-//         }
-//         let user = await Database.instance.User.createUser(new UserModel(email, displayname, avatar));
-//         res.send({
-//             message: user,
-//         });
-//     } catch (err) {
-//         res.send({
-//             message: 'Can not create account',
-//         })
-//     }
-// });
+
 
 //create account for user use gmail
 router.post("/email", async (req, res) => {
@@ -69,7 +48,8 @@ router.post("/email", async (req, res) => {
             }
         }
         let avatar = 'https://i1.sndcdn.com/avatars-000480605109-m7g7ci-t500x500.jpg';
-        let test = new UserModel(email, userName, avatar, '');
+        let newName = userName.substring(0, 14);
+        let test = new UserModel(email, newName, avatar, '');
         let user = await Database.instance.User.createUser(test);
         res.send({
             message: user,
@@ -82,7 +62,7 @@ router.post("/email", async (req, res) => {
 });
 
 router.post("/createAccount", async (req, res) => {
-    const { email, userName, password } = req.body;
+    const { email, userName, password, retypePass } = req.body;
     try {
         let allUser = await Database.instance.User.getAllUser();
         for (let i = 0; i < allUser.length; i++) {
@@ -93,11 +73,45 @@ router.post("/createAccount", async (req, res) => {
                 return;
             }
         }
+        if(email == null){
+            res.send({
+                message: 'Email is blank',
+            });
+            return;
+        }
+        if(userName == null){
+            res.send({
+                message: 'Username is blank',
+            });
+            return;
+        }else if(userName.length > 15){
+            res.send({
+                message: 'Username length must under 15 words',
+            });
+            return;
+        }
+        if(password == null){
+            res.send({
+                message: 'Password must be fill in',
+            });
+            return;
+        }
+        if(retypePass == null){
+            res.send({
+                message: 'Password must be retype again',
+            });
+            return;
+        }else if(retypePass != password){
+            res.send({
+                message: 'Retype password wrong',
+            });
+            return;
+        }
         let avatar = 'https://i1.sndcdn.com/avatars-000480605109-m7g7ci-t500x500.jpg';
         let test = new UserModel(email, userName, avatar, password);
         let user = await Database.instance.User.createUser(test);
         res.send({
-            message: user,
+            message: 'Create an account successfully',
         });
     } catch (err) {
         res.send({
@@ -162,7 +176,6 @@ router.put("/updateUser", async (req, res) => {
     const { id, userName, avatar} = req.body;
     try {
         let temp = await Database.instance.User.updateProfile(id, userName, avatar);
-        console.log(temp)
         res.send({
             message: "Update successfully",
             user: temp

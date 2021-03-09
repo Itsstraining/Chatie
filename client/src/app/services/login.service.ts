@@ -42,7 +42,6 @@ export class LoginService {
       // //get user token
       // this.idToken = this.user.getIdToken();
       let data = { email: this.user.email, userName: this.user.displayName};
-      console.log(data)
       await this.client
         .post(environment.endpoint + 'user/email',data)
         .subscribe((temp) => {
@@ -50,7 +49,6 @@ export class LoginService {
         });
       await this.userService.getUserInfo(this.user.email);
       this.userAccount = this.userService.user;
-      console.log(this.user.email)
       alert('login successfully');
       // return { idToken: this.idToken, user: this.user };
     } catch (erro) {

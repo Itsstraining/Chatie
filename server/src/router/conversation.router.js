@@ -124,4 +124,16 @@ router.put('/sendFile', async (req, res) => {
     }
 });
 
+router.put('/deleteConversation', async (req, res) =>{
+    const {conversationId, userId, friendId} = req.body;
+    try {
+        let temp =await Database.instance.User.deleteChat(conversationId, userId, friendId);
+        res.send({
+            message: 'Delete successfully'
+        })
+    } catch (error) {
+        res.send(error)
+    }
+})
+
 module.exports = router;

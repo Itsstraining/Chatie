@@ -16,7 +16,7 @@
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>UserName</mat-label>
-                <input type="text" matInput placeholder="Ex. Nguyen Van A" [value]="this.userInfo.userName" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}" />
+                <input type="text" matInput placeholder="Ex. Nguyen Van A" ngModel [value]="this.userName" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}" />
             </mat-form-field>
             <!-- <mat-form-field class="example-full-width">
                 <mat-label>Nhập vào mật khẩu mới</mat-label>

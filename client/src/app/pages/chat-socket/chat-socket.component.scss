@@ -81,6 +81,39 @@ $light-blue: #4290E4;
             }
         }
     }
+    .friend {
+        width: 100%;
+      
+        .friend-content {
+          margin: 0;
+          padding: 0.5rem 0 0.5rem 0;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          text-align: center;
+          align-items: center;
+      
+          .friend-info {
+            width: 50%;
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            align-items: center;
+      
+            h3 {
+              margin: 0 0 0 0.25rem;
+            }
+
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: black;
+              }
+      
+          }
+        }
+      }
 }
 
 
@@ -140,3 +173,6 @@ $light-blue: #4290E4;
     background: #555;
 }
 
+
+
+  

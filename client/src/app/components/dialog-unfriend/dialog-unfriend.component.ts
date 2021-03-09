@@ -8,12 +8,12 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
   styleUrls: ['./dialog-unfriend.component.scss']
 })
 export class DialogUnfriendComponent implements OnInit {
-  public recentFriendChat: any;
+  public data: any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogUnfriendComponent>,
     @Inject(MAT_DIALOG_DATA) data) { 
-      this.recentFriendChat = data
+      this.data = data
   }
 
   ngOnInit(): void {

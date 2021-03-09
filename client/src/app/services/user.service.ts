@@ -19,7 +19,6 @@ export class UserService {
   public async getUserInfo(email){
     let temp = await this.httpClient.get(environment.endpoint + `user/getByEmail?email=${email}`).toPromise();
     this.user =  temp['getByEmail'];
-    console.log(temp['getByEmail'])
   }
 
   public async getUserById(id){
@@ -30,7 +29,6 @@ export class UserService {
   public async getUserAllConver(userId){
     let tempAllConver = await this.httpClient.get(environment.endpoint + `conversation/allUserConver?senderId=${userId}`).toPromise();
     this.listConver = tempAllConver['allUserConver'];
-    console.log(typeof this.listConver);
   }
 
   public async getUserFromDB(){
@@ -40,8 +38,7 @@ export class UserService {
 
   public async updateProfile(id, userName, avatar){
     let data = { id: id, userName: userName, avatar: avatar}
-    let tempConverInfo = await this.httpClient.put(environment.endpoint + 'user/updateUser', data);
-    console.log(tempConverInfo['message'])
+    let tempConverInfo = await this.httpClient.put(environment.endpoint + 'user/updateUser', data).toPromise();
     return tempConverInfo['message'];
   }
 

@@ -61,9 +61,7 @@ router.put('/checkrequestlist', async (req, res) => {
     const { from, to, status } = req.body;
     try {
         let mess = await Database.instance.Friend.checkRequestList(from, to, status);
-        res.send({
-            mess: mess,
-        })
+        res.send(mess)
     } catch (error) {
         res.send({
             message: 'Can not add this friend'

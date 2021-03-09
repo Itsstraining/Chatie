@@ -42,6 +42,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { OptionComponent } from './components/option/option.component';
 import { NgAudioRecorderModule } from 'ng-audio-recorder';
 import { DialogNotiComponent } from './components/dialog-noti/dialog-noti.component';
+import { DelConverDialogComponent } from './components/del-conver-dialog/del-conver-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { DialogNotiComponent } from './components/dialog-noti/dialog-noti.compon
     PushnotifyingComponent,
     NotiComponent,
     DialogNotiComponent,
+    DelConverDialogComponent,
   ],
   imports: [
     BrowserModule,

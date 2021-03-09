@@ -1,14 +1,14 @@
 <div class="main">
-    <h1 style="font-size: x-large;"><b>Xác nhận hủy làm bạn</b></h1>
+    <h1 style="font-size: x-large;"><b>Unfriend with</b></h1>
     <div class="block">
 
         <div class="info">
-            <img src={{this.recentFriendChat.avatar}}>
-            <h1>{{this.recentFriendChat.userName}}</h1>
+            <img src={{this.data.friend.avatar}}>
+            <h1>{{this.data.friend.userName}}</h1>
         </div>
     </div>
     <div class="button">
-        <button mat-button>Đồng ý</button>
-        <button mat-button (click)="onNoClick()">Hủy</button>
+        <button mat-button style="background-color: #f44336; color: white;">Accept</button>
+        <button mat-button (click)="onNoClick()">Cancel</button>
     </div>
 </div>

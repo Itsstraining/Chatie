@@ -7,11 +7,11 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
   styleUrls: ['./dialog-block.component.scss']
 })
 export class DialogBlockComponent implements OnInit {
-  public recentFriendChat: any;
+  public data: any;
   constructor(
     public dialogRef: MatDialogRef<DialogBlockComponent>,
     @Inject(MAT_DIALOG_DATA) data) { 
-      this.recentFriendChat = data;
+      this.data = data;
   }
 
   ngOnInit(): void {

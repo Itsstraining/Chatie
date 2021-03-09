@@ -36,6 +36,10 @@ class MessageClass {
             conversationId: conversationId
         }, null,{sort: {date: -1}, limit: 30});
     }
+
+    async deleteConverMessages(conversationId){
+        await this.Message.deleteMany({conversationId: conversationId});
+    }
 }
 
 module.exports = MessageClass;

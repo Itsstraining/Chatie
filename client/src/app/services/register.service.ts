@@ -7,13 +7,14 @@ import { environment } from 'src/environments/environment';
 export class RegisterService {
   data: []
   constructor(private http: HttpClient) { }
-  async registerAccount(email,userName,password){ 
+  async registerAccount(email,userName,password, retypepassword){ 
     let result;
     let temp;
    result = await this.http.post(environment.endpoint+ 'user/createAccount',{
     email:email, 
     userName:userName , 
-    password: password
+    password: password,
+    retypePass: retypepassword
    }).toPromise().then(data=>{ 
      temp=data;
    })

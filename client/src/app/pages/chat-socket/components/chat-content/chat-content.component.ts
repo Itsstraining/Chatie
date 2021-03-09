@@ -22,6 +22,7 @@ import { Observable } from "rxjs";
 
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
+import { DelConverDialogComponent } from 'src/app/components/del-conver-dialog/del-conver-dialog.component';
 // import { url } from 'node:inspector';
 // import { catchError, map } from 'rxjs/operators';
 // import { FileService } from '../../../../services/file.service';
@@ -51,6 +52,7 @@ export class ChatContentComponent implements OnInit, OnChanges {
   // private selectedFile: File;
 
   @Output() public newMess: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public recentChatDel: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   constructor(
@@ -109,24 +111,45 @@ export class ChatContentComponent implements OnInit, OnChanges {
 
   public openDialogUnfriend(): void {
     const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.data = this.recentFriendChat
+    dialogConfig.data = dialogConfig.data = {
+      friend: this.recentFriendChat,
+      me: this.userInfo._id,
+      recent: this.recentConver.converId
+    }
     const dialogRef = this.dialog.open(DialogUnfriendComponent, dialogConfig);
 
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   console.log('The dialog was closed');
+    // });
+  }
+
+  public openDialogDelConver(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = dialogConfig.data = {
+      friend: this.recentFriendChat,
+      me: this.userInfo._id,
+      recent: this.recentConver.converId
+    }
+    const dialogRef = this.dialog.open(DelConverDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
+      this.recentChatDel.emit(result);
+    })
+
   }
 
   public openDialogBlock(): void {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.data = this.recentFriendChat
+    dialogConfig.data = {
+      friend: this.recentFriendChat,
+      me: this.userInfo._id,
+      recent: this.recentConver._id
+    }
     const dialogRef = this.dialog.open(DialogBlockComponent, dialogConfig);
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   console.log('The dialog was closed');
+    // });
   }
 
   SendMessage() {
@@ -176,6 +199,4 @@ export class ChatContentComponent implements OnInit, OnChanges {
         }
       });
   }
-
-  
 }

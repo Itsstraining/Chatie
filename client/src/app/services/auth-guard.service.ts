@@ -14,7 +14,6 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
       if(this.login.newUser){
         this.login.user = this.login.newUser.user
-        console.log(this.login.newUser.user)
         return true;
       }
     return this.login.auth.authState.pipe(

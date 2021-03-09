@@ -57,23 +57,52 @@ class UserClass {
     }
 
     async chat(id, receiverId, newConversationId) {
-        // const changeStream = this.User.watch().on('change', change => console.log(change));
+        
         await this.User.findOneAndUpdate({
             _id: id
         }, {
             $push: {
-                conversations: [newConversationId]
+                conversations: { 
+                    $each: [newConversationId],
+                    $position: 0
+                },
+                
             }
         });
         await this.User.findOneAndUpdate({
             _id: receiverId
         }, {
             $push: {
-                conversations: [newConversationId]
+                conversations: { 
+                    $each: [newConversationId],
+                    $position: 0
+                },
             }
         });
         // console.log(changeStream)
         return 'You two are connected now'
+    }
+
+    async deleteChat(conversationId, userId, friendId){
+        console.log(conversationId)
+        await this.Conversation.deleteConversation(conversationId);
+        console.log(userId)
+        await this.User.findByIdAndUpdate({_id: userId}, {
+            $pull: {
+                conversations: {
+                    $in: [conversationId]
+                }
+            }
+        });
+        console.log(friendId)
+        await this.User.findByIdAndUpdate({_id: friendId}, {
+            $pull: {
+                conversations: {
+                    $in: [conversationId]
+                }
+            }
+        });
+        return 'delete done';
     }
 
     async getUserById(id) {
@@ -100,26 +129,6 @@ class UserClass {
      * @param {String} friendId 
      * 
      */
-
-    /// ds chờ
-    // async addFriendRequest(id, friendId) {
-    //     // Optional. Use this if you create a lot of connections and don't want
-    //     // to copy/paste `{ useNewUrlParser: true }`.
-    //     mongoose.set('useNewUrlParser', true);
-    //     let user = await this.getId(id);
-    //     for (let i = 0; i < user.friendList.length; i++) {
-    //         if (friendId == user.friendList[i]) {
-    //             return 'Already be friend';
-    //         }
-    //     }
-    //     // user.friendList.push(friendId);                  
-    //     await this.User.updateOne({ _id: friendId }, { $push: { friendListRequest: [id] } });
-    //     return 'Friends'
-    // }
-
-   
-   
-   
    
    ///Send Friend Request
     /**
@@ -147,30 +156,6 @@ class UserClass {
         });
         return 'Have send friend request'
     }
-
-    // async addFriend(id, friendId, accept) {
-    //     mongoose.set('useNewUrlParser', true);
-    //     let user = await this.getId(id);
-    //     for (let i = 0; i < user.friendListRequest.length; i++) {
-    //     if (accept) {
-    //         await this.User.updateOne({
-    //             _id: id
-    //         }, {
-    //             $push: {
-    //                 friendList: [friendId]
-    //             }
-    //         });
-    //         await this.User.updateOne({
-    //             _id: friendId
-    //         }, {
-    //             $push: {
-    //                 friendList: [id]
-    //             }
-    //         })
-    //         return 'You two are friends now.';
-    //     }
-    //     }
-    // }
 
     async addFriend(userId, friendId){
         await this.User.findOneAndUpdate({_id: userId}, {
@@ -248,10 +233,6 @@ class UserClass {
        return temp.friendList;
     }
 
-    // async getUserNotFriend(userId){
-    //     let temp = (await this.User.findOne({_id: userId})).friendList;
-
-    // }
 }
 
 module.exports = UserClass;

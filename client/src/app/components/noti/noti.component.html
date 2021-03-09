@@ -3,18 +3,18 @@
     <p>{{this.mess}}</p>
     <mat-divider></mat-divider>
 
-    <div *ngFor="let request of listRequest">
+    <div *ngFor="let request of listRequest; let i = index">
         <div class="noti">
             <div class="info">
                 <img [src]="request.avatar">
                 <p>{{request.userName}} has sent friend request</p>
             </div>
             <div class="button" *ngIf="!this.messRequest">
-                <button mat-raised-button color="warn" (click) = "clickAddFriend(request._id, 1)">Accept</button>
-                <button mat-raised-button target="_blank" (click) = "clickAddFriend(request._id, 0)">Cancel</button>
+                <button mat-raised-button color="warn" (click)="clickAddFriend(request._id, 1, i)">Accept</button>
+                <button mat-raised-button target="_blank" (click)="clickAddFriend(request._id, 0, i)">Cancel</button>
             </div>
-            <div class="button" *ngIf="this.messRequest">
-                <p>{{this.messRequest}}</p>
+            <div class="button" *ngIf="this.messRequest && this.messRequest.index == i">
+                <p>{{this.messRequest.mess}}</p>
             </div>
         </div>
         <mat-divider></mat-divider>

@@ -1,16 +1,25 @@
-<app-navbar></app-navbar>
+<app-navbar (fromId) = "getFromId($event)"></app-navbar>
 <div class="container" *ngIf=" this.auth.user != null">
     <div class="chat-box">
 
-    <app-chat-content [recentConver]="recentConver" (newMess) = "newMess($event)"></app-chat-content>
+    <app-chat-content [recentConver]="recentConver" (newMess) = "newMess($event)" (recentChatDel)="DelChat($event)"></app-chat-content>
 
     <!-- sender-chat -->
     <div class="user-container">
       <div class="find">
         <!-- <img style="width: 30px; height: 30px;" src="../../../assets/images/search.svg" alt="search"> -->
-        <input class="search-input" type="text" placeholder="Seach">
-
+        <input class="search-input" type="text" placeholder="Seach" [(ngModel)]="friendName" [ngModelOptions]="{standalone: true}" (ngModelChange)="Search()"> 
       </div>
+      
+      <div *ngFor="let user of this.user" class="friend">
+        <div class="friend-content">
+          <div class="friend-info">
+            <img src="{{user.avatar}}" alt="">
+            <h3>{{user.name}}</h3>
+          </div>
+        </div>
+      </div>
+
       <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
         <app-chat-recent *ngFor="let conver of listChat; let i = index" [conversation]="conver"
           (click)="getConverIndex(i)"></app-chat-recent>

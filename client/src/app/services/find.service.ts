@@ -9,6 +9,12 @@ export class FindService {
   public status: boolean = false;
 
   constructor(private client: HttpClient) {}
+
+  public async getFriendList(userId){
+    let tempFriendList = await this.client.get(environment.endpoint + `user/getfriendlist?userId=${userId}`).toPromise();
+    return tempFriendList['tempListFriend'];
+  }
+
   public async getUser(userId) {
     let listRep = [];
     let tempList = (
@@ -34,6 +40,9 @@ export class FindService {
             continue;
           }
         }
+        if(tempList[i]._id == userId){
+          continue;
+        }
         if (temp == 0) {
           this.status = false;
           listRep.push({
@@ -44,7 +53,6 @@ export class FindService {
         }
       }
     }
-    console.log(listRep);
     return listRep;
   }
 
@@ -68,6 +76,6 @@ export class FindService {
     let temp = await this.client
       .put(environment.endpoint + 'friend/checkrequestlist', data)
       .toPromise();
-    return temp['mess'];
+    return temp;
   }
 }

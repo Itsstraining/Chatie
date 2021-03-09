@@ -1,0 +1,42 @@
+$light-blue: #4290E4;
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.main{
+    text-align: center;
+
+    button{
+        color: white;
+        background-color: $light-blue;
+        box-sizing: border-box;
+        position: relative;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        -webkit-tap-highlight-color: transparent;
+        display: inline-block;
+        white-space: nowrap;
+        text-decoration: none;
+        vertical-align: baseline;
+        text-align: center;
+        margin: 0;
+        width: 9rem;
+        line-height: 36px;
+        padding: 0 16px;
+        border-radius: 4px;
+        overflow: visible;
+        font-weight: bold;
+
+        &:hover{
+            background-color: white;
+            color: $light-blue;
+            border: 0.5px solid $light-blue;
+        }
+    };
+
+}

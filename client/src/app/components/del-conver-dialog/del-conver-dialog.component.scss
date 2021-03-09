@@ -1,0 +1,36 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.button {
+    min-height: 60px;
+    min-width: 204px;
+    align-items: center;
+    margin-bottom: -24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.info {
+    text-align-last: center;
+}
+
+img {
+    margin: 0 1.5rem 0.5rem 1.5rem;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 0.015rem solid white;
+    // float: left;
+    // display: flex;
+    // align-self: center;
+    // flex-direction: column;
+}
+
+.main {
+    display: block;
+    height: 310px;
+    width: 400px;
+    text-align: center;
+}

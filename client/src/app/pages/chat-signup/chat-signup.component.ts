@@ -13,18 +13,23 @@ export class ChatSignupComponent implements OnInit {
   public email: String;
   public userName: String;
   public password: String;
+  public retypepassword: String;
   ngOnInit(): void {
   }
 
   async registerAccount() {
-    let temp = await this.register.registerAccount(this.email, this.userName, this.password)
-    console.log("regiss!! " + temp.message)
-    if (temp.message == "This email is already existed") {
-      alert("This email is already existed")
-    }else {
-      alert("Sign up success")
+    let temp = await this.register.registerAccount(this.email, this.userName, this.password, this.retypepassword)
+    // if (temp.message == "This email is already existed") {
+    //   alert("This email is already existed")
+    // }else {
+    //   alert("Sign up success")
+    //   this.router.navigate(['/'])
+    // }
+    if(temp.message == 'Create an account successfully'){
+      alert(temp['message']);
       this.router.navigate(['/'])
     }
+    alert(temp['message']);
   }
 
 }

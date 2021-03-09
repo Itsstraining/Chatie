@@ -28,7 +28,7 @@ class ConversationClass {
             _id: newConver._id
         }, {
             $push: {
-                participants: [senderID, receiverID]
+                participants: { $each: [ senderID, receiverID ]}
             }
         })
     }
@@ -56,7 +56,7 @@ class ConversationClass {
      * @param {*} receiverId 
      * @param {String} message 
      */
-    async updateConversation(senderId, conversationId, message,type) {
+    async updateConversation(senderId, conversationId, message, type) {
         let newMessage = (await this.message.createMessage(new MessageModel(message, conversationId, senderId,type)))._id;
         await this.Conversation.findOneAndUpdate({
             _id: conversationId
@@ -81,6 +81,11 @@ class ConversationClass {
                 listFile: [newFile]
             }
         });
+    }
+
+    async deleteConversation(conversationId){
+        await this.Conversation.deleteOne({_id: conversationId});
+        await this.message.deleteConverMessages(conversationId);
     }
     
 }

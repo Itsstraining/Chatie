@@ -37,6 +37,11 @@ export class ConversationService {
   public async updateIndexConver(userId, covnersationId){
     let data = {userId: userId, covnersationId: covnersationId}
     let mess = await this.httpClient.put(environment.endpoint + 'user/updateConver', data).toPromise();
-    console.log(mess)
+  }
+
+  public async deleteConver(conversationId, userId, friendId){
+    let data = {conversationId: conversationId, userId: userId, friendId: friendId}
+    let mess = await this.httpClient.put(environment.endpoint + 'conversation/deleteConversation', data).toPromise();
+    return mess['message']
   }
 }

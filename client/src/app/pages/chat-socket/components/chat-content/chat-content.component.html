@@ -25,8 +25,8 @@
               <button mat-menu-item (click)="openDialogUnfriend()">
                 <span style="color: red">Unfriend</span>
               </button>
-              <button mat-menu-item>
-                <span>Cancel</span>
+              <button mat-menu-item (click)="openDialogDelConver()">
+                <span style="color: red">Delete Conversation</span>
               </button>
             </mat-menu>
   
@@ -39,16 +39,22 @@
           <div class="chat-messages-show-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
             <div class="chat-messages-show-list" id="message-list" *ngIf="this.recentConver">
               <div *ngFor="let message of this.recentConver.conversation">
+                <div *ngIf="!this.message.senderId" class="first-mess">
+                  <img src={{this.recentFriendChat.avatar}} alt="">
+                  <h2>{{this.recentFriendChat.userName}}</h2>
+                  <p>{{message.content}}</p>
+                  <mat-divider style="background-color: rgba(112, 112, 112, 0.5); width: 70%;"></mat-divider>
+                </div>
                 <app-sendermessage *ngIf="this.message.senderId == this.userInfo._id" [send_msg]="message.content">
                 </app-sendermessage>
-                <app-receivermessage *ngIf="this.message.senderId != this.userInfo._id" [receive_msg]="message.content">
+                <app-receivermessage *ngIf="this.message.senderId && this.message.senderId != this.userInfo._id" [receive_msg]="message.content">
                 </app-receivermessage>
               </div>
             </div>
           </div>
           <div class="chat-messages-create-container">
             <button class="chat-messages-option-button" [matMenuTriggerFor]="aboveMenu">
-              <mat-icon style="color: #242526;" matTooltip="Add media">add</mat-icon>
+              <mat-icon style="color: #242526;" matTooltip="Add media">manage_accounts</mat-icon>
               <mat-menu #aboveMenu="matMenu" yPosition="above">
                 <div mat-menu-item class="form-group col-12">
                   <input type="file"

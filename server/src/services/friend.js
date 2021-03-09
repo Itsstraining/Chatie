@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
+const MessageModel = require('../../models/message.model');
 const UserModel = require('../../models/user.model');
 const friendrequest = require('../../schemas/friendrequest.schemas');
 const ConversationClass = require('./conversation');
+const MessageClass = require('./message');
 const UserClass = require('./user');
 class FriendClass {
     constructor() {
@@ -11,6 +13,7 @@ class FriendClass {
         this.FriendRequest = mongoose.model('FriendRequest', friendrequest);
         this.user = new UserClass();
         this.conversation = new ConversationClass();
+        this.message = new MessageClass();
     }
     
      /**
@@ -48,15 +51,19 @@ class FriendClass {
         
         if(status == 1){
             // status = 1 => accept
-            console.log(status)
             let mess = await this.user.addFriend(to, from);
             let newConversation = await this.conversation.createConversation(to, from);
             let message =  await this.user.chat(to, from, newConversation._id);
-            console.log(message);
-            await this.FriendRequest.remove(temp);
-            return message;
+            await this.conversation.updateConversation('', newConversation._id, message, 'text')
+            console.log(newConversation)
+            await this.FriendRequest.deleteOne(temp);
+            return {
+                addmess: mess,
+                message: message,
+                newConversation: newConversation
+            };
         }
-        await this.FriendRequest.remove(temp);
+        await this.FriendRequest.deleteOne(temp);
         return 'You two are not friends.';
     }
 }

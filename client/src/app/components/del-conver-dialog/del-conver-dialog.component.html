@@ -1,13 +1,13 @@
 <div class="main">
+    <h1 style="font-size: x-large;"><b>Delete conversation with</b></h1>
     <div class="block">
-        <h1 style="font-size: x-large;"><b>Block</b></h1>
         <div class="info">
             <img src={{this.data.friend.avatar}}>
             <h1>{{this.data.friend.userName}}</h1>
         </div>
     </div>
     <div class="button">
-        <button mat-button style="background-color: #f44336; color: white;">Accept</button>
+        <button mat-button style="background-color: #f44336; color: white;" (click)="delConver()">Accept</button>
         <button mat-button (click)="onNoClick()">Cancel</button>
     </div>
 </div>

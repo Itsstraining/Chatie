@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ChatSocketRoutingModule } from './chat-socket-routing.module';
 import { ChatSocketComponent } from './chat-socket.component';
-import { FormsModule } from '@angular/forms'
+import { FormsModule,  ReactiveFormsModule } from '@angular/forms'
 import {MatDividerModule} from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -18,6 +18,7 @@ import { SendermessageComponent } from '../../components/sendermessage/sendermes
 import { ReceivermessageComponent } from '../../components/receivermessage/receivermessage.component';
 import { OptionComponent } from '../../components/option/option.component';
 import { HttpClientModule }  from '@angular/common/http'
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 // import { UploadfireRoutingModule } from './uploadfire-routing.module';
 // import { UploadfireComponent } from './uploadfire.component';
@@ -48,6 +49,8 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
     MatTabsModule,
     MatButtonModule,
     MatTooltipModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
 
     MatToolbarModule,
     MatSlideToggleModule,

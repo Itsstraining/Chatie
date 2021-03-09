@@ -5,6 +5,8 @@ import {
   OnInit,
   Output,
   EventEmitter,
+  AfterContentInit,
+  AfterContentChecked,
 } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,7 +16,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './chat-recent.component.html',
   styleUrls: ['./chat-recent.component.scss'],
 })
-export class ChatRecentComponent implements OnInit, DoCheck {
+export class ChatRecentComponent implements OnInit, AfterContentInit ,AfterContentChecked {
   @Input() public conversation: any;
   @Input() public isClicked: any;
 
@@ -26,7 +28,10 @@ export class ChatRecentComponent implements OnInit, DoCheck {
   public lastTime: any;
 
   constructor(private userService: UserService, public auth: LoginService) {}
-  ngDoCheck(): void {
+  ngAfterContentInit(): void {
+    this.conversation.conversation;
+  }
+  ngAfterContentChecked(): void {
     if (this.conversation.conversation.length != this.length) {
       this.length = this.conversation.conversation.length;
       this.newestContent = this.getLastestMess(

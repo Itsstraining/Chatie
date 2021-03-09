@@ -3,8 +3,10 @@ import {
   AfterViewChecked,
   Component,
   DoCheck,
+  EventEmitter,
   OnChanges,
   OnInit,
+  Output,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
@@ -21,12 +23,13 @@ import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
   public user: any;
   public numRequest: number;
   public count = 0;
 
-  public reload
+  public reload;
+  @Output() public fromId: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     public auth: LoginService,
@@ -35,23 +38,8 @@ export class NavbarComponent implements OnInit{
     public dialog: MatDialog,
     public userService: UserService
   ) {
-    // if(this.auth.user){
-    //   this.user = this.auth.userAccount
-    // console.log(this.user)
-    // };
     this.user = this.auth.user;
   }
-
-  // ngOnChanges(){
-  //   if (window.performance) {
-  //     console.log(this.auth.user)
-  //   }
-  //   // console.log(this.auth.user)
-  //   // this.socketIo.listen('friend-request').subscribe((data) => {
-  //   //   console.log(data);
-  //   // });
-  //   // this.newRequest();
-  // }
 
   ngOnInit(): void {
     this.socketIo.listen('friend-request').subscribe((data) => {
@@ -59,7 +47,6 @@ export class NavbarComponent implements OnInit{
     });
     this.newRequest();
     if (this.auth.user) {
-      
       this.checkUser();
     }
   }
@@ -72,12 +59,9 @@ export class NavbarComponent implements OnInit{
   public async getUserInfos() {
     await this.userService.getUserInfo(this.auth.user.email);
     this.user = this.userService.user;
-    console.log(this.user);
   }
 
   public openDialog() {
-    console.log(this.auth.userAccount);
-
     const dialogRef = this.dialog.open(DialogSettingprofileComponent);
   }
 
@@ -94,6 +78,7 @@ export class NavbarComponent implements OnInit{
     dialogConfig.data = this.auth.userAccount;
     this.count = 0;
     const dialogRef = this.dialog.open(NotiComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => this.fromId.emit(data));
   }
 
   async LogOut() {
@@ -108,15 +93,10 @@ export class NavbarComponent implements OnInit{
 
   public newRequest() {
     this.socketIo.socket.on('friend-request', (data) => {
-      
-      console.log(data)
       if (data) {
         console.log(data)
-        console.log(this.auth.userAccount)
         if (data == this.auth.userAccount._id) {
-          console.log(this.count);
           this.count++;
-          console.log(this.count);
         }
       }
     });
