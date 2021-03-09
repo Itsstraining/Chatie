@@ -26,10 +26,11 @@ export class HomePageComponent implements OnInit {
     try {
       let res;
       await this.auth.loginByAccount(this.email, this.password).then(data=>{res=data});
-      if(res.message==true){
+      if(res.message=='Login successful'){
+        alert(res.message)
         this.router.navigate(['chat-socket']); 
       }else{
-        alert("Login failed")
+        alert(res.message)
       }
     } catch (err) {
       console.log(err)

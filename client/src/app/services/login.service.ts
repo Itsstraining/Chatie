@@ -74,6 +74,8 @@ export class LoginService {
       let result;
       this.newUser = await this.client.get(environment.endpoint+`user/check?email=${email}&password=${password}`).toPromise();
       localStorage.setItem("user", JSON.stringify(this.newUser.user));
+      await this.userService.getUserInfo(this.newUser.user.email);
+      this.userAccount = this.userService.user;
        return this.newUser;
     }catch(err){
       console.log(err)

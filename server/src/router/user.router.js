@@ -122,17 +122,17 @@ router.post("/createAccount", async (req, res) => {
 router.get("/check", async (req, res) => {
     try {
         const { email, password } = req.query;
-        var allUser;
+        let allUser;
         allUser = await Database.instance.User.getUserByEmail(email);
         console.log(allUser)     
         if (allUser.email== email  &&  allUser.password==password ) {
             res.send({
-                message: true,
+                message: 'Login successful',
                 user: allUser
             });
         }
         else {
-            res.send({ message: false })
+            res.send({ message: 'Email or password is wrong.' })
         }
     } catch (error) {
         console.log(error)

@@ -53,8 +53,9 @@
             </div>
           </div>
           <div class="chat-messages-create-container">
-            <button class="chat-messages-option-button" [matMenuTriggerFor]="aboveMenu">
-              <mat-icon style="color: #242526;" matTooltip="Add media">manage_accounts</mat-icon>
+            <button class="chat-messages-option-button" [matMenuTriggerFor]="aboveMenu" matTooltip="Add media">
+              <img style="margin: auto;" src="../../../../../assets/images/add.svg">
+              <!-- <mat-icon style="color: #242526;" >add</mat-icon> -->
               <mat-menu #aboveMenu="matMenu" yPosition="above">
                 <div mat-menu-item class="form-group col-12">
                   <input type="file"
@@ -62,13 +63,12 @@
                   #userPhoto
                   (change)="onFileSelected($event)"
                   name="image"
-                  autocomplete="off"
-                  />
+                  autocomplete="off">
                  </div>
               </mat-menu>
 
 
-              
+
             </button>
   
             <div class="content-emoji">
@@ -87,10 +87,11 @@
                       d="m136 96h-80a8 8 0 0 0 -8 8 48 48 0 0 0 96 0 8 8 0 0 0 -8-8zm-40 40a32.054 32.054 0 0 1 -30.987-24h61.974a32.054 32.054 0 0 1 -30.987 24z" />
                   </g>
                 </svg>
+                <mat-menu #emojiMenu="matMenu" yPosition="above">
+                  <emoji-mart style="display: flex;" class="emoji-mart" (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
+                </mat-menu>
               </button>
-              <mat-menu #emojiMenu="matMenu" yPosition="above">
-                <emoji-mart class="emoji-mart" (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
-              </mat-menu>
+              
             </div>
 
             <button class="chat-messages-create-button" (click)="SendMessage()">
