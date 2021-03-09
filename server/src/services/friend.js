@@ -48,14 +48,12 @@ class FriendClass {
 
     async checkRequestList(from, to, status){
         let temp = await this.FriendRequest.findOne({from: from});
-        
         if(status == 1){
             // status = 1 => accept
             let mess = await this.user.addFriend(to, from);
             let newConversation = await this.conversation.createConversation(to, from);
             let message =  await this.user.chat(to, from, newConversation._id);
-            await this.conversation.updateConversation('', newConversation._id, message, 'text')
-            console.log(newConversation)
+            await this.conversation.updateConversation('', newConversation._id, message, 'text');
             await this.FriendRequest.deleteOne(temp);
             return {
                 addmess: mess,
@@ -64,7 +62,11 @@ class FriendClass {
             };
         }
         await this.FriendRequest.deleteOne(temp);
-        return 'You two are not friends.';
+        return {
+            addmess: 'You two are not friends.',
+            message: '',
+            newConversation: ''
+        };
     }
 }
 

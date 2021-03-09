@@ -37,7 +37,9 @@ export class NotiComponent implements OnInit {
   }
 
   public async clickAddFriend(from, status, index){
+    this.messRequest = '';
     let temp = await this.findService.addFriend(from, this.userInfo._id, status);
+    console.log(temp['addmess'])
     this.messRequest =  {
       mess: temp['addmess'],
       index: index

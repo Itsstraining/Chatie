@@ -23,7 +23,7 @@
       </div>
      </div>
 
-      <div *ngIf="!this.myFocusVar" class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
+      <div *ngIf="!this.myFocusVar" class="chat-recent">
         <app-chat-recent *ngFor="let conver of listChat; let i = index" [conversation]="conver"
           (click)="getConverIndex(i)"></app-chat-recent>
       </div>

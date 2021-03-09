@@ -26,7 +26,7 @@ export class DelConverDialogComponent implements OnInit {
     let mess = await this.conversationService.deleteConver(this.data.recent, this.data.me, this.data.friend._id);
     alert(mess);
     this.isFriends =false;
-    // this.dialogRef.close(this.data.recent);
+    this.dialogRef.close(this.data.recent);
   }
 
   onNoClick(): void{

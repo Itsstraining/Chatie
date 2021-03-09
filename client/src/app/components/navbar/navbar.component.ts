@@ -17,6 +17,7 @@ import { FindComponent } from '../find/find.component';
 import { NotiComponent } from '../noti/noti.component';
 import { UserService } from 'src/app/services/user.service';
 import { ChatsocketioService } from 'src/app/services/chatsocketio.service';
+import { NgxPushNotificationService } from 'ngx-push-notification';
 
 @Component({
   selector: 'app-navbar',
@@ -36,7 +37,8 @@ export class NavbarComponent implements OnInit {
     public socketIo: ChatsocketioService,
     private router: Router,
     public dialog: MatDialog,
-    public userService: UserService
+    public userService: UserService,
+    private ngxPushNotificationService: NgxPushNotificationService
   ) {
     this.user = this.auth.user;
   }
@@ -92,12 +94,26 @@ export class NavbarComponent implements OnInit {
   }
 
   public newRequest() {
-    this.socketIo.socket.on('friend-request', (data) => {
+    this.socketIo.socket.on('friend-request', async (data) => {
       if (data) {
         console.log(data)
         if (data == this.auth.userAccount._id) {
           this.count++;
-        }
+        };
+        let tempSender = await this.userService.getUserById(data.from)
+        this.ngxPushNotificationService.showNotification({
+          title: tempSender.userName,
+          body: 'has sent a friend request.',
+          icon: tempSender.avatar
+        }).subscribe((res: any) => {
+          if (res.type === 'show') {
+            console.log('show');
+          } else if (res.type === 'click') {
+            console.log('click');
+          } else {
+            console.log('close');
+          }
+        });
       }
     });
   }

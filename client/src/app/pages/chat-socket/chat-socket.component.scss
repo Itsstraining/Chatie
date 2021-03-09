@@ -173,26 +173,29 @@ $light-blue: #4290E4;
 /* width */
 
 ::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 
 
 /* Track */
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+    background: #242526;
+    border-top-right-radius: 10px;
 }
 
 
 /* Handle */
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+    background: #4e4e4e;
+    border-radius: 10px;
 }
 
 
 /* Handle on hover */
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+    background: #4e4e4e;
+    border-radius: 10px;
 }

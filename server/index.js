@@ -20,30 +20,6 @@ let tempUser = {};
 // connect socket server with client
 io.on('connection', (socket) => {
   console.log('a user is connected');
-  // socket.on('emit-account', (account) => {
-  //   console.log(account);
-  //   console.log(socket.id);
-  //   tempUser[account] = {
-  //     sId: socket.id
-  //   };
-  //   console.log(tempUser);
-  //   socket.on('message', (msg) => {
-  //     let receiversId;
-  //     receiversId = tempUser[msg.receiverId].sId
-  //     socket.to(receiversId).emit('message-broadcast', msg);
-  //     Database.instance.Conversation.updateConversation(msg.userId, msg.conversationId, msg.message);
-  //     Database.instance.User.sortRecentConver(msg.userId, msg.conversationId);
-  //     Database.instance.User.sortRecentConver(msg.receiverId, msg.conversationId);
-  //   });
-
-  //   socket.on('add-friend', (data) => {
-  //     console.log(data)
-  //     // let receiver_sId = tempUser[data].sId;
-  //     // console.log(receiver_sId)
-  //     socket.broadcast.emit('friend-request', data)
-  //   })
-  // });
-
 
   socket.on('disconnect', () => {
     console.log('a user disconnected')
@@ -70,18 +46,7 @@ io.on('connection', (socket) => {
     socket.emit('new-friend-accept', data)
   })
 
-  // socket.emit('message-broadcast', 'this is some new data');
-
-
-  // socket.emit('update-conversation',)
-  // socket.on('update-conversation', (data) =>{
-  //   socket.emit('update-conversation', data)
-  // });
-
-  // socket.on('save-message', function (data) {
-  //   console.log(data);
-  //   io.emit('new-message', { message: data });
-  // });
+  
 });
 
 
