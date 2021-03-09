@@ -22,8 +22,14 @@
               <button mat-menu-item (click)="openDialogBlock()">
                 <span style="color: red;">Block</span>
               </button>
-              <button mat-menu-item (click)="openDialogUnfriend()">
+              <button mat-menu-item (click)="openDialogUnfriend()" *ngIf="this.isFriends && this.isRequested == 1">
                 <span style="color: red">Unfriend</span>
+              </button>
+              <button mat-menu-item (click)="addFriend()" *ngIf="!this.isFriends && this.isRequested == 0">
+                <span >Add friend</span>
+              </button>
+              <button mat-menu-item (click)="addFriend()" *ngIf="!this.isFriends && this.isRequested == 0">
+                <span style="color: #242526; background-color: rgba(112, 112, 112, 0.3);">Requested</span>
               </button>
               <button mat-menu-item (click)="openDialogDelConver()">
                 <span style="color: red">Delete Conversation</span>
@@ -93,7 +99,7 @@
               </mat-menu>
             </div>
 
-            <button class="chat-messages-create-button" (click)="SendMessage()">
+            <button class="chat-messages-create-button" matTooltip="Send message" (click)="SendMessage()">
               <svg fill="#242526" id="Capa_1" enable-background="new 0 0 512.005 512.005" height="15px"
                 viewBox="0 0 512.005 512.005" width="15px" xmlns="http://www.w3.org/2000/svg">
                 <g>

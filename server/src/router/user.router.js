@@ -217,19 +217,18 @@ router.get('/getfriendlist', async (req, res) => {
     }
 })
 
-// router.get('/getusernotfriend', (req, res) => {
-//     const { userId } = req.query;
-//     try{
-//         let tempListFriend = await Database.instance.User.getUserFriendList(userId);
-//         res.send({
-//             tempListFriend: tempListFriend,
-//         })
-//     }catch(err){
-//         res.send({
-//             message: 'You do not any friend.'
-//         })
-//     }
-// })
-
+router.put('/deleteFriend', async (req, res) => {
+    const { id, friendId } = req.body;
+    try {
+        let deleteFriendMess = await Database.instance.User.DeleteFriend(id, friendId);
+        res.send({
+            message: deleteFriendMess
+        })
+    } catch (error) {
+        res.send({
+            message: 'Can not unfriend'
+        })
+    }
+})
 
 module.exports = router;

@@ -8,9 +8,10 @@
     <div class="user-container">
       <div class="find">
         <!-- <img style="width: 30px; height: 30px;" src="../../../assets/images/search.svg" alt="search"> -->
-        <input class="search-input" type="text" placeholder="Seach" [(ngModel)]="friendName" [ngModelOptions]="{standalone: true}" (ngModelChange)="Search()"> 
+        <input class="search-input" type="text" placeholder="Seach your conversation" [(ngModel)]="friendName" [ngModelOptions]="{standalone: true}" (ngModelChange)="Search()" (blur)="myFocusVar = false" (focus)="myFocusVar = true"> 
       </div>
       
+     <div *ngIf="this.myFocusVar" class="chat-recent">
       <div *ngFor="let user of this.user" class="friend">
         <div class="friend-content">
           <div class="friend-info">
@@ -18,9 +19,11 @@
             <h3>{{user.name}}</h3>
           </div>
         </div>
+        <mat-divider style="background-color: rgba(112, 112, 112, 0.5); width: 80%;"></mat-divider>
       </div>
+     </div>
 
-      <div class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
+      <div *ngIf="!this.myFocusVar" class="chat-recent" onmouseover="this.style.overflowY='auto'" onmouseout="this.style.overflowY='hidden'">
         <app-chat-recent *ngFor="let conver of listChat; let i = index" [conversation]="conver"
           (click)="getConverIndex(i)"></app-chat-recent>
       </div>

@@ -16,6 +16,8 @@ import { ConversationService } from 'src/app/services/conversation.service';
 import { DialogNotiComponent } from 'src/app/components/dialog-noti/dialog-noti.component';
 import { FindService } from 'src/app/services/find.service';
 
+import { NgxPushNotificationService } from 'ngx-push-notification';
+
 export interface User{
   name: string,
   avatar: string,
@@ -43,6 +45,7 @@ export class ChatSocketComponent implements OnInit{
   userTemp:User[] = [];
   user:User[]=[];
   friendName:String;
+  myFocusVar: boolean = false
 
   // @ViewChild ('newMess') newMessInConver;
   constructor(
@@ -51,7 +54,8 @@ export class ChatSocketComponent implements OnInit{
     public auth: LoginService,
     private conversationService: ConversationService,
     public dialog: MatDialog,
-    private find:FindService
+    private find:FindService,
+    private ngxPushNotificationService: NgxPushNotificationService
   ) {
     this.userInfo = this.auth.user;
   }
@@ -217,9 +221,6 @@ export class ChatSocketComponent implements OnInit{
   }
   Search() {
     this.user = this.userTemp.filter((res) => {
-      console.log(res.name
-        .toLocaleLowerCase()
-        .match(this.friendName.toLocaleLowerCase()));
       return res.name
         .toLocaleLowerCase()
         .match(this.friendName.toLocaleLowerCase());
@@ -229,9 +230,13 @@ export class ChatSocketComponent implements OnInit{
     return user && user.name ? user.name : '';
   }
 
+  public async getConverFromSearch(){
+    
+  }
+
   async getReceiveMsg() {
     this.socketIo.socket.on('message-broadcast', async (data) => {
-      if (data) {
+      if (data && data.receiverId == this.userInfo._id) {
         for (let i = 0; i < this.listChat.length; i++) {
           if (data.conversationId == this.listChat[i].converId) {
             this.listChat[i].conversation.push({
@@ -242,7 +247,22 @@ export class ChatSocketComponent implements OnInit{
             });
           }
         }
+        let tempmess = data.message
+        let tempSender = await this.userService.getUserById(data.userId)
         // this.receive_msg = data.mesage;
+        this.ngxPushNotificationService.showNotification({
+          title: tempSender.userName,
+          body: tempmess,
+          icon: tempSender.avatar
+        }).subscribe((res: any) => {
+          if (res.type === 'show') {
+            console.log('show');
+          } else if (res.type === 'click') {
+            console.log('click');
+          } else {
+            console.log('close');
+          }
+        });
         this.sortRecentConver(this.listChat, data.conversationId);
       }
     });

@@ -78,4 +78,10 @@ export class FindService {
       .toPromise();
     return temp;
   }
+
+  public async deleteFriend(id, friendId){
+    let data = { id: id, friendId: friendId};
+    let tempMess = await this.client.put(environment.endpoint + 'user/deleteFriend', data).toPromise();
+    return tempMess;
+  }
 }

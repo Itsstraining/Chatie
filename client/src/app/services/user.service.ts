@@ -39,7 +39,7 @@ export class UserService {
   public async updateProfile(id, userName, avatar){
     let data = { id: id, userName: userName, avatar: avatar}
     let tempConverInfo = await this.httpClient.put(environment.endpoint + 'user/updateUser', data).toPromise();
-    return tempConverInfo['message'];
+    return tempConverInfo;
   }
 
   public getAllConver(){
